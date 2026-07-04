@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salesforce — Saloni Rai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #B22222;
+      --bg: #fafafa;
+      --foreground: #1a1a1a;
+      --display-font: 'Fraunces', serif;
+      --body-font: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--foreground);
+      font-family: var(--body-font);
+      min-height: 100vh;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 20px 40px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #737373;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    .page-header {
+      padding: 60px 40px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .page-header h1 {
+      font-family: var(--display-font);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .page-header .meta {
+      font-size: 1rem;
+      color: #737373;
+      margin-bottom: 24px;
+    }
+
+    .page-header .summary {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #404040;
+      max-width: 700px;
+    }
+
+    .projects-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 40px 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .project-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 16px;
+      padding: 40px;
+      background: #fff;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 32px rgba(178, 34, 34, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .project-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .badge-patent {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #f59e0b;
+    }
+
+    .badge-shipped {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #10b981;
+    }
+
+    .project-card h2 {
+      font-family: var(--display-font);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .project-card .subtitle {
+      font-size: 0.95rem;
+      color: #525252;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .project-tags span {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      background: #f5f5f5;
+      color: #525252;
+      font-weight: 500;
+    }
+
+    .project-cta {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .page-header { padding: 40px 20px 24px; }
+      .projects-grid { padding: 24px 20px 80px; }
+      .project-card { padding: 28px 24px; }
+      .back-link { padding: 16px 20px; }
+    }
+  </style>
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+</head>
+<body>
+
+  <a href="../index.html" class="back-link">← Back to portfolio</a>
+
+  <div class="page-header">
+    <h1>Salesforce</h1>
+    <p class="meta">Product Designer &middot; 2023 — Present</p>
+    <p class="summary">Designing AI-first enterprise experiences at Salesforce. I've worked on agentic workflows, activity timelines, and conversation-native tools that serve millions of partner users across multiple channels.</p>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Case Study 1: Activity Timeline -->
+    <a href="activity-timeline.html" class="project-card">
+      <span class="project-badge badge-patent">Patent Filed</span>
+      <h2>Unified Agentic Activity Timeline</h2>
+      <p class="subtitle">Redesigned the most universal component in CRM from the ground up — for a world where AI agents outnumber humans on the timeline. A design-initiated vision exercise that became a patent-filed specification.</p>
+      <div class="project-tags">
+        <span>Vision & Strategy</span>
+        <span>AI Agents</span>
+        <span>Cross-Cloud</span>
+        <span>Interaction Design</span>
+      </div>
+      <span class="project-cta">Read case study →</span>
+    </a>
+
+    <!-- Case Study 2: Headless Partner Agent -->
+    <a href="partner-agent.html" class="project-card">
+      <span class="project-badge badge-shipped">Shipped</span>
+      <h2>Headless Partner Agent</h2>
+      <p class="subtitle">A design-led vision that pivoted an entire product strategy. Designed Salesforce's first conversation-native channel management tool — a headless, omnichannel agent deployed across WhatsApp, Slack, and SMS for 40M partner users.</p>
+      <div class="project-tags">
+        <span>Conversation Design</span>
+        <span>Omnichannel</span>
+        <span>Product Strategy</span>
+        <span>0 → 1</span>
+      </div>
+      <span class="project-cta">Read case study →</span>
+    </a>
+
+  </div>
+
+</body>
+</html>

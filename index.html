@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saloni Rai — Senior Product Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared/components.css" />
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <style>
+    :root {
+      --accent: #B22222;
+      --bg: #fafafa;
+      --foreground: #1a1a1a;
+      --grid-color: rgba(0, 0, 0, 0.06);
+      --display-font: 'Fraunces', serif;
+      --body-font: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
+
+    html, body {
+      position: relative;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--foreground);
+      font-family: var(--body-font);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: rgba(178, 34, 34, 0.2); color: inherit; }
+
+    /* Grid background — matches branding-preview exactly */
+    .grid-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .grid-bg canvas {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* Custom cursor */
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 99999;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .custom-cursor img {
+      width: 28px;
+      height: 34px;
+      margin-left: -2px;
+      margin-top: -2px;
+    }
+
+    .cursor-halo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 99998;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .cursor-ring {
+      width: 40px;
+      height: 40px;
+      margin-left: -20px;
+      margin-top: -20px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      opacity: 0.45;
+      animation: ringPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes ringPulse {
+      0%, 100% { width: 40px; height: 40px; margin-left: -20px; margin-top: -20px; opacity: 0.45; }
+      50% { width: 54px; height: 54px; margin-left: -27px; margin-top: -27px; opacity: 0; }
+    }
+
+    /* ===== Fixed Nav Header ===== */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 24px 5vw;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 36px;
+      pointer-events: none;
+    }
+
+    .site-nav a,
+    .site-nav button {
+      pointer-events: auto;
+      font-family: var(--body-font);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      color: var(--foreground);
+      text-decoration: none;
+      background: none;
+      border: none;
+      padding: 0;
+      position: relative;
+      transition: color 0.3s ease, opacity 0.2s ease;
+    }
+
+    .site-nav.on-dark a,
+    .site-nav.on-dark button {
+      color: #fff;
+    }
+
+    .site-nav.on-dark .nav-talk .nav-tooltip {
+      background: #fff;
+      color: #000;
+    }
+
+    .site-nav a:hover,
+    .site-nav button:hover {
+      opacity: 0.6;
+    }
+
+    .site-nav .nav-talk {
+      position: relative;
+    }
+
+    .site-nav .nav-talk .nav-tooltip {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      white-space: nowrap;
+      background: var(--foreground);
+      color: var(--bg);
+      padding: 4px 10px;
+      border-radius: 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .site-nav .nav-talk:hover .nav-tooltip {
+      opacity: 1;
+    }
+
+    .site-nav .nav-talk.copied .nav-tooltip {
+      opacity: 1;
+    }
+
+    .scroll-spacer {
+      height: 250vh;
+      position: relative;
+    }
+
+    .hero {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Figma frame: 1512 x 882. Collage maintains that ratio. */
+    .collage {
+      position: relative;
+      width: 90vw;
+      max-width: 1200px;
+      aspect-ratio: 1512 / 882;
+      max-height: 85vh;
+    }
+
+    /* Main portrait — center, always visible */
+    .main-image {
+      position: absolute;
+      z-index: 10;
+      /* Figma: left 499, top 192, w 518, h 593 in 1512x882 */
+      left: 33.0%;
+      top: 21.77%;
+      width: 34.26%;
+      height: 67.23%;
+    }
+
+    .main-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Floating assets */
+    .float-asset {
+      position: absolute;
+      opacity: 0;
+      will-change: transform, opacity;
+      cursor: pointer;
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .float-asset img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .float-asset:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Asset hover tooltip — rendered outside the opacity:0 parent via JS */
+    #assetTooltip {
+      position: fixed;
+      background: var(--foreground);
+      color: #fff;
+      font-family: var(--body-font);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      z-index: 9000;
+    }
+
+    #assetTooltip.visible {
+      opacity: 1;
+    }
+
+    /* Disco mode overlay — strobing tile grid */
+    .disco-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      background: #0a0a2a;
+    }
+
+    .disco-overlay.active {
+      opacity: 1;
+    }
+
+    .disco-grid {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(var(--disco-cols, 30), 1fr);
+      grid-template-rows: repeat(var(--disco-rows, 18), 1fr);
+      gap: 2px;
+      padding: 2px;
+    }
+
+    .disco-tile {
+      border-radius: 2px;
+      background: #1a1a4a;
+      transition: background 0.1s ease;
+    }
+
+
+    /* Disco ball — node 1:20
+       Figma: center at left 758+405/2=960, top 19+405/2=221, size ~316px rendered, container 405px
+       Positioned: left 50.13%, top 2.15%, width 26.8% */
+    .asset-disco {
+      left: 50.13%;
+      top: 2.15%;
+      width: 18.49%;
+      aspect-ratio: 1;
+      --start-x: 400;
+      --start-y: -400;
+      --end-rotate: 20.05;
+    }
+
+    /* Pin/polaroid — node 1:8
+       Figma: left 313, top 62, w 445, h 282 in 1512x882 */
+    .asset-pin {
+      left: 20.7%;
+      top: 7.03%;
+      width: 29.43%;
+      --start-x: -350;
+      --start-y: -350;
+      --end-rotate: 4.82;
+    }
+
+    /* Dinner — node 1:10
+       Figma: left 956, top 309, w 269, h 311 in 1512x882 */
+    .asset-dinner {
+      left: 63.23%;
+      top: 35.03%;
+      width: 17.82%;
+      height: 35.26%;
+      --start-x: 450;
+      --start-y: 50;
+      --end-rotate: -13.35;
+    }
+
+    /* Coffee machine — node 1:12
+       Figma: left 232, top 398, w 382, h 222 in 1512x882 */
+    .asset-coffee {
+      left: 15.34%;
+      top: 45.12%;
+      width: 25.26%;
+      height: 25.17%;
+      --start-x: -400;
+      --start-y: 0;
+      --end-rotate: 0;
+    }
+
+    /* Vinyl/record — node 1:7
+       Figma: left 797, top 660, w 383, h 222 in 1512x882 */
+    .asset-vinyl {
+      left: 52.71%;
+      top: 74.83%;
+      width: 25.33%;
+      height: 25.17%;
+      --start-x: 350;
+      --start-y: 350;
+      --end-rotate: 0;
+    }
+
+    /* Character — node 1:9
+       Figma: left 289, top 640, w 364, h 212 in 1512x882 */
+    .asset-character {
+      left: 19.11%;
+      top: 72.56%;
+      width: 24.07%;
+      height: 24.04%;
+      --start-x: -300;
+      --start-y: 350;
+      --end-rotate: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .collage {
+        width: 95vw;
+        max-height: 75vh;
+      }
+    }
+
+    /* ===== About Section — scroll-driven flip ===== */
+    .about-scroll-container {
+      background: #000;
+      height: 180vh;
+      position: relative;
+    }
+
+    .about-section {
+      position: sticky;
+      top: 0;
+      height: auto;
+      padding: 100px 0 80px;
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .about-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 5vw;
+      width: 100%;
+    }
+
+    .about-content h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .about-content h2.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .sf-logo {
+      display: inline-block;
+      width: 1.4em;
+      height: 1em;
+      vertical-align: -0.1em;
+      margin-left: 0.2em;
+    }
+
+    .about-statements {
+      position: relative;
+      min-height: 160px;
+    }
+
+    .about-statement {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .about-statement.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-statement.exiting {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+
+    /* Final state (scroll-up only) — all visible stacked */
+    .about-section.final-state .about-statements {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      min-height: auto;
+    }
+
+    .about-section.final-state .about-statement {
+      opacity: 1;
+      transform: none;
+      position: relative;
+      transition: none;
+    }
+
+    .about-statement-title {
+      font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+      line-height: 1.6;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .about-statement-desc {
+      font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+      line-height: 1.6;
+      color: #737373;
+      font-weight: 400;
+    }
+
+    .about-statement-desc .highlight {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .about-scroll-container {
+        height: 150vh;
+      }
+
+      .about-section {
+        padding: 60px 5vw 50px;
+      }
+    }
+
+    /* ===== Experience Section ===== */
+    .experience-section {
+      padding: 120px 5vw 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .experience-section h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 60px;
+      color: var(--foreground);
+    }
+
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .experience-card {
+      position: relative;
+      border: 1px solid #e5e5e5;
+      border-radius: 16px;
+      padding: 32px 36px;
+      background: #fff;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .experience-section {
+      perspective: 1200px;
+    }
+
+    .experience-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 32px rgba(178, 34, 34, 0.08);
+    }
+
+    .experience-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .experience-card-info h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .experience-card-info .role {
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .experience-card-info .period {
+      font-size: 0.875rem;
+      color: #737373;
+    }
+
+    .experience-card-arrow {
+      font-size: 1.5rem;
+      color: #a3a3a3;
+      transition: transform 0.3s ease, color 0.3s ease;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .experience-card:hover .experience-card-arrow {
+      transform: translateX(4px);
+      color: var(--accent);
+    }
+
+    /* Hover reveal panel */
+    .experience-card-reveal {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+      opacity: 0;
+      margin-top: 0;
+    }
+
+    .experience-card:hover .experience-card-reveal {
+      max-height: 300px;
+      opacity: 1;
+      margin-top: 24px;
+    }
+
+    .experience-card-reveal-inner {
+      padding-top: 24px;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .reveal-text {
+      font-size: 0.9rem;
+      color: #525252;
+      line-height: 1.5;
+    }
+
+    .reveal-tags {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .reveal-tag {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      background: var(--accent);
+      color: white;
+      font-weight: 500;
+    }
+
+    .reveal-cta {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      transition: gap 0.2s ease;
+    }
+
+    .reveal-cta:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .experience-section {
+        padding: 80px 5vw 60px;
+      }
+
+      .experience-card-reveal-inner {
+        flex-direction: column;
+      }
+    }
+
+    /* ===== Lately Section — Horizontal Scroll Marquee ===== */
+    .lately-section {
+      padding: 120px 0 100px;
+      overflow: hidden;
+    }
+
+    .lately-section h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 48px;
+      color: var(--foreground);
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 5vw;
+    }
+
+    .lately-track-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .lately-track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: latelyScroll 40s linear infinite;
+      padding: 20px 0;
+    }
+
+    .lately-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes latelyScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Card base */
+    .lately-card {
+      flex-shrink: 0;
+      width: 280px;
+      padding: 24px;
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--foreground);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .lately-card:hover {
+      transform: translateY(-4px) rotate(-0.5deg);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      border-color: var(--accent);
+    }
+
+    .lately-card-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .lately-card-desc {
+      font-size: 0.82rem;
+      color: #737373;
+      line-height: 1.5;
+    }
+
+    .lately-card-link {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: auto;
+    }
+
+    /* Substack article card */
+    .lately-card-substack {
+      background: #fffdf7;
+      border-color: #f0ebe0;
+    }
+
+    .substack-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #a3a3a3;
+    }
+
+    .lately-card-substack .lately-card-title {
+      font-size: 1.15rem;
+      line-height: 1.25;
+    }
+
+    .lately-card-substack .lately-card-desc {
+      font-style: italic;
+      font-size: 0.78rem;
+    }
+
+    .lately-card-substack:hover {
+      border-color: var(--accent);
+    }
+
+    /* ThinkingWords card */
+    .lately-card-thinking {
+      background: #fff;
+      border-color: #e5e5e5;
+      justify-content: flex-start;
+    }
+
+    .thinking-heading {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--foreground);
+      line-height: 1.3;
+    }
+
+    .thinking-animation {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      margin: 4px 0 8px;
+    }
+
+    .thinking-asterisk {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .thinking-word {
+      color: var(--accent);
+      font-weight: 500;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .thinking-word.fade-out {
+      opacity: 0;
+      transform: translateX(4px);
+    }
+
+    .thinking-word.fade-in {
+      opacity: 0;
+      transform: translateX(-4px);
+    }
+
+    .thinking-dots {
+      color: var(--accent);
+      animation: dotPulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .thinking-logos {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .thinking-logos img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    /* Polaroid photo card */
+    .lately-card-polaroid {
+      width: 240px;
+      padding: 12px 12px 32px;
+      background: #fff;
+      border: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-radius: 2px;
+    }
+
+    .lately-card-polaroid:nth-child(3n+1) { transform: rotate(-2.5deg); }
+    .lately-card-polaroid:nth-child(3n+2) { transform: rotate(1.8deg); }
+    .lately-card-polaroid:nth-child(3n+3) { transform: rotate(-0.8deg); }
+    .lately-card-polaroid:nth-child(5n+1) { transform: rotate(3deg); }
+    .lately-card-polaroid:nth-child(5n+4) { transform: rotate(-1.5deg); }
+    .lately-card-polaroid:nth-child(7n+2) { transform: rotate(2.2deg); }
+    .lately-card-polaroid:nth-child(7n+5) { transform: rotate(-3.2deg); }
+    .lately-card-polaroid:nth-child(7n+6) { transform: rotate(0.7deg); }
+
+    .lately-card-polaroid:hover {
+      transform: translateY(-4px) rotate(0deg) !important;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+    }
+
+    .lately-card-polaroid img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 1px;
+      display: block;
+    }
+
+    .lately-card-polaroid .lately-card-caption {
+      font-size: 0.8rem;
+      color: #525252;
+      margin-top: 12px;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* ===== Scroll Animations ===== */
+
+    /* Section headings — scroll trigger */
+    .section-heading-anim {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .section-heading-anim.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Testimonial cards — staggered float-up (on wrapper so shadow animates too) */
+    .testimonial-card-wrap {
+      opacity: 0;
+      transform: translateY(50px) rotate(0.5deg);
+      transition: opacity 0.6s ease-out, transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .testimonial-card-wrap.visible {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+
+    /* ===== Testimonials Section ===== */
+    .testimonials-section {
+      padding: 120px 5vw 100px;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: transparent;
+      position: relative;
+    }
+
+    .testimonials-header {
+      text-align: left;
+      margin-bottom: 72px;
+      position: relative;
+    }
+
+    .testimonials-header .header-top {
+      font-family: var(--body-font);
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #737373;
+      margin-bottom: 12px;
+    }
+
+    .testimonials-header h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      color: var(--foreground);
+      line-height: 1.2;
+    }
+
+    .testimonials-header h2 .header-emphasis {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .testimonials-grid {
+      columns: 3;
+      column-gap: 24px;
+      position: relative;
+    }
+
+    /* Wrapper gets the shadow — mask on inner card would clip it otherwise */
+    .testimonial-card-wrap {
+      break-inside: avoid;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12)) drop-shadow(0 1px 3px rgba(0,0,0,0.08));
+    }
+
+    .testimonial-card {
+      padding: 28px 24px;
+      border: none;
+      border-radius: 0;
+      position: relative;
+      background: #fff;
+      /* Stamp perforation — semicircles punched out of all edges */
+      -webkit-mask:
+        radial-gradient(circle 5px at 5px 50%, transparent 4.5px, black 5px) -5px 0 / 10px 18px repeat-y,
+        radial-gradient(circle 5px at 5px 50%, transparent 4.5px, black 5px) calc(100% + 5px) 0 / 10px 18px repeat-y,
+        radial-gradient(circle 5px at 50% 5px, transparent 4.5px, black 5px) 0 -5px / 18px 10px repeat-x,
+        radial-gradient(circle 5px at 50% 5px, transparent 4.5px, black 5px) 0 calc(100% + 5px) / 18px 10px repeat-x,
+        linear-gradient(#000, #000) 5px 5px / calc(100% - 10px) calc(100% - 10px) no-repeat;
+      -webkit-mask-composite: source-over;
+      mask:
+        radial-gradient(circle 5px at 5px 50%, transparent 4.5px, black 5px) -5px 0 / 10px 18px repeat-y,
+        radial-gradient(circle 5px at 5px 50%, transparent 4.5px, black 5px) calc(100% + 5px) 0 / 10px 18px repeat-y,
+        radial-gradient(circle 5px at 50% 5px, transparent 4.5px, black 5px) 0 -5px / 18px 10px repeat-x,
+        radial-gradient(circle 5px at 50% 5px, transparent 4.5px, black 5px) 0 calc(100% + 5px) / 18px 10px repeat-x,
+        linear-gradient(#000, #000) 5px 5px / calc(100% - 10px) calc(100% - 10px) no-repeat;
+      mask-composite: add;
+    }
+
+    .testimonial-card h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--foreground);
+    }
+
+    .testimonial-card p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #525252;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e5e5e5;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial-author-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testimonial-author-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--foreground);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .testimonial-author-name .verified {
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    .testimonial-author-role {
+      font-size: 0.78rem;
+      color: #737373;
+    }
+
+    .testimonial-card[data-role="founder"] { background: #fffdf7; }
+    .testimonial-card[data-role="product"] { background: #faf8ff; }
+    .testimonial-card[data-role="engineer"] { background: #f7fbff; }
+    .testimonial-card[data-role="marketing"] { background: #f7fdf9; }
+    .testimonial-card[data-role="designer"] { background: #fdf7fa; }
+
+    @media (max-width: 1024px) {
+      .testimonials-grid {
+        columns: 2;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .testimonials-grid {
+        columns: 1;
+      }
+
+      .testimonials-section {
+        padding: 80px 5vw 60px;
+      }
+    }
+
+    /* ===== Hero Intro Elements ===== */
+    .hero-scroll-hint {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--body-font);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--foreground);
+      opacity: 0.7;
+      transition: opacity 0.4s ease;
+    }
+
+    .hero-scroll-hint.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .hero-scroll-hint svg {
+      width: 18px;
+      height: 18px;
+      animation: bounceDown 1.5s ease-in-out infinite;
+    }
+
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+
+    /* ===== Footer ===== */
+    .site-footer {
+      padding: 100px 5vw 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .footer-flowerpot {
+      width: 180px;
+      height: auto;
+      flex-shrink: 0;
+    }
+
+    .footer-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+    }
+
+    .footer-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      color: var(--foreground);
+      line-height: 1.2;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .footer-socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 51px;
+      height: 51px;
+      border-radius: 50%;
+      border: 1.3px solid #e5e5e5;
+      color: var(--foreground);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .footer-socials a:hover {
+      border-color: var(--foreground);
+      transform: translateY(-2px);
+    }
+
+    .footer-socials svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .footer-stamp {
+      width: 100px;
+      height: 100px;
+      animation: stampSpin 20s linear infinite;
+      flex-shrink: 0;
+      transform: rotate(55deg);
+    }
+
+    .footer-stamp-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    @keyframes stampSpin {
+      0% { transform: rotate(55deg); }
+      100% { transform: rotate(415deg); }
+    }
+
+    @media (max-width: 768px) {
+      .site-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+      }
+
+      .footer-flowerpot {
+        width: 140px;
+      }
+
+      .footer-stamp {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Grid background — must be first child -->
+  <div class="grid-bg">
+    <canvas id="gridCanvas"></canvas>
+  </div>
+
+  <!-- Fixed Nav -->
+  <nav class="site-nav">
+    <a href="#about-section">About</a>
+    <a href="#experience-section">Work</a>
+    <a href="#lately-section">Play</a>
+    <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <button class="nav-talk" onclick="copyEmail(this)">Talk<span class="nav-tooltip">Copy email ID</span></button>
+  </nav>
+
+  <!-- Custom cursor -->
+  <div class="custom-cursor" id="cursorDot">
+    <img src="cursor/cursor.svg" alt="" />
+  </div>
+  <div class="cursor-halo" id="cursorHalo">
+    <div class="cursor-ring"></div>
+  </div>
+
+  <!-- Hero scroll hint -->
+  <div class="hero-scroll-hint" id="heroScrollHint">
+    Scroll down
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"></line>
+      <polyline points="19 12 12 19 5 12"></polyline>
+    </svg>
+  </div>
+
+  <div class="scroll-spacer">
+    <section class="hero">
+      <div class="collage">
+        <!-- Main portrait — always visible -->
+        <div class="main-image">
+          <img src="collage/main.png" alt="Saloni Rai" />
+        </div>
+
+        <!-- Surrounding assets — fly in on scroll -->
+        <div class="float-asset asset-disco" data-tooltip="click me">
+          <img src="collage/disco.gif" alt="" />
+        </div>
+        <div class="float-asset asset-pin" data-tooltip="finding opportunities to spend time near trees and water bodies">
+          <img src="collage/pin.png" alt="" />
+        </div>
+        <div class="float-asset asset-dinner" data-tooltip="will host you at the drop of a hat">
+          <img src="collage/dinner.png" alt="" />
+        </div>
+        <div class="float-asset asset-coffee" data-tooltip="fuelled by iced lattes">
+          <img src="collage/coffee.png" alt="" />
+        </div>
+        <div class="float-asset asset-vinyl" data-tooltip="if it makes me feel something, it's on the playlist">
+          <img src="collage/vinyl.png" alt="" />
+        </div>
+        <div class="float-asset asset-character" data-tooltip="creating as much as I can">
+          <img src="collage/character.png" alt="" />
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== About Section ===== -->
+  <div class="about-scroll-container" id="about-section">
+    <section class="about-section">
+      <div class="about-content">
+        <h2>I am a ...</h2>
+        <div class="about-statements">
+          <div class="about-statement">
+            <p class="about-statement-title">Senior Product Designer at Salesforce<svg class="sf-logo" viewBox="0 0 48 34" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.1 3.5a9.9 9.9 0 0 1 7.5-3.5 10 10 0 0 1 9.2 6.2A8.5 8.5 0 0 1 48 14.3a8.5 8.5 0 0 1-8.5 8.5h-.3a7.8 7.8 0 0 1-5.5 7.9 7.8 7.8 0 0 1-9-3.8 9.2 9.2 0 0 1-5 1.5 9.2 9.2 0 0 1-8.7-6.3 8.1 8.1 0 0 1-3.7.9A7.3 7.3 0 0 1 0 15.7a7.3 7.3 0 0 1 5.9-7.2A9.5 9.5 0 0 1 20.1 3.5z" fill="#00A1E0"/></svg></p>
+            <p class="about-statement-desc">Currently working on how people and agents work together at enterprise scale for <span class="highlight">Agentforce Sales.</span></p>
+          </div>
+          <div class="about-statement">
+            <p class="about-statement-title">Fashion supply chain, art and anthropology nerd at heart</p>
+            <p class="about-statement-desc">I studied fashion supply chain at NIFT Mumbai, not the obvious path to where I am now, but it gave me a way of thinking about systems and flows that shows up in my work more than I realize.</p>
+          </div>
+          <div class="about-statement">
+            <p class="about-statement-title">Curious cat</p>
+            <p class="about-statement-desc">New tools, new systems, new ways to think about the same problem. I like the feeling of being a beginner at something again.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== Experience Section ===== -->
+  <section class="experience-section" id="experience-section">
+    <h2>Experience</h2>
+    <div class="experience-list">
+
+      <!-- Card 1 — Salesforce -->
+      <div class="experience-card" onclick="window.open('work/salesforce.html','_blank')">
+        <div class="experience-card-header">
+          <div class="experience-card-info">
+            <h3>Salesforce</h3>
+            <p class="role">Product Designer</p>
+            <p class="period">2023 — Present</p>
+          </div>
+          <span class="experience-card-arrow">→</span>
+        </div>
+        <div class="experience-card-reveal">
+          <div class="experience-card-reveal-inner">
+            <div>
+              <p class="reveal-text">Designing for AI-first enterprise experiences. Led the vision for Salesforce's Unified Agentic Activity Timeline (patent filed) and designed the first conversation-native channel management tool — the Headless Partner Agent — that pivoted an entire product strategy.</p>
+              <div class="reveal-tags">
+                <span class="reveal-tag">AI Agents</span>
+                <span class="reveal-tag">Enterprise</span>
+              </div>
+              <a href="work/salesforce.html" target="_blank" rel="noopener noreferrer" class="reveal-cta">View Projects →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 — Springworks / Albus -->
+      <div class="experience-card" onclick="window.open('work/albus.html','_blank')">
+        <div class="experience-card-header">
+          <div class="experience-card-info">
+            <h3>Springworks</h3>
+            <p class="role">Product Designer</p>
+            <p class="period">2022 — 2024</p>
+          </div>
+          <span class="experience-card-arrow">→</span>
+        </div>
+        <div class="experience-card-reveal">
+          <div class="experience-card-reveal-inner">
+            <div>
+              <p class="reveal-text">Designed and led Albus — an AI knowledge bot — from zero to 3,000+ organizations, 18,000+ users, and acquisition. Built the product before Slack, Microsoft, or anyone else had AI in workplace chat. Wore every hat: product design, growth, content, and strategy.</p>
+              <div class="reveal-tags">
+                <span class="reveal-tag">0 → 1</span>
+                <span class="reveal-tag">AI Product</span>
+              </div>
+              <a href="work/albus.html" target="_blank" rel="noopener noreferrer" class="reveal-cta">View Case Study →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Lately Section — Horizontal Scroll ===== -->
+  <section class="lately-section" id="lately-section">
+    <h2>What I've been up to lately</h2>
+    <div class="lately-track-wrapper">
+      <div class="lately-track">
+        <!-- Card 1 — Salesforce Offices -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/sf-office.jpg" alt="Saloni at SF office" />
+          <span class="lately-card-caption">Seeing Salesforce in 3 cities — Tokyo, Seattle, San Francisco</span>
+        </div>
+
+        <!-- Card 2 — Substack -->
+        <a href="https://saloni529819.substack.com/p/the-death-of-the-interesting-homepage" target="_blank" class="lately-card lately-card-substack">
+          <span class="substack-label">Writing</span>
+          <span class="lately-card-title">the death of the interesting homepage</span>
+          <span class="lately-card-desc">"It's like there's a single Figma file being passed around the entire internet and everyone's just changing the copy and 3 colors!"</span>
+          <span class="lately-card-link">Read on Substack →</span>
+        </a>
+
+        <!-- Card 3 — Cooking class -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/cooking-class.jpg" alt="Saloni in cooking class" />
+          <span class="lately-card-caption">Taking cooking classes in places I travel to</span>
+        </div>
+
+        <!-- Card 4 — Creating more -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/artworks.jpg" alt="Saloni's artworks" />
+          <span class="lately-card-caption">Creating more than I am consuming</span>
+        </div>
+
+        <!-- Card 5 — ThinkingWords -->
+        <div class="lately-card lately-card-thinking">
+          <span class="substack-label">Exploring</span>
+          <div class="thinking-animation">
+            <span class="thinking-asterisk">✱</span>
+            <span class="thinking-word" id="thinkingWord">Cogitating</span>
+            <span class="thinking-dots">...</span>
+          </div>
+          <span class="lately-card-desc">Prototyping with AI, shipping side projects, and making things that feel alive.</span>
+          <div class="thinking-logos">
+            <img src="logos/logo-1.png" alt="" />
+            <img src="logos/logo-2.png" alt="" />
+            <img src="logos/logo-3.png" alt="" />
+            <img src="logos/logo-4.png" alt="" />
+          </div>
+        </div>
+
+        <!-- Card 6 — Mentoring -->
+        <a href="https://topmate.io/salonirai" target="_blank" class="lately-card">
+          <span class="substack-label">Mentoring</span>
+          <span class="lately-card-title">Mentoring young designers</span>
+          <span class="lately-card-desc">Helping early-career designers navigate their first roles, build portfolios, and find their voice in the industry.</span>
+          <span class="lately-card-link">Book a session on Topmate →</span>
+        </a>
+
+        <!-- Card 7 — Reading -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/mine-your-language.jpg" alt="Mine Your Language book" />
+          <span class="lately-card-caption">Reading 'Mine Your Language' by Abhishek Borah</span>
+        </div>
+
+        <!-- Card 8 — Art gallery -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/art-gallery.jpg" alt="Saloni at art gallery" />
+          <span class="lately-card-caption">Frolicking in art galleries</span>
+        </div>
+
+        <!-- Card 9 — Substack -->
+        <a href="https://saloni529819.substack.com/p/how-the-algorithm-gave-everyone-the" target="_blank" class="lately-card lately-card-substack">
+          <span class="substack-label">Writing</span>
+          <span class="lately-card-title">how the algorithm gave everyone the same taste</span>
+          <span class="lately-card-desc">"Without friction, you get preference. Not taste. Preference is what you click on. Taste is what you'd build your life around."</span>
+          <span class="lately-card-link">Read on Substack →</span>
+        </a>
+
+        <!-- Duplicate set for seamless loop -->
+        <!-- Card 1 dup -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/sf-office.jpg" alt="Saloni at SF office" />
+          <span class="lately-card-caption">Seeing Salesforce in 3 cities — Tokyo, Seattle, San Francisco</span>
+        </div>
+
+        <!-- Card 2 dup — Substack -->
+        <a href="https://saloni529819.substack.com/p/the-death-of-the-interesting-homepage" target="_blank" class="lately-card lately-card-substack">
+          <span class="lately-card-title">the death of the interesting homepage</span>
+          <span class="lately-card-desc">"It's like there's a single Figma file being passed around the entire internet and everyone's just changing the copy and 3 colors!"</span>
+          <span class="lately-card-link">Read on Substack →</span>
+        </a>
+
+        <!-- Card 3 dup -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/cooking-class.jpg" alt="Saloni in cooking class" />
+          <span class="lately-card-caption">Taking cooking classes in places I travel to</span>
+        </div>
+
+        <!-- Card 4 dup -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/artworks.jpg" alt="Saloni's artworks" />
+          <span class="lately-card-caption">Creating more than I am consuming</span>
+        </div>
+
+        <!-- Card 5 duplicate — ThinkingWords -->
+        <div class="lately-card lately-card-thinking">
+          <span class="substack-label">Exploring</span>
+          <div class="thinking-animation">
+            <span class="thinking-asterisk">✱</span>
+            <span class="thinking-word thinking-word-dup">Cogitating</span>
+            <span class="thinking-dots">...</span>
+          </div>
+          <span class="lately-card-desc">Prototyping with AI, shipping side projects, and making things that feel alive.</span>
+          <div class="thinking-logos">
+            <img src="logos/logo-1.png" alt="" />
+            <img src="logos/logo-2.png" alt="" />
+            <img src="logos/logo-3.png" alt="" />
+            <img src="logos/logo-4.png" alt="" />
+          </div>
+        </div>
+
+        <!-- Card 6 dup -->
+        <a href="https://topmate.io/salonirai" target="_blank" class="lately-card">
+          <span class="substack-label">Mentoring</span>
+          <span class="lately-card-title">Mentoring young designers</span>
+          <span class="lately-card-desc">Helping early-career designers navigate their first roles, build portfolios, and find their voice in the industry.</span>
+          <span class="lately-card-link">Book a session on Topmate →</span>
+        </a>
+
+        <!-- Card 7 dup -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/mine-your-language.jpg" alt="Mine Your Language book" />
+          <span class="lately-card-caption">Reading 'Mine Your Language' by Abhishek Borah</span>
+        </div>
+
+        <!-- Card 8 dup — Art gallery -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/art-gallery.jpg" alt="Saloni at art gallery" />
+          <span class="lately-card-caption">Frolicking in art galleries</span>
+        </div>
+
+        <!-- Card 9 dup — Substack -->
+        <a href="https://saloni529819.substack.com/p/how-the-algorithm-gave-everyone-the" target="_blank" class="lately-card lately-card-substack">
+          <span class="substack-label">Writing</span>
+          <span class="lately-card-title">how the algorithm gave everyone the same taste</span>
+          <span class="lately-card-desc">"Without friction, you get preference. Not taste. Preference is what you click on. Taste is what you'd build your life around."</span>
+          <span class="lately-card-link">Read on Substack →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Testimonials Section (hidden for now) ===== -->
+  <section class="testimonials-section" style="display: none;">
+    <div class="testimonials-header">
+      <p class="header-top">The best thing about design is,</p>
+      <h2>it's all about the <span class="header-emphasis">people</span></h2>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card-wrap">
+        <div class="testimonial-card" data-role="founder">
+          <h4>Saloni is phenomenal</h4>
+          <p>Saloni is phenomenal. Insanely high quality work product, very responsive and easy to work with. She integrated herself in the team, helping us drive product decisions and build a world-class platform with a clean, intuitive and modern design. We wouldn't be where we are today without her.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/B22222/fff?text=WF" alt="" />
+            </div>
+            <div class="testimonial-author-info">
+              <span class="testimonial-author-name">William Fry <span class="verified">●</span></span>
+              <span class="testimonial-author-role">CEO @Mainshares</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card-wrap">
+        <div class="testimonial-card" data-role="founder">
+          <h4>Choosing Saloni was one of the best decisions we've made</h4>
+          <p>Her team is nothing short of fantastic — extremely helpful, incredibly quick, and utterly professional in every interaction. From the get-go, they worked closely with us, ensuring our vision was brought to life in a way that exceeded our expectations. The quality of their work speaks volumes about their creativity and skill.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/525252/fff?text=RA" alt="" />
+            </div>
+            <div class="testimonial-author-info">
+              <span class="testimonial-author-name">Reece Akhtar <span class="verified">●</span></span>
+              <span class="testimonial-author-role">CEO & Co-Founder @Deeper Signals</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card-wrap">
+        <div class="testimonial-card" data-role="product">
+          <h4>Right balance of beautiful design and functional usability</h4>
+          <p>Saloni and the team are essential to my team. Full stop. They strike the right balance of beautiful design and functional usability. Their designs and design systems are being used by multiple engineering teams and are super efficient to implement. No doubt you'll be happy with the results.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/737373/fff?text=SW" alt="" />
+            </div>
+            <div class="testimonial-author-info">
+              <span class="testimonial-author-name">Scott Willman <span class="verified">●</span></span>
+              <span class="testimonial-author-role">EVP of Product Management @SmartCloud</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card-wrap">
+        <div class="testimonial-card" data-role="marketing">
+          <h4>One of the most talented design teams</h4>
+          <p>After 7+ years in the SaaS industry, I can confidently say that Saloni is one of the most talented designers I've worked with so far. She goes above and beyond when it comes to understanding and executing design.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/a3a3a3/fff?text=AB" alt="" />
+            </div>
+            <div class="testimonial-author-info">
+              <span class="testimonial-author-name">Amneet Bains <span class="verified">●</span></span>
+              <span class="testimonial-author-role">Marketing Lead @Stepsize</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card-wrap">
+        <div class="testimonial-card" data-role="founder">
+          <h4>Amazing to work with</h4>
+          <p>Our product and website redesign went great, and we're thrilled with the end result. But more than that, Saloni was just amazing to work with and made the whole process fun and stress free. She's always super responsive, and has helped us with other design needs.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/404040/fff?text=PK" alt="" />
+            </div>
+            <div class="testimonial-author-info">
+              <span class="testimonial-author-name">Patrick Kelly <span class="verified">●</span></span>
+              <span class="testimonial-author-role">CEO & Founder @ClickMagick</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card-wrap">
+        <div class="testimonial-card" data-role="product">
+          <h4>Outstanding product design and wonderful cooperation</h4>
+          <p>Their creativity-fueled technical skills resulted in visually stunning, user-friendly mobile app and web designs. It was an absolute pleasure working with such talented people. I highly recommend!</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/B22222/fff?text=MT" alt="" />
+            </div>
+            <div class="testimonial-author-info">
+              <span class="testimonial-author-name">Marta Tloczek <span class="verified">●</span></span>
+              <span class="testimonial-author-role">Product Owner @Plix</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card-wrap">
+        <div class="testimonial-card" data-role="founder">
+          <h4>Reliable, Fast, Easy</h4>
+          <p>Saloni was incredibly fast and came up with numerous options for us to walk-through. She solicits feedback at every opportunity and worked really hard to create the perfect design for us. We couldn't be happier, and really enjoyed working with her!</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/525252/fff?text=JS" alt="" />
+            </div>
+            <div class="testimonial-author-info">
+              <span class="testimonial-author-name">Jackie Sheely <span class="verified">●</span></span>
+              <span class="testimonial-author-role">Co-Founder @Legacy Blueprint</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card-wrap">
+        <div class="testimonial-card" data-role="founder">
+          <h4>Efficiency and Excellence</h4>
+          <p>Working with Saloni has been a breeze. She really nailed the details and delivered top-notch design. If you want things done right without any fuss, Saloni is your go-to.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/737373/fff?text=HD" alt="" />
+            </div>
+            <div class="testimonial-author-info">
+              <span class="testimonial-author-name">Hu Dan <span class="verified">●</span></span>
+              <span class="testimonial-author-role">Founder @Mite</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card-wrap">
+        <div class="testimonial-card" data-role="founder">
+          <h4>Excellent Design</h4>
+          <p>Working with Saloni has been a pleasure. She was fast, great in communication and crafted an excellent design.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/a3a3a3/fff?text=HA" alt="" />
+            </div>
+            <div class="testimonial-author-info">
+              <span class="testimonial-author-name">Helene Auramo <span class="verified">●</span></span>
+              <span class="testimonial-author-role">CEO & Co-Founder @Prono</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <img src="collage/flowerpot.png" alt="" class="footer-flowerpot" />
+
+    <div class="footer-center">
+      <h2 class="footer-heading">Thank you for visiting!</h2>
+      <div class="footer-socials">
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/salonirai373" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/salonely__/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <!-- Substack -->
+        <a href="https://substack.com/@saloni529819" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24l9.6-5.4 9.6 5.4V10.812H1.46zm21.08-8.042H1.46V0h21.08v2.77z"/></svg>
+        </a>
+        <!-- Email -->
+        <a href="mailto:saloniraidesigns@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-stamp">
+      <svg class="footer-stamp-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="stampCircle" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"/>
+        </defs>
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+        <text font-size="8.5" font-family="Plus Jakarta Sans, sans-serif" font-weight="600" fill="#1a1a1a" letter-spacing="2.5">
+          <textPath href="#stampCircle">MADE WITH HUMAN INTELLIGENCE ✦ </textPath>
+        </text>
+        <circle cx="60" cy="60" r="16" fill="none" stroke="#1a1a1a" stroke-width="1.8"/>
+        <circle cx="54" cy="56" r="2" fill="#1a1a1a"/>
+        <circle cx="66" cy="56" r="2" fill="#1a1a1a"/>
+        <path d="M52 65 Q60 73 68 65" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </footer>
+
+  <!-- Asset tooltip (body-level to avoid opacity inheritance) -->
+  <div id="assetTooltip"></div>
+
+  <!-- Disco mode overlay -->
+  <div class="disco-overlay" id="discoOverlay">
+    <div class="disco-grid" id="discoGrid"></div>
+  </div>
+
+  <!-- Cursor + Grid (inline for file:// compatibility) -->
+  <script>
+    // --- Copy Email ---
+    function copyEmail(btn) {
+      navigator.clipboard.writeText('saloniraidesigns@gmail.com');
+      const tooltip = btn.querySelector('.nav-tooltip');
+      tooltip.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        tooltip.textContent = 'Copy email ID';
+        btn.classList.remove('copied');
+      }, 2000);
+    }
+
+    // --- Smooth scroll for nav links ---
+    document.querySelectorAll('.site-nav a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // --- Cursor ---
+    (function() {
+      const cursorDot = document.getElementById('cursorDot');
+      const cursorHalo = document.getElementById('cursorHalo');
+      if (!cursorDot || !cursorHalo) return;
+
+      const haloPos = { x: 0, y: 0 };
+      const target = { x: 0, y: 0 };
+
+      document.addEventListener('mousemove', (e) => {
+        target.x = e.clientX;
+        target.y = e.clientY;
+        // Cursor follows instantly — no lag
+        cursorDot.style.transform = `translate3d(${target.x}px, ${target.y}px, 0)`;
+      });
+
+      function lerp(a, b, f) { return a + (b - a) * f; }
+
+      function animate() {
+        haloPos.x = lerp(haloPos.x, target.x, 0.1);
+        haloPos.y = lerp(haloPos.y, target.y, 0.1);
+        cursorHalo.style.transform = `translate3d(${haloPos.x}px, ${haloPos.y}px, 0)`;
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
+    // --- Grid Background (Absolute full-page canvas — same as branding-preview) ---
+    (function() {
+      const canvas = document.getElementById('gridCanvas');
+      if (!canvas) return;
+
+      function drawGrid() {
+        const ctx = canvas.getContext('2d');
+        const dpr = window.devicePixelRatio || 1;
+
+        const w = window.innerWidth;
+        // Full page height — grid covers everything including scrollable area
+        const h = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight,
+          window.innerHeight
+        );
+
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.scale(dpr, dpr);
+        ctx.clearRect(0, 0, w, h);
+
+        // Tighter grid — ~24 columns for smaller squares
+        const cols = 24;
+        const spacing = w / cols;
+
+        const gridColor = 'rgba(0, 0, 0, 0.08)';
+        ctx.strokeStyle = gridColor;
+        ctx.lineWidth = 0.5;
+
+        // Tight curve zone at bottom — compact so distortion is dramatic
+        const curveZone = 350;
+        const bendY = h - curveZone;
+
+        function getCurvedPoint(flatX, flatY) {
+          if (flatY <= bendY) {
+            return [flatX, flatY];
+          }
+
+          const t = (flatY - bendY) / curveZone;
+          const eased = t * t * t; // cubic for snappier curve onset
+
+          const curvedY = flatY;
+
+          // Strong barrel distortion — very dramatic bow
+          const centerX = w / 2;
+          const offsetX = flatX - centerX;
+          const normalizedX = offsetX / (w / 2);
+          const bowStrength = eased * 4.5;
+          const bow = 1 + bowStrength * normalizedX * normalizedX;
+          const curvedX = centerX + offsetX * bow;
+
+          return [curvedX, curvedY];
+        }
+
+        const extraCols = 4;
+
+        // Draw vertical lines
+        for (let i = -extraCols; i <= cols + extraCols; i++) {
+          const x = i * spacing;
+          ctx.beginPath();
+          for (let y = 0; y <= h + spacing * 6; y += 2) {
+            const [cx, cy] = getCurvedPoint(x, y);
+            if (y === 0) ctx.moveTo(cx, cy);
+            else ctx.lineTo(cx, cy);
+          }
+          ctx.stroke();
+        }
+
+        // Draw horizontal lines
+        const totalRows = Math.ceil((h + spacing * 6) / spacing);
+        for (let j = 0; j <= totalRows; j++) {
+          const y = j * spacing;
+          ctx.beginPath();
+          for (let x = -spacing * extraCols; x <= w + spacing * extraCols; x += 2) {
+            const [cx, cy] = getCurvedPoint(x, y);
+            if (x === -spacing * extraCols) ctx.moveTo(cx, cy);
+            else ctx.lineTo(cx, cy);
+          }
+          ctx.stroke();
+        }
+      }
+
+      // Draw after layout is complete — multiple hooks to ensure it fires
+      window.addEventListener('load', () => { drawGrid(); setTimeout(drawGrid, 500); });
+      window.addEventListener('resize', drawGrid);
+      if (document.readyState === 'complete') {
+        drawGrid();
+      } else {
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(drawGrid, 50);
+          setTimeout(drawGrid, 300);
+        });
+      }
+
+      // Redraw when page height changes (images loading, content expanding)
+      const ro = new ResizeObserver(() => drawGrid());
+      ro.observe(document.body);
+    })();
+  </script>
+
+  <!-- Scroll animations: parallax, magnetic tilt, text scramble, stagger -->
+  <script>
+    (function() {
+      // ===== 0. Nav color on dark sections =====
+      const siteNav = document.querySelector('.site-nav');
+      const darkSections = document.querySelectorAll('.about-scroll-container');
+
+      function updateNavColor() {
+        const navBottom = siteNav.getBoundingClientRect().bottom;
+        let onDark = false;
+        darkSections.forEach(sec => {
+          const rect = sec.getBoundingClientRect();
+          if (rect.top < navBottom && rect.bottom > 0) onDark = true;
+        });
+        siteNav.classList.toggle('on-dark', onDark);
+      }
+
+      // ===== 1. About section — scroll-driven flip =====
+      const aboutScrollContainer = document.querySelector('.about-scroll-container');
+      const aboutSection = document.querySelector('.about-section');
+      if (aboutScrollContainer && aboutSection) {
+        const aboutH2 = aboutSection.querySelector('h2');
+        const statements = aboutSection.querySelectorAll('.about-statement');
+        const totalStatements = statements.length;
+        let ticking = false;
+        let hasScrolledPast = false; // true once section has fully left the viewport
+
+        function updateAbout() {
+          const containerRect = aboutScrollContainer.getBoundingClientRect();
+          const scrolled = -containerRect.top;
+          const totalScroll = aboutScrollContainer.offsetHeight - window.innerHeight;
+
+          // Only reset if user scrolls ALL the way back above the section top
+          if (scrolled < 0) {
+            aboutH2.classList.remove('visible');
+            statements.forEach(s => { s.classList.remove('active', 'exiting'); });
+            aboutSection.classList.remove('final-state');
+            hasScrolledPast = false;
+            ticking = false;
+            return;
+          }
+
+          aboutH2.classList.add('visible');
+
+          const progress = Math.min(Math.max(scrolled / totalScroll, 0), 1);
+
+          // Mark as completed once section has scrolled fully off screen
+          if (containerRect.bottom < 0) {
+            hasScrolledPast = true;
+          }
+
+          // Scrolling back up after having passed — show all 3, no re-animation
+          if (hasScrolledPast) {
+            aboutSection.classList.add('final-state');
+            statements.forEach(s => {
+              s.classList.remove('exiting');
+              s.classList.add('active');
+            });
+            ticking = false;
+            return;
+          }
+
+          // First pass scrolling down — one at a time, last one stays
+          aboutSection.classList.remove('final-state');
+
+          const segmentSize = 1 / totalStatements;
+          const activeIdx = Math.min(Math.floor(progress / segmentSize), totalStatements - 1);
+
+          statements.forEach((s, i) => {
+            if (i === activeIdx) {
+              s.classList.add('active');
+              s.classList.remove('exiting');
+            } else if (i < activeIdx) {
+              s.classList.remove('active');
+              s.classList.add('exiting');
+            } else {
+              s.classList.remove('active', 'exiting');
+            }
+          });
+          ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+              updateAbout();
+              updateNavColor();
+            });
+          }
+        }, { passive: true });
+        updateAbout();
+        updateNavColor();
+      }
+
+      // ===== 2. Magnetic tilt on experience cards =====
+      document.querySelectorAll('.experience-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -4;
+          const rotateY = ((x - centerX) / centerX) * 4;
+          card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) scale(1)';
+        });
+      });
+
+      // ===== 3. Section headings fade in =====
+      const sectionHeadings = document.querySelectorAll('.experience-section h2, .testimonials-header h2');
+      sectionHeadings.forEach(h => {
+        h.classList.add('section-heading-anim');
+      });
+
+      const headingObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.3 });
+      sectionHeadings.forEach(h => headingObs.observe(h));
+
+      // ===== 4. Testimonial cards staggered reveal =====
+      const testimonialWraps = document.querySelectorAll('.testimonial-card-wrap');
+      const cardObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const idx = Array.from(testimonialWraps).indexOf(entry.target);
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, idx * 100);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+      testimonialWraps.forEach(c => cardObs.observe(c));
+
+      // ===== 5. Smooth parallax depth on scroll — subtle y-offset for sections =====
+      const experienceSection = document.querySelector('.experience-section');
+      const testimonialsSection = document.querySelector('.testimonials-section');
+
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const vh = window.innerHeight;
+
+        // Fade out scroll hint
+        const heroScrollHint = document.getElementById('heroScrollHint');
+        if (scrollY > 80) {
+          heroScrollHint && heroScrollHint.classList.add('hidden');
+        } else {
+          heroScrollHint && heroScrollHint.classList.remove('hidden');
+        }
+
+        // Experience cards get a subtle parallax float
+        if (experienceSection) {
+          const rect = experienceSection.getBoundingClientRect();
+          if (rect.top < vh && rect.bottom > 0) {
+            const progress = (vh - rect.top) / (vh + rect.height);
+            const cards = experienceSection.querySelectorAll('.experience-card');
+            cards.forEach((card, i) => {
+              const offset = (progress - 0.5) * (8 + i * 3);
+              if (!card.matches(':hover')) {
+                card.style.transform = `perspective(1200px) translateY(${offset}px)`;
+              }
+            });
+          }
+        }
+      }, { passive: true });
+    })();
+  </script>
+
+  <!-- Page-specific scripts -->
+  <script>
+    // ===== Disco Mode — Strobing Tile Grid =====
+    const discoOverlay = document.getElementById('discoOverlay');
+    const discoGrid = document.getElementById('discoGrid');
+    const discoBall = document.querySelector('.asset-disco');
+    let discoTiles = [];
+    let discoRAF = null;
+    let discoActive = false;
+
+    const discoColors = [
+      '#0066ff', '#00aaff', '#00ddff', '#33ffff',
+      '#0044cc', '#0088dd', '#1a1a4a', '#0055ee',
+      '#66ccff', '#ffffff', '#88eeff', '#003399'
+    ];
+
+    function buildDiscoGrid() {
+      const cols = Math.ceil(window.innerWidth / 28);
+      const rows = Math.ceil(window.innerHeight / 28);
+      discoGrid.style.setProperty('--disco-cols', cols);
+      discoGrid.style.setProperty('--disco-rows', rows);
+      discoGrid.innerHTML = '';
+      discoTiles = [];
+
+      for (let i = 0; i < cols * rows; i++) {
+        const tile = document.createElement('div');
+        tile.className = 'disco-tile';
+        discoGrid.appendChild(tile);
+        discoTiles.push(tile);
+      }
+    }
+
+    function strobeFrame() {
+      if (!discoActive) return;
+
+      for (let i = 0; i < discoTiles.length; i++) {
+        if (Math.random() < 0.3) {
+          const color = discoColors[Math.floor(Math.random() * discoColors.length)];
+          const brightness = 0.3 + Math.random() * 0.7;
+          discoTiles[i].style.background = color;
+          discoTiles[i].style.opacity = brightness;
+        } else {
+          discoTiles[i].style.background = '#1a1a4a';
+          discoTiles[i].style.opacity = 0.6 + Math.random() * 0.4;
+        }
+      }
+
+      discoRAF = setTimeout(() => requestAnimationFrame(strobeFrame), 80);
+    }
+
+    function startDisco() {
+      if (discoTiles.length === 0) buildDiscoGrid();
+      discoActive = true;
+      discoOverlay.classList.add('active');
+      strobeFrame();
+    }
+
+    function stopDisco() {
+      discoActive = false;
+      discoOverlay.classList.remove('active');
+      if (discoRAF) clearTimeout(discoRAF);
+    }
+
+    // Tooltip positioning for all float assets
+    const assetTooltip = document.getElementById('assetTooltip');
+    const allAssets = document.querySelectorAll('.float-asset[data-tooltip]');
+
+    allAssets.forEach(asset => {
+      asset.addEventListener('mouseenter', () => {
+        assetTooltip.textContent = asset.getAttribute('data-tooltip');
+        assetTooltip.classList.add('visible');
+      });
+
+      asset.addEventListener('mousemove', (e) => {
+        assetTooltip.style.left = (e.clientX + 16) + 'px';
+        assetTooltip.style.top = (e.clientY - 10) + 'px';
+      });
+
+      asset.addEventListener('mouseleave', () => {
+        assetTooltip.classList.remove('visible');
+        if (asset === discoBall) stopDisco();
+      });
+    });
+
+    // Disco-specific interactions
+    if (discoBall) {
+      discoBall.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        assetTooltip.classList.remove('visible');
+        startDisco();
+      });
+      discoBall.addEventListener('mouseup', stopDisco);
+
+      discoBall.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        startDisco();
+      });
+      discoBall.addEventListener('touchend', stopDisco);
+    }
+
+    // ===== Scroll Animation for Float Assets =====
+    const assets = document.querySelectorAll('.float-asset');
+    const scrollRange = window.innerHeight * 0.7;
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function animateAssets() {
+      const scrollY = window.scrollY;
+      const progress = Math.min(scrollY / scrollRange, 1);
+      const eased = easeOutCubic(progress);
+
+      assets.forEach((asset) => {
+        const style = getComputedStyle(asset);
+        const startX = parseFloat(style.getPropertyValue('--start-x'));
+        const startY = parseFloat(style.getPropertyValue('--start-y'));
+        const endRotate = parseFloat(style.getPropertyValue('--end-rotate'));
+
+        const x = startX * (1 - eased);
+        const y = startY * (1 - eased);
+
+        const extraSpin = 15 * (1 - eased);
+        const currentRotate = endRotate + (endRotate !== 0 ? (endRotate > 0 ? extraSpin : -extraSpin) : 0);
+
+        asset.style.opacity = eased;
+        asset.style.transform = `translate(${x}px, ${y}px) rotate(${currentRotate}deg)`;
+      });
+
+      requestAnimationFrame(animateAssets);
+    }
+
+    animateAssets();
+  </script>
+
+  <!-- ThinkingWords animation -->
+  <script>
+    (function() {
+      const WORDS = [
+        'Cogitating', 'Percolating', 'Marinating', 'Synthesizing',
+        'Orchestrating', 'Crystallizing', 'Bamboozling', 'Discombobulating'
+      ];
+
+      const wordEls = document.querySelectorAll('.thinking-word');
+      let currentIndex = 0;
+
+      function getNextIndex() {
+        let next;
+        do {
+          next = Math.floor(Math.random() * WORDS.length);
+        } while (next === currentIndex && WORDS.length > 1);
+        return next;
+      }
+
+      function cycleWord() {
+        // Fade out
+        wordEls.forEach(el => el.classList.add('fade-out'));
+
+        setTimeout(() => {
+          currentIndex = getNextIndex();
+          wordEls.forEach(el => {
+            el.textContent = WORDS[currentIndex];
+            el.classList.remove('fade-out');
+            el.classList.add('fade-in');
+          });
+
+          // Trigger reflow then fade in
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              wordEls.forEach(el => el.classList.remove('fade-in'));
+            });
+          });
+        }, 200);
+      }
+
+      setInterval(cycleWord, 2500);
+    })();
+  </script>
+</body>
+</html>

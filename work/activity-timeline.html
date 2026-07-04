@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Unified Agentic Activity Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #1a1a1a;
+            background: #fafafa;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1e1b4b 100%);
+            color: #ffffff;
+            padding: 120px 40px 80px;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            max-width: 800px;
+            margin: 0 auto 16px;
+            line-height: 1.15;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            display: block;
+            width: fit-content;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 80px 0 24px;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            color: #0f0f0f;
+        }
+
+        h2:first-of-type {
+            border-top: none;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin: 32px 0 12px;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        strong {
+            color: #0f0f0f;
+        }
+
+        .stat {
+            background: #f0f0ff;
+            border-left: 4px solid #6366f1;
+            padding: 20px 24px;
+            margin: 28px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .stat p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .visual-placeholder {
+            background: #f5f5f5;
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            padding: 32px;
+            margin: 32px 0;
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .visual-placeholder::before {
+            content: "VISUAL";
+            display: block;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            color: #aaa;
+        }
+
+        ul {
+            margin: 16px 0 24px 24px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        em {
+            color: #555;
+        }
+
+        .patent-callout {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 1px solid #f59e0b;
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin: 32px 0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .patent-callout strong {
+            color: #92400e;
+        }
+
+        .design-principle {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .design-principle h4 {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #6366f1;
+            margin-bottom: 8px;
+        }
+
+        .design-principle p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .contributions {
+            background: #0f0f0f;
+            color: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .contributions h2 {
+            color: #fff;
+            border-top: none;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .contributions li {
+            color: #ddd;
+        }
+
+        .contributions strong {
+            color: #fff;
+        }
+
+        .meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .meta-item {
+            padding: 12px 0;
+        }
+
+        .meta-item .label {
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .meta-item .value {
+            color: #333;
+        }
+
+        .reflection {
+            background: #f0f0ff;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 1px solid #c7d2fe;
+        }
+
+        .reflection h2 {
+            border-top: none;
+            margin-top: 0;
+            padding-top: 0;
+        }
+    </style>
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+</head>
+<body>
+
+<a href="salesforce.html" style="display:inline-flex;align-items:center;gap:6px;padding:20px 40px;font-size:0.875rem;font-weight:500;color:#737373;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">← Back to Salesforce</a>
+
+<div class="hero">
+    <div class="badge">Patent Filed</div>
+    <h1>Unified Agentic Activity Timeline</h1>
+    <p class="subtitle">A vision for the most universal component in CRM &mdash; redesigned from the ground up for a world where AI agents outnumber humans on the timeline</p>
+</div>
+
+<div class="container">
+
+    <h2>The Provocation</h2>
+
+    <p>Activity timelines are the backbone of every CRM. Every call logged. Every email sent. Every case opened. Across Sales Cloud, Service Cloud, Marketing Cloud, Financial Services, Health Cloud &mdash; the timeline is the one component that appears <em>everywhere</em>. It is, arguably, the most universal piece of interface in enterprise software.</p>
+
+    <p>And it was designed for a world that no longer exists.</p>
+
+    <div class="visual-placeholder">The current Activity Timeline &mdash; a linear, chronological feed designed entirely for human-only workflows. Every entry requires human review. Every action demands human initiation.</div>
+
+    <p>Today's activity timeline is a passive log. It shows <em>what happened</em> &mdash; calls, emails, meetings, case updates &mdash; in strict chronological order. Even with AI additions (Einstein summaries, activity capture), the paradigm hasn't shifted: it remains a human-authored, human-consumed, human-reviewed list. The AI is decorative. It adds summaries. It doesn't change the fundamental architecture.</p>
+
+    <p>But here's the thing: <strong>the timeline is already filling up with activities that no human performed.</strong> Agents are qualifying leads. Agents are triaging cases. Agents are sending follow-up emails. Agents are updating records. And the current timeline has no way to make sense of this. It can't distinguish who did the work. It can't show <em>why</em> an agent acted. It can't surface what still needs human attention versus what's already been handled autonomously.</p>
+
+    <div class="stat">
+        <p>The question wasn't "how do we add AI to the timeline?" It was: <strong>"What does the timeline become when agents generate more activity than humans?"</strong></p>
+    </div>
+
+    <p>This was a pure vision exercise &mdash; no product brief, no sprint commitment, no delivery pressure. Just a question that felt urgent: if we don't rethink this now, the most foundational component in Salesforce will break under the weight of agentic work. We set out to answer it before anyone asked us to.</p>
+
+    <h2>Why This Matters Now</h2>
+
+    <p>Activity timelines serve as the single source of truth across virtually every Salesforce cloud. When we looked at the landscape, the gap was becoming critical for five reasons:</p>
+
+    <p><strong>No Agent Attribution.</strong> The current interface cannot distinguish which activities were performed by AI agents versus humans. As agents generate more entries, users lose the ability to understand what's automated and what requires their judgment.</p>
+
+    <p><strong>Manual Bottleneck.</strong> All activities flow through one human-reviewed feed, creating unsustainable volume. A sales rep managing 50 accounts can't parse a timeline where agents have logged 200 actions overnight.</p>
+
+    <p><strong>No Autonomous Filtering.</strong> Humans must manually scroll through every update, even routine AI-generated ones. There's no intelligence applied to what surfaces and what stays buried.</p>
+
+    <p><strong>Missing Agent Coordination.</strong> No visibility into multi-agent workflows or handoffs between human and AI tasks. When three agents collaborate on a case, the timeline shows a flat list &mdash; not the orchestration.</p>
+
+    <p><strong>Linear Processing in a Parallel World.</strong> The timeline forces sequential review rather than parallel human-AI processing. It's a 2005 interface for a 2026 workflow.</p>
+
+    <div class="stat">
+        <p><strong>Competitive pressure:</strong> Microsoft Dynamics 365 was already shipping generative AI timeline highlights and Copilot integration. Nutshell CRM offered AI Timeline Summarisation. The window to lead was closing.</p>
+    </div>
+
+    <h2>The Team & My Role</h2>
+
+    <p>This was a focused, high-conviction team of three designers and one principal architect:</p>
+
+    <ul>
+        <li><strong>Me (Saloni Rai)</strong> &mdash; Led the design execution, interaction architecture, and the majority of the detailed UI work. Drove the vision from concept through patent-ready specification.</li>
+        <li><strong>Prantik Banerjee</strong> &mdash; Principal Designer who partnered with me on the conceptual framing and strategic positioning. Together we did the heavy lifting.</li>
+        <li><strong>Angad Brar</strong> &mdash; Consulting designer with deep institutional knowledge of the existing Activity Timeline component, its technical constraints, and its usage patterns across clouds.</li>
+        <li><strong>Kevin Venkiteswaran</strong> &mdash; Principal Engineer/Architect who validated feasibility and ensured the vision wasn't science fiction &mdash; every pattern we proposed could be built on the existing Salesforce platform.</li>
+    </ul>
+
+    <p>We had no PM. No sprint. No backlog. This was design-initiated, self-directed work that we pursued because we believed the problem was too important to wait for a brief.</p>
+
+    <h2>The Design: From Passive Log to Active Orchestration Layer</h2>
+
+    <p>We redesigned the Activity Timeline from the ground up as a <strong>Unified Agentic Activity Timeline</strong> &mdash; transforming it from a chronological event log into an intelligent orchestration surface that reflects human-AI collaboration as a first-class concept.</p>
+
+    <div class="visual-placeholder">The redesigned Activity Timeline &mdash; showing the full component with natural language input, expandable insight cards, agent/human attribution, and tabbed navigation (All, Up Next, Needs Attention, Completed)</div>
+
+    <p>The experience is structured around two pillars:</p>
+
+    <h3>Pillar 1: All Engagements</h3>
+
+    <p>The primary view that replaces the traditional chronological feed. It's no longer a flat list &mdash; it's a layered, queryable, intelligent surface.</p>
+
+    <div class="design-principle">
+        <h4>Natural Language Query</h4>
+        <p>A text input at the top of the timeline lets users ask questions about their activity history in plain language. Not just filtering &mdash; <em>analysis.</em> "What was the average sentiment from all emails in the past 7 days?" or "What's the most important thing I need to do today?" The timeline becomes conversational, surfacing the <em>why</em>, <em>what</em>, and <em>how</em> behind activities &mdash; not just listing them.</p>
+    </div>
+
+    <div class="design-principle">
+        <h4>Actionable Summary Card</h4>
+        <p>An auto-generated engagement summary appears when you land on any record page &mdash; showing what happened in the past 7 days, with whom, the engagement sentiment trend, and a recommended next action. No clicking required. The most important context is <em>already there.</em> This card is configurable via prompt to capture domain-specific signals (different for sales vs. service vs. healthcare).</p>
+    </div>
+
+    <div class="design-principle">
+        <h4>Agent/Human Attribution</h4>
+        <p>Every activity card visually distinguishes whether it was performed by a human or an agent. Agent-authored activities surface the <em>rationale</em> &mdash; why the agent took that action &mdash; and suggest a recommended human action if one is needed. You can filter the entire timeline to show only agent activity, only human activity, or both.</p>
+    </div>
+
+    <div class="design-principle">
+        <h4>Intelligent Tabs</h4>
+        <p>Four tabs replace the one-dimensional chronological scroll:<br>
+        <strong>All</strong> &mdash; Everything, chronologically (the "old world" preserved)<br>
+        <strong>Up Next</strong> &mdash; Activities you or your agents should focus on, sorted by urgency<br>
+        <strong>Needs Attention</strong> &mdash; Activities flagged as requiring human judgment, overdue items, escalations<br>
+        <strong>Completed</strong> &mdash; Work done by you or agents, providing a clear "done" ledger</p>
+    </div>
+
+    <div class="visual-placeholder">Close-up of the "All Engagements" view &mdash; showing the natural language input, expandable summary card with sentiment trend, agent-attributed activity cards with rationale badges, and the tab navigation</div>
+
+    <h3>Pillar 2: Saved Insights</h3>
+
+    <p>A persistent layer for insights worth returning to. When the timeline surfaces something meaningful &mdash; a pattern in email sentiment, a risk signal from an agent &mdash; users can save it. These insights accumulate as a curated knowledge base about the record, shareable via Slack, filterable, and sortable.</p>
+
+    <div class="visual-placeholder">The Saved Insights tab &mdash; showing saved AI-generated insights with expandable detail, "Ask Agentforce" deepdive button, sources, and share/save actions</div>
+
+    <h2>Key Design Decisions</h2>
+
+    <h3>The "Why" is More Important Than the "What"</h3>
+
+    <p>Traditional timelines tell you <em>what</em> happened: "Email sent to Olivia Patel." Our redesign surfaces <em>why it matters</em>: "Olivia's email signals interest, but raises procurement concerns. Her mention of 'reviewing options with procurement next quarter' signals a potential delay." This transforms the timeline from a log into a strategic advisor.</p>
+
+    <h3>Show Related, Not Just Sequential</h3>
+
+    <p>When an insight is generated, users can toggle "Show related activities" &mdash; breaking free from chronological prison. The timeline dynamically reorganizes to show the constellation of activities that contributed to an insight, regardless of when they occurred. This was a fundamental architectural departure from every CRM timeline in the market.</p>
+
+    <h3>Multi-Owner Awareness</h3>
+
+    <p>Enterprise records have multiple owners. Our design shows avatar piles and prompt attribution &mdash; so when a colleague generates an insight or an agent takes an action, you see <em>who</em> initiated it and <em>what</em> they asked. The timeline becomes a shared workspace, not a personal feed.</p>
+
+    <h3>Cross-Cloud Unification</h3>
+
+    <p>We designed visual signifiers that communicate unified connections between Marketing, Service, and Sales activities on a single record. An activity originating from a marketing campaign, a service case, and a sales call all appear in one coherent feed with clear provenance &mdash; eliminating the siloed views that exist today.</p>
+
+    <div class="patent-callout">
+        <strong>Patent Filed:</strong> The novelty of this approach &mdash; agent attribution, natural language timeline querying, actionable AI-generated summary cards with sentiment analysis, and the "Needs Attention" prioritization layer &mdash; was deemed sufficiently novel for patent submission. The invention disclosure names 7 inventors, including myself (Saloni Rai).
+    </div>
+
+    <h2>Designing the States & Scenarios</h2>
+
+    <p>Vision work that can't withstand scrutiny isn't a vision &mdash; it's a mood board. We designed <strong>15+ distinct scenarios and states</strong> to prove the concept held up under real conditions:</p>
+
+    <ul>
+        <li><strong>Empty state</strong> &mdash; New record with no activity history. What does the agent summarize when there's nothing to summarize?</li>
+        <li><strong>High-volume state</strong> &mdash; Record with 200+ agent activities overnight. How does "Needs Attention" filter signal from noise?</li>
+        <li><strong>Multi-agent state</strong> &mdash; Three agents (lead qualification, email outreach, case triage) all active on the same record. How do you show orchestration?</li>
+        <li><strong>Conflicting signals</strong> &mdash; Agent recommends one action, but human activity suggests another direction. How does the timeline surface tension without creating confusion?</li>
+        <li><strong>Natural language edge cases</strong> &mdash; Ambiguous queries, compound questions, queries that span time ranges the system can't access.</li>
+        <li><strong>Cross-cloud scenarios</strong> &mdash; A single customer record with activity from Sales, Service, and Marketing. How does attribution stay clear?</li>
+    </ul>
+
+    <div class="visual-placeholder">The full Scenarios section from Figma &mdash; 15 side-by-side timeline states showing the component adapting to different data conditions, agent volumes, and user queries</div>
+
+    <p>Each scenario was designed at full fidelity &mdash; not wireframes, not sketches. These were production-ready UI specifications that an engineer could build from. The Principal Architect validated each pattern against existing platform capabilities, confirming feasibility without requiring new infrastructure.</p>
+
+    <h2>What Made This Patentable</h2>
+
+    <p>The patent filing wasn't an afterthought. As we designed, we realized we were solving problems no one in the market had addressed:</p>
+
+    <ul>
+        <li><strong>No CRM offers agent-attributed timelines.</strong> Microsoft Dynamics 365 adds AI summaries, but doesn't distinguish agent work from human work in the timeline itself.</li>
+        <li><strong>No CRM lets you query your timeline in natural language</strong> with complex analytical questions ("What's the average sentiment from emails this week?")</li>
+        <li><strong>No CRM auto-generates actionable summaries on page load</strong> with configurable, domain-specific signal detection.</li>
+        <li><strong>No CRM separates "Needs Attention" from "Completed"</strong> in a way that accounts for autonomous agent work that may or may not need human review.</li>
+    </ul>
+
+    <p>These weren't incremental improvements. They were architectural innovations in how humans relate to AI-generated activity &mdash; and they were novel enough to protect.</p>
+
+    <h2>Impact & Influence</h2>
+
+    <p>This was a vision exercise. It didn't ship in a release. But its influence was real:</p>
+
+    <ul>
+        <li><strong>Patent filed</strong> with Salesforce IP team &mdash; 7 named inventors, invention disclosure accepted</li>
+        <li><strong>Became a reference design</strong> for how Salesforce thinks about agentic UI patterns across clouds</li>
+        <li><strong>Influenced the platform roadmap</strong> &mdash; the concepts of agent attribution and "needs attention" prioritization have been picked up by platform teams</li>
+        <li><strong>Principal Architect endorsement</strong> &mdash; feasibility validated at every step, meaning this isn't speculative fantasy but buildable vision</li>
+        <li><strong>Cross-cloud applicability</strong> &mdash; designed to work identically in Sales, Service, Marketing, Health, Financial Services &mdash; making it a horizontal platform investment, not a vertical feature</li>
+    </ul>
+
+    <div class="contributions">
+        <h2>What I Contributed</h2>
+        <ul>
+            <li><strong>Interaction architecture</strong> for the entire redesigned timeline &mdash; the tab structure, card anatomy, natural language input behavior, and insight pagination system</li>
+            <li><strong>15+ scenario designs at full fidelity</strong> &mdash; proving the concept holds under real-world data conditions, edge cases, and multi-agent states</li>
+            <li><strong>The "actionable summary card" concept</strong> &mdash; auto-generated on page load, configurable via prompt, with sentiment analysis and recommended actions</li>
+            <li><strong>Agent attribution visual system</strong> &mdash; distinguishing human vs. agent activity, surfacing rationale, and recommending human action where needed</li>
+            <li><strong>Named inventor on patent filing</strong> &mdash; contribution recognized as novel intellectual property by Salesforce IP team</li>
+            <li><strong>Design leadership without a brief</strong> &mdash; self-initiated this work based on conviction that the problem was urgent, secured architect support, and delivered patent-ready specification</li>
+        </ul>
+    </div>
+
+    <div class="reflection">
+        <h2>Reflection</h2>
+
+        <p>This project is the opposite of my Headless Partner Agent work. That was about shipping &mdash; navigating constraints, getting resources, delivering to pilot customers. This was about <strong>seeing around corners.</strong></p>
+
+        <p>The skill that made this work wasn't craft (though the designs are detailed). It was <strong>recognizing that the most fundamental component in the platform was about to become obsolete</strong> &mdash; and having the conviction to redesign it before anyone commissioned the work.</p>
+
+        <p>In vision work, the designer's job is to make the future feel inevitable. Not aspirational. Not fantastical. Inevitable. That's why we designed 15 scenarios instead of 3. That's why we had an architect validate feasibility at every turn. That's why we filed the patent &mdash; because the ideas weren't just interesting, they were <em>defensible.</em></p>
+
+        <p>The Unified Agentic Activity Timeline hasn't shipped yet. But when it does &mdash; and it will, because the problem it solves is only getting more acute &mdash; the design is ready. That's what vision work is for.</p>
+    </div>
+
+    <div class="meta">
+        <div class="meta-item">
+            <div class="label">Duration</div>
+            <div class="value">~3 months (self-initiated vision sprint)</div>
+        </div>
+        <div class="meta-item">
+            <div class="label">Role</div>
+            <div class="value">Product Designer &mdash; Interaction Design, Vision, Scenario Design</div>
+        </div>
+        <div class="meta-item">
+            <div class="label">Team</div>
+            <div class="value">2 Designers (heavy lifting) + 1 Consulting Designer + 1 Principal Architect</div>
+        </div>
+        <div class="meta-item">
+            <div class="label">Scope</div>
+            <div class="value">Cross-cloud platform component (Sales, Service, Marketing, Health, FSC)</div>
+        </div>
+        <div class="meta-item">
+            <div class="label">Tools</div>
+            <div class="value">Figma (full-fidelity scenarios), Patent disclosure documentation</div>
+        </div>
+        <div class="meta-item">
+            <div class="label">Outcome</div>
+            <div class="value">Patent filed (7 inventors); reference design for agentic UI; architect-validated feasibility</div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

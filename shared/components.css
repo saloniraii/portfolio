@@ -1,0 +1,320 @@
+/* ============================================
+   SHARED COMPONENTS — Saloni Rai Portfolio
+   Reusable styles across all pages
+   ============================================ */
+
+/* ===== Design Tokens ===== */
+:root {
+  --accent: #B22222;
+  --accent-light: rgba(178, 34, 34, 0.08);
+  --bg: #fafafa;
+  --foreground: #1a1a1a;
+  --gray-100: #f5f5f5;
+  --gray-200: #e5e5e5;
+  --gray-300: #d4d4d4;
+  --gray-400: #a3a3a3;
+  --gray-500: #737373;
+  --gray-600: #525252;
+  --gray-700: #404040;
+  --gray-800: #262626;
+  --grid-color: rgba(0, 0, 0, 0.06);
+  --display-font: 'Fraunces', serif;
+  --body-font: 'Plus Jakarta Sans', sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
+
+/* ===== Grid Background ===== */
+.grid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.grid-bg canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+html, body {
+  position: relative;
+}
+
+
+/* ===== Custom Cursor ===== */
+* { cursor: none !important; }
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.custom-cursor img {
+  width: 28px;
+  height: 34px;
+  margin-left: -2px;
+  margin-top: -2px;
+}
+
+.cursor-halo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99998;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  margin-top: -20px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0.45;
+  animation: ringPulse 2s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% {
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
+    opacity: 0.45;
+  }
+  50% {
+    width: 54px;
+    height: 54px;
+    margin-left: -27px;
+    margin-top: -27px;
+    opacity: 0;
+  }
+}
+
+
+/* ===== Buttons ===== */
+
+/* Primary button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--body-font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer !important;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #8b1a1a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(178, 34, 34, 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Secondary/outline button */
+.btn-secondary {
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--gray-200);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(178, 34, 34, 0.08);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Ghost button */
+.btn-ghost {
+  background: transparent;
+  color: var(--gray-500);
+  padding: 8px 16px;
+}
+
+.btn-ghost:hover {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* Small variant */
+.btn-sm {
+  font-size: 0.8rem;
+  padding: 8px 16px;
+}
+
+/* Large variant */
+.btn-lg {
+  font-size: 1rem;
+  padding: 16px 32px;
+}
+
+/* Icon-only button */
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: var(--radius-full);
+}
+
+
+/* ===== Tooltips ===== */
+.tooltip-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--foreground);
+  color: #fff;
+  font-family: var(--body-font);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 100;
+}
+
+/* Arrow */
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--foreground);
+}
+
+.tooltip-wrap:hover .tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Tooltip below */
+.tooltip-bottom {
+  bottom: auto;
+  top: calc(100% + 8px);
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.tooltip-bottom::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: var(--foreground);
+}
+
+.tooltip-wrap:hover .tooltip-bottom {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Tooltip with accent bg */
+.tooltip-accent {
+  background: var(--accent);
+}
+
+.tooltip-accent::after {
+  border-top-color: var(--accent);
+}
+
+.tooltip-bottom.tooltip-accent::after {
+  border-top-color: transparent;
+  border-bottom-color: var(--accent);
+}
+
+
+/* ===== Tags / Chips ===== */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-family: var(--body-font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tag-filled {
+  background: var(--accent);
+  color: white;
+}
+
+.tag-outline {
+  background: transparent;
+  border: 1px solid var(--gray-200);
+  color: var(--gray-600);
+}
+
+.tag-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+
+/* ===== Cards ===== */
+.card {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(178, 34, 34, 0.06);
+}
+
+
+/* ===== Selection ===== */
+::selection {
+  background: rgba(178, 34, 34, 0.2);
+  color: inherit;
+}

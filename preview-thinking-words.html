@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ThinkingWords Preview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+      background: #1a1a1a;
+      color: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .demo-block {
+      background: #262626;
+      border: 1px solid #404040;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      min-width: 360px;
+    }
+
+    .demo-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #737373;
+      margin-bottom: 1rem;
+    }
+
+    .thinking-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .asterisk {
+      color: #B22222;
+      font-weight: bold;
+    }
+
+    .word {
+      color: #B22222;
+      font-weight: 500;
+      display: inline-block;
+      min-width: 140px;
+    }
+
+    .dots {
+      color: #B22222;
+    }
+
+    .meta {
+      color: rgba(250, 250, 250, 0.35);
+      margin-left: 4px;
+    }
+
+    .dot-indicator {
+      display: inline-block;
+    }
+
+    .tip-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 1.25rem;
+      margin-top: 2px;
+      font-size: 14px;
+      color: rgba(250, 250, 250, 0.35);
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateX(-4px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .dots { animation: pulse 1.6s ease-in-out infinite; }
+    .dot-indicator { animation: pulse 2s ease-in-out infinite; }
+    .word { animation: fadeSlideIn 0.25s ease-out; }
+
+    /* Light variant */
+    .demo-block.light {
+      background: #fafafa;
+      border-color: #e5e5e5;
+    }
+    .demo-block.light .word,
+    .demo-block.light .asterisk,
+    .demo-block.light .dots { color: #B22222; }
+    .demo-block.light .meta { color: rgba(26, 26, 26, 0.4); }
+    .demo-block.light .tip-line { color: rgba(26, 26, 26, 0.4); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Dark variant -->
+    <div class="demo-block">
+      <div class="demo-label">Dark — Full (with tip)</div>
+      <div class="thinking-line">
+        <span class="asterisk">✱</span>
+        <span class="word" id="word1">Cogitating</span>
+        <span class="dots">...</span>
+        <span class="meta">(<span id="timer1">0s</span> · <span class="dot-indicator">●</span>)</span>
+      </div>
+      <div class="tip-line">
+        <span>└</span>
+        <span>Tip: Running build pipeline</span>
+      </div>
+    </div>
+
+    <!-- Dark variant no tip -->
+    <div class="demo-block">
+      <div class="demo-label">Dark — No tip</div>
+      <div class="thinking-line">
+        <span class="asterisk">✱</span>
+        <span class="word" id="word2">Orchestrating</span>
+        <span class="dots">...</span>
+        <span class="meta">(<span id="timer2">0s</span> · <span class="dot-indicator">●</span>)</span>
+      </div>
+    </div>
+
+    <!-- Light variant -->
+    <div class="demo-block light">
+      <div class="demo-label" style="color: #a3a3a3;">Light — Full (with tip)</div>
+      <div class="thinking-line">
+        <span class="asterisk">✱</span>
+        <span class="word" id="word3">Percolating</span>
+        <span class="dots">...</span>
+        <span class="meta">(<span id="timer3">0s</span> · <span class="dot-indicator">●</span>)</span>
+      </div>
+      <div class="tip-line">
+        <span>└</span>
+        <span>Tip: Fetching latest updates</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const allWords = [
+      "Cogitating", "Ruminating", "Pondering", "Deliberating",
+      "Contemplating", "Percolating", "Marinating", "Synthesizing",
+      "Orchestrating", "Harmonizing", "Calibrating", "Materializing",
+      "Crystallizing", "Manifesting", "Weaving", "Sculpting", "Crafting",
+      "Bamboozling", "Discombobulating", "Perambulating",
+      "Gesticulating", "Pontificating",
+      "Scrutinizing", "Investigating"
+    ];
+
+    function randomWord(current) {
+      let next;
+      do {
+        next = allWords[Math.floor(Math.random() * allWords.length)];
+      } while (next === current);
+      return next;
+    }
+
+    // Word cycling
+    const wordEls = [
+      document.getElementById('word1'),
+      document.getElementById('word2'),
+      document.getElementById('word3'),
+    ];
+
+    wordEls.forEach((el, i) => {
+      setInterval(() => {
+        const next = randomWord(el.textContent);
+        el.style.animation = 'none';
+        el.offsetHeight; // reflow
+        el.textContent = next;
+        el.style.animation = 'fadeSlideIn 0.25s ease-out';
+      }, 2500 + i * 800); // stagger them
+    });
+
+    // Timers
+    const startTime = Date.now();
+    const timerEls = [
+      document.getElementById('timer1'),
+      document.getElementById('timer2'),
+      document.getElementById('timer3'),
+    ];
+
+    setInterval(() => {
+      const s = Math.floor((Date.now() - startTime) / 1000);
+      const display = s < 60 ? `${s}s` : `${Math.floor(s/60)}m ${s%60}s`;
+      timerEls.forEach(el => el.textContent = display);
+    }, 1000);
+  </script>
+</body>
+</html>
