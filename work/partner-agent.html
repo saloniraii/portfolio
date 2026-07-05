@@ -421,8 +421,7 @@
             transform: translateX(0);
         }
         .process-step:nth-child(even) {
-            margin-left: auto;
-            transform: translateX(40px);
+            transform: translateX(-40px);
         }
         .process-step:nth-child(even).visible {
             transform: translateX(0);
@@ -438,9 +437,6 @@
             background: var(--accent);
             border: 3px solid var(--bg);
             box-shadow: 0 0 0 2px var(--accent);
-        }
-        .process-step:nth-child(even)::before {
-            left: -33px;
         }
         .process-step .step-num {
             font-size: 0.65rem;
