@@ -93,6 +93,17 @@
       50% { width: 54px; height: 54px; margin-left: -27px; margin-top: -27px; opacity: 0; }
     }
 
+    /* Hide custom cursor on mobile/touch devices */
+    @media (hover: none) and (pointer: coarse) {
+      .custom-cursor,
+      .cursor-halo {
+        display: none !important;
+      }
+      * {
+        cursor: auto !important;
+      }
+    }
+
     /* ===== Fixed Nav Header ===== */
     .site-nav {
       position: fixed;
@@ -571,7 +582,7 @@
     }
 
     .experience-card:hover .experience-card-reveal {
-      max-height: 300px;
+      max-height: 600px;
       opacity: 1;
       margin-top: 24px;
     }
@@ -632,6 +643,17 @@
 
       .experience-card-reveal-inner {
         flex-direction: column;
+      }
+
+      /* Make cards expand on tap/click on mobile */
+      .experience-card.active .experience-card-reveal {
+        max-height: 800px;
+        opacity: 1;
+        margin-top: 24px;
+      }
+
+      .experience-card:hover .experience-card-reveal {
+        max-height: 800px;
       }
     }
 
@@ -1943,6 +1965,17 @@
 
       // ===== 2. Magnetic tilt on experience cards =====
       document.querySelectorAll('.experience-card').forEach(card => {
+        // Mobile: toggle active class on tap
+        card.addEventListener('click', (e) => {
+          if (window.innerWidth <= 768) {
+            // Don't toggle if clicking on a link inside the card
+            if (!e.target.closest('a')) {
+              card.classList.toggle('active');
+            }
+          }
+        });
+
+        // Desktop: magnetic tilt effect
         card.addEventListener('mousemove', (e) => {
           const rect = card.getBoundingClientRect();
           const x = e.clientX - rect.left;
