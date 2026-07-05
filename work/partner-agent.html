@@ -3,412 +3,918 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Study: Headless Partner Agent</title>
+    <title>Headless Partner Agent — Saloni Rai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,800;9..144,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --accent: #4338ca;
+            --accent-light: #6366f1;
+            --bg: #fafafa;
+            --dark: #0f0f0f;
+            --foreground: #1a1a1a;
+            --muted: #737373;
+            --display-font: 'Fraunces', serif;
+            --body-font: 'Plus Jakarta Sans', sans-serif;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Georgia', serif;
-            line-height: 1.8;
-            color: #1a1a1a;
-            background: #fafafa;
+            background: var(--bg);
+            color: var(--foreground);
+            font-family: var(--body-font);
+            line-height: 1.7;
         }
 
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 20px 40px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--accent); }
+
+        /* ─── HERO ─── */
         .hero {
-            background: #0f0f0f;
-            color: #ffffff;
-            padding: 120px 40px 80px;
-            text-align: left;
-        }
-
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 700;
-            max-width: 800px;
-            margin: 0 auto 16px;
-            line-height: 1.15;
-        }
-
-        .hero .subtitle {
-            font-size: 1.15rem;
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0.7;
-            font-style: italic;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 40px;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin: 80px 0 24px;
-            padding-top: 40px;
-            border-top: 1px solid #e0e0e0;
-            color: #0f0f0f;
-        }
-
-        h2:first-of-type {
-            border-top: none;
-            margin-top: 0;
-            padding-top: 0;
-        }
-
-        h3 {
-            font-size: 1.2rem;
-            margin: 32px 0 12px;
-            color: #333;
-        }
-
-        p {
-            margin-bottom: 20px;
-            font-size: 1.05rem;
-        }
-
-        strong {
-            color: #0f0f0f;
-        }
-
-        .stat {
-            background: #f0f4ff;
-            border-left: 4px solid #2563eb;
-            padding: 20px 24px;
-            margin: 28px 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .stat p {
-            margin: 0;
-            font-size: 1rem;
-        }
-
-        .visual-placeholder {
-            background: #f5f5f5;
-            border: 2px dashed #ccc;
-            border-radius: 12px;
-            padding: 32px;
-            margin: 32px 0;
+            background: var(--dark);
+            color: #fff;
+            padding: 80px 40px;
             text-align: center;
-            color: #888;
-            font-size: 0.9rem;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         }
-
-        .visual-placeholder::before {
-            content: "VISUAL";
-            display: block;
+        .hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-family: var(--display-font);
+            font-size: clamp(2rem, 4vw, 2.8rem);
             font-weight: 700;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            color: #aaa;
+            margin-bottom: 24px;
+            opacity: 0.6;
         }
-
-        ul {
-            margin: 16px 0 24px 24px;
+        .hero-diagram {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 48px 40px;
+            margin-top: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
         }
-
-        li {
-            margin-bottom: 10px;
-            font-size: 1.05rem;
-        }
-
-        em {
-            color: #555;
-        }
-
-        .conversation-example {
-            background: #f9f9f9;
+        .diagram-node {
+            background: #252540;
+            border: 1px solid #3a3a5c;
             border-radius: 12px;
-            padding: 24px;
-            margin: 24px 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            border: 1px solid #eee;
+            padding: 24px 20px;
+            text-align: center;
+            min-width: 160px;
         }
-
-        .conversation-example em {
-            color: #2563eb;
-            font-style: normal;
-            background: #eef4ff;
-            padding: 2px 6px;
-            border-radius: 4px;
+        .diagram-node.portal {
+            background: #fff;
+            color: var(--dark);
+            border: none;
         }
-
-        .contributions {
-            background: #0f0f0f;
-            color: #fff;
-            border-radius: 12px;
-            padding: 40px;
-            margin: 40px 0;
-        }
-
-        .contributions h2 {
-            color: #fff;
-            border-top: none;
-            margin-top: 0;
-            padding-top: 0;
-        }
-
-        .contributions li {
-            color: #ddd;
-        }
-
-        .contributions strong {
-            color: #fff;
-        }
-
-        .meta {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 1px solid #e0e0e0;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 0.9rem;
-        }
-
-        .meta-item {
-            padding: 12px 0;
-        }
-
-        .meta-item .label {
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #888;
+        .diagram-node h3 {
+            font-size: 1rem;
+            font-weight: 700;
             margin-bottom: 4px;
         }
+        .diagram-node p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        .diagram-node.portal p {
+            color: #555;
+        }
+        .diagram-node .big-stat {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: var(--display-font);
+        }
+        .diagram-arrow {
+            font-size: 1.5rem;
+            color: var(--accent-light);
+        }
+        .diagram-disconnect {
+            color: #ef4444;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .diagram-disconnect .dashes {
+            display: block;
+            border-top: 2px dashed #ef4444;
+            width: 60px;
+            margin: 4px auto;
+        }
+        .channel-pills {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 12px;
+        }
+        .channel-pill {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .pill-whatsapp { background: #22c55e; color: #fff; }
+        .pill-slack { background: #7c3aed; color: #fff; }
+        .pill-sms { background: #06b6d4; color: #fff; }
 
-        .meta-item .value {
-            color: #333;
+        /* ─── SECTIONS ─── */
+        .section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+        .section-headline {
+            font-family: var(--display-font);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .section-body {
+            font-size: 1.05rem;
+            color: #404040;
+            max-width: 720px;
+            line-height: 1.8;
         }
 
-        .reflection {
-            background: #fffbeb;
+        /* ─── SETUP SECTION ─── */
+        .setup-hero-stat {
+            display: flex;
+            align-items: baseline;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .setup-hero-stat .big-number {
+            font-family: var(--display-font);
+            font-size: clamp(4rem, 8vw, 6rem);
+            font-weight: 900;
+            color: var(--dark);
+            line-height: 1;
+        }
+        .setup-hero-stat .big-number sup {
+            font-size: 0.4em;
+            vertical-align: super;
+        }
+        .setup-hero-stat .stat-text {
+            font-size: 1.3rem;
+            color: #404040;
+            max-width: 400px;
+            line-height: 1.5;
+        }
+
+        .stat-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .stat-card {
+            padding: 24px;
+            border: 1px solid #e5e5e5;
             border-radius: 12px;
-            padding: 40px;
-            margin: 40px 0;
-            border: 1px solid #fde68a;
+            background: #fff;
+        }
+        .stat-card .number {
+            font-family: var(--display-font);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        .stat-card .desc {
+            font-size: 0.875rem;
+            color: var(--muted);
+            line-height: 1.5;
         }
 
-        .reflection h2 {
-            border-top: none;
-            margin-top: 0;
-            padding-top: 0;
+        /* ─── INSIGHT CARDS ─── */
+        .insight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .insight-card {
+            padding: 32px 24px;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            background: #fff;
+        }
+        .insight-card .insight-num {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+        .insight-card h3 {
+            font-family: var(--display-font);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .insight-card p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ─── VISION SECTION ─── */
+        .vision-section {
+            background: var(--dark);
+            color: #fff;
+            padding: 80px 40px;
+            text-align: center;
+        }
+        .vision-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .vision-section .section-label {
+            color: rgba(255,255,255,0.5);
+        }
+        .vision-section .section-headline {
+            color: #fff;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+        }
+        .vision-section .section-body {
+            color: rgba(255,255,255,0.7);
+            margin: 0 auto 32px;
+        }
+        .vision-definitions {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .vision-def {
+            text-align: left;
+            max-width: 320px;
+        }
+        .vision-def strong {
+            color: var(--accent-light);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .vision-def p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+        .vision-diagram {
+            margin-top: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .vision-channel {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+        .vision-agent-box {
+            background: var(--accent);
+            color: #fff;
+            padding: 16px 28px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .vision-crm {
+            background: #252540;
+            border: 1px solid #3a3a5c;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.7);
+        }
+        .vision-thesis {
+            margin-top: 40px;
+            font-style: italic;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.95rem;
+        }
+
+        /* ─── SECURING THE BET ─── */
+        .bet-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .bet-card {
+            padding: 28px 24px;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            background: #fff;
+        }
+        .bet-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .bet-card p {
+            font-size: 0.875rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+        .bet-card.confidential {
+            background: var(--dark);
+            color: #fff;
+            border-color: transparent;
+        }
+        .bet-card.confidential p {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ─── QUOTE BLOCK ─── */
+        .quote-block {
+            background: var(--dark);
+            color: #fff;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .quote-block .quote-text {
+            max-width: 700px;
+            margin: 0 auto;
+            font-family: var(--display-font);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* ─── PROJECT DETAILS GRID ─── */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #e5e5e5;
+        }
+        .detail-item .detail-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+        .detail-item .detail-value {
+            font-size: 0.9rem;
+            color: var(--foreground);
+            line-height: 1.5;
+        }
+
+        /* ─── CONVERSATION MOCKUP ─── */
+        .conversation-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+            margin-top: 48px;
+        }
+        .conversation-context h3 {
+            font-family: var(--display-font);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .conversation-context p {
+            font-size: 0.95rem;
+            color: #404040;
+            line-height: 1.7;
+        }
+        .conversation-mockup {
+            background: #f0f0f0;
+            border-radius: 20px;
+            padding: 24px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.875rem;
+        }
+        .conv-header {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--muted);
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: 600;
+        }
+        .conv-bubble {
+            padding: 10px 14px;
+            border-radius: 16px;
+            margin-bottom: 8px;
+            max-width: 85%;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+        .conv-bubble.agent {
+            background: #fff;
+            color: var(--foreground);
+            border-bottom-left-radius: 4px;
+        }
+        .conv-bubble.user {
+            background: var(--accent);
+            color: #fff;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+        .conv-bubble.success {
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+            border-bottom-left-radius: 4px;
+        }
+        .conv-bubble .emoji {
+            margin-right: 4px;
+        }
+
+        /* ─── TOPICS GRID ─── */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .topic-card {
+            border: 1px solid #e5e5e5;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .topic-card-header {
+            padding: 20px 24px 12px;
+        }
+        .topic-card-header .topic-num {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+        .topic-card-header h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+        .topic-card-conv {
+            padding: 12px 20px 20px;
+            background: #f5f5f5;
+        }
+        .topic-card-conv .conv-bubble {
+            font-size: 0.8rem;
+            padding: 8px 12px;
+        }
+        .topic-card-caption {
+            padding: 16px 24px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.5;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        /* ─── CONSTRAINT SECTION ─── */
+        .constraint-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            margin-top: 48px;
+        }
+
+        /* ─── IMPACT ─── */
+        .impact-section {
+            background: var(--dark);
+            color: #fff;
+            padding: 80px 40px;
+        }
+        .impact-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .impact-section .section-label {
+            color: rgba(255,255,255,0.5);
+        }
+        .impact-section .section-headline {
+            color: #fff;
+        }
+        .impact-section .section-body {
+            color: rgba(255,255,255,0.6);
+        }
+        .impact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .impact-card {
+            padding: 28px 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+        }
+        .impact-card .impact-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            margin-bottom: 12px;
+        }
+        .impact-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .impact-card p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.5;
+        }
+
+        /* ─── REFLECTION ─── */
+        .reflection-section {
+            background: #f5f5f0;
+            padding: 80px 40px;
+        }
+        .reflection-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .reflection-section .section-headline {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+        }
+        .reflection-section .section-headline strong {
+            color: var(--accent);
+        }
+        .reflection-section .section-body {
+            margin-top: 20px;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .back-link { padding: 16px 20px; }
+            .hero { padding: 60px 20px; }
+            .section { padding: 60px 20px; }
+            .vision-section { padding: 60px 20px; }
+            .quote-block { padding: 48px 20px; }
+            .impact-section { padding: 60px 20px; }
+            .reflection-section { padding: 60px 20px; }
+            .conversation-section { grid-template-columns: 1fr; }
+            .constraint-section { grid-template-columns: 1fr; }
+            .hero-diagram { flex-direction: column; }
+            .stat-cards { grid-template-columns: 1fr; }
+            .insight-cards { grid-template-columns: 1fr; }
+            .bet-cards { grid-template-columns: 1fr; }
+            .topics-grid { grid-template-columns: 1fr; }
+            .impact-cards { grid-template-columns: 1fr; }
+            .details-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
-  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 </head>
 <body>
 
-<a href="salesforce.html" style="display:inline-flex;align-items:center;gap:6px;padding:20px 40px;font-size:0.875rem;font-weight:500;color:#737373;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">← Back to Salesforce</a>
-
-<div class="hero">
-    <h1>Headless Partner Agent</h1>
-    <p class="subtitle">How a design-led vision pivoted an entire product strategy and shipped as Salesforce's first conversation-native channel management tool</p>
-</div>
-
-<div class="container">
-
-    <h2>The Setup</h2>
-
-    <p>Here's a number that should make any product team uncomfortable: <strong>40 million partner users</strong>, and most of them never log in.</p>
-
-    <p>Partner Cloud is Salesforce's platform for managing indirect sales ecosystems&mdash;the resellers, distributors, and affiliate partners who collectively drive <strong>75% of enterprise B2B revenue</strong>. We serve <strong>8,000 customers</strong> who use our tools to recruit, onboard, enable, and compensate their partner networks. On paper, it's a massive, high-value product. In practice, we had an engagement crisis that no amount of portal polish could fix.</p>
-
-    <div class="visual-placeholder">Opening stat &mdash; a bold data visualization showing 40M partner users, 4M monthly active, and the engagement gap. Hero image.</div>
-
-    <p>The symptoms were everywhere. Support cases took an average of <strong>8 days to resolve</strong> because information was scattered across systems. <strong>11% of cases</strong> ended with a channel manager simply sending the partner a link to a help article they could have found themselves&mdash;if only they'd logged in. Channel leaders at our customer organizations were openly questioning the ROI of their partner programs, despite those same programs generating the majority of their revenue.</p>
-
-    <p>When I joined this problem space, the team's strategy was focused on incremental improvements: better navigation, streamlined admin setup, AI-powered suggestions <em>within</em> the portal. Good work, but it assumed the portal was the right surface. I wasn't convinced it was.</p>
-
-    <h2>The Insight That Changed Everything</h2>
-
-    <p>I spent the first phase immersed in research&mdash;customer interviews, behavioral analysis, competitive landscape review, and deep collaboration with Salesforce's R&I team who had conducted a PRM Opportunity Assessment and a Seller Survey.</p>
-
-    <div class="visual-placeholder">Research synthesis wall or insight map &mdash; showing the journey from raw data to the three core insights below</div>
-
-    <p>One data point from the R&I studies crystallized the opportunity: when Salesforce surveyed both its own customers and non-Salesforce users about what they most needed from an AI agent, <strong>partner support ranked #2 across all respondents</strong>. The demand was there. The delivery mechanism was wrong.</p>
-
-    <p>I mapped the actual daily workflow of partner representatives&mdash;not the idealized journey we'd designed for, but the real one. And the real one looked like this: a partner rep named "Russel" (our composite persona) starts his morning checking WhatsApp messages from customers. He drives to a client site. During the meeting, the client asks about pricing for a product he sells on behalf of his vendor. Russel needs the answer <em>now</em>&mdash;not after he drives back to his office, opens a laptop, logs into a portal he barely remembers the URL for, navigates to the pricing section, and searches for the right SKU.</p>
-
-    <div class="stat">
-        <p>Russel's vendor has 40 million partners like him. Each channel manager at the vendor engages with <strong>500 of these partners every month</strong>. The math doesn't work through a portal. It never did.</p>
-    </div>
-
-    <p>Three insights emerged from this research:</p>
-
-    <p><strong>The portal assumed captive attention.</strong> But partners aren't employees. They sell for multiple vendors simultaneously. They have no loyalty to any single portal. Our market analysis showed that <strong>81% of our customer base</strong> (the Scale-up and Micro-SaaS segments, representing 36% and 45% respectively) lacked dedicated channel account managers who could drive portal adoption through relationship pressure. For these customers, the portal was a sunk cost.</p>
-
-    <p><strong>Partners already had a primary workspace&mdash;messaging.</strong> WhatsApp, Slack, SMS. That's where deals moved. That's where questions got asked. That's where decisions happened. The portal was a side quest.</p>
-
-    <p><strong>The jobs-to-be-done were conversational by nature.</strong> Check pricing. Register a deal. Ask about MDF balance. Get a case update. These aren't complex GUI workflows. They're questions and requests&mdash;the exact shape of a conversation.</p>
-
-    <h2>The Vision: Meet Partners Where They Work</h2>
-
-    <p>I proposed something that felt obvious once stated but radical in context: <strong>stop trying to get partners to come to us. Go to them.</strong></p>
-
-    <p>Instead of improving the existing portal-based Partner Success Agent, I designed a <strong>headless, omnichannel partner agent</strong>&mdash;one that could operate natively across WhatsApp, Slack, and SMS, bringing the full power of Salesforce's partner management capabilities into a conversation thread.</p>
-
-    <div class="visual-placeholder">Core concept diagram &mdash; a single agent identity deployed across multiple messaging surfaces (WhatsApp, Slack, SMS), all connecting back to the Salesforce CRM with Agentforce reasoning engine</div>
-
-    <p>"Headless" meant no GUI dependency. "Omnichannel" meant the same agent, same context, same capabilities&mdash;regardless of which messaging platform the partner preferred. The agent would be context-aware (understanding partner tier, assigned products, active deals) and surface-aware (adapting its response format to the constraints of each channel).</p>
-
-    <p>This wasn't a feature request or an incremental enhancement. It was a new product thesis. And to make it real, I had to design something no one at Salesforce had done before for partners: a complete <strong>conversation-first experience</strong> that could replace a web application.</p>
-
-    <h2>Conversation Design: Writing the Product, Not Just Drawing It</h2>
-
-    <p>This is where the work got deep. Designing a headless agent isn't wireframing screens&mdash;it's <strong>authoring dialogue.</strong> Every interaction pattern, every error state, every edge case exists as a conversation turn. I was simultaneously the interaction designer, the content strategist, and the information architect&mdash;except my medium was language, not layout.</p>
-
-    <div class="visual-placeholder">Full conversation flow diagram for the Deal Registration topic &mdash; branching tree with decision nodes, data collection steps, validation checks, error recovery loops, and final record creation</div>
-
-    <p>I designed the complete conversational UX for <strong>six core agent topics:</strong></p>
-
-    <h3>Deal Registration</h3>
-    <p>The most complex flow. On the portal, deal registration is a 15+ field form with picklists, date pickers, currency inputs, and file uploads. I had to translate this entire workflow into natural dialogue. The agent asks: <em>"Who's the customer?"</em> &rarr; <em>"What product are they interested in?"</em> &rarr; <em>"When do you expect to close?"</em> Each response gets intelligently mapped to the correct Salesforce object field. The partner never sees a form. They just have a conversation, and a fully valid Deal Registration record appears in their vendor's CRM.</p>
-
-    <h3>MDF (Market Development Funds) Enquiries</h3>
-    <p>Partners constantly need to know their fund balance&mdash;but a raw number is useless without context. I designed the agent's response pattern to always provide a <strong>contextual summary</strong>: total allocation, committed funds (approved but unpaid), available balance, and a proactive warning if any portion expires within 30 days. This replaced a portal page that required 4 clicks to reach and 3 different views to piece together.</p>
-
-    <h3>Authentication</h3>
-    <p>The hardest conversation design challenge. Partners on WhatsApp aren't logged into Salesforce. They need to prove their identity before accessing sensitive data&mdash;but the authentication flow can't break the conversational thread or feel like a security obstacle course. I designed a <strong>mid-conversation 2FA flow</strong>: the agent sends a verification code to the partner's registered email, the partner replies with the code in-chat, and authenticated capabilities unlock seamlessly. No redirect. No new window. No broken context.</p>
-
-    <h3>Error Recovery & Graceful Degradation</h3>
-    <p>Messaging platforms don't have form validation. If a partner types "next Tuesday" when the agent needs a date, or "$50K-ish" when it needs a precise currency value, the conversation can't crash. I designed re-prompt patterns that feel natural rather than robotic:</p>
-
-    <div class="conversation-example">
-        <em>"Got it&mdash;around $50K. To submit this request, I'll need the exact amount. What should I put down?"</em>
-    </div>
-
-    <div class="visual-placeholder">Side-by-side comparison &mdash; the Deal Registration experience as a portal form (15 fields, dropdowns, date pickers) vs. the same task as a 6-message WhatsApp conversation</div>
-
-    <h3>Designing Within Brutal Constraints</h3>
-
-    <p>WhatsApp has no interactive buttons in most regions. No carousels. No tables. No rich text formatting beyond bold and italic. Slack is more flexible but still limited compared to a web UI. Every design decision had to survive the worst-case surface.</p>
-
-    <p>I developed patterns that became the team's conversation design system:</p>
-
-    <ul>
-        <li><strong>Chunked responses</strong> &mdash; Long information broken into 2-3 messages rather than one wall of text</li>
-        <li><strong>Numbered options</strong> &mdash; "Reply 1, 2, or 3" as a substitute for buttons</li>
-        <li><strong>Narrative data presentation</strong> &mdash; Instead of a pricing table: <em>"The SmartSolar Pro is $4,200/unit for orders under 50. For 50+, your partner tier gives you $3,780/unit&mdash;that's a 10% discount. Want me to generate a quote?"</em></li>
-        <li><strong>Progressive skill unlocking</strong> &mdash; Unauthenticated partners get FAQ access only. The moment they ask something that requires data access, the agent naturally triggers the verification flow before continuing.</li>
-    </ul>
-
-    <h2>The Steel-Thread That Sold the Vision</h2>
-
-    <p>A headless agent is abstract. Executives don't fund abstractions. So I crafted an <strong>end-to-end narrative demo</strong>&mdash;a steel-thread story that walked stakeholders through a single partner's day, showing how every interaction that previously required portal access could now happen in the flow of work.</p>
-
-    <div class="visual-placeholder">Steel-thread storyboard &mdash; key frames from the Figma prototype showing Russel receiving a lead on WhatsApp, authenticating, registering a deal, checking pricing mid-meeting, and receiving a generated quote PDF</div>
-
-    <p>The story followed Russel from Alpine Solar through six scenarios: partner onboarding, training enrollment, lead distribution, deal negotiation (including a discount request while <em>at the customer's office</em>), MDF campaign initiation, and ecosystem performance review for his channel manager. Each scenario mapped to a real customer pain point from our research.</p>
-
-    <p>I built this as an interactive Figma prototype and a working Heroku mock that simulated the conversational flow. This became the centerpiece of our DVS (Design Vision Sprint) presentation to leadership in July 2025.</p>
-
-    <h2>Securing the Bet</h2>
-
-    <p>The vision work wouldn't matter if it stayed in Figma. I co-authored the confidential strategy proposal with my PM, framing the investment through three lenses:</p>
-
-    <p><strong>Market positioning:</strong> No competitor offered headless, conversation-native partner management. This would make Salesforce the first.</p>
-
-    <p><strong>Revenue model:</strong> I mapped conversation patterns to Agentforce <strong>Flex Credits</strong>&mdash;every agent interaction consumes credits. A simple FAQ costs <strong>20 credits</strong>. A deal registration flow costs <strong>40</strong>. A full guided onboarding journey costs <strong>120</strong>. Multiply by 4M monthly active partners, and the headless agent becomes a significant Agentforce revenue driver.</p>
-
-    <p><strong>De-risked execution:</strong> I proposed a phased approach&mdash;262 release for foundation (WhatsApp + Slack, 5 topics), 264 for skill expansion (MDF, loyalty, JBP summaries), 268 for channel expansion (SMS, iMessage). Each phase delivered standalone value.</p>
-
-    <div class="visual-placeholder">Phased roadmap &mdash; three columns showing 262/264/268 releases with expanding channel support and topic coverage. Team allocation: 8 engineers, 1 release cycle per phase.</div>
-
-    <div class="stat">
-        <p>The proposal secured an <strong>8-person engineering team</strong>, <strong>VP-level sponsorship</strong>, review by <strong>two Principal Architects</strong>, and pilot commitments from <strong>Avalara</strong> (~$250K ACV), <strong>AWS</strong>, and <strong>CrowdStrike</strong>.</p>
-    </div>
-
-    <h2>Shipping: Where Vision Meets Sprint Boards</h2>
-
-    <p>Execution required designing not just the partner-facing experience but also the <strong>admin setup experience</strong>. The original portal-based agent required <strong>34 manual configuration clicks</strong> to set up routing, messaging channels, and agent queues. For a headless agent that needed to work across multiple surfaces, this complexity would have killed adoption before it started.</p>
-
-    <p>I collaborated with the Salesforce Go (guided setup) team to design an automated configuration experience. We got routing setup down to <strong>1 click</strong>&mdash;a <strong>97% reduction</strong>. The full Partner Agent deployment was reduced by <strong>60-70%</strong> in admin effort compared to manual configuration.</p>
-
-    <div class="visual-placeholder">Before/after setup flow &mdash; 34-step manual configuration collapsed to 1-click automation, with the Go interface showing the Partner Agent setup card</div>
-
-    <p>I also worked with engineering to resolve a critical constraint: the platform's ASA-type agent security mandate blocked the product pricing topic from functioning in release 258. I helped design workarounds that met security requirements while preserving the conversational pricing experience&mdash;a solution that shipped in the 258 patch release in time for Dreamforce.</p>
-
-    <h2>Impact</h2>
-
-    <p>The Headless Partner Agent shipped in the <strong>262 release</strong> with WhatsApp and Slack support. But the impact extended far beyond a single feature launch:</p>
-
-    <ul>
-        <li><strong>Product strategy pivot.</strong> The vision I proposed became Partner Cloud's defining narrative. We went from "portal improvement" to "conversation-native channel management platform." The entire 264 and 268 roadmaps were structured around this thesis.</li>
-        <li><strong>Company-wide influence.</strong> Other Salesforce clouds began exploring similar "meet users in their channel" patterns for employee-facing and customer-facing agents. The headless architecture became a reference model.</li>
-        <li><strong>Customer validation.</strong> Three enterprise pilots (Avalara, AWS, CrowdStrike) committed before the product shipped&mdash;based on the design vision and interactive prototype alone.</li>
-        <li><strong>Revenue framing adopted.</strong> The Flex Credits consumption model I mapped became part of the official "Agentforce for Partners: Capability Deepdive and Implementation Guide" used by sales teams.</li>
-        <li><strong>Flagship SKU differentiator.</strong> The headless agent became the headline capability for the Partner Ecosystem Management (PEM) add-on, positioned as what makes PEM worth the investment over base PRM.</li>
-    </ul>
-
-    <div class="visual-placeholder">The shipped product &mdash; screenshot of the Partner Agent in action on WhatsApp showing a deal registration or pricing conversation. Pair with the PEM positioning slide.</div>
-
-    <div class="contributions">
-        <h2>What I Contributed</h2>
-        <ul>
-            <li><strong>Strategic research</strong> that reframed the problem from portal UX to channel paradigm&mdash;directly influencing where a team of 12+ invested their next 3 releases</li>
-            <li><strong>Complete conversation design</strong> for 6 agent topics across constrained messaging surfaces&mdash;the flows, the copy, the error states, the progressive disclosure patterns</li>
-            <li><strong>Authentication UX</strong> for a conversation-native 2FA experience that didn't exist as a pattern at Salesforce</li>
-            <li><strong>Steel-thread narrative and prototype</strong> used in executive pitches and pilot customer conversations</li>
-            <li><strong>Setup automation design</strong> reducing admin effort by 60-70% and enabling 1-click deployment</li>
-            <li><strong>Business case co-authorship</strong> including the Flex Credits mapping that reframed design work as revenue opportunity</li>
-            <li><strong>Constraint negotiation</strong>&mdash;designed workarounds for platform security mandates, UCP limitations, and messaging surface restrictions that could have killed the project</li>
-        </ul>
-    </div>
-
-    <div class="reflection">
-        <h2>Reflection</h2>
-
-        <p>The biggest lesson from this project: <strong>in 0-1 work, the designer's job isn't just to envision the product&mdash;it's to make the vision legible to everyone who needs to believe in it.</strong> I designed the conversations that partners would have with the agent. But I also designed the <em>narrative</em> that leadership needed to hear, the <em>phased roadmap</em> that de-risked the bet, and the <em>financial model</em> that made the opportunity undeniable.</p>
-
-        <p>Conversation design was central to this project in a way that traditional product design case studies rarely capture. There were no hero screens. No dramatic before/after UI comparisons. The product <em>is</em> the dialogue. And designing dialogue at enterprise scale&mdash;across constrained surfaces, with authentication requirements, error recovery needs, and platform limitations at every turn&mdash;is some of the most technically demanding design work I've done.</p>
-
-        <p>The Headless Partner Agent is still expanding. The 264 release adds MDF and Joint Business Plan skills. 268 will bring SMS and iMessage. But the strategic foundation&mdash;the argument that partners should be met where they work, not where we build&mdash;that shipped in the first vision presentation, months before a single line of code was written. That's the work I'm most proud of.</p>
-    </div>
-
-    <div class="visual-placeholder">Closing image &mdash; Figma cover showing "Partner Success Agent, 262 Release Work" with team credits, or the full architecture diagram across all planned phases</div>
-
-    <div class="meta">
-        <div class="meta-item">
-            <div class="label">Duration</div>
-            <div class="value">9 months (research &rarr; pilot launch)</div>
+<a href="salesforce.html" class="back-link">&larr; Back to Salesforce</a>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+    <div class="hero-inner">
+        <h1>Headless Partner Agent</h1>
+        <div class="hero-diagram">
+            <div class="diagram-node">
+                <h3>Vendor</h3>
+                <p>8,000 Salesforce customers</p>
+            </div>
+            <div class="diagram-arrow">&rarr;</div>
+            <div class="diagram-node portal">
+                <h3>Partner Cloud</h3>
+                <p style="font-weight:600; margin-bottom:8px;">Web Portal</p>
+                <p style="text-align:left; font-size:0.75rem;">&rarr; Recruit<br>&rarr; Onboard<br>&rarr; Enable<br>&rarr; Compensate</p>
+            </div>
+            <div class="diagram-disconnect">
+                <span class="dashes"></span>
+                DISCONNECT
+            </div>
+            <div class="diagram-node">
+                <div class="big-stat">40M</div>
+                <h3>Partners</h3>
+                <div class="channel-pills">
+                    <span class="channel-pill pill-whatsapp">WhatsApp</span>
+                    <span class="channel-pill pill-slack">Slack</span>
+                    <span class="channel-pill pill-sms">SMS</span>
+                </div>
+            </div>
         </div>
-        <div class="meta-item">
-            <div class="label">Role</div>
-            <div class="value">Senior Product Designer &mdash; Strategy, Conversation Design, Interaction Design</div>
+        <p style="margin-top: 24px; font-size: 0.9rem; opacity: 0.5; font-style: italic;">Partners never log in. They're already on messaging.</p>
+    </div>
+</section>
+
+<!-- ═══════════ THE SETUP ═══════════ -->
+<section class="section">
+    <p class="section-label">THE SETUP</p>
+    <div class="setup-hero-stat">
+        <span class="big-number">40<sup>M</sup></span>
+        <span class="stat-text">partner users on the platform. Most of them never log in.</span>
+    </div>
+    <p class="section-body">Partner Cloud manages the resellers and distributors who drive 75% of enterprise B2B revenue. A massive, high-value product &mdash; with an engagement crisis no amount of portal polish could fix.</p>
+
+    <div class="stat-cards">
+        <div class="stat-card">
+            <div class="number">8 <span style="font-size:0.6em; font-weight:400;">days</span></div>
+            <div class="desc">Average support-case resolution &mdash; information scattered across systems.</div>
         </div>
-        <div class="meta-item">
-            <div class="label">Team</div>
-            <div class="value">3 Designers, 1 PM, 8 Engineers, 2 Principal Architects, 1 TPM</div>
+        <div class="stat-card">
+            <div class="number">11%</div>
+            <div class="desc">Of cases ended with a manager sending a help link the partner could've found themselves.</div>
         </div>
-        <div class="meta-item">
-            <div class="label">Platform</div>
-            <div class="value">Salesforce Agentforce, UCP, WhatsApp Business API, Slack</div>
-        </div>
-        <div class="meta-item">
-            <div class="label">Tools</div>
-            <div class="value">Figma, AI Studio, Heroku (interactive demo), Google Slides</div>
-        </div>
-        <div class="meta-item">
-            <div class="label">Outcome</div>
-            <div class="value">Shipped pilot with 3 enterprise customers; became Partner Cloud's flagship agentic capability; strategy adopted company-wide</div>
+        <div class="stat-card">
+            <div class="number">500</div>
+            <div class="desc">Partners each channel manager engages every month. The math never worked through a portal.</div>
         </div>
     </div>
 
-</div>
+    <!-- Insight Cards -->
+    <div class="insight-cards">
+        <div class="insight-card">
+            <div class="insight-num">Insight 01</div>
+            <h3>The portal assumed captive attention</h3>
+            <p>81% of the customer base (Scale-up + Micro-SaaS) had no dedicated channel managers to drive adoption. For them, the portal was a sunk cost.</p>
+        </div>
+        <div class="insight-card">
+            <div class="insight-num">Insight 02</div>
+            <h3>Partners already had a workspace</h3>
+            <p>WhatsApp, Slack, SMS. That's where deals moved and questions got asked. The portal was a side quest.</p>
+        </div>
+        <div class="insight-card">
+            <div class="insight-num">Insight 03</div>
+            <h3>The jobs were conversational</h3>
+            <p>Check pricing. Register a deal. Ask about MDF. These aren't GUI workflows &mdash; they're questions. The exact shape of a conversation.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ THE VISION ═══════════ -->
+<section class="vision-section">
+    <div class="vision-inner">
+        <p class="section-label">THE VISION &mdash; MEET PARTNERS WHERE THEY WORK</p>
+        <h2 class="section-headline">Stop bringing partners to us.<br>Go to them.</h2>
+        <p class="section-body">Instead of improving the portal-based agent, I proposed a <strong style="color:#fff;">headless, omnichannel partner agent</strong> &mdash; one identity operating natively across every messaging surface, backed by the full power of Salesforce partner management.</p>
+
+        <div class="vision-definitions">
+            <div class="vision-def">
+                <strong>HEADLESS</strong>
+                <p>No GUI dependency.</p>
+            </div>
+            <div class="vision-def">
+                <strong>OMNICHANNEL</strong>
+                <p>Same agent, same context, same capabilities &mdash; whichever platform the partner prefers. Context-aware and surface-aware.</p>
+            </div>
+        </div>
+
+        <div class="vision-diagram">
+            <div class="vision-channel">
+                <span class="channel-pill pill-whatsapp">WhatsApp</span>
+                <span class="channel-pill pill-slack">Slack</span>
+                <span class="channel-pill pill-sms">SMS</span>
+            </div>
+            <div class="diagram-arrow">&rarr;</div>
+            <div class="vision-agent-box">ONE AGENT</div>
+            <div class="diagram-arrow">&rarr;</div>
+            <div class="vision-crm">Salesforce CRM<br><small>Agentforce reasoning engine</small></div>
+        </div>
+
+        <p class="vision-thesis">This wasn't a feature. It was a new product thesis.</p>
+    </div>
+</section>
+
+<!-- ═══════════ SECURING THE BET ═══════════ -->
+<section class="section">
+    <p class="section-label">SECURING THE BET</p>
+    <h2 class="section-headline">Making design work read as a revenue opportunity</h2>
+    <p class="section-body">The vision wouldn't matter if it stayed in Figma. I co-authored the strategy proposal with my PM, framing the investment through three lenses.</p>
+
+    <div class="bet-cards">
+        <div class="bet-card">
+            <h3>Market positioning</h3>
+            <p>No competitor offered headless, conversation-native partner management. This would make Salesforce first.</p>
+        </div>
+        <div class="bet-card confidential">
+            <h3>Revenue model</h3>
+            <p>Confidential</p>
+        </div>
+        <div class="bet-card">
+            <h3>De-risked execution</h3>
+            <p>A phased roadmap where each release delivered standalone value &mdash; foundation, then skills, then channels.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ BET SECURED QUOTE ═══════════ -->
+<section class="quote-block">
+    <p class="quote-text">The proposal secured an <strong>8-person team</strong>, VP sponsorship, two Principal Architect reviews &mdash; and three pilot commitments before a line of code was written.</p>
+</section>
+
+<!-- ═══════════ PROJECT DETAILS ═══════════ -->
+<section class="section">
+    <div class="details-grid">
+        <div class="detail-item">
+            <div class="detail-label">Duration</div>
+            <div class="detail-value">9 months<br><span style="color:var(--muted);">research &rarr; pilot launch</span></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Role</div>
+            <div class="detail-value">Senior Product Designer<br><span style="color:var(--muted);">Strategy &middot; Conversation &middot; Interaction</span></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Team</div>
+            <div class="detail-value">3 Designers &middot; 1 PM &middot; 8 Engineers<br><span style="color:var(--muted);">2 Principal Architects &middot; 1 TPM</span></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Platform</div>
+            <div class="detail-value">Agentforce &middot; UCP<br><span style="color:var(--muted);">WhatsApp Business API &middot; Slack</span></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Tools</div>
+            <div class="detail-value">Figma &middot; AI Studio<br><span style="color:var(--muted);">Heroku (demo) &middot; Google Slides</span></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Outcome</div>
+            <div class="detail-value">Shipped pilot, 3 enterprise customers<br><span style="color:var(--muted);">Partner Cloud's flagship agentic capability</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ TOPIC 01: DEAL REGISTRATION ═══════════ -->
+<section class="section">
+    <p class="section-label">TOPIC 01 &middot; THE HARDEST FLOW</p>
+    <h2 class="section-headline">A 15-field form, re-authored as dialogue</h2>
+    <p class="section-body">On the portal, deal registration is picklists, date pickers, currency inputs and uploads. I translated the entire workflow into natural turns &mdash; each answer intelligently mapped to the correct Salesforce object field. The partner never sees a form. They just have a conversation, and a fully valid record appears in their vendor's CRM.</p>
+
+    <div class="conversation-section">
+        <div class="conversation-mockup">
+            <div class="conv-header">Partner Agent &middot; WhatsApp &middot; Deal Registration</div>
+            <div class="conv-bubble agent">Let's register this deal. Who's the customer?</div>
+            <div class="conv-bubble user">Meridian Logistics</div>
+            <div class="conv-bubble agent">Got it. Which product are they interested in?</div>
+            <div class="conv-bubble user">SmartSolar Pro, ~60 units</div>
+            <div class="conv-bubble agent">And when do you expect to close?</div>
+            <div class="conv-bubble user">end of next month</div>
+            <div class="conv-bubble success"><span class="emoji">&#10004;</span> Done! Deal registered to Meridian Logistics. You'll get a decision within 5 business days.</div>
+        </div>
+        <div class="conversation-context">
+            <h3>From form to conversation</h3>
+            <p>A 15-field CRM form compressed into 6 natural turns. Each response is intelligently mapped to the right object field &mdash; partner never touches a dropdown, date picker, or submit button.</p>
+            <p style="margin-top: 16px; font-size: 0.85rem; color: var(--muted);">&rarr; Valid Deal Registration record created in vendor CRM</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ NARRATIVE DATA PRESENTATION ═══════════ -->
+<section class="section" style="border-top: 1px solid #e5e5e5;">
+    <p class="section-label">NARRATIVE DATA PRESENTATION</p>
+    <h2 class="section-headline">When you can't draw a table, you talk it</h2>
+
+    <div class="constraint-section">
+        <div class="conversation-context">
+            <p>A pricing table can't render on WhatsApp &mdash; so the numbers become a sentence, with tier logic and a call to action folded in. Information design without a canvas.</p>
+        </div>
+        <div class="conversation-mockup">
+            <div class="conv-header">Partner Agent &middot; Pricing</div>
+            <div class="conv-bubble user">price on SmartSolar Pro?</div>
+            <div class="conv-bubble agent">The SmartSolar Pro is $4,200/unit under 50. For 50+, your partner tier drops it to $3,780/unit &mdash; a 10% discount. Want me to generate a quote?</div>
+            <div class="conv-bubble user">yes please</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ MORE TOPICS ═══════════ -->
+<section class="section">
+    <div class="topics-grid">
+        <!-- MDF -->
+        <div class="topic-card">
+            <div class="topic-card-header">
+                <div class="topic-num">TOPIC 02 &middot; MDF ENQUIRIES</div>
+                <h4>Market Development Funds</h4>
+            </div>
+            <div class="topic-card-conv">
+                <div class="conv-bubble user">what's my MDF balance?</div>
+                <div class="conv-bubble agent">
+                    <strong>Your MDF summary:</strong><br>
+                    Allocated: $40,000<br>
+                    Committed: $12,500<br>
+                    Available: $27,500<br><br>
+                    &#9888;&#65039; $8,000 expires in 24 days &mdash; want to plan a campaign?
+                </div>
+            </div>
+            <div class="topic-card-caption">A raw number is useless without context. The response always summarizes allocation, committed, available &mdash; plus a proactive expiry warning. Replaces a portal page that took 4 clicks and 3 views to assemble.</div>
+        </div>
+
+        <!-- Authentication -->
+        <div class="topic-card">
+            <div class="topic-card-header">
+                <div class="topic-num">TOPIC 03 &middot; AUTHENTICATION</div>
+                <h4>In-thread 2FA</h4>
+            </div>
+            <div class="topic-card-conv">
+                <div class="conv-bubble user">show me my open deals</div>
+                <div class="conv-bubble agent">Quick check first &mdash; I've sent a 6-digit code to your registered email. Pop it in here?</div>
+                <div class="conv-bubble user">418 302</div>
+                <div class="conv-bubble success"><span class="emoji">&#10004;</span> Verified! Here are your 3 open deals...</div>
+            </div>
+            <div class="topic-card-caption">The hardest challenge: partners on WhatsApp aren't logged in. I designed mid-conversation 2FA that never breaks the thread &mdash; no redirect, no new window, no broken context.</div>
+        </div>
+
+        <!-- Error Recovery -->
+        <div class="topic-card">
+            <div class="topic-card-header">
+                <div class="topic-num">TOPIC 04 &middot; ERROR RECOVERY</div>
+                <h4>Graceful degradation</h4>
+            </div>
+            <div class="topic-card-conv">
+                <div class="conv-bubble user">$50K-ish</div>
+                <div class="conv-bubble agent">Got it &mdash; around $50K. To submit, I'll need the exact figure. What should I put down?</div>
+                <div class="conv-bubble user">$48,000</div>
+                <div class="conv-bubble agent">Perfect &mdash; logging $48,000.</div>
+            </div>
+            <div class="topic-card-caption">Messaging has no form validation. Re-prompts feel natural, not robotic &mdash; the conversation never crashes on "next Tuesday" or "$50K-ish."</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ IMPACT ═══════════ -->
+<section class="impact-section">
+    <div class="impact-inner">
+        <p class="section-label">IMPACT</p>
+        <h2 class="section-headline">It shipped in 262 &mdash; but the impact wasn't a feature</h2>
+        <p class="section-body">WhatsApp and Slack went live. What travelled further was the thesis.</p>
+
+        <div class="impact-cards">
+            <div class="impact-card">
+                <div class="impact-tag">Strategy Pivot</div>
+                <h3>Portal &rarr; conversation-native platform</h3>
+                <p>The vision became Partner Cloud's defining narrative. The entire 264 and 268 roadmaps were built around it.</p>
+            </div>
+            <div class="impact-card">
+                <div class="impact-tag">Company-wide</div>
+                <h3>A reference architecture</h3>
+                <p>Other Salesforce clouds began exploring the same "meet users in their channel" pattern for employee- and customer-facing agents.</p>
+            </div>
+            <div class="impact-card">
+                <div class="impact-tag">Customer Validation</div>
+                <h3>3 pilots signed pre-launch</h3>
+                <p>Avalara, AWS and CrowdStrike committed on the strength of the design vision and prototype alone.</p>
+            </div>
+            <div class="impact-card">
+                <div class="impact-tag">Commercial</div>
+                <h3>Flagship SKU differentiator</h3>
+                <p>The Flex-Credits model I mapped entered the official sales guide; the agent became the headline capability of the PRM add-on.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ REFLECTION ═══════════ -->
+<section class="reflection-section">
+    <div class="reflection-inner">
+        <p class="section-label">REFLECTION</p>
+        <h2 class="section-headline">In 0&rarr;1 work, the designer's job isn't just to envision the product &mdash; it's to make the vision <strong>legible to everyone who has to believe in it.</strong></h2>
+        <p class="section-body">I designed the conversations partners have with the agent. But I also designed the narrative leadership needed to hear, the roadmap that de-risked the bet, and the model that made the opportunity undeniable.</p>
+    </div>
+</section>
 
 </body>
 </html>
