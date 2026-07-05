@@ -448,6 +448,52 @@
             line-height: 1.8;
         }
 
+        /* ─── HERO / PROJECT SUMMARY ─── */
+        .hero-section {
+            padding: 60px 40px 80px;
+        }
+        .hero-section .section-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .hero-section .hero-title {
+            font-family: var(--display-font);
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            font-weight: 900;
+            line-height: 1.15;
+            color: var(--foreground);
+            max-width: 900px;
+            margin-bottom: 32px;
+        }
+        .hero-section .hero-subtitle {
+            font-size: 1.1rem;
+            color: #404040;
+            line-height: 1.8;
+            max-width: 720px;
+            margin-bottom: 48px;
+        }
+        .hero-meta {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            padding-top: 32px;
+            border-top: 1px solid #e5e5e5;
+        }
+        .hero-meta-item .meta-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+        .hero-meta-item .meta-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--foreground);
+            line-height: 1.5;
+        }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 1200px) {
             .background-section .content-row { flex-direction: column; }
@@ -461,6 +507,8 @@
         @media (max-width: 768px) {
             .back-link { padding: 16px 20px; }
             .section { padding: 60px 20px; }
+            .hero-section { padding: 40px 20px 60px; }
+            .hero-meta { grid-template-columns: repeat(2, 1fr); gap: 24px; }
             .insight-section { padding: 60px 20px; }
             .quote-block { padding: 48px 20px; }
             .impact-section { padding: 60px 20px; }
@@ -478,6 +526,33 @@
 <body>
 
 <a href="salesforce.html" class="back-link">&larr; Back to Salesforce</a>
+
+<!-- ═══════════ HERO / SUMMARY ═══════════ -->
+<section class="hero-section">
+    <div class="section-inner">
+        <h1 class="hero-title">Designing a headless partner agent</h1>
+        <p class="hero-subtitle">Partner Cloud is Salesforce's platform for managing resellers, distributors, and channel partners. I led the design of a conversation-native agent that meets partners where they already work &mdash; Slack, WhatsApp, SMS &mdash; instead of asking them to log into a portal they'd already abandoned.</p>
+
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <div class="meta-label">Role</div>
+                <div class="meta-value">Lead Product Designer</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="meta-label">Team</div>
+                <div class="meta-value">Partner Cloud, Salesforce</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="meta-label">Duration</div>
+                <div class="meta-value">6 months (0 &rarr; 1)</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="meta-label">Scope</div>
+                <div class="meta-value">Strategy, Conversation Design, Prototyping</div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- ═══════════ BACKGROUND ═══════════ -->
 <section class="section background-section">
