@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headless Partner Agent — Saloni Rai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,800;9..144,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #4338ca;
+            --accent-light: #6366f1;
+            --bg: #fafafa;
+            --dark: #0f0f0f;
+            --foreground: #1a1a1a;
+            --muted: #737373;
+            --display-font: 'Fraunces', serif;
+            --body-font: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--foreground);
+            font-family: var(--body-font);
+            line-height: 1.7;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 20px 40px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--accent); }
+
+        /* ─── HERO ─── */
+        .hero {
+            background: var(--dark);
+            color: #fff;
+            padding: 80px 40px;
+            text-align: center;
+        }
+        .hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-family: var(--display-font);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            opacity: 0.6;
+        }
+        .hero-diagram {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 48px 40px;
+            margin-top: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .diagram-node {
+            background: #252540;
+            border: 1px solid #3a3a5c;
+            border-radius: 12px;
+            padding: 24px 20px;
+            text-align: center;
+            min-width: 160px;
+        }
+        .diagram-node.portal {
+            background: #fff;
+            color: var(--dark);
+            border: none;
+        }
+        .diagram-node h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .diagram-node p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        .diagram-node.portal p {
+            color: #555;
+        }
+        .diagram-node .big-stat {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: var(--display-font);
+        }
+        .diagram-arrow {
+            font-size: 1.5rem;
+            color: var(--accent-light);
+        }
+        .diagram-disconnect {
+            color: #ef4444;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .diagram-disconnect .dashes {
+            display: block;
+            border-top: 2px dashed #ef4444;
+            width: 60px;
+            margin: 4px auto;
+        }
+        .channel-pills {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 12px;
+        }
+        .channel-pill {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .pill-whatsapp { background: #22c55e; color: #fff; }
+        .pill-slack { background: #7c3aed; color: #fff; }
+        .pill-sms { background: #06b6d4; color: #fff; }
+
+        /* ─── SECTIONS ─── */
+        .section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+        .section-headline {
+            font-family: var(--display-font);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .section-body {
+            font-size: 1.05rem;
+            color: #404040;
+            max-width: 720px;
+            line-height: 1.8;
+        }
+
+        /* ─── SETUP SECTION ─── */
+        .setup-hero-stat {
+            display: flex;
+            align-items: baseline;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .setup-hero-stat .big-number {
+            font-family: var(--display-font);
+            font-size: clamp(4rem, 8vw, 6rem);
+            font-weight: 900;
+            color: var(--dark);
+            line-height: 1;
+        }
+        .setup-hero-stat .big-number sup {
+            font-size: 0.4em;
+            vertical-align: super;
+        }
+        .setup-hero-stat .stat-text {
+            font-size: 1.3rem;
+            color: #404040;
+            max-width: 400px;
+            line-height: 1.5;
+        }
+
+        .stat-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .stat-card {
+            padding: 24px;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            background: #fff;
+        }
+        .stat-card .number {
+            font-family: var(--display-font);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        .stat-card .desc {
+            font-size: 0.875rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* ─── INSIGHT CARDS ─── */
+        .insight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .insight-card {
+            padding: 32px 24px;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            background: #fff;
+        }
+        .insight-card .insight-num {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+        .insight-card h3 {
+            font-family: var(--display-font);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .insight-card p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ─── VISION SECTION ─── */
+        .vision-section {
+            background: var(--dark);
+            color: #fff;
+            padding: 80px 40px;
+            text-align: center;
+        }
+        .vision-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .vision-section .section-label {
+            color: rgba(255,255,255,0.5);
+        }
+        .vision-section .section-headline {
+            color: #fff;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+        }
+        .vision-section .section-body {
+            color: rgba(255,255,255,0.7);
+            margin: 0 auto 32px;
+        }
+        .vision-definitions {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .vision-def {
+            text-align: left;
+            max-width: 320px;
+        }
+        .vision-def strong {
+            color: var(--accent-light);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .vision-def p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+        .vision-diagram {
+            margin-top: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .vision-channel {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+        .vision-agent-box {
+            background: var(--accent);
+            color: #fff;
+            padding: 16px 28px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .vision-crm {
+            background: #252540;
+            border: 1px solid #3a3a5c;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.7);
+        }
+        .vision-thesis {
+            margin-top: 40px;
+            font-style: italic;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.95rem;
+        }
+
+        /* ─── SECURING THE BET ─── */
+        .bet-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .bet-card {
+            padding: 28px 24px;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            background: #fff;
+        }
+        .bet-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .bet-card p {
+            font-size: 0.875rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+        .bet-card.confidential {
+            background: var(--dark);
+            color: #fff;
+            border-color: transparent;
+        }
+        .bet-card.confidential p {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ─── QUOTE BLOCK ─── */
+        .quote-block {
+            background: var(--dark);
+            color: #fff;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .quote-block .quote-text {
+            max-width: 700px;
+            margin: 0 auto;
+            font-family: var(--display-font);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* ─── PROJECT DETAILS GRID ─── */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #e5e5e5;
+        }
+        .detail-item .detail-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+        .detail-item .detail-value {
+            font-size: 0.9rem;
+            color: var(--foreground);
+            line-height: 1.5;
+        }
+
+        /* ─── CONVERSATION MOCKUP ─── */
+        .conversation-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+            margin-top: 48px;
+        }
+        .conversation-context h3 {
+            font-family: var(--display-font);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .conversation-context p {
+            font-size: 0.95rem;
+            color: #404040;
+            line-height: 1.7;
+        }
+        .conversation-mockup {
+            background: #f0f0f0;
+            border-radius: 20px;
+            padding: 24px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.875rem;
+        }
+        .conv-header {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--muted);
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: 600;
+        }
+        .conv-bubble {
+            padding: 10px 14px;
+            border-radius: 16px;
+            margin-bottom: 8px;
+            max-width: 85%;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+        .conv-bubble.agent {
+            background: #fff;
+            color: var(--foreground);
+            border-bottom-left-radius: 4px;
+        }
+        .conv-bubble.user {
+            background: var(--accent);
+            color: #fff;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+        .conv-bubble.success {
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+            border-bottom-left-radius: 4px;
+        }
+        .conv-bubble .emoji {
+            margin-right: 4px;
+        }
+
+        /* ─── TOPICS GRID ─── */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .topic-card {
+            border: 1px solid #e5e5e5;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .topic-card-header {
+            padding: 20px 24px 12px;
+        }
+        .topic-card-header .topic-num {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+        .topic-card-header h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+        .topic-card-conv {
+            padding: 12px 20px 20px;
+            background: #f5f5f5;
+        }
+        .topic-card-conv .conv-bubble {
+            font-size: 0.8rem;
+            padding: 8px 12px;
+        }
+        .topic-card-caption {
+            padding: 16px 24px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.5;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        /* ─── CONSTRAINT SECTION ─── */
+        .constraint-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            margin-top: 48px;
+        }
+
+        /* ─── IMPACT ─── */
+        .impact-section {
+            background: var(--dark);
+            color: #fff;
+            padding: 80px 40px;
+        }
+        .impact-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .impact-section .section-label {
+            color: rgba(255,255,255,0.5);
+        }
+        .impact-section .section-headline {
+            color: #fff;
+        }
+        .impact-section .section-body {
+            color: rgba(255,255,255,0.6);
+        }
+        .impact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .impact-card {
+            padding: 28px 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+        }
+        .impact-card .impact-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            margin-bottom: 12px;
+        }
+        .impact-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .impact-card p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.5;
+        }
+
+        /* ─── REFLECTION ─── */
+        .reflection-section {
+            background: #f5f5f0;
+            padding: 80px 40px;
+        }
+        .reflection-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .reflection-section .section-headline {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+        }
+        .reflection-section .section-headline strong {
+            color: var(--accent);
+        }
+        .reflection-section .section-body {
+            margin-top: 20px;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .back-link { padding: 16px 20px; }
+            .hero { padding: 60px 20px; }
+            .section { padding: 60px 20px; }
+            .vision-section { padding: 60px 20px; }
+            .quote-block { padding: 48px 20px; }
+            .impact-section { padding: 60px 20px; }
+            .reflection-section { padding: 60px 20px; }
+            .conversation-section { grid-template-columns: 1fr; }
+            .constraint-section { grid-template-columns: 1fr; }
+            .hero-diagram { flex-direction: column; }
+            .stat-cards { grid-template-columns: 1fr; }
+            .insight-cards { grid-template-columns: 1fr; }
+            .bet-cards { grid-template-columns: 1fr; }
+            .topics-grid { grid-template-columns: 1fr; }
+            .impact-cards { grid-template-columns: 1fr; }
+            .details-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="salesforce.html" class="back-link">&larr; Back to Salesforce</a>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+    <div class="hero-inner">
+        <h1>Headless Partner Agent</h1>
+        <div class="hero-diagram">
+            <div class="diagram-node">
+                <h3>Vendor</h3>
+                <p>8,000 Salesforce customers</p>
+            </div>
+            <div class="diagram-arrow">&rarr;</div>
+            <div class="diagram-node portal">
+                <h3>Partner Cloud</h3>
+                <p style="font-weight:600; margin-bottom:8px;">Web Portal</p>
+                <p style="text-align:left; font-size:0.75rem;">&rarr; Recruit<br>&rarr; Onboard<br>&rarr; Enable<br>&rarr; Compensate</p>
+            </div>
+            <div class="diagram-disconnect">
+                <span class="dashes"></span>
+                DISCONNECT
+            </div>
+            <div class="diagram-node">
+                <div class="big-stat">40M</div>
+                <h3>Partners</h3>
+                <div class="channel-pills">
+                    <span class="channel-pill pill-whatsapp">WhatsApp</span>
+                    <span class="channel-pill pill-slack">Slack</span>
+                    <span class="channel-pill pill-sms">SMS</span>
+                </div>
+            </div>
+        </div>
+        <p style="margin-top: 24px; font-size: 0.9rem; opacity: 0.5; font-style: italic;">Partners never log in. They're already on messaging.</p>
+    </div>
+</section>
+
+<!-- ═══════════ THE SETUP ═══════════ -->
+<section class="section">
+    <p class="section-label">THE SETUP</p>
+    <div class="setup-hero-stat">
+        <span class="big-number">40<sup>M</sup></span>
+        <span class="stat-text">partner users on the platform. Most of them never log in.</span>
+    </div>
+    <p class="section-body">Partner Cloud manages the resellers and distributors who drive 75% of enterprise B2B revenue. A massive, high-value product &mdash; with an engagement crisis no amount of portal polish could fix.</p>
+
+    <div class="stat-cards">
+        <div class="stat-card">
+            <div class="number">8 <span style="font-size:0.6em; font-weight:400;">days</span></div>
+            <div class="desc">Average support-case resolution &mdash; information scattered across systems.</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">11%</div>
+            <div class="desc">Of cases ended with a manager sending a help link the partner could've found themselves.</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">500</div>
+            <div class="desc">Partners each channel manager engages every month. The math never worked through a portal.</div>
+        </div>
+    </div>
+
+    <!-- Insight Cards -->
+    <div class="insight-cards">
+        <div class="insight-card">
+            <div class="insight-num">Insight 01</div>
+            <h3>The portal assumed captive attention</h3>
+            <p>81% of the customer base (Scale-up + Micro-SaaS) had no dedicated channel managers to drive adoption. For them, the portal was a sunk cost.</p>
+        </div>
+        <div class="insight-card">
+            <div class="insight-num">Insight 02</div>
+            <h3>Partners already had a workspace</h3>
+            <p>WhatsApp, Slack, SMS. That's where deals moved and questions got asked. The portal was a side quest.</p>
+        </div>
+        <div class="insight-card">
+            <div class="insight-num">Insight 03</div>
+            <h3>The jobs were conversational</h3>
+            <p>Check pricing. Register a deal. Ask about MDF. These aren't GUI workflows &mdash; they're questions. The exact shape of a conversation.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ THE VISION ═══════════ -->
+<section class="vision-section">
+    <div class="vision-inner">
+        <p class="section-label">THE VISION &mdash; MEET PARTNERS WHERE THEY WORK</p>
+        <h2 class="section-headline">Stop bringing partners to us.<br>Go to them.</h2>
+        <p class="section-body">Instead of improving the portal-based agent, I proposed a <strong style="color:#fff;">headless, omnichannel partner agent</strong> &mdash; one identity operating natively across every messaging surface, backed by the full power of Salesforce partner management.</p>
+
+        <div class="vision-definitions">
+            <div class="vision-def">
+                <strong>HEADLESS</strong>
+                <p>No GUI dependency.</p>
+            </div>
+            <div class="vision-def">
+                <strong>OMNICHANNEL</strong>
+                <p>Same agent, same context, same capabilities &mdash; whichever platform the partner prefers. Context-aware and surface-aware.</p>
+            </div>
+        </div>
+
+        <div class="vision-diagram">
+            <div class="vision-channel">
+                <span class="channel-pill pill-whatsapp">WhatsApp</span>
+                <span class="channel-pill pill-slack">Slack</span>
+                <span class="channel-pill pill-sms">SMS</span>
+            </div>
+            <div class="diagram-arrow">&rarr;</div>
+            <div class="vision-agent-box">ONE AGENT</div>
+            <div class="diagram-arrow">&rarr;</div>
+            <div class="vision-crm">Salesforce CRM<br><small>Agentforce reasoning engine</small></div>
+        </div>
+
+        <p class="vision-thesis">This wasn't a feature. It was a new product thesis.</p>
+    </div>
+</section>
+
+<!-- ═══════════ SECURING THE BET ═══════════ -->
+<section class="section">
+    <p class="section-label">SECURING THE BET</p>
+    <h2 class="section-headline">Making design work read as a revenue opportunity</h2>
+    <p class="section-body">The vision wouldn't matter if it stayed in Figma. I co-authored the strategy proposal with my PM, framing the investment through three lenses.</p>
+
+    <div class="bet-cards">
+        <div class="bet-card">
+            <h3>Market positioning</h3>
+            <p>No competitor offered headless, conversation-native partner management. This would make Salesforce first.</p>
+        </div>
+        <div class="bet-card confidential">
+            <h3>Revenue model</h3>
+            <p>Confidential</p>
+        </div>
+        <div class="bet-card">
+            <h3>De-risked execution</h3>
+            <p>A phased roadmap where each release delivered standalone value &mdash; foundation, then skills, then channels.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ BET SECURED QUOTE ═══════════ -->
+<section class="quote-block">
+    <p class="quote-text">The proposal secured an <strong>8-person team</strong>, VP sponsorship, two Principal Architect reviews &mdash; and three pilot commitments before a line of code was written.</p>
+</section>
+
+<!-- ═══════════ PROJECT DETAILS ═══════════ -->
+<section class="section">
+    <div class="details-grid">
+        <div class="detail-item">
+            <div class="detail-label">Duration</div>
+            <div class="detail-value">9 months<br><span style="color:var(--muted);">research &rarr; pilot launch</span></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Role</div>
+            <div class="detail-value">Senior Product Designer<br><span style="color:var(--muted);">Strategy &middot; Conversation &middot; Interaction</span></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Team</div>
+            <div class="detail-value">3 Designers &middot; 1 PM &middot; 8 Engineers<br><span style="color:var(--muted);">2 Principal Architects &middot; 1 TPM</span></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Platform</div>
+            <div class="detail-value">Agentforce &middot; UCP<br><span style="color:var(--muted);">WhatsApp Business API &middot; Slack</span></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Tools</div>
+            <div class="detail-value">Figma &middot; AI Studio<br><span style="color:var(--muted);">Heroku (demo) &middot; Google Slides</span></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Outcome</div>
+            <div class="detail-value">Shipped pilot, 3 enterprise customers<br><span style="color:var(--muted);">Partner Cloud's flagship agentic capability</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ TOPIC 01: DEAL REGISTRATION ═══════════ -->
+<section class="section">
+    <p class="section-label">TOPIC 01 &middot; THE HARDEST FLOW</p>
+    <h2 class="section-headline">A 15-field form, re-authored as dialogue</h2>
+    <p class="section-body">On the portal, deal registration is picklists, date pickers, currency inputs and uploads. I translated the entire workflow into natural turns &mdash; each answer intelligently mapped to the correct Salesforce object field. The partner never sees a form. They just have a conversation, and a fully valid record appears in their vendor's CRM.</p>
+
+    <div class="conversation-section">
+        <div class="conversation-mockup">
+            <div class="conv-header">Partner Agent &middot; WhatsApp &middot; Deal Registration</div>
+            <div class="conv-bubble agent">Let's register this deal. Who's the customer?</div>
+            <div class="conv-bubble user">Meridian Logistics</div>
+            <div class="conv-bubble agent">Got it. Which product are they interested in?</div>
+            <div class="conv-bubble user">SmartSolar Pro, ~60 units</div>
+            <div class="conv-bubble agent">And when do you expect to close?</div>
+            <div class="conv-bubble user">end of next month</div>
+            <div class="conv-bubble success"><span class="emoji">&#10004;</span> Done! Deal registered to Meridian Logistics. You'll get a decision within 5 business days.</div>
+        </div>
+        <div class="conversation-context">
+            <h3>From form to conversation</h3>
+            <p>A 15-field CRM form compressed into 6 natural turns. Each response is intelligently mapped to the right object field &mdash; partner never touches a dropdown, date picker, or submit button.</p>
+            <p style="margin-top: 16px; font-size: 0.85rem; color: var(--muted);">&rarr; Valid Deal Registration record created in vendor CRM</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ NARRATIVE DATA PRESENTATION ═══════════ -->
+<section class="section" style="border-top: 1px solid #e5e5e5;">
+    <p class="section-label">NARRATIVE DATA PRESENTATION</p>
+    <h2 class="section-headline">When you can't draw a table, you talk it</h2>
+
+    <div class="constraint-section">
+        <div class="conversation-context">
+            <p>A pricing table can't render on WhatsApp &mdash; so the numbers become a sentence, with tier logic and a call to action folded in. Information design without a canvas.</p>
+        </div>
+        <div class="conversation-mockup">
+            <div class="conv-header">Partner Agent &middot; Pricing</div>
+            <div class="conv-bubble user">price on SmartSolar Pro?</div>
+            <div class="conv-bubble agent">The SmartSolar Pro is $4,200/unit under 50. For 50+, your partner tier drops it to $3,780/unit &mdash; a 10% discount. Want me to generate a quote?</div>
+            <div class="conv-bubble user">yes please</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ MORE TOPICS ═══════════ -->
+<section class="section">
+    <div class="topics-grid">
+        <!-- MDF -->
+        <div class="topic-card">
+            <div class="topic-card-header">
+                <div class="topic-num">TOPIC 02 &middot; MDF ENQUIRIES</div>
+                <h4>Market Development Funds</h4>
+            </div>
+            <div class="topic-card-conv">
+                <div class="conv-bubble user">what's my MDF balance?</div>
+                <div class="conv-bubble agent">
+                    <strong>Your MDF summary:</strong><br>
+                    Allocated: $40,000<br>
+                    Committed: $12,500<br>
+                    Available: $27,500<br><br>
+                    &#9888;&#65039; $8,000 expires in 24 days &mdash; want to plan a campaign?
+                </div>
+            </div>
+            <div class="topic-card-caption">A raw number is useless without context. The response always summarizes allocation, committed, available &mdash; plus a proactive expiry warning. Replaces a portal page that took 4 clicks and 3 views to assemble.</div>
+        </div>
+
+        <!-- Authentication -->
+        <div class="topic-card">
+            <div class="topic-card-header">
+                <div class="topic-num">TOPIC 03 &middot; AUTHENTICATION</div>
+                <h4>In-thread 2FA</h4>
+            </div>
+            <div class="topic-card-conv">
+                <div class="conv-bubble user">show me my open deals</div>
+                <div class="conv-bubble agent">Quick check first &mdash; I've sent a 6-digit code to your registered email. Pop it in here?</div>
+                <div class="conv-bubble user">418 302</div>
+                <div class="conv-bubble success"><span class="emoji">&#10004;</span> Verified! Here are your 3 open deals...</div>
+            </div>
+            <div class="topic-card-caption">The hardest challenge: partners on WhatsApp aren't logged in. I designed mid-conversation 2FA that never breaks the thread &mdash; no redirect, no new window, no broken context.</div>
+        </div>
+
+        <!-- Error Recovery -->
+        <div class="topic-card">
+            <div class="topic-card-header">
+                <div class="topic-num">TOPIC 04 &middot; ERROR RECOVERY</div>
+                <h4>Graceful degradation</h4>
+            </div>
+            <div class="topic-card-conv">
+                <div class="conv-bubble user">$50K-ish</div>
+                <div class="conv-bubble agent">Got it &mdash; around $50K. To submit, I'll need the exact figure. What should I put down?</div>
+                <div class="conv-bubble user">$48,000</div>
+                <div class="conv-bubble agent">Perfect &mdash; logging $48,000.</div>
+            </div>
+            <div class="topic-card-caption">Messaging has no form validation. Re-prompts feel natural, not robotic &mdash; the conversation never crashes on "next Tuesday" or "$50K-ish."</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ IMPACT ═══════════ -->
+<section class="impact-section">
+    <div class="impact-inner">
+        <p class="section-label">IMPACT</p>
+        <h2 class="section-headline">It shipped in 262 &mdash; but the impact wasn't a feature</h2>
+        <p class="section-body">WhatsApp and Slack went live. What travelled further was the thesis.</p>
+
+        <div class="impact-cards">
+            <div class="impact-card">
+                <div class="impact-tag">Strategy Pivot</div>
+                <h3>Portal &rarr; conversation-native platform</h3>
+                <p>The vision became Partner Cloud's defining narrative. The entire 264 and 268 roadmaps were built around it.</p>
+            </div>
+            <div class="impact-card">
+                <div class="impact-tag">Company-wide</div>
+                <h3>A reference architecture</h3>
+                <p>Other Salesforce clouds began exploring the same "meet users in their channel" pattern for employee- and customer-facing agents.</p>
+            </div>
+            <div class="impact-card">
+                <div class="impact-tag">Customer Validation</div>
+                <h3>3 pilots signed pre-launch</h3>
+                <p>Avalara, AWS and CrowdStrike committed on the strength of the design vision and prototype alone.</p>
+            </div>
+            <div class="impact-card">
+                <div class="impact-tag">Commercial</div>
+                <h3>Flagship SKU differentiator</h3>
+                <p>The Flex-Credits model I mapped entered the official sales guide; the agent became the headline capability of the PRM add-on.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ REFLECTION ═══════════ -->
+<section class="reflection-section">
+    <div class="reflection-inner">
+        <p class="section-label">REFLECTION</p>
+        <h2 class="section-headline">In 0&rarr;1 work, the designer's job isn't just to envision the product &mdash; it's to make the vision <strong>legible to everyone who has to believe in it.</strong></h2>
+        <p class="section-body">I designed the conversations partners have with the agent. But I also designed the narrative leadership needed to hear, the roadmap that de-risked the bet, and the model that made the opportunity undeniable.</p>
+    </div>
+</section>
+
+</body>
+</html>
