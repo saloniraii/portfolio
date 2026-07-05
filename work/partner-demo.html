@@ -471,7 +471,7 @@
     <!-- Journey Tabs -->
     <div class="journey-tabs">
         <button class="journey-tab active" data-journey="partner-connect">Partner Connect</button>
-        <button class="journey-tab" data-journey="authentication">Authentication</button>
+        <button class="journey-tab" data-journey="pricing-quotes">Pricing & Quotes</button>
         <button class="journey-tab" data-journey="deal-registration">Deal Registration</button>
     </div>
 
@@ -600,25 +600,29 @@ const CONVERSATIONS = {
             ]
         }
     },
-    'authentication': {
+    'pricing-quotes': {
         _default: {
             slack: [
-                { type: 'user', text: 'Show me my open deals' },
-                { type: 'bot', html: '🔐 Quick check — I\'ve sent a <strong>6-digit code</strong> to your registered email. Pop it in here?' },
-                { type: 'user', text: '418 302' },
-                { type: 'bot', html: '✅ <strong>Verified!</strong> Here are your 3 open deals:<ul class="lead-list"><li>Acme Corp — $450K — Negotiation</li><li>Vertex Tech — $200K — Proposal</li><li>Cascade — $350K — Discovery</li></ul>', actions: [{ label: 'View details', primary: true }] },
+                { type: 'user', text: 'I need a quote for Meridian Logistics' },
+                { type: 'bot', html: 'Sure! Let me pull up Meridian Logistics. <strong>Which product?</strong>', actions: [{ label: 'SmartSolar Pro' }, { label: 'CloudSync Enterprise', primary: true }, { label: 'DataVault 360' }] },
+                { type: 'user', text: 'CloudSync Enterprise' },
+                { type: 'bot', html: 'Got it. <strong>How many licenses?</strong>' },
+                { type: 'user', text: '150 users' },
+                { type: 'bot', html: '💰 Here\'s the pricing breakdown:<ul class="lead-list"><li>CloudSync Enterprise × 150</li><li>List price: $89/user/mo</li><li>Partner tier discount (Gold): –15%</li><li>Volume discount (100+): –8%</li><li><strong>Your price: $69.19/user/mo</strong></li><li><strong>Annual total: $124,542</strong></li></ul>', actions: [{ label: 'Generate quote PDF', primary: true }, { label: 'Adjust terms' }] },
+                { type: 'user', text: 'Generate quote PDF' },
+                { type: 'bot', html: '✅ <strong>Quote #QT-2026-4871</strong> generated and sent to your email. Valid 30 days. Want me to send it to the customer too?' },
             ],
             whatsapp: [
-                { type: 'user', text: 'show me my open deals' },
-                { type: 'bot', html: '🔐 Quick check — I\'ve sent a 6-digit code to your registered email. What\'s the code?' },
-                { type: 'user', text: '418 302' },
-                { type: 'bot', html: '✅ Verified! Here are your 3 open deals:<ul class="lead-list"><li>1. Acme Corp — $450K — Negotiation</li><li>2. Vertex Tech — $200K — Proposal</li><li>3. Cascade — $350K — Discovery</li></ul>Say a number for details.' },
+                { type: 'user', text: 'need a quote for Meridian Logistics, CloudSync Enterprise, 150 users' },
+                { type: 'bot', html: '💰 Pricing for Meridian Logistics:<ul class="lead-list"><li>CloudSync Enterprise × 150</li><li>List: $89/user/mo</li><li>Gold partner: –15%</li><li>Volume (100+): –8%</li><li><strong>$69.19/user/mo</strong></li><li><strong>$124,542/year</strong></li></ul>Say "generate quote" to create the PDF.' },
+                { type: 'user', text: 'generate quote' },
+                { type: 'bot', html: '✅ Quote #QT-2026-4871 generated and emailed to you. Valid 30 days.' },
             ],
             sms: [
-                { type: 'user', text: 'My open deals' },
-                { type: 'bot', html: 'Verification needed. I sent a 6-digit code to your email. Reply with the code.' },
-                { type: 'user', text: '418302' },
-                { type: 'bot', html: '✅ Verified. 3 open deals:\n1. Acme Corp $450K\n2. Vertex Tech $200K\n3. Cascade $350K' },
+                { type: 'user', text: 'Quote for Meridian, CloudSync Enterprise, 150 users' },
+                { type: 'bot', html: 'CloudSync Enterprise × 150 users:\nList: $89/user/mo\nPartner discount: –15%\nVolume discount: –8%\nYour price: $69.19/user/mo\nAnnual: $124,542' },
+                { type: 'user', text: 'Generate quote' },
+                { type: 'bot', html: '✅ Quote #QT-2026-4871 sent to your email. Valid 30 days.' },
             ]
         }
     },
