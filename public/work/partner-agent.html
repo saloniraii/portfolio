@@ -256,6 +256,30 @@
             line-height: 1.6;
         }
 
+        /* ─── THE PIVOT ─── */
+        .pivot-section {
+            padding-bottom: 0;
+        }
+        .pivot-headline {
+            font-family: var(--display-font);
+            font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.35;
+            color: var(--foreground);
+            max-width: 900px;
+        }
+        .pivot-headline em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        .pivot-body {
+            font-size: 1.05rem;
+            color: #404040;
+            line-height: 1.8;
+            max-width: 720px;
+            margin-top: 20px;
+        }
+
         /* ─── SECURING THE BET ─── */
         .bet-section .bet-layout {
             display: flex;
@@ -836,6 +860,15 @@
     </div>
 </section>
 
+<!-- ═══════════ THE PIVOT ═══════════ -->
+<section class="section pivot-section">
+    <div class="section-inner">
+        <p class="section-label">The pivot</p>
+        <h2 class="pivot-headline">The existing roadmap was portal improvements. But the research made it clear &mdash; improving the portal wouldn't fix the problem, because the problem <em>was</em> the portal.</h2>
+        <p class="pivot-body">Partners weren't going to log in more. They needed the work to come to them. That meant proposing a fundamentally different direction to leadership &mdash; one that required new infrastructure, new channels, and a new mental model for the product.</p>
+    </div>
+</section>
+
 <!-- ═══════════ SECURING THE BET ═══════════ -->
 <section class="section bet-section">
     <div class="section-inner">
@@ -843,8 +876,7 @@
             <div class="bet-left">
                 <p class="section-label">Securing the Bet</p>
                 <h2 class="section-headline" style="padding-top: 24px;">Making design work read as a revenue opportunity</h2>
-                <p class="section-body" style="padding-top: 20px;">The existing roadmap was portal improvements &mdash; better dashboards, cleaner navigation, incremental polish. But the research made it clear that improving the portal wouldn't fix the problem because the problem was the portal itself. Partners weren't going to log in more; they needed the work to come to them.</p>
-                <p class="section-body" style="margin-top: 16px;">That meant proposing a fundamentally different direction to leadership &mdash; one that required new infrastructure, new channels, and a new mental model for the product. The vision wouldn't matter if it stayed in Figma. We worked on the strategy proposal, framing the investment through three lenses.</p>
+                <p class="section-body" style="padding-top: 20px;">The vision wouldn't matter if it stayed in Figma. We worked on the strategy proposal, framing the investment through three lenses.</p>
             </div>
             <div class="bet-right">
                 <div class="bet-card">
