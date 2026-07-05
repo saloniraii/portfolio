@@ -74,8 +74,21 @@
 }
 
 /* Active state */
+.cp-accordion-item.active {
+    border-left: 3px solid var(--accent, #B22222);
+    background: rgba(178, 34, 34, 0.04);
+    border-radius: 6px;
+    margin-left: -16px;
+    padding-left: 16px;
+    border-bottom-color: transparent;
+}
+
+.cp-accordion-item.active + .cp-accordion-item {
+    border-top: none;
+}
+
 .cp-accordion-item.active .cp-accordion-trigger .cp-title {
-    color: var(--dark, #0f0f0f);
+    color: var(--accent, #B22222);
     font-weight: 700;
 }
 
