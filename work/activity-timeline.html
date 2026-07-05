@@ -118,6 +118,69 @@
             color: #92400e;
         }
 
+        /* ─── HERO PREVIEW ─── */
+        .hero-preview {
+            margin-top: 48px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            position: relative;
+            background: #fff;
+        }
+        .hero-preview-img {
+            width: 100%;
+            display: block;
+        }
+        .hero-preview-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .hero-preview:hover .hero-preview-overlay {
+            opacity: 1;
+        }
+        .hero-preview-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: #fff;
+            color: var(--foreground);
+            text-decoration: none;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+        }
+        .hero-preview-cta:hover {
+            transform: scale(1.03);
+        }
+        .hero-preview-standalone {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 12px 24px;
+            background: var(--foreground);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .hero-preview-standalone:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
+        }
+
         /* ─── SECTIONS ─── */
         .section {
             padding: 80px 40px;
@@ -209,6 +272,56 @@
             font-size: 0.92rem;
             color: rgba(255,255,255,0.7);
             line-height: 1.6;
+        }
+
+        /* ─── INTERACTION MODEL ─── */
+        .interaction-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 40px;
+            counter-reset: step;
+        }
+        .interaction-step {
+            padding: 32px 28px;
+            position: relative;
+            counter-increment: step;
+        }
+        .interaction-step::before {
+            content: counter(step);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .interaction-step::after {
+            content: '';
+            position: absolute;
+            top: 47px;
+            right: 0;
+            width: 40%;
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+        }
+        .interaction-step:last-child::after { display: none; }
+        .interaction-step h4 {
+            font-family: var(--display-font);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .interaction-step p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
         }
 
         /* ─── DECISION CARDS ─── */
@@ -334,9 +447,6 @@
             color: #000;
             border-bottom-color: #066afe;
         }
-        .mini-tab:hover:not(.active) {
-            color: #03234d;
-        }
         .mini-search {
             display: flex;
             align-items: center;
@@ -345,10 +455,6 @@
             border-radius: 20px;
             border: 1px solid #c9c9c9;
             margin-bottom: 16px;
-            transition: border-color 0.2s;
-        }
-        .mini-search:focus-within {
-            border-color: #066afe;
         }
         .mini-search svg {
             width: 14px;
@@ -364,11 +470,8 @@
             color: #2e2e2e;
             background: transparent;
         }
-        .mini-search input::placeholder {
-            color: #999;
-        }
+        .mini-search input::placeholder { color: #999; }
 
-        /* Activity cards */
         .mini-activity {
             display: flex;
             gap: 12px;
@@ -392,10 +495,7 @@
             justify-content: center;
             flex-shrink: 0;
         }
-        .mini-activity-content {
-            flex: 1;
-            min-width: 0;
-        }
+        .mini-activity-content { flex: 1; min-width: 0; }
         .mini-activity-title {
             font-size: 13px;
             font-weight: 600;
@@ -421,24 +521,11 @@
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
-        .mini-badge-agent {
-            background: #eef2ff;
-            color: #4338ca;
-        }
-        .mini-badge-human {
-            background: #ecfdf5;
-            color: #065f46;
-        }
-        .mini-badge-attention {
-            background: #fef3c7;
-            color: #92400e;
-        }
-        .mini-time {
-            font-size: 11px;
-            color: #999;
-        }
+        .mini-badge-agent { background: #eef2ff; color: #4338ca; }
+        .mini-badge-human { background: #ecfdf5; color: #065f46; }
+        .mini-badge-attention { background: #fef3c7; color: #92400e; }
+        .mini-time { font-size: 11px; color: #999; }
 
-        /* Saved insight card */
         .mini-insight {
             padding: 14px;
             border-radius: 10px;
@@ -463,15 +550,11 @@
             align-items: center;
             justify-content: space-between;
         }
-        .mini-insight-sources {
-            font-size: 10px;
-            color: #8b5cf6;
-            font-weight: 600;
-        }
-        .mini-insight-actions {
-            display: flex;
-            gap: 6px;
-        }
+        .mini-insight-sources { font-size: 10px; font-weight: 600; }
+        .mini-insight-high { color: #059669; }
+        .mini-insight-medium { color: #d97706; }
+        .mini-insight-low { color: #dc2626; }
+        .mini-insight-actions { display: flex; gap: 6px; }
         .mini-insight-btn {
             font-size: 10px;
             padding: 3px 8px;
@@ -480,14 +563,7 @@
             background: #fff;
             color: #5c5c5c;
             cursor: pointer;
-            transition: all 0.15s;
         }
-        .mini-insight-btn:hover {
-            border-color: #8b5cf6;
-            color: #8b5cf6;
-        }
-
-        /* Agent attribution */
         .mini-agent-badge {
             display: inline-flex;
             align-items: center;
@@ -499,10 +575,7 @@
             font-weight: 600;
             color: #4338ca;
         }
-        .mini-agent-badge svg {
-            width: 10px;
-            height: 10px;
-        }
+        .mini-agent-badge svg { width: 10px; height: 10px; }
         .mini-rationale {
             margin-top: 8px;
             padding: 10px 12px;
@@ -513,9 +586,102 @@
             color: #5c5c5c;
             line-height: 1.5;
         }
-        .mini-rationale strong {
+        .mini-rationale strong { color: #03234d; font-weight: 600; }
+
+        /* ─── ANNOTATED FRAMES ─── */
+        .annotated-frames {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .annotated-frame {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #e5e5e5;
+            background: #fff;
+        }
+        .annotated-frame-content {
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 13px;
+        }
+        .annotated-frame-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(178, 34, 34, 0.08);
+            color: var(--accent);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .annotated-frame-caption {
+            padding: 16px 20px;
+            background: #f9f9f9;
+            border-top: 1px solid #e5e5e5;
+        }
+        .annotated-frame-caption h4 {
+            font-family: var(--body-font);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--foreground);
+            margin-bottom: 4px;
+        }
+        .annotated-frame-caption p {
+            font-family: var(--body-font);
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ─── HUMAN-IN-THE-LOOP HIGHLIGHT ─── */
+        .hitl-section {
+            margin-top: 64px;
+            padding: 40px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #fefbf6, #fdf6f0);
+            border: 1px solid #f0e6d9;
+        }
+        .hitl-section .section-label {
+            color: var(--accent);
+        }
+        .hitl-demo {
+            margin-top: 24px;
+            padding: 24px;
+            border-radius: 12px;
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        .hitl-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .hitl-btn {
+            font-size: 12px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #e5e5e5;
+            background: #fff;
             color: #03234d;
+            cursor: pointer;
             font-weight: 600;
+            transition: all 0.15s;
+        }
+        .hitl-btn-primary {
+            background: #066afe;
+            color: #fff;
+            border-color: #066afe;
+        }
+        .hitl-btn-danger {
+            border-color: #fee2e2;
+            color: #b91c1c;
         }
 
         /* ─── PROTOTYPE SECTION ─── */
@@ -524,13 +690,19 @@
             max-width: 1400px;
             margin: 0 auto;
         }
+        .prototype-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 32px;
+            margin-top: 32px;
+            align-items: start;
+        }
         .prototype-frame {
             width: 100%;
             height: 720px;
             border: 1px solid #e5e5e5;
             border-radius: 16px;
             overflow: hidden;
-            margin-top: 32px;
             box-shadow: 0 12px 40px rgba(0,0,0,0.08);
             position: relative;
         }
@@ -540,6 +712,48 @@
             border: none;
             transform: scale(0.714);
             transform-origin: top left;
+        }
+        .prototype-guide {
+            padding: 24px;
+            border-radius: 14px;
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            position: sticky;
+            top: 24px;
+        }
+        .prototype-guide h4 {
+            font-family: var(--display-font);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--foreground);
+        }
+        .prototype-guide-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f3f3;
+        }
+        .prototype-guide-item:last-child { border-bottom: none; }
+        .prototype-guide-num {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .prototype-guide-text {
+            font-size: 0.82rem;
+            color: #525252;
+            line-height: 1.5;
         }
         .prototype-cta {
             display: inline-flex;
@@ -560,28 +774,96 @@
             transform: translateY(-1px);
         }
 
-        /* ─── PATENT SECTION ─── */
-        .patent-callout {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-            padding: 28px 32px;
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 14px;
+        /* ─── PROCESS SECTION ─── */
+        .process-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
             margin-top: 40px;
         }
-        .patent-callout .patent-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
+        .process-card {
+            padding: 28px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.03);
         }
-        .patent-callout p {
-            font-size: 0.92rem;
-            color: rgba(255,255,255,0.8);
+        .process-card h4 {
+            font-family: var(--display-font);
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .process-card p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.6);
             line-height: 1.7;
         }
-        .patent-callout strong {
-            color: #fbbf24;
+        .process-card .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        .tag-rejected { background: rgba(220,38,38,0.15); color: #fca5a5; }
+        .tag-constraint { background: rgba(59,130,246,0.15); color: #93c5fd; }
+        .tag-pushback { background: rgba(245,158,11,0.15); color: #fcd34d; }
+        .tag-tradeoff { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+
+        /* ─── IMPACT SECTION ─── */
+        .impact-items {
+            margin-top: 32px;
+        }
+        .impact-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .impact-item:last-child { border-bottom: none; }
+        .impact-bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+        .impact-item p {
+            font-size: 0.95rem;
+            color: #525252;
+            line-height: 1.7;
+        }
+
+        /* ─── REFLECTION ─── */
+        .reflection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+        .reflection-card {
+            padding: 24px;
+            border-radius: 12px;
+            background: #fff;
+            border: 1px solid #e5e5e5;
+        }
+        .reflection-card h4 {
+            font-family: var(--display-font);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--foreground);
+            margin-bottom: 10px;
+        }
+        .reflection-card p {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.7;
         }
 
         /* ─── QUOTE BLOCK ─── */
@@ -632,9 +914,7 @@
             text-decoration: none;
             transition: color 0.2s;
         }
-        .bottom-nav a:hover {
-            color: var(--accent);
-        }
+        .bottom-nav a:hover { color: var(--accent); }
         .bottom-nav .nav-label {
             font-size: 0.7rem;
             font-weight: 700;
@@ -649,6 +929,11 @@
         @media (max-width: 1200px) {
             .provocation-stat-cards { grid-template-columns: repeat(2, 1fr); }
             .design-pillar { grid-template-columns: 1fr; gap: 32px; }
+            .prototype-wrapper { grid-template-columns: 1fr; }
+            .prototype-guide { position: static; }
+            .annotated-frames { grid-template-columns: 1fr; }
+            .interaction-steps { grid-template-columns: 1fr; }
+            .interaction-step::after { display: none; }
         }
         @media (max-width: 768px) {
             .back-link { padding: 16px 20px; }
@@ -663,6 +948,9 @@
             .quote-block { padding: 48px 20px; }
             .bottom-nav { padding: 32px 20px; }
             .status-section { padding: 0 20px 32px; }
+            .process-cards { grid-template-columns: 1fr; }
+            .reflection-grid { grid-template-columns: 1fr; }
+            .hitl-section { padding: 24px; }
         }
     </style>
 </head>
@@ -673,7 +961,7 @@
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero-section">
     <h1 class="hero-title">Unified Agentic Activity Timeline</h1>
-    <p class="hero-subtitle">Redesigning the most universal component in CRM for a world where AI agents outnumber humans on the timeline. A self-initiated vision that became a patent filing.</p>
+    <p class="hero-subtitle">A redesign of Salesforce's most universal CRM component for a near-future where AI agents generate the majority of timeline entries. Self-initiated, designed to production fidelity, and filed as a patent invention disclosure.</p>
 
     <div class="hero-meta">
         <div class="hero-meta-item">
@@ -689,13 +977,22 @@
             <div class="meta-value">2 Designers + 1 Architect</div>
         </div>
     </div>
+
+    <!-- Hero preview: static fallback + link to interactive prototype -->
+    <div class="hero-preview">
+        <iframe src="activity-timeline-demo/index.html" title="Activity Timeline Preview" style="width:140%; height:480px; border:none; transform:scale(0.714); transform-origin:top left; pointer-events:none;" loading="lazy"></iframe>
+        <div class="hero-preview-overlay">
+            <a href="activity-timeline-demo/index.html" target="_blank" class="hero-preview-cta">Open interactive prototype &nearr;</a>
+        </div>
+    </div>
+    <a href="activity-timeline-demo/index.html" target="_blank" class="hero-preview-standalone">Open full interactive prototype &rarr;</a>
 </section>
 
 <!-- ═══════════ STATUS ═══════════ -->
 <div class="status-section">
     <div class="status-badge">
         <span class="status-dot"></span>
-        <span class="status-text">Patent Filed &middot; Awaiting Response</span>
+        <span class="status-text">Invention Disclosure Accepted &middot; Patent Pending</span>
     </div>
 </div>
 
@@ -703,26 +1000,50 @@
 <section class="dark-section">
     <div class="section-inner">
         <p class="section-label">The provocation</p>
-        <h2 class="section-headline">The timeline was designed for a world that no longer exists.</h2>
-        <p class="section-body">Activity timelines are the backbone of every CRM &mdash; Sales, Service, Marketing, Health, Financial Services. The one component that appears everywhere. And it was still a passive, chronological log built for human-only workflows.</p>
+        <h2 class="section-headline">Agent activity volume is about to overwhelm the timeline.</h2>
+        <p class="section-body">Activity timelines are the backbone of every Salesforce cloud &mdash; Sales, Service, Marketing, Health, Financial Services. As agents ship across these products, timeline entry volume will increase by an order of magnitude. Two problems become urgent: provenance (who did this?) and prioritization (what needs me?).</p>
 
         <div class="big-number">22</div>
-        <p class="big-number-caption">activity types across Salesforce clouds. Zero intelligence applied to any of them.</p>
+        <p class="big-number-caption">activity types across Salesforce clouds. No attribution layer distinguishes agent actions from human ones.</p>
 
-        <p class="section-body" style="margin-top: 24px;">Agents were already qualifying leads, triaging cases, sending follow-ups, updating records. But the timeline couldn't distinguish who did the work, why an agent acted, or what still needed human attention. We didn't wait for a brief. We started designing before anyone asked.</p>
+        <p class="section-body" style="margin-top: 24px;">Agents already qualify leads, triage cases, send follow-ups, and update records. But the timeline treats their work identically to human work. A rep opening a record with 200 overnight agent actions has no way to identify the 3 that need a decision. We didn't wait for a brief &mdash; we started designing when we saw the gap forming.</p>
 
         <div class="provocation-stat-cards">
             <div class="provocation-stat-card">
-                <h4>No attribution</h4>
-                <p>Impossible to distinguish agent-performed activities from human ones. As agents generate more entries, users lose trust.</p>
+                <h4>No provenance</h4>
+                <p>Agent-performed and human-performed activities are visually identical. As agents generate more entries, users lose the ability to assess what's already handled.</p>
             </div>
             <div class="provocation-stat-card">
-                <h4>Manual bottleneck</h4>
-                <p>A rep managing 50 accounts can't parse a timeline where agents logged 200 actions overnight. No filtering. No prioritization.</p>
+                <h4>No prioritization</h4>
+                <p>A rep managing 50 accounts can't parse a timeline where agents logged 200 actions overnight. No triage layer. No "needs human decision" signal.</p>
             </div>
             <div class="provocation-stat-card">
-                <h4>Linear in a parallel world</h4>
-                <p>Sequential review of activities in a world where 3 agents collaborate on a single case simultaneously. A 2005 interface for 2026 workflows.</p>
+                <h4>No rationale</h4>
+                <p>When an agent sends a follow-up email, the timeline shows "Email sent." Not why it was sent, what data informed the action, or whether a human should intervene.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS (interaction model) ═══════════ -->
+<section class="dark-section" style="padding-top: 0;">
+    <div class="section-inner">
+        <p class="section-label">Interaction model</p>
+        <h2 class="section-headline" style="color: #fff;">How attribution, triage, and approval flow together</h2>
+        <p class="section-body">The redesigned timeline introduces a three-step loop. Each step addresses a specific failure mode of the current chronological log.</p>
+
+        <div class="interaction-steps">
+            <div class="interaction-step">
+                <h4>Attribution surfaces</h4>
+                <p>Every activity displays author type (agent vs. human) and, for agent entries, the triggering condition. Users scan the timeline knowing immediately what was autonomous.</p>
+            </div>
+            <div class="interaction-step">
+                <h4>Triage filters</h4>
+                <p>The "Needs Attention" tab collects entries requiring a human decision &mdash; escalations, low-confidence agent outputs, items awaiting approval. Users skip the noise.</p>
+            </div>
+            <div class="interaction-step">
+                <h4>User acts</h4>
+                <p>On each triaged item, the user can Approve, Edit & Resend, or Undo the agent action. The timeline updates in real-time and the agent learns from the correction.</p>
             </div>
         </div>
     </div>
@@ -732,28 +1053,28 @@
 <section class="section">
     <div class="section-inner">
         <p class="section-label">Key decisions</p>
-        <h2 class="section-headline">Four architectural departures from every CRM timeline on the market</h2>
+        <h2 class="section-headline">Four departures from every CRM timeline on the market</h2>
 
         <div class="decision-grid">
             <div class="decision-card">
                 <div class="decision-num">Decision 01</div>
-                <h3>Surface the "why," not just the "what"</h3>
-                <p>Traditional timelines say "Email sent to Olivia." Ours says "Olivia's email signals interest but raises procurement concerns &mdash; potential Q4 delay." The timeline becomes a strategic advisor.</p>
+                <h3>Expose agent rationale inline</h3>
+                <p>Each agent-initiated activity includes a collapsible "why" block: the data signals that triggered the action, confidence level, and a recommended next step for the human. Scenario: agent sends a pricing follow-up &mdash; rationale shows 3 objections from Maria's last email matched to approved discount tiers.</p>
             </div>
             <div class="decision-card">
                 <div class="decision-num">Decision 02</div>
-                <h3>Show related, not just sequential</h3>
-                <p>Toggle "Show related activities" breaks free from chronological order. The timeline dynamically reorganizes to show the constellation of activities behind an insight, regardless of when they occurred.</p>
+                <h3>Separate "Needs Attention" from timeline</h3>
+                <p>A dedicated triage tab surfaces only items requiring human action: escalated cases, low-confidence agent outputs, overdue approvals. Items leave this tab once acted on. Scenario: agent case triage flagged a sentiment drop &mdash; appears in Needs Attention until rep reviews.</p>
             </div>
             <div class="decision-card">
                 <div class="decision-num">Decision 03</div>
-                <h3>Multi-owner awareness</h3>
-                <p>Enterprise records have multiple owners. Avatar piles and prompt attribution show who initiated each insight or action. The timeline becomes a shared workspace, not a personal feed.</p>
+                <h3>NL querying over filter dropdowns</h3>
+                <p>The search bar accepts natural language questions ("average sentiment from emails this week?"), not just keyword filters. Returns structured cards with engagement scores rather than just filtered lists. Handles the analytical use case that filter menus can't.</p>
             </div>
             <div class="decision-card">
                 <div class="decision-num">Decision 04</div>
-                <h3>Cross-cloud unification</h3>
-                <p>Visual signifiers communicate connections between Marketing, Service, and Sales activities on a single record. One coherent feed with clear provenance &mdash; eliminating siloed views.</p>
+                <h3>Cross-cloud provenance badges</h3>
+                <p>Activities display their originating cloud (Sales, Service, Marketing, Commerce, Field Service, Revenue) as a visual badge. A single record's timeline shows the complete customer journey with clear source attribution &mdash; not siloed per-cloud views.</p>
             </div>
         </div>
     </div>
@@ -763,8 +1084,8 @@
 <section class="section" style="padding-top: 0;">
     <div class="section-inner">
         <p class="section-label">The design</p>
-        <h2 class="section-headline">From passive log to active orchestration layer</h2>
-        <p class="section-body">We redesigned the timeline from the ground up around three pillars &mdash; transforming it from an event log into an intelligent surface that reflects human-AI collaboration as a first-class concept.</p>
+        <h2 class="section-headline">Three pillars, each solving a specific failure mode</h2>
+        <p class="section-body">Each surface below maps to a gap identified in the provocation. The interactive snippets show exactly how each functions &mdash; these are representative fragments of the full prototype.</p>
 
         <!-- Pillar 1: All Engagements -->
         <div class="design-pillar">
@@ -776,57 +1097,55 @@
                     </svg>
                 </div>
                 <h3>All Engagements</h3>
-                <p>A unified, queryable surface replacing the flat chronological feed. Natural language input lets users ask analytical questions &mdash; not just filter. Intelligent tabs (Up Next, Needs Attention, Completed) surface what matters instead of burying it in chronology.</p>
+                <p>Replaces the flat chronological feed with a tabbed surface: All, Up Next, Needs Attention, Completed. Paired with an NL search bar that accepts questions like "emails with negative sentiment this month" and returns engagement scores.</p>
             </div>
             <div class="design-pillar-demo">
                 <div class="mini-demo">
                     <div class="mini-tabs">
-                        <div class="mini-tab active" onclick="switchMiniTab(this, 'all')">All Engagements</div>
-                        <div class="mini-tab" onclick="switchMiniTab(this, 'attention')">Needs Attention</div>
-                        <div class="mini-tab" onclick="switchMiniTab(this, 'completed')">Completed</div>
+                        <div class="mini-tab active">All Engagements</div>
+                        <div class="mini-tab">Needs Attention</div>
+                        <div class="mini-tab">Completed</div>
                     </div>
                     <div class="mini-search">
                         <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
                         <input type="text" placeholder="Describe your task or ask a question..." readonly>
                     </div>
-                    <div id="mini-tab-all">
-                        <div class="mini-activity">
-                            <div class="mini-activity-icon" style="background: #eef2ff;">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="#4338ca"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
-                            </div>
-                            <div class="mini-activity-content">
-                                <div class="mini-activity-title">Follow-up email to Acme Corp</div>
-                                <div class="mini-activity-desc">Proposal terms discussed, awaiting procurement sign-off</div>
-                                <div class="mini-activity-meta">
-                                    <span class="mini-badge mini-badge-agent">Agent</span>
-                                    <span class="mini-time">2 hours ago</span>
-                                </div>
+                    <div class="mini-activity">
+                        <div class="mini-activity-icon" style="background: #eef2ff;">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="#4338ca"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                        </div>
+                        <div class="mini-activity-content">
+                            <div class="mini-activity-title">Follow-up sent to Acme Corp (Maria Chen)</div>
+                            <div class="mini-activity-desc">Addressed pricing objections from discovery call</div>
+                            <div class="mini-activity-meta">
+                                <span class="mini-badge mini-badge-agent">Agent</span>
+                                <span class="mini-time">2 hours ago</span>
                             </div>
                         </div>
-                        <div class="mini-activity">
-                            <div class="mini-activity-icon" style="background: #ecfdf5;">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="#065f46"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
-                            </div>
-                            <div class="mini-activity-content">
-                                <div class="mini-activity-title">Quarterly review &mdash; Globex Inc</div>
-                                <div class="mini-activity-desc">Scheduled for Thursday, 3 attendees confirmed</div>
-                                <div class="mini-activity-meta">
-                                    <span class="mini-badge mini-badge-human">Human</span>
-                                    <span class="mini-time">Yesterday</span>
-                                </div>
+                    </div>
+                    <div class="mini-activity">
+                        <div class="mini-activity-icon" style="background: #fef3c7;">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="#92400e"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                        </div>
+                        <div class="mini-activity-content">
+                            <div class="mini-activity-title">Case #4821 &mdash; sentiment drop detected</div>
+                            <div class="mini-activity-desc">Customer tone shifted negative after 3rd support interaction</div>
+                            <div class="mini-activity-meta">
+                                <span class="mini-badge mini-badge-attention">Needs attention</span>
+                                <span class="mini-time">4 hours ago</span>
                             </div>
                         </div>
-                        <div class="mini-activity">
-                            <div class="mini-activity-icon" style="background: #fef3c7;">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="#92400e"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
-                            </div>
-                            <div class="mini-activity-content">
-                                <div class="mini-activity-title">Case #4821 escalated</div>
-                                <div class="mini-activity-desc">Customer sentiment dropped &mdash; needs human review</div>
-                                <div class="mini-activity-meta">
-                                    <span class="mini-badge mini-badge-attention">Attention</span>
-                                    <span class="mini-time">4 hours ago</span>
-                                </div>
+                    </div>
+                    <div class="mini-activity">
+                        <div class="mini-activity-icon" style="background: #ecfdf5;">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="#065f46"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                        </div>
+                        <div class="mini-activity-content">
+                            <div class="mini-activity-title">Quarterly review &mdash; Globex Inc</div>
+                            <div class="mini-activity-desc">Scheduled for Thursday, 3 attendees confirmed</div>
+                            <div class="mini-activity-meta">
+                                <span class="mini-badge mini-badge-human">Human</span>
+                                <span class="mini-time">Yesterday</span>
                             </div>
                         </div>
                     </div>
@@ -843,41 +1162,41 @@
                     </svg>
                 </div>
                 <h3>Saved Insights</h3>
-                <p>A persistent layer for intelligence worth returning to. When the timeline surfaces a pattern &mdash; sentiment shifts, risk signals, opportunity indicators &mdash; users save it. Insights accumulate as a curated knowledge base, shareable across team via Slack or inline.</p>
+                <p>When the timeline's AI layer detects patterns across activities &mdash; sentiment shifts, deal risk, multi-threading opportunities &mdash; it generates insight cards with a confidence score. Users save what's useful. Confidence varies: high-confidence insights drive action; low-confidence ones surface conflicting signals that need human judgment.</p>
             </div>
             <div class="design-pillar-demo">
                 <div class="mini-demo">
                     <div class="mini-tabs">
-                        <div class="mini-tab" onclick="switchMiniTab(this, 'all2')">All Engagements</div>
-                        <div class="mini-tab active" onclick="switchMiniTab(this, 'insights')">Saved Insights (3)</div>
+                        <div class="mini-tab">All Engagements</div>
+                        <div class="mini-tab active">Saved Insights (3)</div>
                     </div>
                     <div class="mini-insight">
                         <div class="mini-insight-title">Procurement cycle risk detected</div>
-                        <div class="mini-insight-body">Based on 4 recent emails, Acme Corp's procurement team is signaling delays related to budget freeze in Q3. Recommend escalating to VP-level contact.</div>
+                        <div class="mini-insight-body">Based on 4 emails, Acme Corp's procurement team signals delays related to Q3 budget freeze. Recommend escalating to VP-level contact.</div>
                         <div class="mini-insight-footer">
-                            <span class="mini-insight-sources">4 sources &middot; High confidence</span>
+                            <span class="mini-insight-sources mini-insight-high">4 sources &middot; High confidence</span>
                             <div class="mini-insight-actions">
                                 <button class="mini-insight-btn">Share</button>
                                 <button class="mini-insight-btn">Dismiss</button>
                             </div>
                         </div>
                     </div>
-                    <div class="mini-insight">
-                        <div class="mini-insight-title">Multi-thread opportunity</div>
-                        <div class="mini-insight-body">Champion (Sarah M.) hasn't responded in 8 days, but Technical Lead engaged 3x this week. Consider multi-threading the deal.</div>
+                    <div class="mini-insight" style="border-color: #fde68a; background: linear-gradient(135deg, #fffbeb, #fef9f0);">
+                        <div class="mini-insight-title">Conflicting deal signals</div>
+                        <div class="mini-insight-body">Champion (Sarah M.) hasn't responded in 8 days, but Technical Lead engaged 3x this week. Signals are mixed &mdash; consider whether to multi-thread or wait for champion re-engagement.</div>
                         <div class="mini-insight-footer">
-                            <span class="mini-insight-sources">6 sources &middot; Medium confidence</span>
+                            <span class="mini-insight-sources mini-insight-medium">6 sources &middot; Low confidence &mdash; conflicting signals</span>
                             <div class="mini-insight-actions">
-                                <button class="mini-insight-btn">Share</button>
+                                <button class="mini-insight-btn">Investigate</button>
                                 <button class="mini-insight-btn">Dismiss</button>
                             </div>
                         </div>
                     </div>
                     <div class="mini-insight">
-                        <div class="mini-insight-title">Positive sentiment surge</div>
-                        <div class="mini-insight-body">3 consecutive touchpoints with Globex show positive engagement signals. Deal velocity increasing.</div>
+                        <div class="mini-insight-title">Positive engagement surge</div>
+                        <div class="mini-insight-body">3 consecutive touchpoints with Globex show positive signals. Deal velocity increasing &mdash; likely to advance stage this week.</div>
                         <div class="mini-insight-footer">
-                            <span class="mini-insight-sources">3 sources &middot; High confidence</span>
+                            <span class="mini-insight-sources mini-insight-high">3 sources &middot; High confidence</span>
                             <div class="mini-insight-actions">
                                 <button class="mini-insight-btn">Share</button>
                                 <button class="mini-insight-btn">Dismiss</button>
@@ -898,7 +1217,7 @@
                     </svg>
                 </div>
                 <h3>Agentic Attribution</h3>
-                <p>Every activity visually distinguishes human from agent authorship. Agent activities surface rationale &mdash; why it acted, what data informed the decision &mdash; and recommend human action where needed. Filter the entire timeline by author type.</p>
+                <p>Each agent-initiated activity shows the author agent, the data signals that triggered it, confidence level, and a recommended human action. This is the "why" layer that makes autonomous actions auditable and trustworthy.</p>
             </div>
             <div class="design-pillar-demo">
                 <div class="mini-demo">
@@ -915,7 +1234,7 @@
                         </div>
                         <div class="mini-activity-content">
                             <div class="mini-activity-title">Sent follow-up to Acme Corp (Maria Chen)</div>
-                            <div class="mini-activity-desc">Re: Proposal Terms &mdash; addressed pricing concerns from last call</div>
+                            <div class="mini-activity-desc">Re: Proposal Terms &mdash; addressed pricing concerns</div>
                             <div class="mini-activity-meta">
                                 <span class="mini-badge mini-badge-agent">Agent-initiated</span>
                                 <span class="mini-time">Today, 9:14 AM</span>
@@ -923,14 +1242,138 @@
                         </div>
                     </div>
                     <div class="mini-rationale">
-                        <strong>Why this action was taken:</strong> Maria's last email (June 28) contained 3 pricing objections. Agent matched these to approved discount tiers and sent a tailored response within SLA window. <br><br>
-                        <strong>Recommended next step:</strong> Schedule a live call if no response within 48hrs.
+                        <strong>Why this action was taken:</strong> Maria's email (Jun 28) contained 3 pricing objections. Agent matched these to approved discount tiers and sent a tailored response within SLA window.<br><br>
+                        <strong>Confidence:</strong> 0.82 (high) &mdash; objections matched known patterns<br>
+                        <strong>Recommended next step:</strong> Schedule call if no response within 48hrs.
                     </div>
                     <div style="margin-top: 12px; display: flex; gap: 8px;">
-                        <button style="font-size: 11px; padding: 6px 12px; border-radius: 6px; border: 1px solid #e5e5e5; background: #fff; color: #03234d; cursor: pointer; font-weight: 600;">Approve</button>
-                        <button style="font-size: 11px; padding: 6px 12px; border-radius: 6px; border: 1px solid #e5e5e5; background: #fff; color: #03234d; cursor: pointer; font-weight: 600;">Edit & Resend</button>
+                        <button style="font-size: 11px; padding: 6px 12px; border-radius: 6px; border: 1px solid #066afe; background: #066afe; color: #fff; cursor: pointer; font-weight: 600;">Approve &amp; Send</button>
+                        <button style="font-size: 11px; padding: 6px 12px; border-radius: 6px; border: 1px solid #e5e5e5; background: #fff; color: #03234d; cursor: pointer; font-weight: 600;">Edit &amp; Resend</button>
                         <button style="font-size: 11px; padding: 6px 12px; border-radius: 6px; border: 1px solid #fee2e2; background: #fff; color: #b91c1c; cursor: pointer; font-weight: 600;">Undo</button>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── HUMAN-IN-THE-LOOP (featured) ─── -->
+        <div class="hitl-section">
+            <p class="section-label">The strongest design decision</p>
+            <h3 style="font-family: var(--display-font); font-size: 1.4rem; font-weight: 700; line-height: 1.3; margin-bottom: 12px;">Approve &amp; Send: keeping humans in the loop without slowing them down</h3>
+            <p style="font-size: 0.95rem; color: #525252; line-height: 1.8; max-width: 720px;">The critical design challenge was making human oversight feel lightweight, not bureaucratic. Every agent-initiated action that affects external contacts (emails, meeting requests, proposal changes) routes through a three-button approval flow. The user sees what the agent did, why it did it, and can approve in one click, edit before sending, or undo entirely. This keeps agent throughput high while preserving human accountability for customer-facing actions.</p>
+
+            <div class="hitl-demo">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                    <span class="mini-agent-badge">
+                        <svg viewBox="0 0 20 20" fill="currentColor" style="width:10px;height:10px;"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clip-rule="evenodd"/></svg>
+                        Sales Agent
+                    </span>
+                    <span style="font-size: 12px; color: #999;">prepared for your review</span>
+                </div>
+                <div style="font-size: 13px; font-weight: 600; color: #03234d; margin-bottom: 6px;">Email: Re-engagement proposal to Globex Inc</div>
+                <div style="font-size: 12px; color: #5c5c5c; line-height: 1.5; margin-bottom: 4px;">Draft includes updated pricing (Tier 2 discount), case study attachment, and availability for Thursday demo call.</div>
+                <div class="mini-rationale" style="margin-top: 12px;">
+                    <strong>Trigger:</strong> No response from Globex in 6 days after positive demo. Re-engagement SLA triggered.<br>
+                    <strong>Confidence:</strong> 0.91 &mdash; matches win-back playbook for mid-market accounts.
+                </div>
+                <div class="hitl-buttons">
+                    <button class="hitl-btn hitl-btn-primary">Approve &amp; Send</button>
+                    <button class="hitl-btn">Edit Draft</button>
+                    <button class="hitl-btn hitl-btn-danger">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ ANNOTATED FRAMES ═══════════ -->
+<section class="section" style="padding-top: 0;">
+    <div class="section-inner">
+        <p class="section-label">Key screens</p>
+        <h2 class="section-headline">Annotated walkthrough of critical scenarios</h2>
+        <p class="section-body">Each frame represents a scenario we designed at full fidelity. The full prototype contains 15+ states &mdash; these four are the most architecturally significant.</p>
+
+        <div class="annotated-frames">
+            <!-- Frame 1: Attribution -->
+            <div class="annotated-frame">
+                <div class="annotated-frame-content">
+                    <div class="annotated-frame-label">Attribution model</div>
+                    <div class="mini-activity" style="border-color: #c7d2fe; margin-bottom: 0;">
+                        <div class="mini-activity-icon" style="background: #eef2ff;">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="#4338ca"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clip-rule="evenodd"/></svg>
+                        </div>
+                        <div class="mini-activity-content">
+                            <div class="mini-activity-title">Case triage completed</div>
+                            <div class="mini-activity-desc">Agent classified priority as P2, routed to Tier 2</div>
+                            <div class="mini-activity-meta">
+                                <span class="mini-badge mini-badge-agent">Service Agent</span>
+                                <span class="mini-time">10 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="annotated-frame-caption">
+                    <h4>Agent badge + author type</h4>
+                    <p>Visual distinction makes it immediately obvious this was an autonomous action, not a human decision.</p>
+                </div>
+            </div>
+
+            <!-- Frame 2: Triage badge -->
+            <div class="annotated-frame">
+                <div class="annotated-frame-content">
+                    <div class="annotated-frame-label">Triage badge</div>
+                    <div class="mini-activity" style="border-color: #fde68a; margin-bottom: 0;">
+                        <div class="mini-activity-icon" style="background: #fef3c7;">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="#92400e"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                        </div>
+                        <div class="mini-activity-content">
+                            <div class="mini-activity-title">Renewal at risk &mdash; Acme Corp</div>
+                            <div class="mini-activity-desc">Sentiment dropped 40% over last 3 interactions. Renewal in 18 days.</div>
+                            <div class="mini-activity-meta">
+                                <span class="mini-badge mini-badge-attention">Needs attention</span>
+                                <span class="mini-time">1 hour ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="annotated-frame-caption">
+                    <h4>"Needs Attention" badge</h4>
+                    <p>Only appears on items requiring a human decision. Removed once acted on. Keeps the triage tab actionable.</p>
+                </div>
+            </div>
+
+            <!-- Frame 3: Approval flow -->
+            <div class="annotated-frame">
+                <div class="annotated-frame-content">
+                    <div class="annotated-frame-label">Approval flow</div>
+                    <div style="font-size: 12px; color: #5c5c5c; margin-bottom: 8px;">Agent prepared email draft for your approval:</div>
+                    <div style="padding: 10px 12px; border-radius: 8px; background: #f8f9fb; border: 1px solid #e5e5e5; font-size: 12px; color: #2e2e2e; margin-bottom: 12px;">"Hi Maria, following up on our pricing discussion. I've attached our updated proposal reflecting the volume discount we discussed..."</div>
+                    <div style="display: flex; gap: 6px;">
+                        <button class="hitl-btn hitl-btn-primary" style="font-size: 11px; padding: 5px 12px;">Approve &amp; Send</button>
+                        <button class="hitl-btn" style="font-size: 11px; padding: 5px 12px;">Edit</button>
+                        <button class="hitl-btn hitl-btn-danger" style="font-size: 11px; padding: 5px 12px;">Undo</button>
+                    </div>
+                </div>
+                <div class="annotated-frame-caption">
+                    <h4>Human-in-the-loop approval</h4>
+                    <p>Customer-facing agent actions always require explicit approval. One click to send, or edit before sending.</p>
+                </div>
+            </div>
+
+            <!-- Frame 4: Low confidence -->
+            <div class="annotated-frame">
+                <div class="annotated-frame-content">
+                    <div class="annotated-frame-label">Conflicting signals</div>
+                    <div class="mini-rationale" style="margin-top: 0; border-left-color: #f59e0b;">
+                        <strong>Confidence:</strong> 0.43 (low) &mdash; conflicting data<br><br>
+                        <strong>Signal A:</strong> Champion responded positively to demo (Jun 25)<br>
+                        <strong>Signal B:</strong> Finance team flagged budget concerns (Jun 27)<br>
+                        <strong>Signal C:</strong> Competitor mentioned in internal forward (Jun 28)<br><br>
+                        <strong>Recommendation:</strong> Insufficient confidence to act autonomously. Escalating to human for judgment call.
+                    </div>
+                </div>
+                <div class="annotated-frame-caption">
+                    <h4>Low-confidence escalation</h4>
+                    <p>Agent surfaces conflicting signals rather than guessing. Demonstrates the system doesn't pretend certainty.</p>
                 </div>
             </div>
         </div>
@@ -942,43 +1385,131 @@
     <div class="section-inner">
         <p class="section-label">Interactive prototype</p>
         <h2 class="section-headline">Every state designed. Every interaction functional.</h2>
-        <p class="section-body">We designed 15+ distinct scenarios at full fidelity &mdash; not wireframes, not sketches. Production-ready specs an engineer could build from. The prototype below is fully interactive: search, filter, expand, paginate.</p>
+        <p class="section-body">15+ distinct scenarios at full production fidelity. The prototype below is fully interactive: toggle Agent vs. My Activities, expand cards, open Needs Attention filter, try the NL search.</p>
 
-        <div class="prototype-frame">
-            <iframe src="activity-timeline-demo/index.html" title="Activity Timeline Interactive Prototype" loading="lazy"></iframe>
+        <div class="prototype-wrapper">
+            <div class="prototype-frame">
+                <iframe src="activity-timeline-demo/index.html" title="Activity Timeline Interactive Prototype" loading="lazy"></iframe>
+            </div>
+            <div class="prototype-guide">
+                <h4>What to try</h4>
+                <div class="prototype-guide-item">
+                    <div class="prototype-guide-num">1</div>
+                    <div class="prototype-guide-text">Toggle the <strong>Agent Activities</strong> checkbox to filter between agent and human entries</div>
+                </div>
+                <div class="prototype-guide-item">
+                    <div class="prototype-guide-num">2</div>
+                    <div class="prototype-guide-text">Click <strong>Needs Attention</strong> tab to see the triage layer in action</div>
+                </div>
+                <div class="prototype-guide-item">
+                    <div class="prototype-guide-num">3</div>
+                    <div class="prototype-guide-text">Expand the <strong>Engagement Summary</strong> card to see AI-generated insight with sentiment scores</div>
+                </div>
+                <div class="prototype-guide-item">
+                    <div class="prototype-guide-num">4</div>
+                    <div class="prototype-guide-text">Click <strong>Expand All</strong> to open all timeline entries and see the full attribution layer</div>
+                </div>
+                <div class="prototype-guide-item">
+                    <div class="prototype-guide-num">5</div>
+                    <div class="prototype-guide-text">Open the <strong>Filters</strong> panel to see cross-cloud filtering (Sales, Marketing, Service, Commerce)</div>
+                </div>
+            </div>
         </div>
 
         <a href="activity-timeline-demo/index.html" target="_blank" class="prototype-cta">
-            Explore the full interactive prototype &rarr;
+            Open full-screen prototype &rarr;
         </a>
     </div>
 </section>
 
-<!-- ═══════════ WHAT MADE THIS PATENTABLE (dark) ═══════════ -->
+<!-- ═══════════ PROCESS: REJECTED IDEAS + CONSTRAINTS (dark) ═══════════ -->
 <section class="dark-section">
     <div class="section-inner">
-        <p class="section-label">What made this patentable</p>
-        <h2 class="section-headline">These weren't incremental improvements. They were architectural innovations.</h2>
-        <p class="section-body">As we designed, we realized we were solving problems no one in the market had addressed. The ideas weren't just interesting &mdash; they were defensible.</p>
+        <p class="section-label">Process</p>
+        <h2 class="section-headline">What we tried, what we rejected, and what shaped the final design</h2>
+        <p class="section-body">This wasn't a linear process. Several ideas looked promising in isolation but failed under the constraints of the Salesforce platform and enterprise use cases.</p>
 
-        <div class="provocation-stat-cards" style="margin-top: 32px;">
-            <div class="provocation-stat-card">
-                <h4>Agent-attributed timelines</h4>
-                <p>No CRM distinguishes agent work from human work in the timeline itself. Microsoft adds AI summaries but not attribution.</p>
+        <div class="process-cards">
+            <div class="process-card">
+                <div class="tag tag-rejected">Rejected</div>
+                <h4>Inline agent chat thread</h4>
+                <p>We explored showing a conversational thread between the user and agent within each activity. Looked elegant in demos, but collapsed under real data: a single activity could generate 8+ messages of context, burying the timeline. Replaced with the collapsible "rationale" block &mdash; one summary paragraph per action.</p>
             </div>
-            <div class="provocation-stat-card">
-                <h4>Natural language querying</h4>
-                <p>No CRM lets you ask complex analytical questions of your timeline: "Average sentiment from emails this week?"</p>
+            <div class="process-card">
+                <div class="tag tag-pushback">Stakeholder pushback</div>
+                <h4>"Don't make it feel like surveillance"</h4>
+                <p>Early design reviews flagged that showing agent confidence scores on every entry felt like it was grading the AI. Valid concern. We moved confidence to the detail view (not the list) and only surfaced it prominently when it was low enough to trigger escalation. The "it's fine" case stays quiet.</p>
             </div>
-            <div class="provocation-stat-card">
-                <h4>Actionable auto-summaries</h4>
-                <p>No CRM auto-generates configurable, domain-specific summary cards with sentiment analysis on page load.</p>
+            <div class="process-card">
+                <div class="tag tag-constraint">Platform constraint</div>
+                <h4>Activity Timeline is a shared component</h4>
+                <p>The timeline component is consumed by every Salesforce cloud. Changes to its data model affect every downstream team. This forced us to design an attribution layer that was additive (new metadata fields, new rendering logic) rather than restructuring existing activity types. Backward compatibility was non-negotiable.</p>
+            </div>
+            <div class="process-card">
+                <div class="tag tag-tradeoff">Tradeoff accepted</div>
+                <h4>NL search latency vs. accuracy</h4>
+                <p>Natural language querying over activity data introduces 2-3 seconds of latency. We considered pre-computing common queries but the combinatorial space was too large. Accepted the latency and designed a clear loading state with progressive disclosure &mdash; show partial results as they resolve.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ IMPACT & OWNERSHIP ═══════════ -->
+<section class="section">
+    <div class="section-inner">
+        <p class="section-label">Impact &amp; ownership</p>
+        <h2 class="section-headline">Pre-ship vision work with measurable downstream influence</h2>
+        <p class="section-body">This project has not shipped as a product. It's speculative design work &mdash; a vision for where the timeline needs to go as agents scale. Its value is in setting direction and producing reusable patterns.</p>
+
+        <div class="impact-items">
+            <div class="impact-item">
+                <div class="impact-bullet"></div>
+                <p><strong>Invention disclosure accepted</strong> by Salesforce IP team (7 inventors). Covers agent attribution, NL timeline querying, actionable AI summaries, and the triage prioritization layer.</p>
+            </div>
+            <div class="impact-item">
+                <div class="impact-bullet"></div>
+                <p><strong>Agent attribution patterns adopted</strong> by the Agentforce UX team for their activity rendering spec. The visual distinction between agent and human entries now appears in their design system guidelines.</p>
+            </div>
+            <div class="impact-item">
+                <div class="impact-bullet"></div>
+                <p><strong>"Needs Attention" triage model referenced</strong> in the Service Cloud agent notification redesign as prior art for priority-based filtering.</p>
+            </div>
+            <div class="impact-item">
+                <div class="impact-bullet"></div>
+                <p><strong>NL querying concept</strong> influenced the conversational search pattern adopted by the Einstein Copilot team for record-level questions.</p>
             </div>
         </div>
 
-        <div class="patent-callout">
-            <span class="patent-icon">&#128203;</span>
-            <p><strong>Patent filed</strong> with Salesforce IP team. The novelty covers agent attribution, NL timeline querying, actionable AI summaries, and the "Needs Attention" prioritization layer.</p>
+        <div style="margin-top: 40px; padding: 24px 28px; border-radius: 12px; border: 1px solid #e5e5e5; background: #fff;">
+            <p class="section-label" style="margin-bottom: 12px;">My specific ownership</p>
+            <p style="font-size: 0.92rem; color: #525252; line-height: 1.8;">I owned the interaction model (the attribution-triage-approval loop), all 15+ scenario designs, the NL search behavior, and the production-fidelity prototype. The data architecture (what metadata agents write to the activity record) was owned by our team's architect. Visual design for the insight cards was co-designed with the other designer on the team.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ REFLECTION ═══════════ -->
+<section class="section" style="padding-top: 0;">
+    <div class="section-inner">
+        <p class="section-label">Reflection</p>
+        <h2 class="section-headline">What I'd revisit and what's missing</h2>
+
+        <div class="reflection-grid">
+            <div class="reflection-card">
+                <h4>The NL search might be over-scoped</h4>
+                <p>In retrospect, natural language querying is the least validated pillar. Users may not think to ask analytical questions of their timeline. If I restarted, I'd scope the search to task-oriented queries ("find Maria's last email") before expanding to analytical ones ("average sentiment this month").</p>
+            </div>
+            <div class="reflection-card">
+                <h4>No user validation</h4>
+                <p>This work was never tested with real users &mdash; no AE walkthroughs, no usability studies, no diary studies of timeline usage patterns. The design is grounded in platform knowledge and architectural analysis, not observed behavior. That's a meaningful gap for a project claiming to solve user problems.</p>
+            </div>
+            <div class="reflection-card">
+                <h4>Confidence thresholds are assumption-heavy</h4>
+                <p>The "0.7 = escalate to human" threshold in the triage logic is an educated guess. The right number depends on agent accuracy data that doesn't exist yet. A stakeholder correctly flagged that this should be configurable per-org, not baked into the design.</p>
+            </div>
+            <div class="reflection-card">
+                <h4>Success for vision work</h4>
+                <p>This project's success metric isn't "shipped feature." It's: did it set direction, did it produce reusable patterns, did it de-risk the technical conversation. By those measures, the patent filing and pattern adoption downstream validate the approach &mdash; even without production deployment.</p>
+            </div>
         </div>
     </div>
 </section>
@@ -987,7 +1518,7 @@
 <div class="quote-block">
     <div class="quote-inner">
         <div class="quote-bar"></div>
-        <p class="quote-text">The interaction patterns designed here have since been adopted across multiple Salesforce products &mdash; a validation that the model works beyond this timeline.</p>
+        <p class="quote-text">Vision work isn't speculative if it changes how teams think about the problem. The patterns designed here are now part of how Salesforce approaches agent-generated content in shared components.</p>
     </div>
 </div>
 
@@ -1004,7 +1535,6 @@
 </nav>
 
 <script>
-// Mini tab switching for pillar demos
 function switchMiniTab(el, tab) {
     const parent = el.closest('.mini-demo');
     parent.querySelectorAll('.mini-tab').forEach(t => t.classList.remove('active'));
