@@ -256,6 +256,124 @@
             line-height: 1.6;
         }
 
+        /* ─── PRIORITY MATRIX ─── */
+        .priority-matrix {
+            position: relative;
+            width: 100%;
+            max-width: 720px;
+            aspect-ratio: 1 / 0.92;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            background: #fafafa;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .matrix-grid {
+            position: absolute;
+            inset: 48px 48px 48px 48px;
+        }
+        .matrix-grid::before,
+        .matrix-grid::after {
+            content: '';
+            position: absolute;
+            border: 1px dashed rgba(0,0,0,0.08);
+        }
+        .matrix-grid::before {
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 0;
+        }
+        .matrix-grid::after {
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 0;
+        }
+        .matrix-quadrant {
+            position: absolute;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .matrix-quadrant.tl { top: 8px; left: 8px; }
+        .matrix-quadrant.tr { top: 8px; right: 8px; color: var(--accent); }
+        .matrix-quadrant.bl { bottom: 8px; left: 8px; }
+        .matrix-quadrant.br { bottom: 8px; right: 8px; }
+        .matrix-fix-zone {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 50%;
+            background: rgba(178, 34, 34, 0.04);
+            border-radius: 0;
+        }
+        .matrix-axis-label {
+            position: absolute;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .matrix-axis-label.x-axis {
+            bottom: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .matrix-axis-label.y-axis {
+            left: -38px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            white-space: nowrap;
+        }
+        .matrix-axis-end {
+            position: absolute;
+            font-size: 0.55rem;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+        }
+        .matrix-axis-end.x-left { bottom: -20px; left: 0; }
+        .matrix-axis-end.x-right { bottom: -20px; right: 0; }
+        .matrix-axis-end.y-bottom { bottom: 0; left: -38px; font-size: 0.5rem; }
+        .matrix-axis-end.y-top { top: 0; left: -38px; font-size: 0.5rem; }
+        .matrix-dot {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .matrix-dot .dot-circle {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--dark);
+            flex-shrink: 0;
+        }
+        .matrix-dot.highlight .dot-circle {
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px rgba(178, 34, 34, 0.15);
+        }
+        .matrix-dot .dot-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--foreground);
+        }
+        .matrix-dot.highlight .dot-label {
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .matrix-dot.label-left {
+            flex-direction: row-reverse;
+        }
+
         /* ─── THE PIVOT ─── */
         .pivot-section {
             padding-bottom: 0;
@@ -939,6 +1057,54 @@
         <p class="section-body">So we ranked them on two axes: how often partners hit them, and how badly the portal handled them.</p>
         <p class="section-body" style="margin-top: 16px;">Deal registration and lead status checks sat in the worst quadrant of both &mdash; they drove the majority of partner escalations and were the biggest contributors to the 8-day case resolution cycle. Those became release one.</p>
         <p class="section-body" style="margin-top: 16px;">Just as deliberately, we deferred anything that needed rich UI to work well &mdash; dashboards, document review, multi-record comparison. Forcing those into a text thread would have proven the skeptics right. The scope wasn't just what conversation could do; it was what conversation could do <em>better</em> than the portal.</p>
+
+        <div class="priority-matrix">
+            <div class="matrix-grid">
+                <div class="matrix-fix-zone"></div>
+                <span class="matrix-quadrant tl">Painful, but rare</span>
+                <span class="matrix-quadrant tr">Fix first</span>
+                <span class="matrix-quadrant bl">Low stakes</span>
+                <span class="matrix-quadrant br">Working &mdash; leave it</span>
+
+                <span class="matrix-axis-label x-axis">How often partners hit it &rarr;</span>
+                <span class="matrix-axis-label y-axis">How badly the portal handled it &larr;</span>
+                <span class="matrix-axis-end x-left">Rarely</span>
+                <span class="matrix-axis-end x-right">Every day</span>
+                <span class="matrix-axis-end y-bottom">Low</span>
+                <span class="matrix-axis-end y-top">High</span>
+
+                <!-- Fix First quadrant - highlighted -->
+                <div class="matrix-dot highlight label-left" style="top: 12%; left: 72%;"><span class="dot-circle"></span><span class="dot-label">Deal registration</span></div>
+                <div class="matrix-dot highlight label-left" style="top: 30%; left: 78%;"><span class="dot-circle"></span><span class="dot-label">Browse & sync leads</span></div>
+                <div class="matrix-dot highlight" style="top: 42%; left: 72%;"><span class="dot-circle"></span><span class="dot-label">Pricing & quotes</span></div>
+
+                <!-- High pain, high frequency (not highlighted) -->
+                <div class="matrix-dot label-left" style="top: 18%; left: 66%;"><span class="dot-circle"></span><span class="dot-label">Issue resolution</span></div>
+                <div class="matrix-dot label-left" style="top: 22%; left: 62%;"><span class="dot-circle"></span><span class="dot-label">Renewals</span></div>
+                <div class="matrix-dot" style="top: 33%; left: 68%;"><span class="dot-circle"></span><span class="dot-label">CRM updates</span></div>
+
+                <!-- Mid zone -->
+                <div class="matrix-dot label-left" style="top: 27%; left: 44%;"><span class="dot-circle"></span><span class="dot-label">Support tickets</span></div>
+                <div class="matrix-dot label-left" style="top: 32%; left: 48%;"><span class="dot-circle"></span><span class="dot-label">Forecasting</span></div>
+                <div class="matrix-dot label-left" style="top: 36%; left: 42%;"><span class="dot-circle"></span><span class="dot-label">Enabling partners</span></div>
+                <div class="matrix-dot label-left" style="top: 44%; left: 35%;"><span class="dot-circle"></span><span class="dot-label">Recruiting partners</span></div>
+                <div class="matrix-dot label-left" style="top: 45%; left: 48%;"><span class="dot-circle"></span><span class="dot-label">KPI tracking</span></div>
+                <div class="matrix-dot" style="top: 46%; left: 54%;"><span class="dot-circle"></span><span class="dot-label">Closing</span></div>
+                <div class="matrix-dot label-left" style="top: 52%; left: 32%;"><span class="dot-circle"></span><span class="dot-label">Product feedback</span></div>
+                <div class="matrix-dot" style="top: 50%; left: 48%;"><span class="dot-circle"></span><span class="dot-label">Upsells</span></div>
+
+                <!-- Low pain zone -->
+                <div class="matrix-dot label-left" style="top: 58%; left: 40%;"><span class="dot-circle"></span><span class="dot-label">Working with SEs</span></div>
+                <div class="matrix-dot" style="top: 55%; left: 68%;"><span class="dot-circle"></span><span class="dot-label">Prospecting</span></div>
+                <div class="matrix-dot" style="top: 62%; left: 46%;"><span class="dot-circle"></span><span class="dot-label">Negotiations</span></div>
+                <div class="matrix-dot" style="top: 68%; left: 44%;"><span class="dot-circle"></span><span class="dot-label">Co-marketing</span></div>
+                <div class="matrix-dot label-left" style="top: 74%; left: 38%;"><span class="dot-circle"></span><span class="dot-label">Business reviews</span></div>
+                <div class="matrix-dot" style="top: 72%; left: 56%;"><span class="dot-circle"></span><span class="dot-label">Demos</span></div>
+                <div class="matrix-dot label-left" style="top: 82%; left: 32%;"><span class="dot-circle"></span><span class="dot-label">Territory planning</span></div>
+                <div class="matrix-dot" style="top: 84%; left: 52%;"><span class="dot-circle"></span><span class="dot-label">Relationship building</span></div>
+            </div>
+        </div>
+
         <div style="margin-top: 48px;">
             <div id="partnerDemo"></div>
         </div>
