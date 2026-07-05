@@ -320,26 +320,6 @@
         }
 
         /* ─── EDGE CASES SECTION ─── */
-        .edge-section .edge-layout {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-            justify-content: space-between;
-        }
-        .edge-section .edge-left {
-            width: 482px;
-            flex-shrink: 0;
-        }
-        .edge-section .edge-right {
-            width: 699px;
-            flex-shrink: 0;
-        }
-        .edge-section .section-headline {
-            padding-top: 24px;
-        }
-        .edge-section .section-body {
-            padding-top: 20px;
-        }
 
         /* ─── IMPACT SECTION ─── */
         .impact-section {
@@ -445,9 +425,6 @@
             .experience-section .exp-layout { flex-direction: column; }
             .experience-section .exp-left { width: 100%; }
             .experience-section .exp-right { width: 100%; }
-            .edge-section .edge-layout { flex-direction: column-reverse; }
-            .edge-section .edge-left { width: 100%; }
-            .edge-section .edge-right { width: 100%; }
             .impact-cards { grid-template-columns: repeat(2, 1fr); }
             .reflections-section .section-label { padding-left: 0; }
         }
@@ -598,14 +575,10 @@
 <!-- ═══════════ EDGE CASES ═══════════ -->
 <section class="section edge-section">
     <div class="section-inner">
-        <div class="edge-layout">
-            <div class="edge-left">
-                <div id="chatPatterns"></div>
-            </div>
-            <div class="edge-right">
-                <h2 class="section-headline">but it's not always the happy path, is it?</h2>
-                <p class="section-body">We picked out the user journeys that had the most friction currently and prioritized those. This allowed us to manage our resources well and move fast.</p>
-            </div>
+        <h2 class="section-headline">but it's not always the happy path, is it?</h2>
+        <p class="section-body">We picked out the user journeys that had the most friction currently and prioritized those. This allowed us to manage our resources well and move fast.</p>
+        <div style="margin-top: 48px;">
+            <div id="chatPatterns"></div>
         </div>
     </div>
 </section>
