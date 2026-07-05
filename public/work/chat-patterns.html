@@ -8,11 +8,13 @@
     <style>
         :root {
             --accent: #B22222;
+            --accent-light: rgba(178, 34, 34, 0.08);
             --bg: #fafafa;
             --dark: #0f0f0f;
             --foreground: #1a1a1a;
             --muted: #737373;
             --body-font: 'Plus Jakarta Sans', sans-serif;
+            --card-bg: #f5f0eb;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -67,49 +69,60 @@
             border-color: var(--dark);
         }
 
-        /* ─── CONTEXT STRIP ─── */
-        .context-strip {
-            margin-bottom: 16px;
-            padding: 12px 16px;
-            background: #fff;
-            border: 1px solid #e5e5e5;
-            border-radius: 10px;
+        /* ─── CHAT CARD ─── */
+        .chat-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 28px 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
         }
 
-        .context-strip .label {
-            font-size: 0.65rem;
+        /* ─── HEADER ─── */
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            margin-bottom: 24px;
+        }
+
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--accent);
-            margin-bottom: 4px;
+            flex-shrink: 0;
         }
 
-        .context-strip .desc {
-            font-size: 0.8rem;
-            color: var(--foreground);
-            line-height: 1.4;
+        .chat-header-text .chat-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--dark);
         }
 
-        /* ─── CHAT BOX — simple rectangle ─── */
-        .chat-box {
-            width: 100%;
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            overflow: hidden;
+        .chat-header-text .chat-subtitle {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 1px;
         }
 
+        /* ─── MESSAGES ─── */
         .chat-messages {
-            height: 520px;
-            overflow-y: auto;
-            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
+            min-height: 300px;
+            max-height: 500px;
+            overflow-y: auto;
         }
 
-        /* ─── MESSAGES — plain text style ─── */
         .msg {
             opacity: 0;
             transform: translateY(6px);
@@ -120,188 +133,192 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .msg-label {
-            font-size: 0.68rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            margin-bottom: 3px;
+        /* User bubble */
+        .msg.user-msg {
+            align-self: flex-end;
+            max-width: 80%;
         }
 
-        .msg-label.user-label {
-            color: var(--accent);
+        .msg.user-msg .bubble {
+            background: var(--accent);
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 20px;
+            border-bottom-right-radius: 6px;
+            font-size: 0.88rem;
+            line-height: 1.5;
         }
 
-        .msg-label.bot-label {
-            color: var(--muted);
+        /* Bot bubble */
+        .msg.bot-msg {
+            align-self: flex-start;
+            max-width: 88%;
         }
 
-        .msg-body {
-            font-size: 0.84rem;
-            line-height: 1.6;
+        .msg.bot-msg .bubble {
+            background: rgba(255,255,255,0.7);
             color: var(--foreground);
+            padding: 14px 20px;
+            border-radius: 20px;
+            border-bottom-left-radius: 6px;
+            font-size: 0.88rem;
+            line-height: 1.6;
         }
 
-        .msg-body strong {
+        .msg .bubble strong {
             font-weight: 700;
         }
 
-        .msg-body em {
-            opacity: 0.65;
+        .msg .bubble em {
+            opacity: 0.6;
             font-style: italic;
         }
 
-        /* Divider between messages */
-        .msg + .msg {
-            padding-top: 14px;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        /* Lists */
-        .msg-body .item-list {
-            margin: 8px 0;
+        /* Lists inside bubbles */
+        .msg .bubble .item-list {
+            margin: 10px 0 4px;
             padding-left: 0;
             list-style: none;
         }
 
-        .msg-body .item-list li {
+        .msg .bubble .item-list li {
             padding: 4px 0;
-            font-size: 0.8rem;
-            border-bottom: 1px solid #f5f5f5;
+            font-size: 0.82rem;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
         }
 
-        .msg-body .item-list li:last-child {
+        .msg .bubble .item-list li:last-child {
             border-bottom: none;
         }
 
-        /* Parsed structure block */
-        .msg-body .parsed {
+        /* Parsed fields */
+        .msg .bubble .parsed {
             margin: 10px 0;
             padding: 10px 14px;
-            background: #f8faf8;
-            border: 1px solid #e2e8e2;
-            border-radius: 8px;
-            font-size: 0.78rem;
+            background: rgba(255,255,255,0.6);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 10px;
+            font-size: 0.8rem;
         }
 
-        .msg-body .parsed .field {
+        .msg .bubble .parsed .field {
             display: flex;
             justify-content: space-between;
             padding: 3px 0;
         }
 
-        .msg-body .parsed .field-key {
+        .msg .bubble .parsed .field-key {
             color: var(--muted);
             font-weight: 500;
         }
 
-        .msg-body .parsed .field-val {
+        .msg .bubble .parsed .field-val {
             font-weight: 600;
             color: var(--dark);
         }
 
-        /* Summary stat block */
-        .msg-body .summary-block {
+        /* Summary block */
+        .msg .bubble .summary-block {
             margin: 8px 0;
             padding: 10px 14px;
-            background: #f9f9f9;
+            background: rgba(255,255,255,0.6);
             border-left: 3px solid var(--accent);
             border-radius: 0 8px 8px 0;
         }
 
-        .msg-body .summary-block .stat {
+        .msg .bubble .summary-block .stat {
             font-size: 1.05rem;
             font-weight: 800;
             color: var(--dark);
         }
 
-        .msg-body .summary-block .stat-label {
+        .msg .bubble .summary-block .stat-label {
             font-size: 0.7rem;
             color: var(--muted);
         }
 
-        /* Card */
-        .msg-body .card {
+        /* Cards */
+        .msg .bubble .card {
             margin: 8px 0;
             padding: 10px 14px;
-            background: #fcfcfc;
-            border: 1px solid #ebebeb;
-            border-radius: 8px;
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 10px;
         }
 
-        .msg-body .card .card-title {
+        .msg .bubble .card .card-title {
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             margin-bottom: 2px;
         }
 
-        .msg-body .card .card-meta {
+        .msg .bubble .card .card-meta {
             font-size: 0.72rem;
             color: var(--muted);
         }
 
         /* Confirm block */
-        .msg-body .confirm-block {
+        .msg .bubble .confirm-block {
             margin: 10px 0;
             padding: 12px 14px;
-            background: #fef8f8;
-            border: 1px solid #f0d0d0;
-            border-radius: 8px;
+            background: rgba(220, 38, 38, 0.05);
+            border: 1px solid rgba(220, 38, 38, 0.15);
+            border-radius: 10px;
         }
 
-        .msg-body .confirm-block .confirm-title {
+        .msg .bubble .confirm-block .confirm-title {
             font-weight: 700;
             font-size: 0.78rem;
             color: #b91c1c;
             margin-bottom: 4px;
         }
 
-        .msg-body .confirm-block .confirm-detail {
+        .msg .bubble .confirm-block .confirm-detail {
             font-size: 0.75rem;
             color: #7f1d1d;
             line-height: 1.4;
         }
 
         /* Permission block */
-        .msg-body .perm-block {
+        .msg .bubble .perm-block {
             margin: 10px 0;
             padding: 12px 14px;
-            background: #fefcf3;
-            border: 1px solid #f0e6c0;
-            border-radius: 8px;
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            border-radius: 10px;
         }
 
-        .msg-body .perm-block .perm-icon {
+        .msg .bubble .perm-block .perm-icon {
             font-size: 1rem;
             margin-bottom: 4px;
         }
 
-        .msg-body .perm-block .perm-text {
+        .msg .bubble .perm-block .perm-text {
             font-size: 0.75rem;
             color: #92400e;
             line-height: 1.4;
         }
 
         /* Action split */
-        .msg-body .action-split {
+        .msg .bubble .action-split {
             margin: 8px 0;
             display: flex;
             flex-direction: column;
             gap: 6px;
         }
 
-        .msg-body .action-split .split-item {
+        .msg .bubble .action-split .split-item {
             display: flex;
             align-items: center;
             gap: 8px;
             padding: 7px 10px;
-            background: #f9f9f9;
-            border: 1px solid #ebebeb;
-            border-radius: 6px;
+            background: rgba(255,255,255,0.6);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 8px;
             font-size: 0.75rem;
         }
 
-        .msg-body .action-split .split-num {
+        .msg .bubble .action-split .split-num {
             width: 18px;
             height: 18px;
             border-radius: 50%;
@@ -315,27 +332,31 @@
             flex-shrink: 0;
         }
 
-        .msg-body .action-split .split-done {
+        .msg .bubble .action-split .split-done {
             background: #16a34a;
         }
 
-        /* Typing indicator */
-        .typing {
+        /* Typing */
+        .typing-dots {
             display: flex;
             gap: 4px;
-            padding: 4px 0;
+            padding: 14px 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 20px;
+            border-bottom-left-radius: 6px;
+            align-self: flex-start;
         }
 
-        .typing span {
-            width: 5px;
-            height: 5px;
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: #bbb;
+            background: #aaa;
             animation: typeDot 1.4s ease-in-out infinite;
         }
 
-        .typing span:nth-child(2) { animation-delay: 0.2s; }
-        .typing span:nth-child(3) { animation-delay: 0.4s; }
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
 
         @keyframes typeDot {
             0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
@@ -363,10 +384,10 @@
             color: var(--accent);
         }
 
-        /* ─── RESPONSIVE ─── */
         @media (max-width: 500px) {
             body { padding: 20px 12px; }
-            .chat-messages { height: 440px; padding: 16px; }
+            .chat-card { padding: 20px 16px; border-radius: 16px; }
+            .chat-messages { max-height: 420px; }
         }
     </style>
 </head>
@@ -374,7 +395,7 @@
 
 <div class="demo-container">
 
-    <div class="scenario-tabs" id="scenarioTabs">
+    <div class="scenario-tabs">
         <button class="scenario-tab active" data-scenario="bulk-data">Bulk Data</button>
         <button class="scenario-tab" data-scenario="info-dump">Info Dump</button>
         <button class="scenario-tab" data-scenario="interruption">Interruption</button>
@@ -385,12 +406,14 @@
         <button class="scenario-tab" data-scenario="confirmation">Confirmation</button>
     </div>
 
-    <div class="context-strip">
-        <div class="label">Edge Case</div>
-        <div class="desc" id="contextDesc">Displaying 100s of records in a text-only chat — no tables, no UI components.</div>
-    </div>
-
-    <div class="chat-box">
+    <div class="chat-card">
+        <div class="chat-header">
+            <div class="chat-avatar">A</div>
+            <div class="chat-header-text">
+                <div class="chat-title">Partner Agent</div>
+                <div class="chat-subtitle" id="chatSubtitle">Bulk data, spoken</div>
+            </div>
+        </div>
         <div class="chat-messages" id="chatMessages"></div>
     </div>
 
@@ -400,100 +423,98 @@
 <script>
 const SCENARIOS = {
     'bulk-data': {
-        context: 'Displaying 100s of records in a text-only chat — no tables, no UI components.',
+        subtitle: 'Bulk data, spoken',
         messages: [
             { type: 'user', html: 'Show me all my leads' },
-            { type: 'bot', html: 'You have <strong>147 leads</strong> across 4 regions. Here\'s a quick breakdown:<div class="summary-block"><span class="stat">147</span> <span class="stat-label">total leads</span></div><ul class="item-list"><li>🌎 West — 52 leads ($4.2M pipeline)</li><li>🌍 APAC — 41 leads ($3.8M pipeline)</li><li>🌐 Northeast — 33 leads ($2.1M pipeline)</li><li>🌎 Southeast — 21 leads ($1.4M pipeline)</li></ul>Want me to zoom into a region, filter by value, or show the top 10 overall?' },
+            { type: 'bot', html: 'You have <strong>147 leads</strong> across 4 regions.<div class="summary-block"><span class="stat">147</span> <span class="stat-label">total leads</span></div><ul class="item-list"><li>🌎 West — 52 leads ($4.2M)</li><li>🌍 APAC — 41 leads ($3.8M)</li><li>🌐 Northeast — 33 leads ($2.1M)</li><li>🌎 Southeast — 21 leads ($1.4M)</li></ul>Want me to zoom into a region, filter by value, or show the top 10?' },
             { type: 'user', html: 'Top 10 by value' },
-            { type: 'bot', html: 'Top 10 leads by deal value:<ul class="item-list"><li><strong>1.</strong> Pinnacle Dynamics — $520K — APAC</li><li><strong>2.</strong> Acme Corp — $450K — West</li><li><strong>3.</strong> Cascade Analytics — $420K — APAC</li><li><strong>4.</strong> NovaTech Solutions — $390K — West</li><li><strong>5.</strong> Meridian Group — $380K — NE</li><li><strong>6.</strong> OceanView Tech — $350K — APAC</li><li><strong>7.</strong> Summit Retail — $340K — West</li><li><strong>8.</strong> Vertex AI — $320K — SE</li><li><strong>9.</strong> BrightPath Edu — $310K — NE</li><li><strong>10.</strong> Atlas Financial — $290K — West</li></ul><em>Showing 10 of 147 — say "next 10" or filter by region/stage.</em>' },
+            { type: 'bot', html: 'Top 10 by deal value:<ul class="item-list"><li><strong>1.</strong> Pinnacle Dynamics — $520K — APAC</li><li><strong>2.</strong> Acme Corp — $450K — West</li><li><strong>3.</strong> Cascade Analytics — $420K — APAC</li><li><strong>4.</strong> NovaTech Solutions — $390K — West</li><li><strong>5.</strong> Meridian Group — $380K — NE</li><li><strong>6.</strong> OceanView Tech — $350K — APAC</li><li><strong>7.</strong> Summit Retail — $340K — West</li><li><strong>8.</strong> Vertex AI — $320K — SE</li><li><strong>9.</strong> BrightPath Edu — $310K — NE</li><li><strong>10.</strong> Atlas Financial — $290K — West</li></ul><em>Showing 10 of 147 — say "next 10" or filter by region.</em>' },
             { type: 'user', html: 'APAC ones over $300K' },
-            { type: 'bot', html: 'APAC × $300K+ — <strong>5 leads</strong>:<ul class="item-list"><li>☑️ Pinnacle Dynamics — $520K — Negotiation</li><li>☑️ Cascade Analytics — $420K — Proposal</li><li>☑️ OceanView Tech — $350K — Discovery</li><li>☑️ TechWave APAC — $330K — Qualification</li><li>☑️ NexusPoint — $310K — Proposal</li></ul>That\'s all of them. Sync these 5, or drill into one?' },
+            { type: 'bot', html: 'APAC × $300K+ — <strong>5 leads</strong>:<ul class="item-list"><li>Pinnacle Dynamics — $520K — Negotiation</li><li>Cascade Analytics — $420K — Proposal</li><li>OceanView Tech — $350K — Discovery</li><li>TechWave APAC — $330K — Qualification</li><li>NexusPoint — $310K — Proposal</li></ul>That\'s all of them. Sync these 5, or drill into one?' },
         ]
     },
     'info-dump': {
-        context: 'User gives all info at once in an unstructured way. Don\'t do annoying back-and-forth — parse it.',
+        subtitle: 'Info dump, spoken',
         messages: [
-            { type: 'user', html: 'hey register a deal for me — its meridian logistics they want smartsolar pro about 60 units, close by end of august, contact is james chen james.chen@meridian.io, its a net new customer in the APAC region' },
-            { type: 'bot', html: 'Got it — I parsed everything from your message:<div class="parsed"><div class="field"><span class="field-key">Customer</span><span class="field-val">Meridian Logistics</span></div><div class="field"><span class="field-key">Product</span><span class="field-val">SmartSolar Pro × 60</span></div><div class="field"><span class="field-key">Close date</span><span class="field-val">Aug 2026</span></div><div class="field"><span class="field-key">Contact</span><span class="field-val">James Chen (james.chen@meridian.io)</span></div><div class="field"><span class="field-key">Type</span><span class="field-val">Net new</span></div><div class="field"><span class="field-key">Region</span><span class="field-val">APAC</span></div></div>Does this look right?' },
-            { type: 'user', html: 'actually its 80 units not 60' },
-            { type: 'bot', html: 'Updated — <strong>80 units</strong>. Everything else stays the same.<div class="parsed"><div class="field"><span class="field-key">Product</span><span class="field-val">SmartSolar Pro × <strong>80</strong></span></div></div>Ready to submit?' },
+            { type: 'user', html: 'hey register a deal for me — its meridian logistics they want smartsolar pro about 60 units, close by end of august, contact is james chen james.chen@meridian.io, net new in APAC' },
+            { type: 'bot', html: 'Got it — parsed everything:<div class="parsed"><div class="field"><span class="field-key">Customer</span><span class="field-val">Meridian Logistics</span></div><div class="field"><span class="field-key">Product</span><span class="field-val">SmartSolar Pro × 60</span></div><div class="field"><span class="field-key">Close</span><span class="field-val">Aug 2026</span></div><div class="field"><span class="field-key">Contact</span><span class="field-val">James Chen</span></div><div class="field"><span class="field-key">Type</span><span class="field-val">Net new</span></div><div class="field"><span class="field-key">Region</span><span class="field-val">APAC</span></div></div>Look right?' },
+            { type: 'user', html: 'actually 80 units not 60' },
+            { type: 'bot', html: 'Updated to <strong>80 units</strong>. Everything else stays.<div class="parsed"><div class="field"><span class="field-key">Product</span><span class="field-val">SmartSolar Pro × 80</span></div></div>Submit?' },
             { type: 'user', html: 'yes' },
-            { type: 'bot', html: '✅ <strong>Deal registered.</strong> Meridian Logistics / SmartSolar Pro × 80 / Aug 2026. You\'ll get a decision within 5 business days.' },
+            { type: 'bot', html: '✅ <strong>Deal registered.</strong> Meridian Logistics / SmartSolar Pro × 80 / Aug 2026. Decision in 5 business days.' },
         ]
     },
     'interruption': {
-        context: 'User abandons a flow mid-way to ask something else. Resume gracefully — don\'t lose progress.',
+        subtitle: 'Interruption, spoken',
         messages: [
             { type: 'user', html: 'I want to register a deal' },
-            { type: 'bot', html: 'Let\'s register this deal. Who\'s the customer?' },
+            { type: 'bot', html: 'Let\'s do it. Who\'s the customer?' },
             { type: 'user', html: 'Meridian Logistics' },
-            { type: 'bot', html: 'Got it. Which product are they interested in?' },
+            { type: 'bot', html: 'Got it. Which product?' },
             { type: 'user', html: 'wait — how many leads did I sync yesterday?' },
-            { type: 'bot', html: 'You synced <strong>12 leads</strong> yesterday (6 APAC, 4 West, 2 NE).<br><br><em>I\'ve saved your deal registration progress (Meridian Logistics). Say "continue" to pick up where we left off.</em>' },
+            { type: 'bot', html: 'You synced <strong>12 leads</strong> yesterday (6 APAC, 4 West, 2 NE).<br><br><em>Saved your deal reg progress. Say "continue" to pick back up.</em>' },
             { type: 'user', html: 'continue' },
-            { type: 'bot', html: 'Resuming — Meridian Logistics. Which product are they interested in?' },
+            { type: 'bot', html: 'Resuming — Meridian Logistics. Which product?' },
             { type: 'user', html: 'SmartSolar Pro, 60 units, close end of August' },
             { type: 'bot', html: '✅ <strong>Deal registered.</strong> Meridian Logistics / SmartSolar Pro × 60 / Aug 2026.' },
         ]
     },
     'disambiguation': {
-        context: 'Multiple matches for a vague query. Clarify naturally — not a robotic "did you mean?"',
+        subtitle: 'Disambiguation, spoken',
         messages: [
             { type: 'user', html: 'Show me the Acme deal' },
-            { type: 'bot', html: 'I found <strong>3 Acme deals</strong>:<div class="card"><div class="card-title">Acme Corp</div><div class="card-meta">$450K · Negotiation · West · Close: Sep 2026</div></div><div class="card"><div class="card-title">Acme Healthcare</div><div class="card-meta">$280K · Discovery · NE · Close: Nov 2026</div></div><div class="card"><div class="card-title">Acme Retail Group</div><div class="card-meta">$95K · Closed Won · SE · Closed: Jun 2026</div></div>Which one?' },
+            { type: 'bot', html: 'Found <strong>3 Acme deals</strong>:<div class="card"><div class="card-title">Acme Corp</div><div class="card-meta">$450K · Negotiation · West · Sep 2026</div></div><div class="card"><div class="card-title">Acme Healthcare</div><div class="card-meta">$280K · Discovery · NE · Nov 2026</div></div><div class="card"><div class="card-title">Acme Retail Group</div><div class="card-meta">$95K · Closed Won · SE · Jun 2026</div></div>Which one?' },
             { type: 'user', html: 'the big one in negotiation' },
-            { type: 'bot', html: '<strong>Acme Corp — $450K</strong><ul class="item-list"><li>Stage: Negotiation</li><li>Region: West</li><li>Contact: Sarah Miller</li><li>Next step: Contract review (Jul 15)</li><li>Expected close: Sep 2026</li></ul>What would you like to do with it?' },
+            { type: 'bot', html: '<strong>Acme Corp — $450K</strong><ul class="item-list"><li>Stage: Negotiation</li><li>Region: West</li><li>Contact: Sarah Miller</li><li>Next: Contract review (Jul 15)</li><li>Close: Sep 2026</li></ul>What would you like to do?' },
         ]
     },
     'progressive': {
-        context: 'User asks a broad question. Start with a summary, let them drill down — don\'t dump everything.',
+        subtitle: 'Progressive disclosure, spoken',
         messages: [
             { type: 'user', html: 'how are my deals going?' },
-            { type: 'bot', html: 'Here\'s your pipeline at a glance:<div class="summary-block"><span class="stat">23 active deals</span><br><span class="stat-label">$4.7M total pipeline</span></div><ul class="item-list"><li>🟢 <strong>5</strong> in Negotiation ($1.8M) — closest to close</li><li>🔵 <strong>8</strong> in Proposal ($1.6M)</li><li>⚪ <strong>10</strong> in Discovery ($1.3M)</li></ul><em>3 deals are at risk (no activity in 14+ days).</em> Want me to show those?' },
-            { type: 'user', html: 'yes show at-risk' },
-            { type: 'bot', html: '⚠️ <strong>3 deals — no activity in 14+ days:</strong><div class="card"><div class="card-title">NovaTech Solutions — $390K</div><div class="card-meta">18 days idle · Proposal · "Waiting on legal review"</div></div><div class="card"><div class="card-title">BrightPath Education — $310K</div><div class="card-meta">21 days idle · Discovery · "Champion went on leave"</div></div><div class="card"><div class="card-title">Atlas Financial — $290K</div><div class="card-meta">16 days idle · Proposal · No notes</div></div>Want me to draft a check-in for any of these?' },
-            { type: 'user', html: 'draft something for NovaTech' },
-            { type: 'bot', html: 'Here\'s a check-in:<br><br><em>"Hi Sarah — just circling back on the SmartSolar proposal. I know legal reviews can take time — is there anything I can help move along on our end? Happy to hop on a quick call this week."</em><br><br>Send it, or want to tweak the tone?' },
+            { type: 'bot', html: 'Pipeline snapshot:<div class="summary-block"><span class="stat">23 deals</span><br><span class="stat-label">$4.7M pipeline</span></div><ul class="item-list"><li>🟢 <strong>5</strong> Negotiation ($1.8M)</li><li>🔵 <strong>8</strong> Proposal ($1.6M)</li><li>⚪ <strong>10</strong> Discovery ($1.3M)</li></ul><em>3 deals at risk (14+ days idle).</em> Want to see those?' },
+            { type: 'user', html: 'yes' },
+            { type: 'bot', html: '⚠️ <strong>3 at-risk deals:</strong><div class="card"><div class="card-title">NovaTech — $390K</div><div class="card-meta">18 days idle · Proposal · Waiting on legal</div></div><div class="card"><div class="card-title">BrightPath — $310K</div><div class="card-meta">21 days idle · Discovery · Champion on leave</div></div><div class="card"><div class="card-title">Atlas Financial — $290K</div><div class="card-meta">16 days idle · Proposal · No notes</div></div>Draft a check-in for any of these?' },
+            { type: 'user', html: 'draft one for NovaTech' },
+            { type: 'bot', html: '<em>"Hi Sarah — circling back on the SmartSolar proposal. I know legal takes time — anything I can help move along? Happy to hop on a call this week."</em><br><br>Send it, or want to adjust the tone?' },
         ]
     },
     'permission': {
-        context: 'User requests something outside their access level. Deny softly, explain, offer alternatives.',
+        subtitle: 'Permission boundary, spoken',
         messages: [
             { type: 'user', html: 'show me the full revenue dashboard for Q3' },
-            { type: 'bot', html: '<div class="perm-block"><div class="perm-icon">🔒</div><div class="perm-text">The Q3 revenue dashboard is restricted to <strong>Tier 1 partners</strong>. Your current tier: <strong>Gold (Tier 2)</strong>.</div></div>Here\'s what I can show you instead:<ul class="item-list"><li>📊 Your personal pipeline & bookings</li><li>📈 Your region\'s partner leaderboard</li><li>🎯 Your quota attainment vs. target</li></ul>I can also flag a request to your partner manager for access.' },
+            { type: 'bot', html: '<div class="perm-block"><div class="perm-icon">🔒</div><div class="perm-text">Q3 revenue dashboard is <strong>Tier 1 only</strong>. You\'re currently <strong>Gold (Tier 2)</strong>.</div></div>I can show you:<ul class="item-list"><li>📊 Your pipeline & bookings</li><li>📈 Region partner leaderboard</li><li>🎯 Quota attainment</li></ul>Or I can request access from your partner manager.' },
             { type: 'user', html: 'request access' },
-            { type: 'bot', html: '✅ Request sent to <strong>Lisa Park</strong> (your Partner Manager). She typically responds within 1–2 business days.<br><br>In the meantime, want me to show your pipeline summary?' },
+            { type: 'bot', html: '✅ Sent to <strong>Lisa Park</strong> (Partner Manager). She usually responds in 1–2 days.<br><br>Want to see your pipeline in the meantime?' },
         ]
     },
     'multi-intent': {
-        context: 'Two actions in one message. Handle both — show progress on each, don\'t force one at a time.',
+        subtitle: 'Multi-intent, spoken',
         messages: [
-            { type: 'user', html: 'Sync my APAC leads and also register a deal for Meridian' },
-            { type: 'bot', html: 'Two things — handling both:<div class="action-split"><div class="split-item"><span class="split-num">1</span> Sync APAC leads</div><div class="split-item"><span class="split-num">2</span> Register deal — Meridian</div></div>Starting with the sync...' },
-            { type: 'bot', html: '<div class="action-split"><div class="split-item"><span class="split-num split-done">✓</span> <strong>12 APAC leads synced</strong></div><div class="split-item"><span class="split-num">2</span> Deal registration — need a few details</div></div>For Meridian: which product?' },
-            { type: 'user', html: 'CloudSync Enterprise, 150 users, close by September' },
-            { type: 'bot', html: '<div class="action-split"><div class="split-item"><span class="split-num split-done">✓</span> 12 APAC leads synced</div><div class="split-item"><span class="split-num split-done">✓</span> <strong>Deal registered</strong> — Meridian / CloudSync × 150 / Sep 2026</div></div>Both done. Anything else?' },
+            { type: 'user', html: 'Sync my APAC leads and register a deal for Meridian' },
+            { type: 'bot', html: 'Two things — on it:<div class="action-split"><div class="split-item"><span class="split-num">1</span> Sync APAC leads</div><div class="split-item"><span class="split-num">2</span> Register deal — Meridian</div></div>' },
+            { type: 'bot', html: '<div class="action-split"><div class="split-item"><span class="split-num split-done">✓</span> <strong>12 APAC leads synced</strong></div><div class="split-item"><span class="split-num">2</span> Deal reg — need a few details</div></div>For Meridian: which product?' },
+            { type: 'user', html: 'CloudSync Enterprise, 150 users, close September' },
+            { type: 'bot', html: '<div class="action-split"><div class="split-item"><span class="split-num split-done">✓</span> 12 APAC leads synced</div><div class="split-item"><span class="split-num split-done">✓</span> <strong>Deal registered</strong> — Meridian / CloudSync × 150 / Sep 2026</div></div>Both done ✅' },
         ]
     },
     'confirmation': {
-        context: 'Destructive action. Apply the right amount of friction — enough to prevent mistakes, not so much it annoys.',
+        subtitle: 'Confirmation, spoken',
         messages: [
             { type: 'user', html: 'Delete all my Southeast leads' },
-            { type: 'bot', html: '<div class="confirm-block"><div class="confirm-title">⚠️ Destructive action</div><div class="confirm-detail">This will permanently remove <strong>21 leads</strong> from your CRM (Southeast region). Cannot be undone.<br><br>Pipeline affected: <strong>$1.4M</strong><br>Includes 3 leads in Proposal stage.</div></div>Type <strong>"delete 21 leads"</strong> to confirm.' },
-            { type: 'user', html: 'wait, keep the ones in Proposal stage' },
-            { type: 'bot', html: 'Keeping 3 Proposal-stage leads. That leaves <strong>18 leads</strong> to delete (Discovery + Qualification only).<div class="confirm-block"><div class="confirm-title">Confirm deletion</div><div class="confirm-detail">Remove <strong>18 SE leads</strong> ($980K)<br>Keep <strong>3 SE leads</strong> in Proposal ($420K)</div></div>Type <strong>"delete 18 leads"</strong> to confirm.' },
+            { type: 'bot', html: '<div class="confirm-block"><div class="confirm-title">⚠️ Destructive action</div><div class="confirm-detail">Permanently remove <strong>21 leads</strong> (Southeast). Can\'t be undone.<br><br>Pipeline: <strong>$1.4M</strong><br>Includes 3 in Proposal stage.</div></div>Type <strong>"delete 21 leads"</strong> to confirm.' },
+            { type: 'user', html: 'wait, keep the Proposal ones' },
+            { type: 'bot', html: 'Keeping 3 Proposal leads. Deleting <strong>18</strong> (Discovery + Qualification).<div class="confirm-block"><div class="confirm-title">Confirm</div><div class="confirm-detail">Remove <strong>18 SE leads</strong> ($980K)<br>Keep <strong>3 SE leads</strong> in Proposal ($420K)</div></div>Type <strong>"delete 18 leads"</strong> to confirm.' },
             { type: 'user', html: 'delete 18 leads' },
-            { type: 'bot', html: '✅ <strong>18 leads removed.</strong> 3 Proposal-stage leads retained.<br><br><em>Deleted leads are recoverable from trash for 30 days (admin only).</em>' },
+            { type: 'bot', html: '✅ <strong>18 leads removed.</strong> 3 Proposal-stage leads kept.<br><br><em>Recoverable from trash for 30 days (admin only).</em>' },
         ]
     }
 };
 
-// ═══════════════════════════════════════════════════
-
 let currentScenario = 'bulk-data';
 let animationTimeouts = [];
 const chatMessages = document.getElementById('chatMessages');
-const contextDesc = document.getElementById('contextDesc');
+const chatSubtitle = document.getElementById('chatSubtitle');
 
 function clearAnimations() {
     animationTimeouts.forEach(t => clearTimeout(t));
@@ -505,7 +526,7 @@ function renderMessages() {
     chatMessages.innerHTML = '';
 
     const scenario = SCENARIOS[currentScenario];
-    contextDesc.textContent = scenario.context;
+    chatSubtitle.textContent = scenario.subtitle;
 
     let delay = 300;
 
@@ -513,8 +534,8 @@ function renderMessages() {
         const t = setTimeout(() => {
             if (msg.type === 'bot') {
                 const typing = document.createElement('div');
-                typing.className = 'msg';
-                typing.innerHTML = `<div class="msg-label bot-label">Agent</div><div class="typing"><span></span><span></span><span></span></div>`;
+                typing.className = 'typing-dots';
+                typing.innerHTML = '<span></span><span></span><span></span>';
                 chatMessages.appendChild(typing);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
 
@@ -535,17 +556,12 @@ function renderMessages() {
 
 function addMessage(msg) {
     const div = document.createElement('div');
-    div.className = 'msg';
-
-    const label = msg.type === 'user' ? 'You' : 'Agent';
-    const labelClass = msg.type === 'user' ? 'user-label' : 'bot-label';
-
-    div.innerHTML = `<div class="msg-label ${labelClass}">${label}</div><div class="msg-body">${msg.html}</div>`;
+    div.className = `msg ${msg.type === 'user' ? 'user-msg' : 'bot-msg'}`;
+    div.innerHTML = `<div class="bubble">${msg.html}</div>`;
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Events
 document.querySelectorAll('.scenario-tab').forEach(tab => {
     tab.addEventListener('click', () => {
         document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
@@ -557,7 +573,6 @@ document.querySelectorAll('.scenario-tab').forEach(tab => {
 
 document.getElementById('replayBtn').addEventListener('click', renderMessages);
 
-// Init
 renderMessages();
 </script>
 
