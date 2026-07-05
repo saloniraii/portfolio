@@ -65,7 +65,7 @@
         }
         .hero-meta {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 32px;
             margin-top: 48px;
             padding-top: 32px;
@@ -211,52 +211,6 @@
             line-height: 1.6;
         }
 
-        /* ─── PILLAR CARDS ─── */
-        .pillar-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 40px;
-        }
-        .pillar-card {
-            padding: 32px 28px;
-            border-radius: 14px;
-            background: #fff;
-            border: 1px solid #e5e5e5;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .pillar-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-        }
-        .pillar-card .pillar-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
-            background: rgba(178, 34, 34, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .pillar-card .pillar-icon svg {
-            width: 24px;
-            height: 24px;
-        }
-        .pillar-card h3 {
-            font-family: var(--display-font);
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--foreground);
-            line-height: 1.3;
-        }
-        .pillar-card p {
-            font-size: 0.9rem;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-
         /* ─── DECISION CARDS ─── */
         .decision-grid {
             display: grid;
@@ -292,6 +246,278 @@
             line-height: 1.7;
         }
 
+        /* ─── DESIGN PILLARS (expanded) ─── */
+        .design-pillar {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 48px;
+            align-items: center;
+            padding: 56px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .design-pillar:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .design-pillar:first-child {
+            padding-top: 40px;
+        }
+        .design-pillar-text .pillar-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: rgba(178, 34, 34, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .design-pillar-text .pillar-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+        .design-pillar-text h3 {
+            font-family: var(--display-font);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: var(--foreground);
+            line-height: 1.3;
+        }
+        .design-pillar-text p {
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+        .design-pillar-demo {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            background: #fff;
+        }
+
+        /* ─── MINI DEMOS ─── */
+        .mini-demo {
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 13px;
+            color: #2e2e2e;
+        }
+        .mini-demo-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .mini-demo-header h4 {
+            font-size: 15px;
+            font-weight: 500;
+            color: #03234d;
+        }
+        .mini-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid #f3f3f3;
+            margin-bottom: 16px;
+        }
+        .mini-tab {
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #5c5c5c;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .mini-tab.active {
+            color: #000;
+            border-bottom-color: #066afe;
+        }
+        .mini-tab:hover:not(.active) {
+            color: #03234d;
+        }
+        .mini-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 20px;
+            border: 1px solid #c9c9c9;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+        .mini-search:focus-within {
+            border-color: #066afe;
+        }
+        .mini-search svg {
+            width: 14px;
+            height: 14px;
+            color: #5c5c5c;
+            flex-shrink: 0;
+        }
+        .mini-search input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 13px;
+            color: #2e2e2e;
+            background: transparent;
+        }
+        .mini-search input::placeholder {
+            color: #999;
+        }
+
+        /* Activity cards */
+        .mini-activity {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #f3f3f3;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .mini-activity:hover {
+            border-color: #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .mini-activity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .mini-activity-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .mini-activity-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #03234d;
+            margin-bottom: 3px;
+        }
+        .mini-activity-desc {
+            font-size: 12px;
+            color: #5c5c5c;
+            line-height: 1.4;
+        }
+        .mini-activity-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .mini-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .mini-badge-agent {
+            background: #eef2ff;
+            color: #4338ca;
+        }
+        .mini-badge-human {
+            background: #ecfdf5;
+            color: #065f46;
+        }
+        .mini-badge-attention {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .mini-time {
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* Saved insight card */
+        .mini-insight {
+            padding: 14px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #f8f6ff, #f0f4ff);
+            border: 1px solid #e5e0f5;
+            margin-bottom: 8px;
+        }
+        .mini-insight-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #03234d;
+            margin-bottom: 6px;
+        }
+        .mini-insight-body {
+            font-size: 12px;
+            color: #5c5c5c;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .mini-insight-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .mini-insight-sources {
+            font-size: 10px;
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+        .mini-insight-actions {
+            display: flex;
+            gap: 6px;
+        }
+        .mini-insight-btn {
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #e5e0f5;
+            background: #fff;
+            color: #5c5c5c;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .mini-insight-btn:hover {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+        }
+
+        /* Agent attribution */
+        .mini-agent-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #eef2ff;
+            font-size: 10px;
+            font-weight: 600;
+            color: #4338ca;
+        }
+        .mini-agent-badge svg {
+            width: 10px;
+            height: 10px;
+        }
+        .mini-rationale {
+            margin-top: 8px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #f8f9fb;
+            border-left: 3px solid #066afe;
+            font-size: 11px;
+            color: #5c5c5c;
+            line-height: 1.5;
+        }
+        .mini-rationale strong {
+            color: #03234d;
+            font-weight: 600;
+        }
+
         /* ─── PROTOTYPE SECTION ─── */
         .prototype-section {
             padding: 80px 40px;
@@ -300,17 +526,20 @@
         }
         .prototype-frame {
             width: 100%;
-            height: 700px;
+            height: 720px;
             border: 1px solid #e5e5e5;
             border-radius: 16px;
             overflow: hidden;
             margin-top: 32px;
             box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            position: relative;
         }
         .prototype-frame iframe {
-            width: 100%;
-            height: 100%;
+            width: 140%;
+            height: 140%;
             border: none;
+            transform: scale(0.714);
+            transform-origin: top left;
         }
         .prototype-cta {
             display: inline-flex;
@@ -419,17 +648,16 @@
         /* ─── RESPONSIVE ─── */
         @media (max-width: 1200px) {
             .provocation-stat-cards { grid-template-columns: repeat(2, 1fr); }
-            .pillar-cards { grid-template-columns: repeat(2, 1fr); }
+            .design-pillar { grid-template-columns: 1fr; gap: 32px; }
         }
         @media (max-width: 768px) {
             .back-link { padding: 16px 20px; }
             .hero-section { padding: 40px 20px 60px; }
-            .hero-meta { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .hero-meta { grid-template-columns: 1fr; gap: 20px; }
             .section { padding: 60px 20px; }
             .dark-section { padding: 60px 20px; }
             .prototype-section { padding: 60px 20px; }
             .provocation-stat-cards { grid-template-columns: 1fr; }
-            .pillar-cards { grid-template-columns: 1fr; }
             .decision-grid { grid-template-columns: 1fr; }
             .prototype-frame { height: 500px; }
             .quote-block { padding: 48px 20px; }
@@ -440,7 +668,7 @@
 </head>
 <body>
 
-<a href="salesforce.html" class="back-link">← Back to Salesforce</a>
+<a href="salesforce.html" class="back-link">&larr; Back to Salesforce</a>
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero-section">
@@ -454,15 +682,11 @@
         </div>
         <div class="hero-meta-item">
             <div class="meta-label">Role</div>
-            <div class="meta-value">Senior Product Designer</div>
+            <div class="meta-value">Product Designer</div>
         </div>
         <div class="hero-meta-item">
             <div class="meta-label">Team</div>
             <div class="meta-value">2 Designers + 1 Architect</div>
-        </div>
-        <div class="hero-meta-item">
-            <div class="meta-label">Outcome</div>
-            <div class="meta-value">Patent Filed (7 inventors)</div>
         </div>
     </div>
 </section>
@@ -471,7 +695,7 @@
 <div class="status-section">
     <div class="status-badge">
         <span class="status-dot"></span>
-        <span class="status-text">Patent Filed · Awaiting Response</span>
+        <span class="status-text">Patent Filed &middot; Awaiting Response</span>
     </div>
 </div>
 
@@ -504,49 +728,8 @@
     </div>
 </section>
 
-<!-- ═══════════ THE DESIGN ═══════════ -->
-<section class="section">
-    <div class="section-inner">
-        <p class="section-label">The design</p>
-        <h2 class="section-headline">From passive log to active orchestration layer</h2>
-        <p class="section-body">We redesigned the timeline from the ground up around three pillars &mdash; transforming it from an event log into an intelligent surface that reflects human-AI collaboration as a first-class concept.</p>
-
-        <div class="pillar-cards">
-            <div class="pillar-card">
-                <div class="pillar-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#B22222" stroke-width="2" stroke-linecap="round">
-                        <rect x="3" y="3" width="18" height="18" rx="3"/>
-                        <path d="M3 9h18M9 3v18"/>
-                    </svg>
-                </div>
-                <h3>All Engagements</h3>
-                <p>A unified, queryable surface replacing the flat chronological feed. Natural language input lets users ask analytical questions &mdash; not just filter. Intelligent tabs (Up Next, Needs Attention, Completed) surface what matters.</p>
-            </div>
-            <div class="pillar-card">
-                <div class="pillar-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#B22222" stroke-width="2" stroke-linecap="round">
-                        <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
-                    </svg>
-                </div>
-                <h3>Saved Insights</h3>
-                <p>A persistent layer for intelligence worth returning to. When the timeline surfaces a pattern &mdash; sentiment shifts, risk signals &mdash; users save it. Insights accumulate as a curated knowledge base, shareable via Slack.</p>
-            </div>
-            <div class="pillar-card">
-                <div class="pillar-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#B22222" stroke-width="2" stroke-linecap="round">
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-                    </svg>
-                </div>
-                <h3>Agentic Attribution</h3>
-                <p>Every activity visually distinguishes human from agent authorship. Agent activities surface rationale &mdash; why it acted &mdash; and recommend human action where needed. Filter the entire timeline by author type.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- ═══════════ KEY DESIGN DECISIONS ═══════════ -->
-<section class="section" style="padding-top: 0;">
+<section class="section">
     <div class="section-inner">
         <p class="section-label">Key decisions</p>
         <h2 class="section-headline">Four architectural departures from every CRM timeline on the market</h2>
@@ -576,6 +759,184 @@
     </div>
 </section>
 
+<!-- ═══════════ THE DESIGN (expanded with interactive snippets) ═══════════ -->
+<section class="section" style="padding-top: 0;">
+    <div class="section-inner">
+        <p class="section-label">The design</p>
+        <h2 class="section-headline">From passive log to active orchestration layer</h2>
+        <p class="section-body">We redesigned the timeline from the ground up around three pillars &mdash; transforming it from an event log into an intelligent surface that reflects human-AI collaboration as a first-class concept.</p>
+
+        <!-- Pillar 1: All Engagements -->
+        <div class="design-pillar">
+            <div class="design-pillar-text">
+                <div class="pillar-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#B22222" stroke-width="2" stroke-linecap="round">
+                        <rect x="3" y="3" width="18" height="18" rx="3"/>
+                        <path d="M3 9h18M9 3v18"/>
+                    </svg>
+                </div>
+                <h3>All Engagements</h3>
+                <p>A unified, queryable surface replacing the flat chronological feed. Natural language input lets users ask analytical questions &mdash; not just filter. Intelligent tabs (Up Next, Needs Attention, Completed) surface what matters instead of burying it in chronology.</p>
+            </div>
+            <div class="design-pillar-demo">
+                <div class="mini-demo">
+                    <div class="mini-tabs">
+                        <div class="mini-tab active" onclick="switchMiniTab(this, 'all')">All Engagements</div>
+                        <div class="mini-tab" onclick="switchMiniTab(this, 'attention')">Needs Attention</div>
+                        <div class="mini-tab" onclick="switchMiniTab(this, 'completed')">Completed</div>
+                    </div>
+                    <div class="mini-search">
+                        <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+                        <input type="text" placeholder="Describe your task or ask a question..." readonly>
+                    </div>
+                    <div id="mini-tab-all">
+                        <div class="mini-activity">
+                            <div class="mini-activity-icon" style="background: #eef2ff;">
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="#4338ca"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                            </div>
+                            <div class="mini-activity-content">
+                                <div class="mini-activity-title">Follow-up email to Acme Corp</div>
+                                <div class="mini-activity-desc">Proposal terms discussed, awaiting procurement sign-off</div>
+                                <div class="mini-activity-meta">
+                                    <span class="mini-badge mini-badge-agent">Agent</span>
+                                    <span class="mini-time">2 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mini-activity">
+                            <div class="mini-activity-icon" style="background: #ecfdf5;">
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="#065f46"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div class="mini-activity-content">
+                                <div class="mini-activity-title">Quarterly review &mdash; Globex Inc</div>
+                                <div class="mini-activity-desc">Scheduled for Thursday, 3 attendees confirmed</div>
+                                <div class="mini-activity-meta">
+                                    <span class="mini-badge mini-badge-human">Human</span>
+                                    <span class="mini-time">Yesterday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mini-activity">
+                            <div class="mini-activity-icon" style="background: #fef3c7;">
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="#92400e"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div class="mini-activity-content">
+                                <div class="mini-activity-title">Case #4821 escalated</div>
+                                <div class="mini-activity-desc">Customer sentiment dropped &mdash; needs human review</div>
+                                <div class="mini-activity-meta">
+                                    <span class="mini-badge mini-badge-attention">Attention</span>
+                                    <span class="mini-time">4 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pillar 2: Saved Insights -->
+        <div class="design-pillar">
+            <div class="design-pillar-text">
+                <div class="pillar-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#B22222" stroke-width="2" stroke-linecap="round">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
+                    </svg>
+                </div>
+                <h3>Saved Insights</h3>
+                <p>A persistent layer for intelligence worth returning to. When the timeline surfaces a pattern &mdash; sentiment shifts, risk signals, opportunity indicators &mdash; users save it. Insights accumulate as a curated knowledge base, shareable across team via Slack or inline.</p>
+            </div>
+            <div class="design-pillar-demo">
+                <div class="mini-demo">
+                    <div class="mini-tabs">
+                        <div class="mini-tab" onclick="switchMiniTab(this, 'all2')">All Engagements</div>
+                        <div class="mini-tab active" onclick="switchMiniTab(this, 'insights')">Saved Insights (3)</div>
+                    </div>
+                    <div class="mini-insight">
+                        <div class="mini-insight-title">Procurement cycle risk detected</div>
+                        <div class="mini-insight-body">Based on 4 recent emails, Acme Corp's procurement team is signaling delays related to budget freeze in Q3. Recommend escalating to VP-level contact.</div>
+                        <div class="mini-insight-footer">
+                            <span class="mini-insight-sources">4 sources &middot; High confidence</span>
+                            <div class="mini-insight-actions">
+                                <button class="mini-insight-btn">Share</button>
+                                <button class="mini-insight-btn">Dismiss</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mini-insight">
+                        <div class="mini-insight-title">Multi-thread opportunity</div>
+                        <div class="mini-insight-body">Champion (Sarah M.) hasn't responded in 8 days, but Technical Lead engaged 3x this week. Consider multi-threading the deal.</div>
+                        <div class="mini-insight-footer">
+                            <span class="mini-insight-sources">6 sources &middot; Medium confidence</span>
+                            <div class="mini-insight-actions">
+                                <button class="mini-insight-btn">Share</button>
+                                <button class="mini-insight-btn">Dismiss</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mini-insight">
+                        <div class="mini-insight-title">Positive sentiment surge</div>
+                        <div class="mini-insight-body">3 consecutive touchpoints with Globex show positive engagement signals. Deal velocity increasing.</div>
+                        <div class="mini-insight-footer">
+                            <span class="mini-insight-sources">3 sources &middot; High confidence</span>
+                            <div class="mini-insight-actions">
+                                <button class="mini-insight-btn">Share</button>
+                                <button class="mini-insight-btn">Dismiss</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pillar 3: Agentic Attribution -->
+        <div class="design-pillar">
+            <div class="design-pillar-text">
+                <div class="pillar-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#B22222" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                    </svg>
+                </div>
+                <h3>Agentic Attribution</h3>
+                <p>Every activity visually distinguishes human from agent authorship. Agent activities surface rationale &mdash; why it acted, what data informed the decision &mdash; and recommend human action where needed. Filter the entire timeline by author type.</p>
+            </div>
+            <div class="design-pillar-demo">
+                <div class="mini-demo">
+                    <div class="mini-demo-header">
+                        <h4>Agent Activity Detail</h4>
+                        <span class="mini-agent-badge">
+                            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clip-rule="evenodd"/></svg>
+                            Sales Agent
+                        </span>
+                    </div>
+                    <div class="mini-activity" style="border-color: #c7d2fe;">
+                        <div class="mini-activity-icon" style="background: #eef2ff;">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="#4338ca"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                        </div>
+                        <div class="mini-activity-content">
+                            <div class="mini-activity-title">Sent follow-up to Acme Corp (Maria Chen)</div>
+                            <div class="mini-activity-desc">Re: Proposal Terms &mdash; addressed pricing concerns from last call</div>
+                            <div class="mini-activity-meta">
+                                <span class="mini-badge mini-badge-agent">Agent-initiated</span>
+                                <span class="mini-time">Today, 9:14 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mini-rationale">
+                        <strong>Why this action was taken:</strong> Maria's last email (June 28) contained 3 pricing objections. Agent matched these to approved discount tiers and sent a tailored response within SLA window. <br><br>
+                        <strong>Recommended next step:</strong> Schedule a live call if no response within 48hrs.
+                    </div>
+                    <div style="margin-top: 12px; display: flex; gap: 8px;">
+                        <button style="font-size: 11px; padding: 6px 12px; border-radius: 6px; border: 1px solid #e5e5e5; background: #fff; color: #03234d; cursor: pointer; font-weight: 600;">Approve</button>
+                        <button style="font-size: 11px; padding: 6px 12px; border-radius: 6px; border: 1px solid #e5e5e5; background: #fff; color: #03234d; cursor: pointer; font-weight: 600;">Edit & Resend</button>
+                        <button style="font-size: 11px; padding: 6px 12px; border-radius: 6px; border: 1px solid #fee2e2; background: #fff; color: #b91c1c; cursor: pointer; font-weight: 600;">Undo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ═══════════ INTERACTIVE PROTOTYPE ═══════════ -->
 <section class="prototype-section">
     <div class="section-inner">
@@ -588,7 +949,7 @@
         </div>
 
         <a href="activity-timeline-demo/index.html" target="_blank" class="prototype-cta">
-            Explore the full interactive prototype →
+            Explore the full interactive prototype &rarr;
         </a>
     </div>
 </section>
@@ -616,8 +977,8 @@
         </div>
 
         <div class="patent-callout">
-            <span class="patent-icon">📋</span>
-            <p><strong>Patent filed</strong> with Salesforce IP team. The invention disclosure names 7 inventors. The novelty covers agent attribution, NL timeline querying, actionable AI summaries, and the "Needs Attention" prioritization layer.</p>
+            <span class="patent-icon">&#128203;</span>
+            <p><strong>Patent filed</strong> with Salesforce IP team. The novelty covers agent attribution, NL timeline querying, actionable AI summaries, and the "Needs Attention" prioritization layer.</p>
         </div>
     </div>
 </section>
@@ -633,14 +994,23 @@
 <!-- ═══════════ BOTTOM NAV ═══════════ -->
 <nav class="bottom-nav">
     <a href="partner-agent.html">
-        <span class="nav-label">← Previous</span>
+        <span class="nav-label">&larr; Previous</span>
         Headless Partner Agent
     </a>
     <a href="salesforce.html">
-        <span class="nav-label">All work →</span>
+        <span class="nav-label">All work &rarr;</span>
         Back to Salesforce
     </a>
 </nav>
+
+<script>
+// Mini tab switching for pillar demos
+function switchMiniTab(el, tab) {
+    const parent = el.closest('.mini-demo');
+    parent.querySelectorAll('.mini-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+}
+</script>
 
 </body>
 </html>
