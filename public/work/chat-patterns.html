@@ -8,7 +8,6 @@
     <style>
         :root {
             --accent: #B22222;
-            --accent-light: rgba(178, 34, 34, 0.08);
             --bg: #fafafa;
             --dark: #0f0f0f;
             --foreground: #1a1a1a;
@@ -118,7 +117,7 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-            min-height: 300px;
+            min-height: 280px;
             max-height: 500px;
             overflow-y: auto;
         }
@@ -133,7 +132,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* User bubble */
         .msg.user-msg {
             align-self: flex-end;
             max-width: 80%;
@@ -149,7 +147,6 @@
             line-height: 1.5;
         }
 
-        /* Bot bubble */
         .msg.bot-msg {
             align-self: flex-start;
             max-width: 88%;
@@ -163,177 +160,6 @@
             border-bottom-left-radius: 6px;
             font-size: 0.88rem;
             line-height: 1.6;
-        }
-
-        .msg .bubble strong {
-            font-weight: 700;
-        }
-
-        .msg .bubble em {
-            opacity: 0.6;
-            font-style: italic;
-        }
-
-        /* Lists inside bubbles */
-        .msg .bubble .item-list {
-            margin: 10px 0 4px;
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .msg .bubble .item-list li {
-            padding: 4px 0;
-            font-size: 0.82rem;
-            border-bottom: 1px solid rgba(0,0,0,0.04);
-        }
-
-        .msg .bubble .item-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* Parsed fields */
-        .msg .bubble .parsed {
-            margin: 10px 0;
-            padding: 10px 14px;
-            background: rgba(255,255,255,0.6);
-            border: 1px solid rgba(0,0,0,0.06);
-            border-radius: 10px;
-            font-size: 0.8rem;
-        }
-
-        .msg .bubble .parsed .field {
-            display: flex;
-            justify-content: space-between;
-            padding: 3px 0;
-        }
-
-        .msg .bubble .parsed .field-key {
-            color: var(--muted);
-            font-weight: 500;
-        }
-
-        .msg .bubble .parsed .field-val {
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        /* Summary block */
-        .msg .bubble .summary-block {
-            margin: 8px 0;
-            padding: 10px 14px;
-            background: rgba(255,255,255,0.6);
-            border-left: 3px solid var(--accent);
-            border-radius: 0 8px 8px 0;
-        }
-
-        .msg .bubble .summary-block .stat {
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: var(--dark);
-        }
-
-        .msg .bubble .summary-block .stat-label {
-            font-size: 0.7rem;
-            color: var(--muted);
-        }
-
-        /* Cards */
-        .msg .bubble .card {
-            margin: 8px 0;
-            padding: 10px 14px;
-            background: rgba(255,255,255,0.7);
-            border: 1px solid rgba(0,0,0,0.06);
-            border-radius: 10px;
-        }
-
-        .msg .bubble .card .card-title {
-            font-weight: 700;
-            font-size: 0.82rem;
-            margin-bottom: 2px;
-        }
-
-        .msg .bubble .card .card-meta {
-            font-size: 0.72rem;
-            color: var(--muted);
-        }
-
-        /* Confirm block */
-        .msg .bubble .confirm-block {
-            margin: 10px 0;
-            padding: 12px 14px;
-            background: rgba(220, 38, 38, 0.05);
-            border: 1px solid rgba(220, 38, 38, 0.15);
-            border-radius: 10px;
-        }
-
-        .msg .bubble .confirm-block .confirm-title {
-            font-weight: 700;
-            font-size: 0.78rem;
-            color: #b91c1c;
-            margin-bottom: 4px;
-        }
-
-        .msg .bubble .confirm-block .confirm-detail {
-            font-size: 0.75rem;
-            color: #7f1d1d;
-            line-height: 1.4;
-        }
-
-        /* Permission block */
-        .msg .bubble .perm-block {
-            margin: 10px 0;
-            padding: 12px 14px;
-            background: rgba(251, 191, 36, 0.08);
-            border: 1px solid rgba(251, 191, 36, 0.25);
-            border-radius: 10px;
-        }
-
-        .msg .bubble .perm-block .perm-icon {
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-
-        .msg .bubble .perm-block .perm-text {
-            font-size: 0.75rem;
-            color: #92400e;
-            line-height: 1.4;
-        }
-
-        /* Action split */
-        .msg .bubble .action-split {
-            margin: 8px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .msg .bubble .action-split .split-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 7px 10px;
-            background: rgba(255,255,255,0.6);
-            border: 1px solid rgba(0,0,0,0.06);
-            border-radius: 8px;
-            font-size: 0.75rem;
-        }
-
-        .msg .bubble .action-split .split-num {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--muted);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.6rem;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .msg .bubble .action-split .split-done {
-            background: #16a34a;
         }
 
         /* Typing */
@@ -425,88 +251,88 @@ const SCENARIOS = {
     'bulk-data': {
         subtitle: 'Bulk data, spoken',
         messages: [
-            { type: 'user', html: 'Show me all my leads' },
-            { type: 'bot', html: 'You have <strong>147 leads</strong> across 4 regions.<div class="summary-block"><span class="stat">147</span> <span class="stat-label">total leads</span></div><ul class="item-list"><li>🌎 West — 52 leads ($4.2M)</li><li>🌍 APAC — 41 leads ($3.8M)</li><li>🌐 Northeast — 33 leads ($2.1M)</li><li>🌎 Southeast — 21 leads ($1.4M)</li></ul>Want me to zoom into a region, filter by value, or show the top 10?' },
-            { type: 'user', html: 'Top 10 by value' },
-            { type: 'bot', html: 'Top 10 by deal value:<ul class="item-list"><li><strong>1.</strong> Pinnacle Dynamics — $520K — APAC</li><li><strong>2.</strong> Acme Corp — $450K — West</li><li><strong>3.</strong> Cascade Analytics — $420K — APAC</li><li><strong>4.</strong> NovaTech Solutions — $390K — West</li><li><strong>5.</strong> Meridian Group — $380K — NE</li><li><strong>6.</strong> OceanView Tech — $350K — APAC</li><li><strong>7.</strong> Summit Retail — $340K — West</li><li><strong>8.</strong> Vertex AI — $320K — SE</li><li><strong>9.</strong> BrightPath Edu — $310K — NE</li><li><strong>10.</strong> Atlas Financial — $290K — West</li></ul><em>Showing 10 of 147 — say "next 10" or filter by region.</em>' },
-            { type: 'user', html: 'APAC ones over $300K' },
-            { type: 'bot', html: 'APAC × $300K+ — <strong>5 leads</strong>:<ul class="item-list"><li>Pinnacle Dynamics — $520K — Negotiation</li><li>Cascade Analytics — $420K — Proposal</li><li>OceanView Tech — $350K — Discovery</li><li>TechWave APAC — $330K — Qualification</li><li>NexusPoint — $310K — Proposal</li></ul>That\'s all of them. Sync these 5, or drill into one?' },
+            { type: 'user', text: 'Show me all my leads' },
+            { type: 'bot', text: 'You have 147 leads across 4 regions:\n\nWest — 52 leads ($4.2M)\nAPAC — 41 leads ($3.8M)\nNortheast — 33 leads ($2.1M)\nSoutheast — 21 leads ($1.4M)\n\nWant me to zoom into a region, filter by value, or show the top 10?' },
+            { type: 'user', text: 'Top 10 by value' },
+            { type: 'bot', text: 'Top 10 by deal value:\n\n1. Pinnacle Dynamics — $520K — APAC\n2. Acme Corp — $450K — West\n3. Cascade Analytics — $420K — APAC\n4. NovaTech Solutions — $390K — West\n5. Meridian Group — $380K — NE\n6. OceanView Tech — $350K — APAC\n7. Summit Retail — $340K — West\n8. Vertex AI — $320K — SE\n9. BrightPath Edu — $310K — NE\n10. Atlas Financial — $290K — West\n\nShowing 10 of 147. Say "next 10" or filter by region.' },
+            { type: 'user', text: 'APAC ones over $300K' },
+            { type: 'bot', text: 'APAC × $300K+ — 5 leads:\n\n1. Pinnacle Dynamics — $520K — Negotiation\n2. Cascade Analytics — $420K — Proposal\n3. OceanView Tech — $350K — Discovery\n4. TechWave APAC — $330K — Qualification\n5. NexusPoint — $310K — Proposal\n\nThat\'s all of them. Sync these 5, or drill into one?' },
         ]
     },
     'info-dump': {
         subtitle: 'Info dump, spoken',
         messages: [
-            { type: 'user', html: 'hey register a deal for me — its meridian logistics they want smartsolar pro about 60 units, close by end of august, contact is james chen james.chen@meridian.io, net new in APAC' },
-            { type: 'bot', html: 'Got it — parsed everything:<div class="parsed"><div class="field"><span class="field-key">Customer</span><span class="field-val">Meridian Logistics</span></div><div class="field"><span class="field-key">Product</span><span class="field-val">SmartSolar Pro × 60</span></div><div class="field"><span class="field-key">Close</span><span class="field-val">Aug 2026</span></div><div class="field"><span class="field-key">Contact</span><span class="field-val">James Chen</span></div><div class="field"><span class="field-key">Type</span><span class="field-val">Net new</span></div><div class="field"><span class="field-key">Region</span><span class="field-val">APAC</span></div></div>Look right?' },
-            { type: 'user', html: 'actually 80 units not 60' },
-            { type: 'bot', html: 'Updated to <strong>80 units</strong>. Everything else stays.<div class="parsed"><div class="field"><span class="field-key">Product</span><span class="field-val">SmartSolar Pro × 80</span></div></div>Submit?' },
-            { type: 'user', html: 'yes' },
-            { type: 'bot', html: '✅ <strong>Deal registered.</strong> Meridian Logistics / SmartSolar Pro × 80 / Aug 2026. Decision in 5 business days.' },
+            { type: 'user', text: 'hey register a deal for me — its meridian logistics they want smartsolar pro about 60 units, close by end of august, contact is james chen james.chen@meridian.io, net new in APAC' },
+            { type: 'bot', text: 'Got it — here\'s what I parsed:\n\nCustomer: Meridian Logistics\nProduct: SmartSolar Pro × 60\nClose: Aug 2026\nContact: James Chen (james.chen@meridian.io)\nType: Net new\nRegion: APAC\n\nLook right?' },
+            { type: 'user', text: 'actually 80 units not 60' },
+            { type: 'bot', text: 'Updated to 80 units. Everything else stays the same.\n\nReady to submit?' },
+            { type: 'user', text: 'yes' },
+            { type: 'bot', text: 'Done — deal registered. Meridian Logistics / SmartSolar Pro × 80 / Aug 2026. You\'ll get a decision in 5 business days.' },
         ]
     },
     'interruption': {
         subtitle: 'Interruption, spoken',
         messages: [
-            { type: 'user', html: 'I want to register a deal' },
-            { type: 'bot', html: 'Let\'s do it. Who\'s the customer?' },
-            { type: 'user', html: 'Meridian Logistics' },
-            { type: 'bot', html: 'Got it. Which product?' },
-            { type: 'user', html: 'wait — how many leads did I sync yesterday?' },
-            { type: 'bot', html: 'You synced <strong>12 leads</strong> yesterday (6 APAC, 4 West, 2 NE).<br><br><em>Saved your deal reg progress. Say "continue" to pick back up.</em>' },
-            { type: 'user', html: 'continue' },
-            { type: 'bot', html: 'Resuming — Meridian Logistics. Which product?' },
-            { type: 'user', html: 'SmartSolar Pro, 60 units, close end of August' },
-            { type: 'bot', html: '✅ <strong>Deal registered.</strong> Meridian Logistics / SmartSolar Pro × 60 / Aug 2026.' },
+            { type: 'user', text: 'I want to register a deal' },
+            { type: 'bot', text: 'Let\'s do it. Who\'s the customer?' },
+            { type: 'user', text: 'Meridian Logistics' },
+            { type: 'bot', text: 'Got it. Which product?' },
+            { type: 'user', text: 'wait — how many leads did I sync yesterday?' },
+            { type: 'bot', text: 'You synced 12 leads yesterday — 6 APAC, 4 West, 2 NE.\n\nI\'ve saved your deal registration progress (Meridian Logistics). Say "continue" when you want to pick back up.' },
+            { type: 'user', text: 'continue' },
+            { type: 'bot', text: 'Resuming — Meridian Logistics. Which product are they interested in?' },
+            { type: 'user', text: 'SmartSolar Pro, 60 units, close end of August' },
+            { type: 'bot', text: 'Done — deal registered. Meridian Logistics / SmartSolar Pro × 60 / Aug 2026.' },
         ]
     },
     'disambiguation': {
         subtitle: 'Disambiguation, spoken',
         messages: [
-            { type: 'user', html: 'Show me the Acme deal' },
-            { type: 'bot', html: 'Found <strong>3 Acme deals</strong>:<div class="card"><div class="card-title">Acme Corp</div><div class="card-meta">$450K · Negotiation · West · Sep 2026</div></div><div class="card"><div class="card-title">Acme Healthcare</div><div class="card-meta">$280K · Discovery · NE · Nov 2026</div></div><div class="card"><div class="card-title">Acme Retail Group</div><div class="card-meta">$95K · Closed Won · SE · Jun 2026</div></div>Which one?' },
-            { type: 'user', html: 'the big one in negotiation' },
-            { type: 'bot', html: '<strong>Acme Corp — $450K</strong><ul class="item-list"><li>Stage: Negotiation</li><li>Region: West</li><li>Contact: Sarah Miller</li><li>Next: Contract review (Jul 15)</li><li>Close: Sep 2026</li></ul>What would you like to do?' },
+            { type: 'user', text: 'Show me the Acme deal' },
+            { type: 'bot', text: 'I found 3 Acme deals:\n\n1. Acme Corp — $450K — Negotiation — West — Sep 2026\n2. Acme Healthcare — $280K — Discovery — NE — Nov 2026\n3. Acme Retail Group — $95K — Closed Won — SE — Jun 2026\n\nWhich one?' },
+            { type: 'user', text: 'the big one in negotiation' },
+            { type: 'bot', text: 'Acme Corp — $450K\n\nStage: Negotiation\nRegion: West\nContact: Sarah Miller\nNext step: Contract review (Jul 15)\nExpected close: Sep 2026\n\nWhat would you like to do with it?' },
         ]
     },
     'progressive': {
         subtitle: 'Progressive disclosure, spoken',
         messages: [
-            { type: 'user', html: 'how are my deals going?' },
-            { type: 'bot', html: 'Pipeline snapshot:<div class="summary-block"><span class="stat">23 deals</span><br><span class="stat-label">$4.7M pipeline</span></div><ul class="item-list"><li>🟢 <strong>5</strong> Negotiation ($1.8M)</li><li>🔵 <strong>8</strong> Proposal ($1.6M)</li><li>⚪ <strong>10</strong> Discovery ($1.3M)</li></ul><em>3 deals at risk (14+ days idle).</em> Want to see those?' },
-            { type: 'user', html: 'yes' },
-            { type: 'bot', html: '⚠️ <strong>3 at-risk deals:</strong><div class="card"><div class="card-title">NovaTech — $390K</div><div class="card-meta">18 days idle · Proposal · Waiting on legal</div></div><div class="card"><div class="card-title">BrightPath — $310K</div><div class="card-meta">21 days idle · Discovery · Champion on leave</div></div><div class="card"><div class="card-title">Atlas Financial — $290K</div><div class="card-meta">16 days idle · Proposal · No notes</div></div>Draft a check-in for any of these?' },
-            { type: 'user', html: 'draft one for NovaTech' },
-            { type: 'bot', html: '<em>"Hi Sarah — circling back on the SmartSolar proposal. I know legal takes time — anything I can help move along? Happy to hop on a call this week."</em><br><br>Send it, or want to adjust the tone?' },
+            { type: 'user', text: 'how are my deals going?' },
+            { type: 'bot', text: '23 active deals — $4.7M total pipeline.\n\n5 in Negotiation ($1.8M) — closest to close\n8 in Proposal ($1.6M)\n10 in Discovery ($1.3M)\n\n3 deals are at risk — no activity in 14+ days. Want to see those?' },
+            { type: 'user', text: 'yes' },
+            { type: 'bot', text: '3 at-risk deals:\n\n1. NovaTech — $390K — 18 days idle — Proposal — "Waiting on legal review"\n2. BrightPath — $310K — 21 days idle — Discovery — "Champion went on leave"\n3. Atlas Financial — $290K — 16 days idle — Proposal — No notes\n\nWant me to draft a check-in for any of these?' },
+            { type: 'user', text: 'draft one for NovaTech' },
+            { type: 'bot', text: '"Hi Sarah — circling back on the SmartSolar proposal. I know legal reviews take time — is there anything I can help move along on our end? Happy to hop on a call this week."\n\nSend it, or want me to adjust the tone?' },
         ]
     },
     'permission': {
         subtitle: 'Permission boundary, spoken',
         messages: [
-            { type: 'user', html: 'show me the full revenue dashboard for Q3' },
-            { type: 'bot', html: '<div class="perm-block"><div class="perm-icon">🔒</div><div class="perm-text">Q3 revenue dashboard is <strong>Tier 1 only</strong>. You\'re currently <strong>Gold (Tier 2)</strong>.</div></div>I can show you:<ul class="item-list"><li>📊 Your pipeline & bookings</li><li>📈 Region partner leaderboard</li><li>🎯 Quota attainment</li></ul>Or I can request access from your partner manager.' },
-            { type: 'user', html: 'request access' },
-            { type: 'bot', html: '✅ Sent to <strong>Lisa Park</strong> (Partner Manager). She usually responds in 1–2 days.<br><br>Want to see your pipeline in the meantime?' },
+            { type: 'user', text: 'show me the full revenue dashboard for Q3' },
+            { type: 'bot', text: 'The Q3 revenue dashboard is restricted to Tier 1 partners. You\'re currently Gold (Tier 2).\n\nHere\'s what I can show you:\n— Your pipeline & bookings\n— Region partner leaderboard\n— Quota attainment vs. target\n\nOr I can send an access request to your partner manager.' },
+            { type: 'user', text: 'request access' },
+            { type: 'bot', text: 'Done — sent a request to Lisa Park (your Partner Manager). She usually responds in 1–2 business days.\n\nWant me to show your pipeline summary in the meantime?' },
         ]
     },
     'multi-intent': {
         subtitle: 'Multi-intent, spoken',
         messages: [
-            { type: 'user', html: 'Sync my APAC leads and register a deal for Meridian' },
-            { type: 'bot', html: 'Two things — on it:<div class="action-split"><div class="split-item"><span class="split-num">1</span> Sync APAC leads</div><div class="split-item"><span class="split-num">2</span> Register deal — Meridian</div></div>' },
-            { type: 'bot', html: '<div class="action-split"><div class="split-item"><span class="split-num split-done">✓</span> <strong>12 APAC leads synced</strong></div><div class="split-item"><span class="split-num">2</span> Deal reg — need a few details</div></div>For Meridian: which product?' },
-            { type: 'user', html: 'CloudSync Enterprise, 150 users, close September' },
-            { type: 'bot', html: '<div class="action-split"><div class="split-item"><span class="split-num split-done">✓</span> 12 APAC leads synced</div><div class="split-item"><span class="split-num split-done">✓</span> <strong>Deal registered</strong> — Meridian / CloudSync × 150 / Sep 2026</div></div>Both done ✅' },
+            { type: 'user', text: 'Sync my APAC leads and register a deal for Meridian' },
+            { type: 'bot', text: 'Two things — handling both.\n\n1. Syncing APAC leads...\n2. Registering deal for Meridian — will need a few details after.' },
+            { type: 'bot', text: '1. Done — 12 APAC leads synced to your CRM.\n\n2. For the Meridian deal: which product?' },
+            { type: 'user', text: 'CloudSync Enterprise, 150 users, close September' },
+            { type: 'bot', text: 'Both done.\n\n1. 12 APAC leads synced ✓\n2. Deal registered — Meridian / CloudSync Enterprise × 150 / Sep 2026 ✓\n\nAnything else?' },
         ]
     },
     'confirmation': {
         subtitle: 'Confirmation, spoken',
         messages: [
-            { type: 'user', html: 'Delete all my Southeast leads' },
-            { type: 'bot', html: '<div class="confirm-block"><div class="confirm-title">⚠️ Destructive action</div><div class="confirm-detail">Permanently remove <strong>21 leads</strong> (Southeast). Can\'t be undone.<br><br>Pipeline: <strong>$1.4M</strong><br>Includes 3 in Proposal stage.</div></div>Type <strong>"delete 21 leads"</strong> to confirm.' },
-            { type: 'user', html: 'wait, keep the Proposal ones' },
-            { type: 'bot', html: 'Keeping 3 Proposal leads. Deleting <strong>18</strong> (Discovery + Qualification).<div class="confirm-block"><div class="confirm-title">Confirm</div><div class="confirm-detail">Remove <strong>18 SE leads</strong> ($980K)<br>Keep <strong>3 SE leads</strong> in Proposal ($420K)</div></div>Type <strong>"delete 18 leads"</strong> to confirm.' },
-            { type: 'user', html: 'delete 18 leads' },
-            { type: 'bot', html: '✅ <strong>18 leads removed.</strong> 3 Proposal-stage leads kept.<br><br><em>Recoverable from trash for 30 days (admin only).</em>' },
+            { type: 'user', text: 'Delete all my Southeast leads' },
+            { type: 'bot', text: 'That would permanently remove 21 leads from your CRM (Southeast region). Total pipeline affected: $1.4M. This includes 3 leads currently in Proposal stage.\n\nThis can\'t be undone. Type "delete 21 leads" to confirm.' },
+            { type: 'user', text: 'wait, keep the ones in Proposal stage' },
+            { type: 'bot', text: 'Keeping 3 Proposal-stage leads. That leaves 18 to delete (all in Discovery or Qualification only).\n\nRemoving: 18 leads ($980K)\nKeeping: 3 leads in Proposal ($420K)\n\nType "delete 18 leads" to confirm.' },
+            { type: 'user', text: 'delete 18 leads' },
+            { type: 'bot', text: '18 leads removed. 3 Proposal-stage leads kept.\n\nDeleted leads are recoverable from trash for 30 days by your admin.' },
         ]
     }
 };
@@ -557,7 +383,9 @@ function renderMessages() {
 function addMessage(msg) {
     const div = document.createElement('div');
     div.className = `msg ${msg.type === 'user' ? 'user-msg' : 'bot-msg'}`;
-    div.innerHTML = `<div class="bubble">${msg.html}</div>`;
+    // Convert \n to <br> for line breaks, but no other formatting
+    const content = msg.text.replace(/\n/g, '<br>');
+    div.innerHTML = `<div class="bubble">${content}</div>`;
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
