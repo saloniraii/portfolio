@@ -290,24 +290,6 @@
             color: var(--muted);
             line-height: 1.5;
         }
-        .bet-card.confidential {
-            position: relative;
-            overflow: hidden;
-        }
-        .bet-card.confidential p {
-            filter: blur(5px);
-            user-select: none;
-        }
-        .bet-card.confidential .lock-label {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: #000;
-            white-space: nowrap;
-        }
 
         /* ─── QUOTE BLOCK ─── */
         .quote-block {
@@ -452,7 +434,7 @@
         /* ─── RESPONSIVE ─── */
         @media (max-width: 1200px) {
             .background-section .content-row { flex-direction: column; }
-            .background-section .bg-image { width: 100%; }
+            .background-section .bg-viz { width: 100%; }
             .bet-section .bet-layout { flex-direction: column; }
             .bet-section .bet-left { width: 100%; }
             .impact-cards { grid-template-columns: repeat(2, 1fr); }
@@ -608,10 +590,9 @@
                     <h3>De-risked execution</h3>
                     <p>A phased roadmap where each release delivered standalone value &mdash; foundation, then skills, then channels.</p>
                 </div>
-                <div class="bet-card confidential">
-                    <h3>Revenue Model</h3>
-                    <p>Lorem ipsim dolores umbres esta dkrhskadf awjerfhawhf kjasher asdfkj</p>
-                    <span class="lock-label">&#128274; Confidential</span>
+                <div class="bet-card">
+                    <h3>Revenue model</h3>
+                    <p>A usage-based Flex-Credits pricing structure that made the agent accessible across partner tiers without cannibalizing existing licenses.</p>
                 </div>
             </div>
         </div>
