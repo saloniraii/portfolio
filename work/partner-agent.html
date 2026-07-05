@@ -298,20 +298,6 @@
         }
 
         /* ─── EXPERIENCE SECTION ─── */
-        .experience-section .exp-layout {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-            justify-content: space-between;
-        }
-        .experience-section .exp-left {
-            width: 699px;
-            flex-shrink: 0;
-        }
-        .experience-section .exp-right {
-            width: 482px;
-            flex-shrink: 0;
-        }
         .experience-section .section-headline {
             padding-top: 24px;
         }
@@ -320,6 +306,10 @@
         }
 
         /* ─── EDGE CASES SECTION ─── */
+        .edge-section .cp-split-layout {
+            max-width: 100%;
+            margin: 0;
+        }
 
         /* ─── IMPACT SECTION ─── */
         .impact-section {
@@ -422,9 +412,6 @@
             .background-section .bg-image { width: 100%; }
             .bet-section .bet-layout { flex-direction: column; }
             .bet-section .bet-left { width: 100%; }
-            .experience-section .exp-layout { flex-direction: column; }
-            .experience-section .exp-left { width: 100%; }
-            .experience-section .exp-right { width: 100%; }
             .impact-cards { grid-template-columns: repeat(2, 1fr); }
             .reflections-section .section-label { padding-left: 0; }
         }
@@ -559,15 +546,11 @@
 <!-- ═══════════ THE EXPERIENCE ═══════════ -->
 <section class="section experience-section">
     <div class="section-inner">
-        <div class="exp-layout">
-            <div class="exp-left">
-                <p class="section-label">The Experience</p>
-                <h2 class="section-headline">As part of the pilot, we worked on few core journeys</h2>
-                <p class="section-body">We picked out the user journeys that had the most friction currently and prioritized those. This allowed us to manage our resources well and move fast.</p>
-            </div>
-            <div class="exp-right">
-                <div id="partnerDemo"></div>
-            </div>
+        <p class="section-label">The Experience</p>
+        <h2 class="section-headline">As part of the pilot, we worked on few core journeys</h2>
+        <p class="section-body">We picked out the user journeys that had the most friction currently and prioritized those. This allowed us to manage our resources well and move fast.</p>
+        <div style="margin-top: 48px;">
+            <div id="partnerDemo"></div>
         </div>
     </div>
 </section>
