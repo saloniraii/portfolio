@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Headless Partner Agent — Saloni Rai</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,800;9..144,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../shared/components.css" />
+    <link rel="stylesheet" href="../shared/partner-demo.css">
+    <link rel="stylesheet" href="../shared/chat-patterns.css">
     <style>
         ::selection { background: rgba(178, 34, 34, 0.2); color: inherit; }
         :root {
             --accent: #B22222;
-            --accent-light: #d44;
             --bg: #fafafa;
             --dark: #0f0f0f;
             --foreground: #1a1a1a;
             --muted: #737373;
             --display-font: 'Fraunces', serif;
             --body-font: 'Plus Jakarta Sans', sans-serif;
+            --card-bg: #f5f0eb;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,6 +29,7 @@
             line-height: 1.7;
         }
 
+        /* ─── BACK LINK ─── */
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -41,106 +43,18 @@
         }
         .back-link:hover { color: var(--accent); }
 
-        /* ─── HERO ─── */
-        .hero {
-            background: var(--dark);
-            color: #fff;
-            padding: 80px 40px;
-            text-align: center;
-        }
-        .hero-inner {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .hero h1 {
-            font-family: var(--display-font);
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: 700;
-            margin-bottom: 24px;
-            opacity: 0.6;
-        }
-        .hero-diagram {
-            background: #1a1a2e;
-            border-radius: 16px;
-            padding: 48px 40px;
-            margin-top: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 32px;
-            flex-wrap: wrap;
-        }
-        .diagram-node {
-            background: #252540;
-            border: 1px solid #3a3a5c;
-            border-radius: 12px;
-            padding: 24px 20px;
-            text-align: center;
-            min-width: 160px;
-        }
-        .diagram-node.portal {
-            background: #fff;
-            color: var(--dark);
-            border: none;
-        }
-        .diagram-node h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .diagram-node p {
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-        .diagram-node.portal p {
-            color: #555;
-        }
-        .diagram-node .big-stat {
-            font-size: 2.2rem;
-            font-weight: 800;
-            font-family: var(--display-font);
-        }
-        .diagram-arrow {
-            font-size: 1.5rem;
-            color: var(--accent);
-        }
-        .diagram-disconnect {
-            color: #ef4444;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .diagram-disconnect .dashes {
-            display: block;
-            border-top: 2px dashed #ef4444;
-            width: 60px;
-            margin: 4px auto;
-        }
-        .channel-pills {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-top: 12px;
-        }
-        .channel-pill {
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        .pill-whatsapp { background: #22c55e; color: #fff; }
-        .pill-slack { background: #7c3aed; color: #fff; }
-        .pill-sms { background: #06b6d4; color: #fff; }
-
-        /* ─── SECTIONS ─── */
+        /* ─── SECTION WRAPPERS ─── */
         .section {
-            max-width: 960px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 80px 40px;
+        }
+        .section-inner {
+            max-width: 1320px;
+            margin: 0 auto;
         }
         .section-label {
-            font-size: 0.7rem;
+            font-size: 0.875rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -150,9 +64,10 @@
         .section-headline {
             font-family: var(--display-font);
             font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
+            font-weight: 900;
             line-height: 1.2;
             margin-bottom: 20px;
+            color: var(--foreground);
         }
         .section-body {
             font-size: 1.05rem;
@@ -161,69 +76,121 @@
             line-height: 1.8;
         }
 
-        /* ─── SETUP SECTION ─── */
-        .setup-hero-stat {
+        /* ─── BACKGROUND SECTION ─── */
+        .background-section .content-row {
             display: flex;
-            align-items: baseline;
-            gap: 24px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
+            gap: 29px;
+            align-items: flex-start;
         }
-        .setup-hero-stat .big-number {
+        .background-section .bg-image {
+            width: 590px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .background-section .bg-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .background-section .bg-text {
+            flex: 1;
+            min-width: 0;
+        }
+        .big-number {
             font-family: var(--display-font);
-            font-size: clamp(4rem, 8vw, 6rem);
             font-weight: 900;
             color: var(--dark);
             line-height: 1;
         }
-        .setup-hero-stat .big-number sup {
-            font-size: 0.4em;
-            vertical-align: super;
+        .big-number .num {
+            font-size: 6rem;
         }
-        .setup-hero-stat .stat-text {
-            font-size: 1.3rem;
-            color: #404040;
-            max-width: 400px;
-            line-height: 1.5;
+        .big-number .unit {
+            font-size: 2.4rem;
+        }
+        .big-number-caption {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-top: 24px;
+            color: var(--dark);
         }
 
         .stat-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             margin-top: 48px;
         }
         .stat-card {
-            padding: 24px;
+            padding: 25px;
             border: 1px solid #e5e5e5;
             border-radius: 12px;
             background: #fff;
         }
         .stat-card .number {
             font-family: var(--display-font);
-            font-size: 2rem;
-            font-weight: 800;
+            font-size: 2.5rem;
+            font-weight: 900;
             color: var(--dark);
-            margin-bottom: 8px;
+            line-height: 1.36;
+        }
+        .stat-card .number .suffix {
+            font-family: var(--display-font);
+            font-size: 2rem;
+            font-weight: 400;
         }
         .stat-card .desc {
             font-size: 0.875rem;
             color: var(--muted);
             line-height: 1.5;
+            margin-top: 8px;
         }
 
-        /* ─── INSIGHT CARDS ─── */
+        /* ─── DARK INSIGHT SECTION ─── */
+        .insight-section {
+            background: var(--dark);
+            padding: 80px 40px;
+        }
+        .insight-section .section-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .insight-section .section-label {
+            color: var(--muted);
+        }
+        .insight-section .intro-text {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            max-width: 900px;
+            margin-bottom: 16px;
+        }
         .insight-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            margin-top: 48px;
+            margin-top: 24px;
         }
         .insight-card {
-            padding: 32px 24px;
-            border: 1px solid #e5e5e5;
+            padding: 25px;
+            border: 1px solid var(--accent);
             border-radius: 12px;
             background: #fff;
+        }
+        .insight-card .insight-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .insight-card .insight-icon {
+            width: 62px;
+            height: 62px;
+            background: #d9d9d9;
+            border-radius: 4px;
+            flex-shrink: 0;
         }
         .insight-card .insight-num {
             font-size: 0.7rem;
@@ -231,7 +198,6 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             color: var(--muted);
-            margin-bottom: 16px;
         }
         .insight-card h3 {
             font-family: var(--display-font);
@@ -239,6 +205,7 @@
             font-weight: 700;
             margin-bottom: 12px;
             line-height: 1.3;
+            color: var(--foreground);
         }
         .insight-card p {
             font-size: 0.9rem;
@@ -246,97 +213,25 @@
             line-height: 1.6;
         }
 
-        /* ─── VISION SECTION ─── */
-        .vision-section {
-            background: var(--dark);
-            color: #fff;
-            padding: 80px 40px;
-            text-align: center;
-        }
-        .vision-inner {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .vision-section .section-label {
-            color: rgba(255,255,255,0.5);
-        }
-        .vision-section .section-headline {
-            color: #fff;
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-        }
-        .vision-section .section-body {
-            color: rgba(255,255,255,0.7);
-            margin: 0 auto 32px;
-        }
-        .vision-definitions {
+        /* ─── SECURING THE BET ─── */
+        .bet-section .bet-layout {
             display: flex;
-            gap: 32px;
-            justify-content: center;
-            margin-top: 32px;
-            flex-wrap: wrap;
+            gap: 40px;
+            align-items: flex-start;
         }
-        .vision-def {
-            text-align: left;
-            max-width: 320px;
+        .bet-section .bet-left {
+            width: 699px;
+            flex-shrink: 0;
         }
-        .vision-def strong {
-            color: var(--accent);
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .vision-def p {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.6);
-            margin-top: 4px;
-        }
-        .vision-diagram {
-            margin-top: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .vision-channel {
+        .bet-section .bet-right {
+            flex: 1;
+            min-width: 0;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            align-items: center;
-        }
-        .vision-agent-box {
-            background: var(--accent);
-            color: #fff;
-            padding: 16px 28px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            border: 1px solid rgba(178,34,34,0.4);
-        }
-        .vision-crm {
-            background: #252540;
-            border: 1px solid #3a3a5c;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.7);
-        }
-        .vision-thesis {
-            margin-top: 40px;
-            font-style: italic;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.95rem;
-        }
-
-        /* ─── SECURING THE BET ─── */
-        .bet-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-            margin-top: 40px;
+            gap: 16px;
         }
         .bet-card {
-            padding: 28px 24px;
+            padding: 25px 29px;
             border: 1px solid #e5e5e5;
             border-radius: 12px;
             background: #fff;
@@ -345,6 +240,7 @@
             font-size: 1rem;
             font-weight: 700;
             margin-bottom: 8px;
+            color: var(--foreground);
         }
         .bet-card p {
             font-size: 0.875rem;
@@ -352,201 +248,128 @@
             line-height: 1.5;
         }
         .bet-card.confidential {
-            background: var(--dark);
-            color: #fff;
-            border-color: var(--accent);
+            position: relative;
+            overflow: hidden;
         }
         .bet-card.confidential p {
-            color: rgba(255,255,255,0.6);
+            filter: blur(5px);
+            user-select: none;
+        }
+        .bet-card.confidential .lock-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #000;
+            white-space: nowrap;
         }
 
         /* ─── QUOTE BLOCK ─── */
         .quote-block {
             background: var(--dark);
-            color: #fff;
             padding: 60px 40px;
-            text-align: center;
+        }
+        .quote-block .quote-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 34px;
+        }
+        .quote-block .quote-bar {
+            width: 6px;
+            align-self: stretch;
+            background: var(--accent);
+            border-radius: 3px;
+            flex-shrink: 0;
         }
         .quote-block .quote-text {
-            max-width: 700px;
-            margin: 0 auto;
             font-family: var(--display-font);
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 400;
             line-height: 1.4;
-        }
-
-        /* ─── PROJECT DETAILS GRID ─── */
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 24px;
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 1px solid #e5e5e5;
-        }
-        .detail-item .detail-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 6px;
-        }
-        .detail-item .detail-value {
-            font-size: 0.9rem;
-            color: var(--foreground);
-            line-height: 1.5;
-        }
-
-        /* ─── CONVERSATION MOCKUP ─── */
-        .conversation-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: start;
-            margin-top: 48px;
-        }
-        .conversation-context h3 {
-            font-family: var(--display-font);
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            line-height: 1.3;
-        }
-        .conversation-context p {
-            font-size: 0.95rem;
-            color: #404040;
-            line-height: 1.7;
-        }
-        .conversation-mockup {
-            background: #f0f0f0;
-            border-radius: 20px;
-            padding: 24px 20px;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 0.875rem;
-        }
-        .conv-header {
-            text-align: center;
-            font-size: 0.75rem;
-            color: var(--muted);
-            padding-bottom: 16px;
-            margin-bottom: 16px;
-            border-bottom: 1px solid #e0e0e0;
-            font-weight: 600;
-        }
-        .conv-bubble {
-            padding: 10px 14px;
-            border-radius: 16px;
-            margin-bottom: 8px;
-            max-width: 85%;
-            line-height: 1.4;
-            font-size: 0.85rem;
-        }
-        .conv-bubble.agent {
-            background: #fff;
-            color: var(--foreground);
-            border-bottom-left-radius: 4px;
-        }
-        .conv-bubble.user {
-            background: var(--dark);
             color: #fff;
-            margin-left: auto;
-            border-bottom-right-radius: 4px;
         }
-        .conv-bubble.success {
-            background: #ecfdf5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-            border-bottom-left-radius: 4px;
-        }
-        .conv-bubble .emoji {
-            margin-right: 4px;
+        .quote-block .quote-text strong {
+            color: #fff;
+            font-weight: 400;
         }
 
-        /* ─── TOPICS GRID ─── */
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
-            margin-top: 48px;
+        /* ─── EXPERIENCE SECTION ─── */
+        .experience-section .exp-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            justify-content: space-between;
         }
-        .topic-card {
-            border: 1px solid #e5e5e5;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #fff;
+        .experience-section .exp-left {
+            width: 699px;
+            flex-shrink: 0;
         }
-        .topic-card-header {
-            padding: 20px 24px 12px;
+        .experience-section .exp-right {
+            width: 482px;
+            flex-shrink: 0;
         }
-        .topic-card-header .topic-num {
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 4px;
+        .experience-section .section-headline {
+            padding-top: 24px;
         }
-        .topic-card-header h4 {
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-        .topic-card-conv {
-            padding: 12px 20px 20px;
-            background: #f5f5f5;
-        }
-        .topic-card-conv .conv-bubble {
-            font-size: 0.8rem;
-            padding: 8px 12px;
-        }
-        .topic-card-caption {
-            padding: 16px 24px;
-            font-size: 0.8rem;
-            color: var(--muted);
-            line-height: 1.5;
-            border-top: 1px solid #e5e5e5;
+        .experience-section .section-body {
+            padding-top: 20px;
         }
 
-        /* ─── CONSTRAINT SECTION ─── */
-        .constraint-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: center;
-            margin-top: 48px;
+        /* ─── EDGE CASES SECTION ─── */
+        .edge-section .edge-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        .edge-section .edge-left {
+            width: 482px;
+            flex-shrink: 0;
+        }
+        .edge-section .edge-right {
+            width: 699px;
+            flex-shrink: 0;
+        }
+        .edge-section .section-headline {
+            padding-top: 24px;
+        }
+        .edge-section .section-body {
+            padding-top: 20px;
         }
 
-        /* ─── IMPACT ─── */
+        /* ─── IMPACT SECTION ─── */
         .impact-section {
             background: var(--dark);
-            color: #fff;
             padding: 80px 40px;
         }
-        .impact-inner {
-            max-width: 960px;
+        .impact-section .section-inner {
+            max-width: 1320px;
             margin: 0 auto;
         }
         .impact-section .section-label {
-            color: rgba(255,255,255,0.5);
+            color: var(--muted);
         }
         .impact-section .section-headline {
             color: #fff;
-        }
-        .impact-section .section-body {
-            color: rgba(255,255,255,0.6);
+            max-width: 960px;
         }
         .impact-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 23px;
             margin-top: 48px;
         }
         .impact-card {
-            padding: 28px 24px;
+            padding: 25px 29px;
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 12px;
             background: rgba(255,255,255,0.03);
+            display: flex;
+            flex-direction: column;
         }
         .impact-card .impact-tag {
             font-size: 0.65rem;
@@ -569,44 +392,80 @@
             line-height: 1.5;
         }
 
-        /* ─── REFLECTION ─── */
-        .reflection-section {
-            background: #f5f5f0;
-            padding: 80px 40px;
+        /* ─── REFLECTIONS SECTION ─── */
+        .reflections-section {
+            background: var(--dark);
+            padding: 60px 40px 80px;
         }
-        .reflection-inner {
-            max-width: 800px;
+        .reflections-section .section-inner {
+            max-width: 1320px;
             margin: 0 auto;
         }
-        .reflection-section .section-headline {
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
+        .reflections-section .section-label {
+            color: var(--muted);
+            padding-left: 160px;
+            margin-bottom: 24px;
         }
-        .reflection-section .section-headline strong {
-            color: var(--accent);
-            font-style: italic;
+        .reflections-section .quote-row {
+            display: flex;
+            align-items: center;
+            gap: 34px;
         }
-        .reflection-section .section-body {
-            margin-top: 20px;
+        .reflections-section .quote-bar {
+            width: 6px;
+            align-self: stretch;
+            background: var(--accent);
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+        .reflections-section .quote-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .reflections-section .quote-text {
+            font-family: var(--display-font);
+            font-size: 2rem;
+            font-weight: 400;
+            line-height: 1.4;
+            color: #fff;
+        }
+        .reflections-section .quote-body {
+            font-size: 1.05rem;
+            color: #d4d4d4;
+            line-height: 1.8;
         }
 
         /* ─── RESPONSIVE ─── */
+        @media (max-width: 1200px) {
+            .background-section .content-row { flex-direction: column; }
+            .background-section .bg-image { width: 100%; }
+            .bet-section .bet-layout { flex-direction: column; }
+            .bet-section .bet-left { width: 100%; }
+            .experience-section .exp-layout { flex-direction: column; }
+            .experience-section .exp-left { width: 100%; }
+            .experience-section .exp-right { width: 100%; }
+            .edge-section .edge-layout { flex-direction: column-reverse; }
+            .edge-section .edge-left { width: 100%; }
+            .edge-section .edge-right { width: 100%; }
+            .impact-cards { grid-template-columns: repeat(2, 1fr); }
+            .reflections-section .section-label { padding-left: 0; }
+        }
+
         @media (max-width: 768px) {
             .back-link { padding: 16px 20px; }
-            .hero { padding: 60px 20px; }
             .section { padding: 60px 20px; }
-            .vision-section { padding: 60px 20px; }
+            .insight-section { padding: 60px 20px; }
             .quote-block { padding: 48px 20px; }
             .impact-section { padding: 60px 20px; }
-            .reflection-section { padding: 60px 20px; }
-            .conversation-section { grid-template-columns: 1fr; }
-            .constraint-section { grid-template-columns: 1fr; }
-            .hero-diagram { flex-direction: column; }
+            .reflections-section { padding: 48px 20px; }
             .stat-cards { grid-template-columns: 1fr; }
             .insight-cards { grid-template-columns: 1fr; }
-            .bet-cards { grid-template-columns: 1fr; }
-            .topics-grid { grid-template-columns: 1fr; }
             .impact-cards { grid-template-columns: 1fr; }
-            .details-grid { grid-template-columns: 1fr 1fr; }
+            .big-number .num { font-size: 4rem; }
+            .big-number .unit { font-size: 1.6rem; }
+            .quote-block .quote-text { font-size: 1.4rem; }
+            .reflections-section .quote-text { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -614,277 +473,148 @@
 
 <a href="salesforce.html" class="back-link">&larr; Back to Salesforce</a>
 
-<!-- ═══════════ HERO ═══════════ -->
-<section class="hero">
-    <div class="hero-inner">
-        <h1>Headless Partner Agent</h1>
-        <div class="hero-diagram">
-            <div class="diagram-node">
-                <h3>Vendor</h3>
-                <p>8,000 Salesforce customers</p>
+<!-- ═══════════ BACKGROUND ═══════════ -->
+<section class="section background-section">
+    <div class="section-inner">
+        <p class="section-label">Background</p>
+
+        <div class="content-row" style="margin-top: 40px;">
+            <div class="bg-image">
+                <img src="https://www.figma.com/api/mcp/asset/2b6236ee-e6de-415d-9a6a-dc1fafc461cb" alt="Partner Cloud engagement data visualization showing monthly active vs. never-engaged partners">
             </div>
-            <div class="diagram-arrow">&rarr;</div>
-            <div class="diagram-node portal">
-                <h3>Partner Cloud</h3>
-                <p style="font-weight:600; margin-bottom:8px;">Web Portal</p>
-                <p style="text-align:left; font-size:0.75rem;">&rarr; Recruit<br>&rarr; Onboard<br>&rarr; Enable<br>&rarr; Compensate</p>
-            </div>
-            <div class="diagram-disconnect">
-                <span class="dashes"></span>
-                DISCONNECT
-            </div>
-            <div class="diagram-node">
-                <div class="big-stat">40M</div>
-                <h3>Partners</h3>
-                <div class="channel-pills">
-                    <span class="channel-pill pill-whatsapp">WhatsApp</span>
-                    <span class="channel-pill pill-slack">Slack</span>
-                    <span class="channel-pill pill-sms">SMS</span>
+            <div class="bg-text">
+                <div class="big-number">
+                    <span class="num">40</span><span class="unit">M</span>
                 </div>
+                <p class="big-number-caption">partner users on the platform. Most of them never log in.</p>
+                <p class="section-body" style="margin-top: 16px;">Partner Cloud manages the resellers and distributors who drive 75% of enterprise B2B revenue. A massive, high-value product &mdash; with an engagement crisis no amount of portal polish could fix.</p>
             </div>
         </div>
-        <p style="margin-top: 24px; font-size: 0.9rem; opacity: 0.5; font-style: italic;">Partners never log in. They're already on messaging.</p>
-    </div>
-</section>
 
-<!-- ═══════════ THE SETUP ═══════════ -->
-<section class="section">
-    <p class="section-label">THE SETUP</p>
-    <div class="setup-hero-stat">
-        <span class="big-number">40<sup>M</sup></span>
-        <span class="stat-text">partner users on the platform. Most of them never log in.</span>
-    </div>
-    <p class="section-body">Partner Cloud manages the resellers and distributors who drive 75% of enterprise B2B revenue. A massive, high-value product &mdash; with an engagement crisis no amount of portal polish could fix.</p>
-
-    <div class="stat-cards">
-        <div class="stat-card">
-            <div class="number">8 <span style="font-size:0.6em; font-weight:400;">days</span></div>
-            <div class="desc">Average support-case resolution &mdash; information scattered across systems.</div>
-        </div>
-        <div class="stat-card">
-            <div class="number">11%</div>
-            <div class="desc">Of cases ended with a manager sending a help link the partner could've found themselves.</div>
-        </div>
-        <div class="stat-card">
-            <div class="number">500</div>
-            <div class="desc">Partners each channel manager engages every month. The math never worked through a portal.</div>
-        </div>
-    </div>
-
-    <!-- Insight Cards -->
-    <div class="insight-cards">
-        <div class="insight-card">
-            <div class="insight-num">Insight 01</div>
-            <h3>The portal assumed captive attention</h3>
-            <p>81% of the customer base (Scale-up + Micro-SaaS) had no dedicated channel managers to drive adoption. For them, the portal was a sunk cost.</p>
-        </div>
-        <div class="insight-card">
-            <div class="insight-num">Insight 02</div>
-            <h3>Partners already had a workspace</h3>
-            <p>WhatsApp, Slack, SMS. That's where deals moved and questions got asked. The portal was a side quest.</p>
-        </div>
-        <div class="insight-card">
-            <div class="insight-num">Insight 03</div>
-            <h3>The jobs were conversational</h3>
-            <p>Check pricing. Register a deal. Ask about MDF. These aren't GUI workflows &mdash; they're questions. The exact shape of a conversation.</p>
+        <div class="stat-cards">
+            <div class="stat-card">
+                <div class="number">8 <span class="suffix">days</span></div>
+                <div class="desc">Average support-case resolution &mdash; information scattered across systems.</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">11%</div>
+                <div class="desc">Of cases ended with a manager sending a help link the partner could've found themselves.</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">500</div>
+                <div class="desc">Partners each channel manager engages every month. The math never worked through a portal.</div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ═══════════ THE VISION ═══════════ -->
-<section class="vision-section">
-    <div class="vision-inner">
-        <p class="section-label">THE VISION &mdash; MEET PARTNERS WHERE THEY WORK</p>
-        <h2 class="section-headline">Stop bringing partners to us.<br>Go to them.</h2>
-        <p class="section-body">Instead of improving the portal-based agent, I proposed a <strong style="color:#fff;">headless, omnichannel partner agent</strong> &mdash; one identity operating natively across every messaging surface, backed by the full power of Salesforce partner management.</p>
+<!-- ═══════════ WHY ISN'T THE PORTAL WORKING? ═══════════ -->
+<section class="insight-section">
+    <div class="section-inner">
+        <p class="section-label">Why isn't the portal working?</p>
+        <p class="intro-text">In collaboration with our Research team, we conducted a deep research into this problem. The core of the report can be boiled down into these three points.</p>
 
-        <div class="vision-definitions">
-            <div class="vision-def">
-                <strong>HEADLESS</strong>
-                <p>No GUI dependency.</p>
+        <div class="insight-cards">
+            <div class="insight-card">
+                <div class="insight-header">
+                    <div class="insight-icon"></div>
+                    <span class="insight-num">Insight 01</span>
+                </div>
+                <h3>The portal assumed captive attention</h3>
+                <p>81% of the customer base (Scale-up + Micro-SaaS) had no dedicated channel managers to drive adoption. For them, the portal was a sunk cost.</p>
             </div>
-            <div class="vision-def">
-                <strong>OMNICHANNEL</strong>
-                <p>Same agent, same context, same capabilities &mdash; whichever platform the partner prefers. Context-aware and surface-aware.</p>
+            <div class="insight-card">
+                <div class="insight-header">
+                    <div class="insight-icon"></div>
+                    <span class="insight-num">Insight 02</span>
+                </div>
+                <h3>Partners already had a workspace</h3>
+                <p>WhatsApp, Slack, SMS. That's where deals moved and questions got asked. The portal was a side quest.</p>
+            </div>
+            <div class="insight-card">
+                <div class="insight-header">
+                    <div class="insight-icon"></div>
+                    <span class="insight-num">Insight 03</span>
+                </div>
+                <h3>The jobs were conversational</h3>
+                <p>Check pricing. Register a deal. Ask about MDF. These aren't GUI workflows &mdash; they're questions. The exact shape of a conversation.</p>
             </div>
         </div>
-
-        <div class="vision-diagram">
-            <div class="vision-channel">
-                <span class="channel-pill pill-whatsapp">WhatsApp</span>
-                <span class="channel-pill pill-slack">Slack</span>
-                <span class="channel-pill pill-sms">SMS</span>
-            </div>
-            <div class="diagram-arrow">&rarr;</div>
-            <div class="vision-agent-box">ONE AGENT</div>
-            <div class="diagram-arrow">&rarr;</div>
-            <div class="vision-crm">Salesforce CRM<br><small>Agentforce reasoning engine</small></div>
-        </div>
-
-        <p class="vision-thesis">This wasn't a feature. It was a new product thesis.</p>
     </div>
 </section>
 
 <!-- ═══════════ SECURING THE BET ═══════════ -->
-<section class="section">
-    <p class="section-label">SECURING THE BET</p>
-    <h2 class="section-headline">Making design work read as a revenue opportunity</h2>
-    <p class="section-body">The vision wouldn't matter if it stayed in Figma. I co-authored the strategy proposal with my PM, framing the investment through three lenses.</p>
-
-    <div class="bet-cards">
-        <div class="bet-card">
-            <h3>Market positioning</h3>
-            <p>No competitor offered headless, conversation-native partner management. This would make Salesforce first.</p>
-        </div>
-        <div class="bet-card confidential">
-            <h3>Revenue model</h3>
-            <p>Confidential</p>
-        </div>
-        <div class="bet-card">
-            <h3>De-risked execution</h3>
-            <p>A phased roadmap where each release delivered standalone value &mdash; foundation, then skills, then channels.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════ BET SECURED QUOTE ═══════════ -->
-<section class="quote-block">
-    <p class="quote-text">The proposal secured an <strong>8-person team</strong>, VP sponsorship, two Principal Architect reviews &mdash; and three pilot commitments before a line of code was written.</p>
-</section>
-
-<!-- ═══════════ PROJECT DETAILS ═══════════ -->
-<section class="section">
-    <div class="details-grid">
-        <div class="detail-item">
-            <div class="detail-label">Duration</div>
-            <div class="detail-value">9 months<br><span style="color:var(--muted);">research &rarr; pilot launch</span></div>
-        </div>
-        <div class="detail-item">
-            <div class="detail-label">Role</div>
-            <div class="detail-value">Senior Product Designer<br><span style="color:var(--muted);">Strategy &middot; Conversation &middot; Interaction</span></div>
-        </div>
-        <div class="detail-item">
-            <div class="detail-label">Team</div>
-            <div class="detail-value">3 Designers &middot; 1 PM &middot; 8 Engineers<br><span style="color:var(--muted);">2 Principal Architects &middot; 1 TPM</span></div>
-        </div>
-        <div class="detail-item">
-            <div class="detail-label">Platform</div>
-            <div class="detail-value">Agentforce &middot; UCP<br><span style="color:var(--muted);">WhatsApp Business API &middot; Slack</span></div>
-        </div>
-        <div class="detail-item">
-            <div class="detail-label">Tools</div>
-            <div class="detail-value">Figma &middot; AI Studio<br><span style="color:var(--muted);">Heroku (demo) &middot; Google Slides</span></div>
-        </div>
-        <div class="detail-item">
-            <div class="detail-label">Outcome</div>
-            <div class="detail-value">Shipped pilot, 3 enterprise customers<br><span style="color:var(--muted);">Partner Cloud's flagship agentic capability</span></div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════ TOPIC 01: DEAL REGISTRATION ═══════════ -->
-<section class="section">
-    <p class="section-label">TOPIC 01 &middot; THE HARDEST FLOW</p>
-    <h2 class="section-headline">A 15-field form, re-authored as dialogue</h2>
-    <p class="section-body">On the portal, deal registration is picklists, date pickers, currency inputs and uploads. I translated the entire workflow into natural turns &mdash; each answer intelligently mapped to the correct Salesforce object field. The partner never sees a form. They just have a conversation, and a fully valid record appears in their vendor's CRM.</p>
-
-    <div class="conversation-section">
-        <div class="conversation-mockup">
-            <div class="conv-header">Partner Agent &middot; WhatsApp &middot; Deal Registration</div>
-            <div class="conv-bubble agent">Let's register this deal. Who's the customer?</div>
-            <div class="conv-bubble user">Meridian Logistics</div>
-            <div class="conv-bubble agent">Got it. Which product are they interested in?</div>
-            <div class="conv-bubble user">SmartSolar Pro, ~60 units</div>
-            <div class="conv-bubble agent">And when do you expect to close?</div>
-            <div class="conv-bubble user">end of next month</div>
-            <div class="conv-bubble success"><span class="emoji">&#10004;</span> Done! Deal registered to Meridian Logistics. You'll get a decision within 5 business days.</div>
-        </div>
-        <div class="conversation-context">
-            <h3>From form to conversation</h3>
-            <p>A 15-field CRM form compressed into 6 natural turns. Each response is intelligently mapped to the right object field &mdash; partner never touches a dropdown, date picker, or submit button.</p>
-            <p style="margin-top: 16px; font-size: 0.85rem; color: var(--muted);">&rarr; Valid Deal Registration record created in vendor CRM</p>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════ NARRATIVE DATA PRESENTATION ═══════════ -->
-<section class="section" style="border-top: 1px solid #e5e5e5;">
-    <p class="section-label">NARRATIVE DATA PRESENTATION</p>
-    <h2 class="section-headline">When you can't draw a table, you talk it</h2>
-
-    <div class="constraint-section">
-        <div class="conversation-context">
-            <p>A pricing table can't render on WhatsApp &mdash; so the numbers become a sentence, with tier logic and a call to action folded in. Information design without a canvas.</p>
-        </div>
-        <div class="conversation-mockup">
-            <div class="conv-header">Partner Agent &middot; Pricing</div>
-            <div class="conv-bubble user">price on SmartSolar Pro?</div>
-            <div class="conv-bubble agent">The SmartSolar Pro is $4,200/unit under 50. For 50+, your partner tier drops it to $3,780/unit &mdash; a 10% discount. Want me to generate a quote?</div>
-            <div class="conv-bubble user">yes please</div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════ MORE TOPICS ═══════════ -->
-<section class="section">
-    <div class="topics-grid">
-        <!-- MDF -->
-        <div class="topic-card">
-            <div class="topic-card-header">
-                <div class="topic-num">TOPIC 02 &middot; MDF ENQUIRIES</div>
-                <h4>Market Development Funds</h4>
+<section class="section bet-section">
+    <div class="section-inner">
+        <div class="bet-layout">
+            <div class="bet-left">
+                <p class="section-label">Securing the Bet</p>
+                <h2 class="section-headline" style="padding-top: 24px;">Making design work read as a revenue opportunity</h2>
+                <p class="section-body" style="padding-top: 20px;">The vision wouldn't matter if it stayed in Figma. We worked on the strategy proposal, framing the investment through three lenses.</p>
             </div>
-            <div class="topic-card-conv">
-                <div class="conv-bubble user">what's my MDF balance?</div>
-                <div class="conv-bubble agent">
-                    <strong>Your MDF summary:</strong><br>
-                    Allocated: $40,000<br>
-                    Committed: $12,500<br>
-                    Available: $27,500<br><br>
-                    &#9888;&#65039; $8,000 expires in 24 days &mdash; want to plan a campaign?
+            <div class="bet-right">
+                <div class="bet-card">
+                    <h3>Market positioning</h3>
+                    <p>No competitor offered headless, conversation-native partner management. This would make Salesforce first.</p>
+                </div>
+                <div class="bet-card">
+                    <h3>De-risked execution</h3>
+                    <p>A phased roadmap where each release delivered standalone value &mdash; foundation, then skills, then channels.</p>
+                </div>
+                <div class="bet-card confidential">
+                    <h3>Revenue Model</h3>
+                    <p>Lorem ipsim dolores umbres esta dkrhskadf awjerfhawhf kjasher asdfkj</p>
+                    <span class="lock-label">&#128274; Confidential</span>
                 </div>
             </div>
-            <div class="topic-card-caption">A raw number is useless without context. The response always summarizes allocation, committed, available &mdash; plus a proactive expiry warning. Replaces a portal page that took 4 clicks and 3 views to assemble.</div>
         </div>
+    </div>
+</section>
 
-        <!-- Authentication -->
-        <div class="topic-card">
-            <div class="topic-card-header">
-                <div class="topic-num">TOPIC 03 &middot; AUTHENTICATION</div>
-                <h4>In-thread 2FA</h4>
+<!-- ═══════════ QUOTE ═══════════ -->
+<section class="quote-block">
+    <div class="quote-inner">
+        <div class="quote-bar"></div>
+        <p class="quote-text">The proposal secured an <strong>8-person team</strong>, VP sponsorship, two Principal Architect reviews and three pilot commitments.</p>
+    </div>
+</section>
+
+<!-- ═══════════ THE EXPERIENCE ═══════════ -->
+<section class="section experience-section">
+    <div class="section-inner">
+        <div class="exp-layout">
+            <div class="exp-left">
+                <p class="section-label">The Experience</p>
+                <h2 class="section-headline">As part of the pilot, we worked on few core journeys</h2>
+                <p class="section-body">We picked out the user journeys that had the most friction currently and prioritized those. This allowed us to manage our resources well and move fast.</p>
             </div>
-            <div class="topic-card-conv">
-                <div class="conv-bubble user">show me my open deals</div>
-                <div class="conv-bubble agent">Quick check first &mdash; I've sent a 6-digit code to your registered email. Pop it in here?</div>
-                <div class="conv-bubble user">418 302</div>
-                <div class="conv-bubble success"><span class="emoji">&#10004;</span> Verified! Here are your 3 open deals...</div>
+            <div class="exp-right">
+                <div id="partnerDemo"></div>
             </div>
-            <div class="topic-card-caption">The hardest challenge: partners on WhatsApp aren't logged in. I designed mid-conversation 2FA that never breaks the thread &mdash; no redirect, no new window, no broken context.</div>
         </div>
+    </div>
+</section>
 
-        <!-- Error Recovery -->
-        <div class="topic-card">
-            <div class="topic-card-header">
-                <div class="topic-num">TOPIC 04 &middot; ERROR RECOVERY</div>
-                <h4>Graceful degradation</h4>
+<!-- ═══════════ EDGE CASES ═══════════ -->
+<section class="section edge-section">
+    <div class="section-inner">
+        <div class="edge-layout">
+            <div class="edge-left">
+                <div id="chatPatterns"></div>
             </div>
-            <div class="topic-card-conv">
-                <div class="conv-bubble user">$50K-ish</div>
-                <div class="conv-bubble agent">Got it &mdash; around $50K. To submit, I'll need the exact figure. What should I put down?</div>
-                <div class="conv-bubble user">$48,000</div>
-                <div class="conv-bubble agent">Perfect &mdash; logging $48,000.</div>
+            <div class="edge-right">
+                <h2 class="section-headline">but it's not always the happy path, is it?</h2>
+                <p class="section-body">We picked out the user journeys that had the most friction currently and prioritized those. This allowed us to manage our resources well and move fast.</p>
             </div>
-            <div class="topic-card-caption">Messaging has no form validation. Re-prompts feel natural, not robotic &mdash; the conversation never crashes on "next Tuesday" or "$50K-ish."</div>
         </div>
     </div>
 </section>
 
 <!-- ═══════════ IMPACT ═══════════ -->
 <section class="impact-section">
-    <div class="impact-inner">
-        <p class="section-label">IMPACT</p>
-        <h2 class="section-headline">It shipped in 262 &mdash; but the impact wasn't a feature</h2>
-        <p class="section-body">WhatsApp and Slack went live. What travelled further was the thesis.</p>
+    <div class="section-inner">
+        <p class="section-label">Impact</p>
+        <h2 class="section-headline">The impact wasn't just the feature</h2>
 
         <div class="impact-cards">
             <div class="impact-card">
@@ -900,7 +630,7 @@
             <div class="impact-card">
                 <div class="impact-tag">Customer Validation</div>
                 <h3>3 pilots signed pre-launch</h3>
-                <p>Avalara, AWS and CrowdStrike committed on the strength of the design vision and prototype alone.</p>
+                <p>3 customers committed on the strength of the design vision and prototype alone.</p>
             </div>
             <div class="impact-card">
                 <div class="impact-tag">Commercial</div>
@@ -911,14 +641,22 @@
     </div>
 </section>
 
-<!-- ═══════════ REFLECTION ═══════════ -->
-<section class="reflection-section">
-    <div class="reflection-inner">
-        <p class="section-label">REFLECTION</p>
-        <h2 class="section-headline">In 0&rarr;1 work, the designer's job isn't just to envision the product &mdash; it's to make the vision <strong>legible to everyone who has to believe in it.</strong></h2>
-        <p class="section-body">I designed the conversations partners have with the agent. But I also designed the narrative leadership needed to hear, the roadmap that de-risked the bet, and the model that made the opportunity undeniable.</p>
+<!-- ═══════════ REFLECTIONS ═══════════ -->
+<section class="reflections-section">
+    <div class="section-inner">
+        <p class="section-label">Reflections</p>
+        <div class="quote-row">
+            <div class="quote-bar"></div>
+            <div class="quote-content">
+                <p class="quote-text">In 0&rarr;1 work, the designer's job isn't just to envision the product; sometimes it's to make the vision legible to everyone who has to believe in it.</p>
+                <p class="quote-body">I designed the conversations partners have with the agent. But I also designed the narrative leadership needed to hear, the roadmap that de-risked the bet, and the model that made the opportunity undeniable.</p>
+            </div>
+        </div>
     </div>
 </section>
+
+<script src="../shared/partner-demo.js"></script>
+<script src="../shared/chat-patterns.js"></script>
 
 </body>
 </html>

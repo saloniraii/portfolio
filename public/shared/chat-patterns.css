@@ -1,0 +1,291 @@
+/* ============================================
+   CHAT PATTERNS COMPONENT — Saloni Rai Portfolio
+   Reusable accordion + chat demo for conversational edge cases
+
+   Usage:
+   1. Add <div id="chatPatterns"></div> where you want it
+   2. Link this CSS file
+   3. Include chat-patterns.js after the div
+   ============================================ */
+
+/* ─── SPLIT LAYOUT ─── */
+.cp-split-layout {
+    display: flex;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+/* ─── LEFT: ACCORDION ─── */
+.cp-accordion-side {
+    flex: 1;
+    min-width: 0;
+    position: sticky;
+    top: 60px;
+}
+
+.cp-accordion-item {
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.cp-accordion-item:first-child {
+    border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.cp-accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--body-font, 'Plus Jakarta Sans', sans-serif);
+    transition: all 0.2s ease;
+}
+
+.cp-accordion-trigger .cp-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--muted, #737373);
+    transition: color 0.2s ease;
+}
+
+.cp-accordion-trigger:hover .cp-title {
+    color: var(--foreground, #1a1a1a);
+}
+
+.cp-accordion-trigger .cp-arrow {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.cp-accordion-trigger .cp-arrow svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--muted, #737373);
+    transition: stroke 0.2s ease;
+}
+
+/* Active state */
+.cp-accordion-item.active .cp-accordion-trigger .cp-title {
+    color: var(--dark, #0f0f0f);
+    font-weight: 700;
+}
+
+.cp-accordion-item.active .cp-accordion-trigger .cp-arrow {
+    transform: rotate(180deg);
+}
+
+.cp-accordion-item.active .cp-accordion-trigger .cp-arrow svg {
+    stroke: var(--accent, #B22222);
+}
+
+/* Expandable content */
+.cp-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.cp-accordion-item.active .cp-accordion-content {
+    max-height: 300px;
+    padding-bottom: 20px;
+}
+
+.cp-description {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--foreground, #1a1a1a);
+    padding-right: 20px;
+}
+
+.cp-description .cp-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent, #B22222);
+    margin-bottom: 6px;
+}
+
+.cp-description .cp-problem {
+    margin-bottom: 10px;
+}
+
+.cp-description .cp-solution {
+    color: var(--muted, #737373);
+    font-size: 0.78rem;
+}
+
+/* ─── RIGHT: CHAT ─── */
+.cp-chat-side {
+    width: 380px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 60px;
+}
+
+.cp-chat-card {
+    background: var(--card-bg, #f5f0eb);
+    border-radius: 20px;
+    padding: 24px 22px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.cp-chat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+
+.cp-chat-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent, #B22222);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.cp-chat-header-text .cp-chat-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--dark, #0f0f0f);
+}
+
+.cp-chat-header-text .cp-chat-subtitle {
+    font-size: 0.7rem;
+    color: var(--muted, #737373);
+    margin-top: 1px;
+}
+
+.cp-chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 320px;
+    max-height: 460px;
+    overflow-y: auto;
+}
+
+.cp-msg {
+    opacity: 0;
+    transform: translateY(6px);
+    animation: cpMsgIn 0.35s ease-out forwards;
+}
+
+@keyframes cpMsgIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.cp-msg.cp-user-msg {
+    align-self: flex-end;
+    max-width: 82%;
+}
+
+.cp-msg.cp-user-msg .cp-bubble {
+    background: var(--accent, #B22222);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 18px;
+    border-bottom-right-radius: 5px;
+    font-size: 0.84rem;
+    line-height: 1.5;
+}
+
+.cp-msg.cp-bot-msg {
+    align-self: flex-start;
+    max-width: 90%;
+}
+
+.cp-msg.cp-bot-msg .cp-bubble {
+    background: rgba(255,255,255,0.7);
+    color: var(--foreground, #1a1a1a);
+    padding: 12px 18px;
+    border-radius: 18px;
+    border-bottom-left-radius: 5px;
+    font-size: 0.84rem;
+    line-height: 1.6;
+}
+
+/* Typing */
+.cp-typing-dots {
+    display: flex;
+    gap: 4px;
+    padding: 12px 18px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 18px;
+    border-bottom-left-radius: 5px;
+    align-self: flex-start;
+}
+
+.cp-typing-dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #aaa;
+    animation: cpTypeDot 1.4s ease-in-out infinite;
+}
+
+.cp-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.cp-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes cpTypeDot {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-3px); opacity: 1; }
+}
+
+/* Replay */
+.cp-replay-btn {
+    display: block;
+    margin: 14px auto 0;
+    padding: 6px 16px;
+    border-radius: 16px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    font-family: var(--body-font, 'Plus Jakarta Sans', sans-serif);
+    border: 1px solid rgba(0,0,0,0.08);
+    background: transparent;
+    color: var(--muted, #737373);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cp-replay-btn:hover {
+    border-color: var(--accent, #B22222);
+    color: var(--accent, #B22222);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 860px) {
+    .cp-split-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .cp-accordion-side {
+        position: static;
+    }
+
+    .cp-chat-side {
+        width: 100%;
+        max-width: 400px;
+        position: static;
+        margin: 0 auto;
+    }
+}
