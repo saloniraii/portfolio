@@ -257,15 +257,27 @@
         }
 
         /* ─── PRIORITY MATRIX ─── */
+        .priority-layout {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            margin-top: 0;
+        }
+        .priority-text {
+            flex: 1;
+            min-width: 280px;
+        }
         .priority-matrix {
-            margin-top: 40px;
-            margin-bottom: 16px;
+            flex: 1.2;
+            min-width: 0;
         }
         .priority-matrix img {
             width: 100%;
-            max-width: 780px;
             height: auto;
             border-radius: 12px;
+        }
+        @media (max-width: 900px) {
+            .priority-layout { flex-direction: column; gap: 32px; }
         }
 
         /* ─── THE PIVOT (inside insight section) ─── */
@@ -940,14 +952,17 @@
 <!-- ═══════════ THE EXPERIENCE ═══════════ -->
 <section class="section experience-section">
     <div class="section-inner">
-        <p class="section-label">The Experience</p>
-        <h2 class="section-headline">We couldn't build every journey</h2>
-        <p class="section-body">So we ranked them on two axes: how often partners hit them, and how badly the portal handled them.</p>
-        <p class="section-body" style="margin-top: 16px;">Deal registration and lead status checks sat in the worst quadrant of both &mdash; they drove the majority of partner escalations and were the biggest contributors to the 8-day case resolution cycle. Those became release one.</p>
-        <p class="section-body" style="margin-top: 16px;">Just as deliberately, we deferred anything that needed rich UI to work well &mdash; dashboards, document review, multi-record comparison. Forcing those into a text thread would have proven the skeptics right. The scope wasn't just what conversation could do; it was what conversation could do <em>better</em> than the portal.</p>
-
-        <div class="priority-matrix">
-            <img src="assets/priority-matrix.png" alt="Priority matrix showing journey prioritization by frequency and portal pain. Deal registration, Browse & sync leads, and Pricing & quotes are in the Fix First quadrant." />
+        <div class="priority-layout">
+            <div class="priority-text">
+                <p class="section-label">The Experience</p>
+                <h2 class="section-headline">We couldn't build every journey</h2>
+                <p class="section-body">So we ranked them on two axes: how often partners hit them, and how badly the portal handled them.</p>
+                <p class="section-body" style="margin-top: 16px;">Deal registration and lead status checks sat in the worst quadrant of both &mdash; they drove the majority of partner escalations and were the biggest contributors to the 8-day case resolution cycle. Those became release one.</p>
+                <p class="section-body" style="margin-top: 16px;">Just as deliberately, we deferred anything that needed rich UI to work well &mdash; dashboards, document review, multi-record comparison. Forcing those into a text thread would have proven the skeptics right. The scope wasn't just what conversation could do; it was what conversation could do <em>better</em> than the portal.</p>
+            </div>
+            <div class="priority-matrix">
+                <img src="assets/priority-matrix.png" alt="Priority matrix showing journey prioritization by frequency and portal pain. Deal registration, Browse & sync leads, and Pricing & quotes are in the Fix First quadrant." />
+            </div>
         </div>
 
         <div style="margin-top: 48px;">
