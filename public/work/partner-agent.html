@@ -82,16 +82,52 @@
             gap: 29px;
             align-items: flex-start;
         }
-        .background-section .bg-image {
+        .background-section .bg-viz {
             width: 590px;
             flex-shrink: 0;
-            border-radius: 8px;
-            overflow: hidden;
+            border-radius: 12px;
+            background: var(--card-bg);
+            padding: 40px 36px 32px;
         }
-        .background-section .bg-image img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .dot-grid {
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            gap: 10px;
+        }
+        .dot-grid .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #c8c4bf;
+        }
+        .dot-grid .dot.active {
+            background: var(--accent);
+        }
+        .dot-legend {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-top: 28px;
+            font-size: 0.75rem;
+            font-family: 'Courier New', monospace;
+            color: var(--muted);
+            letter-spacing: 0.02em;
+        }
+        .dot-legend .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .dot-legend .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .dot-legend .legend-dot.active {
+            background: var(--accent);
+        }
+        .dot-legend .legend-dot.inactive {
+            background: #c8c4bf;
         }
         .background-section .bg-text {
             flex: 1;
@@ -443,8 +479,25 @@
         <p class="section-label">Background</p>
 
         <div class="content-row" style="margin-top: 40px;">
-            <div class="bg-image">
-                <img src="https://www.figma.com/api/mcp/asset/2b6236ee-e6de-415d-9a6a-dc1fafc461cb" alt="Partner Cloud engagement data visualization showing monthly active vs. never-engaged partners">
+            <div class="bg-viz">
+                <div class="dot-grid">
+                    <!-- Row 1 -->
+                    <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <!-- Row 2 -->
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <!-- Row 3 -->
+                    <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <!-- Row 4 -->
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <!-- Row 5 -->
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <!-- Row 6 -->
+                    <span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+                <div class="dot-legend">
+                    <span class="legend-item"><span class="legend-dot active"></span> 4M monthly active</span>
+                    <span class="legend-item"><span class="legend-dot inactive"></span> 36M never engage</span>
+                </div>
             </div>
             <div class="bg-text">
                 <div class="big-number">
