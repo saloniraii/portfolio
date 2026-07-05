@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saloni Rai — Senior Product Designer</title>
+  <title>Saloni Rai - Senior Product Designer</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="shared/components.css" />
   <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
@@ -33,7 +33,7 @@
 
     ::selection { background: rgba(178, 34, 34, 0.2); color: inherit; }
 
-    /* Grid background — matches branding-preview exactly */
+    /* Grid background - matches branding-preview exactly */
     .grid-bg {
       position: absolute;
       top: 0;
@@ -191,7 +191,7 @@
       max-height: 85vh;
     }
 
-    /* Main portrait — center, always visible */
+    /* Main portrait - center, always visible */
     .main-image {
       position: absolute;
       z-index: 10;
@@ -229,7 +229,7 @@
       transform: scale(1.08);
     }
 
-    /* Asset hover tooltip — rendered outside the opacity:0 parent via JS */
+    /* Asset hover tooltip - rendered outside the opacity:0 parent via JS */
     #assetTooltip {
       position: fixed;
       background: var(--foreground);
@@ -250,7 +250,7 @@
       opacity: 1;
     }
 
-    /* Disco mode overlay — strobing tile grid */
+    /* Disco mode overlay - strobing tile grid */
     .disco-overlay {
       position: fixed;
       inset: 0;
@@ -282,7 +282,7 @@
     }
 
 
-    /* Disco ball — node 1:20
+    /* Disco ball - node 1:20
        Figma: center at left 758+405/2=960, top 19+405/2=221, size ~316px rendered, container 405px
        Positioned: left 50.13%, top 2.15%, width 26.8% */
     .asset-disco {
@@ -295,7 +295,7 @@
       --end-rotate: 20.05;
     }
 
-    /* Pin/polaroid — node 1:8
+    /* Pin/polaroid - node 1:8
        Figma: left 313, top 62, w 445, h 282 in 1512x882 */
     .asset-pin {
       left: 20.7%;
@@ -306,7 +306,7 @@
       --end-rotate: 4.82;
     }
 
-    /* Dinner — node 1:10
+    /* Dinner - node 1:10
        Figma: left 956, top 309, w 269, h 311 in 1512x882 */
     .asset-dinner {
       left: 63.23%;
@@ -318,7 +318,7 @@
       --end-rotate: -13.35;
     }
 
-    /* Coffee machine — node 1:12
+    /* Coffee machine - node 1:12
        Figma: left 232, top 398, w 382, h 222 in 1512x882 */
     .asset-coffee {
       left: 15.34%;
@@ -330,7 +330,7 @@
       --end-rotate: 0;
     }
 
-    /* Vinyl/record — node 1:7
+    /* Vinyl/record - node 1:7
        Figma: left 797, top 660, w 383, h 222 in 1512x882 */
     .asset-vinyl {
       left: 52.71%;
@@ -342,7 +342,7 @@
       --end-rotate: 0;
     }
 
-    /* Character — node 1:9
+    /* Character - node 1:9
        Figma: left 289, top 640, w 364, h 212 in 1512x882 */
     .asset-character {
       left: 19.11%;
@@ -362,7 +362,7 @@
       }
     }
 
-    /* ===== About Section — scroll-driven flip ===== */
+    /* ===== About Section - scroll-driven flip ===== */
     .about-scroll-container {
       background: #000;
       height: 180vh;
@@ -435,7 +435,7 @@
       transform: translateY(-15px);
     }
 
-    /* Final state (scroll-up only) — all visible stacked */
+    /* Final state (scroll-up only) - all visible stacked */
     .about-section.final-state .about-statements {
       display: flex;
       flex-direction: column;
@@ -617,6 +617,14 @@
       text-decoration: underline;
     }
 
+    /* Project card hover states */
+    .experience-card-reveal a[href*="work/"]:hover {
+      background: #fafafa !important;
+      border-color: var(--accent) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(178, 34, 34, 0.08);
+    }
+
     @media (max-width: 768px) {
       .experience-section {
         padding: 80px 5vw 60px;
@@ -627,7 +635,7 @@
       }
     }
 
-    /* ===== Lately Section — Horizontal Scroll Marquee ===== */
+    /* ===== Lately Section - Horizontal Scroll Marquee ===== */
     .lately-section {
       padding: 120px 0 100px;
       overflow: hidden;
@@ -853,7 +861,7 @@
 
     /* ===== Scroll Animations ===== */
 
-    /* Section headings — scroll trigger */
+    /* Section headings - scroll trigger */
     .section-heading-anim {
       opacity: 0;
       transform: translateY(40px);
@@ -864,7 +872,7 @@
       transform: translateY(0);
     }
 
-    /* Testimonial cards — staggered float-up (on wrapper so shadow animates too) */
+    /* Testimonial cards - staggered float-up (on wrapper so shadow animates too) */
     .testimonial-card-wrap {
       opacity: 0;
       transform: translateY(50px) rotate(0.5deg);
@@ -919,7 +927,7 @@
       position: relative;
     }
 
-    /* Wrapper gets the shadow — mask on inner card would clip it otherwise */
+    /* Wrapper gets the shadow - mask on inner card would clip it otherwise */
     .testimonial-card-wrap {
       break-inside: avoid;
       margin-bottom: 24px;
@@ -932,7 +940,7 @@
       border-radius: 0;
       position: relative;
       background: #fff;
-      /* Stamp perforation — semicircles punched out of all edges */
+      /* Stamp perforation - semicircles punched out of all edges */
       -webkit-mask:
         radial-gradient(circle 5px at 5px 50%, transparent 4.5px, black 5px) -5px 0 / 10px 18px repeat-y,
         radial-gradient(circle 5px at 5px 50%, transparent 4.5px, black 5px) calc(100% + 5px) 0 / 10px 18px repeat-y,
@@ -1164,7 +1172,7 @@
   </style>
 </head>
 <body>
-  <!-- Grid background — must be first child -->
+  <!-- Grid background - must be first child -->
   <div class="grid-bg">
     <canvas id="gridCanvas"></canvas>
   </div>
@@ -1198,12 +1206,12 @@
   <div class="scroll-spacer">
     <section class="hero">
       <div class="collage">
-        <!-- Main portrait — always visible -->
+        <!-- Main portrait - always visible -->
         <div class="main-image">
           <img src="collage/main.png" alt="Saloni Rai" />
         </div>
 
-        <!-- Surrounding assets — fly in on scroll -->
+        <!-- Surrounding assets - fly in on scroll -->
         <div class="float-asset asset-disco" data-tooltip="click me">
           <img src="collage/disco.gif" alt="" />
         </div>
@@ -1254,49 +1262,73 @@
     <h2>Experience</h2>
     <div class="experience-list">
 
-      <!-- Card 1 — Salesforce -->
-      <div class="experience-card" onclick="window.open('work/salesforce.html','_blank')">
+      <!-- Card 1 - Salesforce -->
+      <div class="experience-card">
         <div class="experience-card-header">
           <div class="experience-card-info">
             <h3>Salesforce</h3>
             <p class="role">Product Designer</p>
-            <p class="period">2023 — Present</p>
+            <p class="period">2023 - Present</p>
           </div>
           <span class="experience-card-arrow">→</span>
         </div>
         <div class="experience-card-reveal">
           <div class="experience-card-reveal-inner">
             <div>
-              <p class="reveal-text">Designing for AI-first enterprise experiences. Led the vision for Salesforce's Unified Agentic Activity Timeline (patent filed) and designed the first conversation-native channel management tool — the Headless Partner Agent — that pivoted an entire product strategy.</p>
-              <div class="reveal-tags">
-                <span class="reveal-tag">AI Agents</span>
-                <span class="reveal-tag">Enterprise</span>
-              </div>
-              <a href="work/salesforce.html" target="_blank" rel="noopener noreferrer" class="reveal-cta">View Projects →</a>
+              <p class="reveal-text" style="margin-bottom: 24px;">Designing for AI-first enterprise experiences across multiple products and platforms.</p>
+
+              <!-- Project 1: Headless Partner Agent -->
+              <a href="work/partner-agent.html" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; color: inherit; padding: 20px; margin: 0 -20px 16px; border-radius: 12px; border: 1px solid #f0f0f0; transition: all 0.2s ease;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                  <h4 style="font-size: 1rem; font-weight: 700; margin: 0; color: var(--foreground);">Headless Partner Agent</h4>
+                  <span style="padding: 2px 8px; border-radius: 12px; font-size: 0.65rem; font-weight: 600; background: #ecfdf5; color: #065f46; text-transform: uppercase; letter-spacing: 0.5px;">Shipped</span>
+                </div>
+                <p style="font-size: 0.85rem; color: #737373; line-height: 1.5; margin-bottom: 10px;">A conversation-native channel management tool deployed across WhatsApp, Slack, and SMS for 40M partner users. Pivoted an entire product strategy.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;">
+                  <span style="padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; background: #f5f5f5; color: #525252;">Conversation Design</span>
+                  <span style="padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; background: #f5f5f5; color: #525252;">Product Strategy</span>
+                  <span style="padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; background: #fef3c7; color: #92400e; font-weight: 600;">✦ Conversational / Non-Visual</span>
+                </div>
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--accent);">Read case study →</span>
+              </a>
+
+              <!-- Project 2: Activity Timeline -->
+              <a href="work/activity-timeline.html" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; color: inherit; padding: 20px; margin: 0 -20px; border-radius: 12px; border: 1px solid #f0f0f0; transition: all 0.2s ease;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                  <h4 style="font-size: 1rem; font-weight: 700; margin: 0; color: var(--foreground);">Unified Agentic Activity Timeline</h4>
+                </div>
+                <p style="font-size: 0.85rem; color: #737373; line-height: 1.5; margin-bottom: 10px;">Redesigned CRM's most universal component for AI agent workflows. A design-initiated vision that became a patent-filed specification.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;">
+                  <span style="padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; background: #f5f5f5; color: #525252;">Vision & Strategy</span>
+                  <span style="padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; background: #f5f5f5; color: #525252;">Cross-Cloud</span>
+                  <span style="padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; background: #eef2ff; color: #4338ca; font-weight: 600;">✦ Visual Design</span>
+                </div>
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--accent);">Read case study →</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Card 2 — Springworks / Albus -->
-      <div class="experience-card" onclick="window.open('work/albus.html','_blank')">
+      <!-- Card 2 - Springworks / Albus -->
+      <div class="experience-card">
         <div class="experience-card-header">
           <div class="experience-card-info">
             <h3>Springworks</h3>
             <p class="role">Product Designer</p>
-            <p class="period">2022 — 2024</p>
+            <p class="period">2022 - 2024</p>
           </div>
           <span class="experience-card-arrow">→</span>
         </div>
         <div class="experience-card-reveal">
           <div class="experience-card-reveal-inner">
             <div>
-              <p class="reveal-text">Designed and led Albus — an AI knowledge bot — from zero to 3,000+ organizations, 18,000+ users, and acquisition. Built the product before Slack, Microsoft, or anyone else had AI in workplace chat. Wore every hat: product design, growth, content, and strategy.</p>
+              <p class="reveal-text">Designed and led Albus - an AI knowledge bot - from zero to 3,000+ organizations, 18,000+ users, and acquisition. Built the product before Slack, Microsoft, or anyone else had AI in workplace chat. Wore every hat: product design, growth, content, and strategy.</p>
               <div class="reveal-tags">
                 <span class="reveal-tag">0 → 1</span>
                 <span class="reveal-tag">AI Product</span>
               </div>
-              <a href="work/albus.html" target="_blank" rel="noopener noreferrer" class="reveal-cta">View Case Study →</a>
+              <p style="margin-top: 16px; font-size: 0.875rem; font-weight: 600; color: #737373;">Case Study (Coming Soon)</p>
             </div>
           </div>
         </div>
@@ -1305,18 +1337,18 @@
     </div>
   </section>
 
-  <!-- ===== Lately Section — Horizontal Scroll ===== -->
+  <!-- ===== Lately Section - Horizontal Scroll ===== -->
   <section class="lately-section" id="lately-section">
     <h2>What I've been up to lately</h2>
     <div class="lately-track-wrapper">
       <div class="lately-track">
-        <!-- Card 1 — Salesforce Offices -->
+        <!-- Card 1 - Salesforce Offices -->
         <div class="lately-card lately-card-polaroid">
           <img src="gallery/sf-office.jpg" alt="Saloni at SF office" />
-          <span class="lately-card-caption">Seeing Salesforce in 3 cities — Tokyo, Seattle, San Francisco</span>
+          <span class="lately-card-caption">Seeing Salesforce in 3 cities - Tokyo, Seattle, San Francisco</span>
         </div>
 
-        <!-- Card 2 — Substack -->
+        <!-- Card 2 - Substack -->
         <a href="https://saloniraiii.substack.com/p/the-death-of-the-interesting-homepage" target="_blank" class="lately-card lately-card-substack">
           <span class="substack-label">Writing</span>
           <span class="lately-card-title">the death of the interesting homepage</span>
@@ -1324,19 +1356,19 @@
           <span class="lately-card-link">Read on Substack →</span>
         </a>
 
-        <!-- Card 3 — Cooking class -->
+        <!-- Card 3 - Cooking class -->
         <div class="lately-card lately-card-polaroid">
           <img src="gallery/cooking-class.jpg" alt="Saloni in cooking class" />
           <span class="lately-card-caption">Taking cooking classes in places I travel to</span>
         </div>
 
-        <!-- Card 4 — Creating more -->
+        <!-- Card 4 - Creating more -->
         <div class="lately-card lately-card-polaroid">
           <img src="gallery/artworks.jpg" alt="Saloni's artworks" />
           <span class="lately-card-caption">Creating more than I am consuming</span>
         </div>
 
-        <!-- Card 5 — ThinkingWords -->
+        <!-- Card 5 - ThinkingWords -->
         <div class="lately-card lately-card-thinking">
           <span class="substack-label">Exploring</span>
           <div class="thinking-animation">
@@ -1353,7 +1385,7 @@
           </div>
         </div>
 
-        <!-- Card 6 — Mentoring -->
+        <!-- Card 6 - Mentoring -->
         <a href="https://topmate.io/saloni_rai" target="_blank" class="lately-card">
           <span class="substack-label">Mentoring</span>
           <span class="lately-card-title">Mentoring young designers</span>
@@ -1361,19 +1393,19 @@
           <span class="lately-card-link">Book a session on Topmate →</span>
         </a>
 
-        <!-- Card 7 — Reading -->
+        <!-- Card 7 - Reading -->
         <div class="lately-card lately-card-polaroid">
           <img src="gallery/mine-your-language.jpg" alt="Mine Your Language book" />
           <span class="lately-card-caption">Reading 'Mine Your Language' by Abhishek Borah</span>
         </div>
 
-        <!-- Card 8 — Art gallery -->
+        <!-- Card 8 - Art gallery -->
         <div class="lately-card lately-card-polaroid">
           <img src="gallery/art-gallery.jpg" alt="Saloni at art gallery" />
           <span class="lately-card-caption">Frolicking in art galleries</span>
         </div>
 
-        <!-- Card 9 — Substack -->
+        <!-- Card 9 - Substack -->
         <a href="https://saloniraiii.substack.com/p/how-the-algorithm-gave-everyone-the" target="_blank" class="lately-card lately-card-substack">
           <span class="substack-label">Writing</span>
           <span class="lately-card-title">how the algorithm gave everyone the same taste</span>
@@ -1385,10 +1417,10 @@
         <!-- Card 1 dup -->
         <div class="lately-card lately-card-polaroid">
           <img src="gallery/sf-office.jpg" alt="Saloni at SF office" />
-          <span class="lately-card-caption">Seeing Salesforce in 3 cities — Tokyo, Seattle, San Francisco</span>
+          <span class="lately-card-caption">Seeing Salesforce in 3 cities - Tokyo, Seattle, San Francisco</span>
         </div>
 
-        <!-- Card 2 dup — Substack -->
+        <!-- Card 2 dup - Substack -->
         <a href="https://saloniraiii.substack.com/p/the-death-of-the-interesting-homepage" target="_blank" class="lately-card lately-card-substack">
           <span class="lately-card-title">the death of the interesting homepage</span>
           <span class="lately-card-desc">"It's like there's a single Figma file being passed around the entire internet and everyone's just changing the copy and 3 colors!"</span>
@@ -1407,7 +1439,7 @@
           <span class="lately-card-caption">Creating more than I am consuming</span>
         </div>
 
-        <!-- Card 5 duplicate — ThinkingWords -->
+        <!-- Card 5 duplicate - ThinkingWords -->
         <div class="lately-card lately-card-thinking">
           <span class="substack-label">Exploring</span>
           <div class="thinking-animation">
@@ -1438,13 +1470,13 @@
           <span class="lately-card-caption">Reading 'Mine Your Language' by Abhishek Borah</span>
         </div>
 
-        <!-- Card 8 dup — Art gallery -->
+        <!-- Card 8 dup - Art gallery -->
         <div class="lately-card lately-card-polaroid">
           <img src="gallery/art-gallery.jpg" alt="Saloni at art gallery" />
           <span class="lately-card-caption">Frolicking in art galleries</span>
         </div>
 
-        <!-- Card 9 dup — Substack -->
+        <!-- Card 9 dup - Substack -->
         <a href="https://saloniraiii.substack.com/p/how-the-algorithm-gave-everyone-the" target="_blank" class="lately-card lately-card-substack">
           <span class="substack-label">Writing</span>
           <span class="lately-card-title">how the algorithm gave everyone the same taste</span>
@@ -1482,7 +1514,7 @@
       <div class="testimonial-card-wrap">
         <div class="testimonial-card" data-role="founder">
           <h4>Choosing Saloni was one of the best decisions we've made</h4>
-          <p>Her team is nothing short of fantastic — extremely helpful, incredibly quick, and utterly professional in every interaction. From the get-go, they worked closely with us, ensuring our vision was brought to life in a way that exceeded our expectations. The quality of their work speaks volumes about their creativity and skill.</p>
+          <p>Her team is nothing short of fantastic - extremely helpful, incredibly quick, and utterly professional in every interaction. From the get-go, they worked closely with us, ensuring our vision was brought to life in a way that exceeded our expectations. The quality of their work speaks volumes about their creativity and skill.</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">
               <img src="https://placehold.co/80x80/525252/fff?text=RA" alt="" />
@@ -1695,7 +1727,7 @@
       document.addEventListener('mousemove', (e) => {
         target.x = e.clientX;
         target.y = e.clientY;
-        // Cursor follows instantly — no lag
+        // Cursor follows instantly - no lag
         cursorDot.style.transform = `translate3d(${target.x}px, ${target.y}px, 0)`;
       });
 
@@ -1711,7 +1743,7 @@
       animate();
     })();
 
-    // --- Grid Background (Absolute full-page canvas — same as branding-preview) ---
+    // --- Grid Background (Absolute full-page canvas - same as branding-preview) ---
     (function() {
       const canvas = document.getElementById('gridCanvas');
       if (!canvas) return;
@@ -1721,7 +1753,7 @@
         const dpr = window.devicePixelRatio || 1;
 
         const w = window.innerWidth;
-        // Full page height — grid covers everything including scrollable area
+        // Full page height - grid covers everything including scrollable area
         const h = Math.max(
           document.body.scrollHeight,
           document.documentElement.scrollHeight,
@@ -1735,7 +1767,7 @@
         ctx.scale(dpr, dpr);
         ctx.clearRect(0, 0, w, h);
 
-        // Tighter grid — ~24 columns for smaller squares
+        // Tighter grid - ~24 columns for smaller squares
         const cols = 24;
         const spacing = w / cols;
 
@@ -1743,7 +1775,7 @@
         ctx.strokeStyle = gridColor;
         ctx.lineWidth = 0.5;
 
-        // Tight curve zone at bottom — compact so distortion is dramatic
+        // Tight curve zone at bottom - compact so distortion is dramatic
         const curveZone = 350;
         const bendY = h - curveZone;
 
@@ -1757,7 +1789,7 @@
 
           const curvedY = flatY;
 
-          // Strong barrel distortion — very dramatic bow
+          // Strong barrel distortion - very dramatic bow
           const centerX = w / 2;
           const offsetX = flatX - centerX;
           const normalizedX = offsetX / (w / 2);
@@ -1796,7 +1828,7 @@
         }
       }
 
-      // Draw after layout is complete — multiple hooks to ensure it fires
+      // Draw after layout is complete - multiple hooks to ensure it fires
       window.addEventListener('load', () => { drawGrid(); setTimeout(drawGrid, 500); });
       window.addEventListener('resize', drawGrid);
       if (document.readyState === 'complete') {
@@ -1831,7 +1863,7 @@
         siteNav.classList.toggle('on-dark', onDark);
       }
 
-      // ===== 1. About section — scroll-driven flip =====
+      // ===== 1. About section - scroll-driven flip =====
       const aboutScrollContainer = document.querySelector('.about-scroll-container');
       const aboutSection = document.querySelector('.about-section');
       if (aboutScrollContainer && aboutSection) {
@@ -1865,7 +1897,7 @@
             hasScrolledPast = true;
           }
 
-          // Scrolling back up after having passed — show all 3, no re-animation
+          // Scrolling back up after having passed - show all 3, no re-animation
           if (hasScrolledPast) {
             aboutSection.classList.add('final-state');
             statements.forEach(s => {
@@ -1876,7 +1908,7 @@
             return;
           }
 
-          // First pass scrolling down — one at a time, last one stays
+          // First pass scrolling down - one at a time, last one stays
           aboutSection.classList.remove('final-state');
 
           const segmentSize = 1 / totalStatements;
@@ -1956,7 +1988,7 @@
       }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
       testimonialWraps.forEach(c => cardObs.observe(c));
 
-      // ===== 5. Smooth parallax depth on scroll — subtle y-offset for sections =====
+      // ===== 5. Smooth parallax depth on scroll - subtle y-offset for sections =====
       const experienceSection = document.querySelector('.experience-section');
       const testimonialsSection = document.querySelector('.testimonials-section');
 
@@ -1992,7 +2024,7 @@
 
   <!-- Page-specific scripts -->
   <script>
-    // ===== Disco Mode — Strobing Tile Grid =====
+    // ===== Disco Mode - Strobing Tile Grid =====
     const discoOverlay = document.getElementById('discoOverlay');
     const discoGrid = document.getElementById('discoGrid');
     const discoBall = document.querySelector('.asset-disco');

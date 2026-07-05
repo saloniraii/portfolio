@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Partner Agent — Live Demo</title>
+    <title>Partner Agent - Live Demo</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -491,7 +491,7 @@
         </button>
     </div>
 
-    <!-- Sub-tabs (lead counts — only for Partner Connect) -->
+    <!-- Sub-tabs (lead counts - only for Partner Connect) -->
     <div class="sub-tabs" id="subTabs">
         <button class="sub-tab active" data-sub="few">&lt; 5 Leads</button>
         <button class="sub-tab" data-sub="medium">5–20 Leads</button>
@@ -534,13 +534,13 @@ const CONVERSATIONS = {
             slack: [
                 { type: 'bot', html: '📋 <strong>4 new leads</strong> added to your vendor CRM.', actions: [{ label: 'Browse leads', primary: true }, { label: 'Sync all 4' }, { label: 'Dismiss' }] },
                 { type: 'user', text: 'Browse leads' },
-                { type: 'bot', html: 'Here are your 4 new leads:<ul class="lead-list"><li>☑️ Vertex Technologies — $200K — West</li><li>☑️ Cascade Analytics — $350K — NE</li><li>☑️ BrightPath Education — $85K — SE</li><li>☑️ TechWave Solutions — $95K — West</li></ul>', actions: [{ label: 'Sync all 4', primary: true }] },
+                { type: 'bot', html: 'Here are your 4 new leads:<ul class="lead-list"><li>☑️ Vertex Technologies - $200K - West</li><li>☑️ Cascade Analytics - $350K - NE</li><li>☑️ BrightPath Education - $85K - SE</li><li>☑️ TechWave Solutions - $95K - West</li></ul>', actions: [{ label: 'Sync all 4', primary: true }] },
                 { type: 'user', text: 'Sync all 4' },
                 { type: 'bot', html: '✅ <strong>4 leads</strong> synced to your CRM. Anything else? I can help write outreach for them.' },
             ],
             whatsapp: [
                 { type: 'user', text: 'Show me my new leads' },
-                { type: 'bot', html: 'You have <strong>4 new leads</strong>:<ul class="lead-list"><li>1. Vertex Technologies — $200K — West</li><li>2. Cascade Analytics — $350K — NE</li><li>3. BrightPath Education — $85K — SE</li><li>4. TechWave Solutions — $95K — West</li></ul>Say "sync all" or tell me which to remove.' },
+                { type: 'bot', html: 'You have <strong>4 new leads</strong>:<ul class="lead-list"><li>1. Vertex Technologies - $200K - West</li><li>2. Cascade Analytics - $350K - NE</li><li>3. BrightPath Education - $85K - SE</li><li>4. TechWave Solutions - $95K - West</li></ul>Say "sync all" or tell me which to remove.' },
                 { type: 'user', text: 'sync all' },
                 { type: 'bot', html: '✅ Done, 4 leads synced to your CRM. Anything else?' },
             ],
@@ -555,13 +555,13 @@ const CONVERSATIONS = {
             slack: [
                 { type: 'bot', html: '📋 <strong>15 new leads</strong> added to your vendor CRM.', actions: [{ label: 'Browse leads', primary: true }, { label: 'Sync all 15' }, { label: 'Dismiss' }] },
                 { type: 'user', text: 'Browse leads' },
-                { type: 'bot', html: 'Showing 1–5 of 15:<ul class="lead-list"><li>☑️ Acme Corp — $450K — West</li><li>☑️ Pinnacle Dynamics — $420K — APAC</li><li>☑️ Cascade Analytics — $350K — NE</li><li>☑️ Nexus Partners — $340K — APAC</li><li>☑️ Vertex Technologies — $200K — West</li></ul>', actions: [{ label: 'Next 5' }, { label: 'Sync all 15', primary: true }] },
+                { type: 'bot', html: 'Showing 1–5 of 15:<ul class="lead-list"><li>☑️ Acme Corp - $450K - West</li><li>☑️ Pinnacle Dynamics - $420K - APAC</li><li>☑️ Cascade Analytics - $350K - NE</li><li>☑️ Nexus Partners - $340K - APAC</li><li>☑️ Vertex Technologies - $200K - West</li></ul>', actions: [{ label: 'Next 5' }, { label: 'Sync all 15', primary: true }] },
                 { type: 'user', text: 'Sync all 15' },
                 { type: 'bot', html: '✅ <strong>15 leads</strong> synced to your CRM. Want me to draft outreach?' },
             ],
             whatsapp: [
                 { type: 'user', text: 'Show me new leads' },
-                { type: 'bot', html: 'You have <strong>15 new leads</strong>. Here are the first 5:<ul class="lead-list"><li>1. Acme Corp — $450K</li><li>2. Pinnacle Dynamics — $420K</li><li>3. Cascade Analytics — $350K</li><li>4. Nexus Partners — $340K</li><li>5. Vertex Technologies — $200K</li></ul>Say "next" for more, "sync all" to sync all 15.' },
+                { type: 'bot', html: 'You have <strong>15 new leads</strong>. Here are the first 5:<ul class="lead-list"><li>1. Acme Corp - $450K</li><li>2. Pinnacle Dynamics - $420K</li><li>3. Cascade Analytics - $350K</li><li>4. Nexus Partners - $340K</li><li>5. Vertex Technologies - $200K</li></ul>Say "next" for more, "sync all" to sync all 15.' },
                 { type: 'user', text: 'sync all' },
                 { type: 'bot', html: '✅ 15 leads synced to your CRM. Anything else?' },
             ],
@@ -576,17 +576,17 @@ const CONVERSATIONS = {
             slack: [
                 { type: 'bot', html: '📋 <strong>92 new leads</strong> added to your vendor CRM.', actions: [{ label: 'Browse leads', primary: true }, { label: 'Sync all 92' }] },
                 { type: 'user', text: 'Show me APAC leads' },
-                { type: 'bot', html: '📍 <strong>APAC region</strong> — 18 leads found. Showing top 5:<ul class="lead-list"><li>☑️ Pinnacle Dynamics — $420K</li><li>☑️ Cascade Analytics — $350K</li><li>☑️ Nexus Partners — $340K</li><li>☑️ Meridian Group — $250K</li><li>☑️ OceanView Tech — $220K</li></ul>', actions: [{ label: 'Only $200K+' }, { label: 'Sync these 5', primary: true }] },
+                { type: 'bot', html: '📍 <strong>APAC region</strong> - 18 leads found. Showing top 5:<ul class="lead-list"><li>☑️ Pinnacle Dynamics - $420K</li><li>☑️ Cascade Analytics - $350K</li><li>☑️ Nexus Partners - $340K</li><li>☑️ Meridian Group - $250K</li><li>☑️ OceanView Tech - $220K</li></ul>', actions: [{ label: 'Only $200K+' }, { label: 'Sync these 5', primary: true }] },
                 { type: 'user', text: 'Only $200K+' },
-                { type: 'bot', html: '📍 APAC × $200K+ — <strong>6 leads</strong>:<ul class="lead-list"><li>☑️ Pinnacle Dynamics — $420K</li><li>☑️ Cascade Analytics — $350K</li><li>☑️ Nexus Partners — $340K</li><li>☑️ Meridian Group — $250K</li><li>☑️ OceanView Tech — $220K</li><li>☑️ Summit Retail — $210K</li></ul>', actions: [{ label: 'Sync these 6', primary: true }] },
+                { type: 'bot', html: '📍 APAC × $200K+ - <strong>6 leads</strong>:<ul class="lead-list"><li>☑️ Pinnacle Dynamics - $420K</li><li>☑️ Cascade Analytics - $350K</li><li>☑️ Nexus Partners - $340K</li><li>☑️ Meridian Group - $250K</li><li>☑️ OceanView Tech - $220K</li><li>☑️ Summit Retail - $210K</li></ul>', actions: [{ label: 'Sync these 6', primary: true }] },
                 { type: 'user', text: 'Sync these 6' },
                 { type: 'bot', html: '✅ <strong>6 APAC leads</strong> ($200K+) synced. 86 leads remaining.' },
             ],
             whatsapp: [
                 { type: 'user', text: 'New leads?' },
-                { type: 'bot', html: 'You have <strong>92 new leads</strong>. Try a filter — say a region like "APAC" or a value like "$200K+".' },
+                { type: 'bot', html: 'You have <strong>92 new leads</strong>. Try a filter - say a region like "APAC" or a value like "$200K+".' },
                 { type: 'user', text: 'APAC $200K+' },
-                { type: 'bot', html: 'APAC × $200K+ — <strong>6 leads</strong>:<ul class="lead-list"><li>1. Pinnacle Dynamics $420K</li><li>2. Cascade Analytics $350K</li><li>3. Nexus Partners $340K</li><li>4. Meridian Group $250K</li><li>5. OceanView Tech $220K</li><li>6. Summit Retail $210K</li></ul>Say "sync these" to add all 6.' },
+                { type: 'bot', html: 'APAC × $200K+ - <strong>6 leads</strong>:<ul class="lead-list"><li>1. Pinnacle Dynamics $420K</li><li>2. Cascade Analytics $350K</li><li>3. Nexus Partners $340K</li><li>4. Meridian Group $250K</li><li>5. OceanView Tech $220K</li><li>6. Summit Retail $210K</li></ul>Say "sync these" to add all 6.' },
                 { type: 'user', text: 'sync these' },
                 { type: 'bot', html: '✅ 6 APAC leads ($200K+) synced. 86 remaining.' },
             ],

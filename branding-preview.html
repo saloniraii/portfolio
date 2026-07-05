@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Branding Preview — Saloni Rai Portfolio</title>
+  <title>Branding Preview - Saloni Rai Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800;900&family=DM+Serif+Display&family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Libre+Baskerville:wght@700&family=Young+Serif&family=DM+Sans:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     @font-face {
@@ -575,7 +575,7 @@
       const dpr = window.devicePixelRatio || 1;
 
       const w = window.innerWidth;
-      // Full page height — grid covers everything including scrollable area
+      // Full page height - grid covers everything including scrollable area
       const h = Math.max(
         document.body.scrollHeight,
         document.documentElement.scrollHeight,
@@ -589,7 +589,7 @@
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, w, h);
 
-      // Tighter grid — ~24 columns for smaller squares
+      // Tighter grid - ~24 columns for smaller squares
       const cols = 24;
       const spacing = w / cols;
 
@@ -608,14 +608,14 @@
 
         // How far into the curve zone (0 at bend, keeps growing past 1)
         const t = (flatY - bendY) / curveZone;
-        // Smooth cubic ease-in — gentle start, never flattens back
+        // Smooth cubic ease-in - gentle start, never flattens back
         const eased = t * t;
 
-        // Y just keeps going linearly — no compression/clamping
+        // Y just keeps going linearly - no compression/clamping
         // The horizontal lines stay evenly spaced but the verticals bow
         const curvedY = flatY;
 
-        // Horizontal bow — barrel distortion that keeps increasing
+        // Horizontal bow - barrel distortion that keeps increasing
         const centerX = w / 2;
         const offsetX = flatX - centerX;
         const normalizedX = offsetX / (w / 2);
@@ -726,7 +726,7 @@
     <!-- Header -->
     <div class="header">
       <h1>Saloni <span>Rai</span></h1>
-      <p>Branding preview — colors, typography, components, and overall vibe.</p>
+      <p>Branding preview - colors, typography, components, and overall vibe.</p>
     </div>
 
     <!-- Colors -->
@@ -771,33 +771,33 @@
       <h3 class="section-title">Typography</h3>
 
       <div class="type-row">
-        <div class="type-label">Playfair Display — Hero / H1</div>
+        <div class="type-label">Playfair Display - Hero / H1</div>
         <div class="type-display-xl">Design with intention</div>
       </div>
 
       <div class="type-row">
-        <div class="type-label">Playfair Display — Section Header / H2</div>
+        <div class="type-label">Playfair Display - Section Header / H2</div>
         <div class="type-display-lg">Experience & Work</div>
       </div>
 
       <div class="type-row">
-        <div class="type-label">Playfair Display — Card Title / H3</div>
+        <div class="type-label">Playfair Display - Card Title / H3</div>
         <div class="type-display-md">Building delightful products</div>
       </div>
 
       <div class="type-row">
-        <div class="type-label">Hanken Grotesk — Body Large</div>
+        <div class="type-label">Hanken Grotesk - Body Large</div>
         <div class="type-body-lg">A vibrant designer who believes every pixel should spark joy. Crafting experiences that feel alive, responsive, and deeply human.</div>
       </div>
 
       <div class="type-row">
-        <div class="type-label">Hanken Grotesk — Body</div>
+        <div class="type-label">Hanken Grotesk - Body</div>
         <div class="type-body">Led design for consumer-facing products, building design systems and shipping delightful user experiences across web and mobile platforms.</div>
       </div>
 
       <div class="type-row">
-        <div class="type-label">Hanken Grotesk — Caption / Meta</div>
-        <div class="type-caption">2023 — Present · Design Lead · San Francisco, CA</div>
+        <div class="type-label">Hanken Grotesk - Caption / Meta</div>
+        <div class="type-caption">2023 - Present · Design Lead · San Francisco, CA</div>
       </div>
     </div>
 
@@ -838,7 +838,7 @@
             <div class="exp-role">Design Lead</div>
           </div>
           <div style="display:flex; align-items:center; gap:16px;">
-            <span class="exp-period">2023 — Present</span>
+            <span class="exp-period">2023 - Present</span>
             <span class="exp-arrow">→</span>
           </div>
         </div>
@@ -848,7 +848,7 @@
             <div class="exp-role">Product Designer</div>
           </div>
           <div style="display:flex; align-items:center; gap:16px;">
-            <span class="exp-period">2021 — 2023</span>
+            <span class="exp-period">2021 - 2023</span>
             <span class="exp-arrow">→</span>
           </div>
         </div>
@@ -858,7 +858,7 @@
             <div class="exp-role">Student / Creative</div>
           </div>
           <div style="display:flex; align-items:center; gap:16px;">
-            <span class="exp-period">2017 — 2021</span>
+            <span class="exp-period">2017 - 2021</span>
             <span class="exp-arrow">→</span>
           </div>
         </div>

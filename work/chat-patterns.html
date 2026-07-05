@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversational Edge Cases — Design Patterns</title>
+    <title>Conversational Edge Cases - Design Patterns</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -341,7 +341,7 @@
             <div class="accordion-content">
                 <div class="acc-description">
                     <div class="acc-label">The problem</div>
-                    <div class="acc-problem">User gives you everything at once in messy prose — name, product, quantity, contact, close date, all in one run-on sentence. Asking "is this the name? is this the product?" one by one is painful.</div>
+                    <div class="acc-problem">User gives you everything at once in messy prose - name, product, quantity, contact, close date, all in one run-on sentence. Asking "is this the name? is this the product?" one by one is painful.</div>
                     <div class="acc-solution">→ Parse it all, present back structured for confirmation. Let them correct specific fields without re-entering everything.</div>
                 </div>
             </div>
@@ -369,8 +369,8 @@
             <div class="accordion-content">
                 <div class="acc-description">
                     <div class="acc-label">The problem</div>
-                    <div class="acc-problem">"Show me the Acme deal" — but there are 3 Acme entries. Traditional bots ask "Did you mean A, B, or C?" which feels robotic and annoying.</div>
-                    <div class="acc-solution">→ Show all matches with enough context to differentiate (value, stage, region). Accept natural language to pick — "the big one" or "the one in negotiation" works.</div>
+                    <div class="acc-problem">"Show me the Acme deal" - but there are 3 Acme entries. Traditional bots ask "Did you mean A, B, or C?" which feels robotic and annoying.</div>
+                    <div class="acc-solution">→ Show all matches with enough context to differentiate (value, stage, region). Accept natural language to pick - "the big one" or "the one in negotiation" works.</div>
                 </div>
             </div>
         </div>
@@ -411,7 +411,7 @@
             <div class="accordion-content">
                 <div class="acc-description">
                     <div class="acc-label">The problem</div>
-                    <div class="acc-problem">"Sync my APAC leads and register a deal for Meridian" — two distinct actions in one breath. Forcing them to do one at a time ignores how people actually talk.</div>
+                    <div class="acc-problem">"Sync my APAC leads and register a deal for Meridian" - two distinct actions in one breath. Forcing them to do one at a time ignores how people actually talk.</div>
                     <div class="acc-solution">→ Acknowledge both, handle them in sequence, report progress on each. The user sees both tasks advancing without having to manage the queue.</div>
                 </div>
             </div>
@@ -425,7 +425,7 @@
             <div class="accordion-content">
                 <div class="acc-description">
                     <div class="acc-label">The problem</div>
-                    <div class="acc-problem">"Delete all my Southeast leads" — destructive, irreversible, affects $1.4M pipeline. Too little friction = accidental data loss. Too much = annoying.</div>
+                    <div class="acc-problem">"Delete all my Southeast leads" - destructive, irreversible, affects $1.4M pipeline. Too little friction = accidental data loss. Too much = annoying.</div>
                     <div class="acc-solution">→ State exactly what will happen and the stakes. Require typing the action back as confirmation. Allow refinement ("keep the Proposal ones") before confirming.</div>
                 </div>
             </div>
@@ -455,22 +455,22 @@ const SCENARIOS = {
         subtitle: 'Bulk data, spoken',
         messages: [
             { type: 'user', text: 'Show me all my leads' },
-            { type: 'bot', text: 'You have 147 leads across 4 regions:\n\nWest — 52 leads ($4.2M)\nAPAC — 41 leads ($3.8M)\nNortheast — 33 leads ($2.1M)\nSoutheast — 21 leads ($1.4M)\n\nWant me to zoom into a region, filter by value, or show the top 10?' },
+            { type: 'bot', text: 'You have 147 leads across 4 regions:\n\nWest - 52 leads ($4.2M)\nAPAC - 41 leads ($3.8M)\nNortheast - 33 leads ($2.1M)\nSoutheast - 21 leads ($1.4M)\n\nWant me to zoom into a region, filter by value, or show the top 10?' },
             { type: 'user', text: 'Top 10 by value' },
-            { type: 'bot', text: 'Top 10 by deal value:\n\n1. Pinnacle Dynamics — $520K — APAC\n2. Acme Corp — $450K — West\n3. Cascade Analytics — $420K — APAC\n4. NovaTech Solutions — $390K — West\n5. Meridian Group — $380K — NE\n6. OceanView Tech — $350K — APAC\n7. Summit Retail — $340K — West\n8. Vertex AI — $320K — SE\n9. BrightPath Edu — $310K — NE\n10. Atlas Financial — $290K — West\n\nShowing 10 of 147. Say "next 10" or filter by region.' },
+            { type: 'bot', text: 'Top 10 by deal value:\n\n1. Pinnacle Dynamics - $520K - APAC\n2. Acme Corp - $450K - West\n3. Cascade Analytics - $420K - APAC\n4. NovaTech Solutions - $390K - West\n5. Meridian Group - $380K - NE\n6. OceanView Tech - $350K - APAC\n7. Summit Retail - $340K - West\n8. Vertex AI - $320K - SE\n9. BrightPath Edu - $310K - NE\n10. Atlas Financial - $290K - West\n\nShowing 10 of 147. Say "next 10" or filter by region.' },
             { type: 'user', text: 'APAC ones over $300K' },
-            { type: 'bot', text: 'APAC × $300K+ — 5 leads:\n\n1. Pinnacle Dynamics — $520K — Negotiation\n2. Cascade Analytics — $420K — Proposal\n3. OceanView Tech — $350K — Discovery\n4. TechWave APAC — $330K — Qualification\n5. NexusPoint — $310K — Proposal\n\nThat\'s all of them. Sync these 5, or drill into one?' },
+            { type: 'bot', text: 'APAC × $300K+ - 5 leads:\n\n1. Pinnacle Dynamics - $520K - Negotiation\n2. Cascade Analytics - $420K - Proposal\n3. OceanView Tech - $350K - Discovery\n4. TechWave APAC - $330K - Qualification\n5. NexusPoint - $310K - Proposal\n\nThat\'s all of them. Sync these 5, or drill into one?' },
         ]
     },
     'info-dump': {
         subtitle: 'Info dump, spoken',
         messages: [
-            { type: 'user', text: 'hey register a deal for me — its meridian logistics they want smartsolar pro about 60 units, close by end of august, contact is james chen james.chen@meridian.io, net new in APAC' },
-            { type: 'bot', text: 'Got it — here\'s what I parsed:\n\nCustomer: Meridian Logistics\nProduct: SmartSolar Pro × 60\nClose: Aug 2026\nContact: James Chen (james.chen@meridian.io)\nType: Net new\nRegion: APAC\n\nLook right?' },
+            { type: 'user', text: 'hey register a deal for me - its meridian logistics they want smartsolar pro about 60 units, close by end of august, contact is james chen james.chen@meridian.io, net new in APAC' },
+            { type: 'bot', text: 'Got it - here\'s what I parsed:\n\nCustomer: Meridian Logistics\nProduct: SmartSolar Pro × 60\nClose: Aug 2026\nContact: James Chen (james.chen@meridian.io)\nType: Net new\nRegion: APAC\n\nLook right?' },
             { type: 'user', text: 'actually 80 units not 60' },
             { type: 'bot', text: 'Updated to 80 units. Everything else stays the same.\n\nReady to submit?' },
             { type: 'user', text: 'yes' },
-            { type: 'bot', text: 'Done — deal registered. Meridian Logistics / SmartSolar Pro × 80 / Aug 2026. You\'ll get a decision in 5 business days.' },
+            { type: 'bot', text: 'Done - deal registered. Meridian Logistics / SmartSolar Pro × 80 / Aug 2026. You\'ll get a decision in 5 business days.' },
         ]
     },
     'interruption': {
@@ -480,51 +480,51 @@ const SCENARIOS = {
             { type: 'bot', text: 'Let\'s do it. Who\'s the customer?' },
             { type: 'user', text: 'Meridian Logistics' },
             { type: 'bot', text: 'Got it. Which product?' },
-            { type: 'user', text: 'wait — how many leads did I sync yesterday?' },
-            { type: 'bot', text: 'You synced 12 leads yesterday — 6 APAC, 4 West, 2 NE.\n\nI\'ve saved your deal registration progress (Meridian Logistics). Say "continue" when you want to pick back up.' },
+            { type: 'user', text: 'wait - how many leads did I sync yesterday?' },
+            { type: 'bot', text: 'You synced 12 leads yesterday - 6 APAC, 4 West, 2 NE.\n\nI\'ve saved your deal registration progress (Meridian Logistics). Say "continue" when you want to pick back up.' },
             { type: 'user', text: 'continue' },
-            { type: 'bot', text: 'Resuming — Meridian Logistics. Which product are they interested in?' },
+            { type: 'bot', text: 'Resuming - Meridian Logistics. Which product are they interested in?' },
             { type: 'user', text: 'SmartSolar Pro, 60 units, close end of August' },
-            { type: 'bot', text: 'Done — deal registered. Meridian Logistics / SmartSolar Pro × 60 / Aug 2026.' },
+            { type: 'bot', text: 'Done - deal registered. Meridian Logistics / SmartSolar Pro × 60 / Aug 2026.' },
         ]
     },
     'disambiguation': {
         subtitle: 'Disambiguation, spoken',
         messages: [
             { type: 'user', text: 'Show me the Acme deal' },
-            { type: 'bot', text: 'I found 3 Acme deals:\n\n1. Acme Corp — $450K — Negotiation — West — Sep 2026\n2. Acme Healthcare — $280K — Discovery — NE — Nov 2026\n3. Acme Retail Group — $95K — Closed Won — SE — Jun 2026\n\nWhich one?' },
+            { type: 'bot', text: 'I found 3 Acme deals:\n\n1. Acme Corp - $450K - Negotiation - West - Sep 2026\n2. Acme Healthcare - $280K - Discovery - NE - Nov 2026\n3. Acme Retail Group - $95K - Closed Won - SE - Jun 2026\n\nWhich one?' },
             { type: 'user', text: 'the big one in negotiation' },
-            { type: 'bot', text: 'Acme Corp — $450K\n\nStage: Negotiation\nRegion: West\nContact: Sarah Miller\nNext step: Contract review (Jul 15)\nExpected close: Sep 2026\n\nWhat would you like to do with it?' },
+            { type: 'bot', text: 'Acme Corp - $450K\n\nStage: Negotiation\nRegion: West\nContact: Sarah Miller\nNext step: Contract review (Jul 15)\nExpected close: Sep 2026\n\nWhat would you like to do with it?' },
         ]
     },
     'progressive': {
         subtitle: 'Progressive disclosure, spoken',
         messages: [
             { type: 'user', text: 'how are my deals going?' },
-            { type: 'bot', text: '23 active deals — $4.7M total pipeline.\n\n5 in Negotiation ($1.8M) — closest to close\n8 in Proposal ($1.6M)\n10 in Discovery ($1.3M)\n\n3 deals are at risk — no activity in 14+ days. Want to see those?' },
+            { type: 'bot', text: '23 active deals - $4.7M total pipeline.\n\n5 in Negotiation ($1.8M) - closest to close\n8 in Proposal ($1.6M)\n10 in Discovery ($1.3M)\n\n3 deals are at risk - no activity in 14+ days. Want to see those?' },
             { type: 'user', text: 'yes' },
-            { type: 'bot', text: '3 at-risk deals:\n\n1. NovaTech — $390K — 18 days idle — Proposal — "Waiting on legal review"\n2. BrightPath — $310K — 21 days idle — Discovery — "Champion went on leave"\n3. Atlas Financial — $290K — 16 days idle — Proposal — No notes\n\nWant me to draft a check-in for any of these?' },
+            { type: 'bot', text: '3 at-risk deals:\n\n1. NovaTech - $390K - 18 days idle - Proposal - "Waiting on legal review"\n2. BrightPath - $310K - 21 days idle - Discovery - "Champion went on leave"\n3. Atlas Financial - $290K - 16 days idle - Proposal - No notes\n\nWant me to draft a check-in for any of these?' },
             { type: 'user', text: 'draft one for NovaTech' },
-            { type: 'bot', text: '"Hi Sarah — circling back on the SmartSolar proposal. I know legal reviews take time — is there anything I can help move along on our end? Happy to hop on a call this week."\n\nSend it, or want me to adjust the tone?' },
+            { type: 'bot', text: '"Hi Sarah - circling back on the SmartSolar proposal. I know legal reviews take time - is there anything I can help move along on our end? Happy to hop on a call this week."\n\nSend it, or want me to adjust the tone?' },
         ]
     },
     'permission': {
         subtitle: 'Permission boundary, spoken',
         messages: [
             { type: 'user', text: 'show me the full revenue dashboard for Q3' },
-            { type: 'bot', text: 'The Q3 revenue dashboard is restricted to Tier 1 partners. You\'re currently Gold (Tier 2).\n\nHere\'s what I can show you:\n— Your pipeline & bookings\n— Region partner leaderboard\n— Quota attainment vs. target\n\nOr I can send an access request to your partner manager.' },
+            { type: 'bot', text: 'The Q3 revenue dashboard is restricted to Tier 1 partners. You\'re currently Gold (Tier 2).\n\nHere\'s what I can show you:\n- Your pipeline & bookings\n- Region partner leaderboard\n- Quota attainment vs. target\n\nOr I can send an access request to your partner manager.' },
             { type: 'user', text: 'request access' },
-            { type: 'bot', text: 'Done — sent a request to Lisa Park (your Partner Manager). She usually responds in 1–2 business days.\n\nWant me to show your pipeline summary in the meantime?' },
+            { type: 'bot', text: 'Done - sent a request to Lisa Park (your Partner Manager). She usually responds in 1–2 business days.\n\nWant me to show your pipeline summary in the meantime?' },
         ]
     },
     'multi-intent': {
         subtitle: 'Multi-intent, spoken',
         messages: [
             { type: 'user', text: 'Sync my APAC leads and register a deal for Meridian' },
-            { type: 'bot', text: 'Two things — handling both.\n\n1. Syncing APAC leads...\n2. Registering deal for Meridian — will need a few details after.' },
-            { type: 'bot', text: '1. Done — 12 APAC leads synced to your CRM.\n\n2. For the Meridian deal: which product?' },
+            { type: 'bot', text: 'Two things - handling both.\n\n1. Syncing APAC leads...\n2. Registering deal for Meridian - will need a few details after.' },
+            { type: 'bot', text: '1. Done - 12 APAC leads synced to your CRM.\n\n2. For the Meridian deal: which product?' },
             { type: 'user', text: 'CloudSync Enterprise, 150 users, close September' },
-            { type: 'bot', text: 'Both done.\n\n1. 12 APAC leads synced ✓\n2. Deal registered — Meridian / CloudSync Enterprise × 150 / Sep 2026 ✓\n\nAnything else?' },
+            { type: 'bot', text: 'Both done.\n\n1. 12 APAC leads synced ✓\n2. Deal registered - Meridian / CloudSync Enterprise × 150 / Sep 2026 ✓\n\nAnything else?' },
         ]
     },
     'confirmation': {
