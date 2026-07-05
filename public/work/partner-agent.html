@@ -340,6 +340,92 @@
             font-weight: 400;
         }
 
+        /* ─── PROCESS SECTION ─── */
+        .process-section {
+            padding: 80px 40px;
+            overflow: hidden;
+        }
+        .process-section .section-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .process-timeline {
+            position: relative;
+            margin-top: 48px;
+            padding-left: 40px;
+        }
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), rgba(178, 34, 34, 0.1));
+        }
+        .process-step {
+            position: relative;
+            margin-bottom: 48px;
+            padding: 28px 32px;
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 14px;
+            max-width: 680px;
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .process-step.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .process-step:nth-child(even) {
+            margin-left: auto;
+            transform: translateX(40px);
+        }
+        .process-step:nth-child(even).visible {
+            transform: translateX(0);
+        }
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 32px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+        .process-step:nth-child(even)::before {
+            left: -33px;
+        }
+        .process-step .step-num {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .process-step h3 {
+            font-family: var(--display-font);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--foreground);
+            line-height: 1.3;
+        }
+        .process-step p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+        .process-step:last-child {
+            margin-bottom: 0;
+        }
+
         /* ─── EXPERIENCE SECTION ─── */
         .experience-section {
             max-width: 100%;
@@ -786,6 +872,32 @@
     </div>
 </section>
 
+<!-- ═══════════ PROCESS ═══════════ -->
+<section class="section process-section">
+    <div class="section-inner">
+        <p class="section-label">Designing for conversation</p>
+        <h2 class="section-headline">The interface went through three fundamental shifts</h2>
+
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="step-num">Iteration 01</div>
+                <h3>Started with forms in chat</h3>
+                <p>The first instinct was to replicate portal forms in conversation &mdash; structured prompts, one field at a time, strict sequence. It worked technically, but felt like talking to a phone tree. Partners abandoned mid-flow at the same rate as the portal.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">Iteration 02</div>
+                <h3>Mapped how partners actually talk</h3>
+                <p>We recorded real partner conversations over Slack and WhatsApp &mdash; messy, multi-intent, constantly interrupted. "Register a deal for Meridian, also what's my quota?" Nobody speaks in form fields. The patterns were nothing like structured flows.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">Iteration 03</div>
+                <h3>Conversation as the interface</h3>
+                <p>The final model: the agent parses intent (not fields), confirms by summarizing back (not re-asking), and remembers context across interruptions. Every pattern went through 3+ rounds of script-testing with real partner managers before engineering saw it.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ═══════════ THE EXPERIENCE ═══════════ -->
 <section class="section experience-section">
     <div class="section-inner">
@@ -886,6 +998,28 @@
 
 <script src="../shared/partner-demo.js"></script>
 <script src="../shared/chat-patterns.js"></script>
+<script>
+// Scroll-triggered cascade for process steps
+(function() {
+    const steps = document.querySelectorAll('.process-step');
+    if (!steps.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const step = entry.target;
+                const index = Array.from(steps).indexOf(step);
+                setTimeout(() => {
+                    step.classList.add('visible');
+                }, index * 200);
+                observer.unobserve(step);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    steps.forEach(step => observer.observe(step));
+})();
+</script>
 
 </body>
 </html>
