@@ -268,16 +268,21 @@
             border-radius: 12px;
         }
 
-        /* ─── THE PIVOT ─── */
-        .pivot-section {
-            padding-bottom: 0;
+        /* ─── THE PIVOT (inside insight section) ─── */
+        .pivot-block {
+            margin-top: 56px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .pivot-block .section-label {
+            color: var(--muted);
         }
         .pivot-headline {
             font-family: var(--display-font);
             font-size: clamp(1.6rem, 3.2vw, 2.4rem);
             font-weight: 700;
             line-height: 1.35;
-            color: var(--foreground);
+            color: #fff;
             max-width: 900px;
         }
         .pivot-headline em {
@@ -286,7 +291,7 @@
         }
         .pivot-body {
             font-size: 1.05rem;
-            color: #404040;
+            color: rgba(255,255,255,0.7);
             line-height: 1.8;
             max-width: 720px;
             margin-top: 20px;
@@ -864,15 +869,13 @@
                 <p>Check pricing. Register a deal. Ask about MDF. These aren't GUI workflows &mdash; they're questions. The exact shape of a conversation.</p>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- ═══════════ THE PIVOT ═══════════ -->
-<section class="section pivot-section">
-    <div class="section-inner">
-        <p class="section-label">The pivot</p>
-        <h2 class="pivot-headline">The existing roadmap was portal improvements. But the research made it clear &mdash; improving the portal wouldn't fix the problem, because the problem <em>was</em> the portal.</h2>
-        <p class="pivot-body">Partners weren't going to log in more. They needed the work to come to them. That meant proposing a fundamentally different direction to leadership &mdash; one that required new infrastructure, new channels, and a new mental model for the product.</p>
+        <!-- Pivot block (inside insight section) -->
+        <div class="pivot-block">
+            <p class="section-label">The pivot</p>
+            <h2 class="pivot-headline">The existing roadmap was portal improvements. But the research made it clear &mdash; improving the portal wouldn't fix the problem, because the problem <em>was</em> the portal.</h2>
+            <p class="pivot-body">Partners weren't going to log in more. They needed the work to come to them. That meant proposing a fundamentally different direction to leadership &mdash; one that required new infrastructure, new channels, and a new mental model for the product.</p>
+        </div>
     </div>
 </section>
 
