@@ -290,6 +290,24 @@
             color: var(--muted);
             line-height: 1.5;
         }
+        .bet-card.confidential {
+            position: relative;
+            overflow: hidden;
+        }
+        .bet-card.confidential p {
+            filter: blur(5px);
+            user-select: none;
+        }
+        .bet-card.confidential .lock-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #000;
+            white-space: nowrap;
+        }
 
         /* ─── QUOTE BLOCK ─── */
         .quote-block {
@@ -589,9 +607,10 @@
                     <h3>De-risked execution</h3>
                     <p>A phased roadmap where each release delivered standalone value &mdash; foundation, then skills, then channels.</p>
                 </div>
-                <div class="bet-card">
-                    <h3>Revenue model</h3>
-                    <p>A usage-based Flex-Credits pricing structure that made the agent accessible across partner tiers without cannibalizing existing licenses.</p>
+                <div class="bet-card confidential">
+                    <h3>Revenue Model</h3>
+                    <p>Details of the commercial model are under NDA and cannot be shared publicly.</p>
+                    <span class="lock-label">&#128274; Confidential</span>
                 </div>
             </div>
         </div>
@@ -602,7 +621,7 @@
 <section class="quote-block">
     <div class="quote-inner">
         <div class="quote-bar"></div>
-        <p class="quote-text">The proposal secured an <strong>8-person team</strong>, VP sponsorship, two Principal Architect reviews and three pilot commitments.</p>
+        <p class="quote-text">The proposal secured an <strong>8-person team</strong>, VP sponsorship, two architecture reviews, and three pilot commitments.</p>
     </div>
 </section>
 
@@ -639,12 +658,12 @@
             <div class="impact-card">
                 <div class="impact-tag">Strategy Pivot</div>
                 <h3>Portal &rarr; conversation-native platform</h3>
-                <p>The vision became Partner Cloud's defining narrative. The entire 264 and 268 roadmaps were built around it.</p>
+                <p>The vision became the product's defining narrative. The next two release roadmaps were built around it.</p>
             </div>
             <div class="impact-card">
                 <div class="impact-tag">Company-wide</div>
                 <h3>A reference architecture</h3>
-                <p>Other Salesforce clouds began exploring the same "meet users in their channel" pattern for employee- and customer-facing agents.</p>
+                <p>Other product teams began exploring the same "meet users in their channel" pattern for employee- and customer-facing agents.</p>
             </div>
             <div class="impact-card">
                 <div class="impact-tag">Customer Validation</div>
@@ -654,7 +673,7 @@
             <div class="impact-card">
                 <div class="impact-tag">Commercial</div>
                 <h3>Flagship SKU differentiator</h3>
-                <p>The Flex-Credits model I mapped entered the official sales guide; the agent became the headline capability of the PRM add-on.</p>
+                <p>The pricing model I designed entered the official sales guide; the agent became the headline capability of the partner management add-on.</p>
             </div>
         </div>
     </div>

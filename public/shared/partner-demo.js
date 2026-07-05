@@ -169,7 +169,7 @@
         },
         'deal-registration': {
             title: 'Deal Registration',
-            description: 'A 15-field CRM form compressed into natural dialogue. The partner talks, the agent maps each answer to the correct Salesforce object field. Done in under a minute.',
+            description: 'A 15-field CRM form compressed into natural dialogue. The partner talks, the agent maps each answer to the correct CRM field. Done in under a minute.',
             hasSubs: false
         }
     };
