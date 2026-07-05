@@ -8,43 +8,127 @@
    3. Include partner-demo.js after the div
    ============================================ */
 
-/* ─── CONTAINER ─── */
-.pd-container {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-}
-
-/* ─── JOURNEY TABS ─── */
-.pd-journey-tabs {
+/* ─── SPLIT LAYOUT ─── */
+.pd-split-layout {
     display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 100%;
+    align-items: flex-start;
 }
 
-.pd-journey-tab {
-    padding: 8px 16px;
-    border-radius: 24px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    border: 1.5px solid #e5e5e5;
-    background: #fff;
-    color: var(--muted, #737373);
+/* ─── LEFT: ACCORDION ─── */
+.pd-accordion-side {
+    flex: 1;
+    min-width: 0;
+    position: sticky;
+    top: 60px;
+}
+
+.pd-accordion-item {
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.pd-accordion-item:first-child {
+    border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.pd-accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    background: none;
+    border: none;
     cursor: pointer;
-    transition: all 0.2s ease;
     font-family: var(--body-font, 'Plus Jakarta Sans', sans-serif);
+    transition: all 0.2s ease;
 }
 
-.pd-journey-tab:hover {
-    border-color: var(--foreground, #1a1a1a);
+.pd-accordion-trigger .pd-acc-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--muted, #737373);
+    transition: color 0.2s ease;
+}
+
+.pd-accordion-trigger:hover .pd-acc-title {
     color: var(--foreground, #1a1a1a);
 }
 
-.pd-journey-tab.active {
-    background: var(--dark, #0f0f0f);
-    color: #fff;
-    border-color: var(--dark, #0f0f0f);
+.pd-accordion-trigger .pd-acc-arrow {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.pd-accordion-trigger .pd-acc-arrow svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--muted, #737373);
+    transition: stroke 0.2s ease;
+}
+
+/* Active state */
+.pd-accordion-item.active .pd-accordion-trigger .pd-acc-title {
+    color: var(--dark, #0f0f0f);
+    font-weight: 700;
+}
+
+.pd-accordion-item.active .pd-accordion-trigger .pd-acc-arrow {
+    transform: rotate(180deg);
+}
+
+.pd-accordion-item.active .pd-accordion-trigger .pd-acc-arrow svg {
+    stroke: var(--accent, #B22222);
+}
+
+/* Expandable content */
+.pd-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.pd-accordion-item.active .pd-accordion-content {
+    max-height: 300px;
+    padding-bottom: 20px;
+}
+
+.pd-acc-description {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--foreground, #1a1a1a);
+    padding-right: 20px;
+}
+
+.pd-acc-description .pd-acc-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent, #B22222);
+    margin-bottom: 6px;
+}
+
+.pd-acc-description .pd-acc-problem {
+    margin-bottom: 10px;
+}
+
+.pd-acc-description .pd-acc-solution {
+    color: var(--muted, #737373);
+    font-size: 0.78rem;
+}
+
+/* ─── RIGHT: PHONE ─── */
+.pd-phone-side {
+    width: 380px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 60px;
 }
 
 /* ─── CHANNEL TABS ─── */
@@ -444,7 +528,23 @@
 }
 
 /* ─── RESPONSIVE ─── */
-@media (max-width: 500px) {
+@media (max-width: 860px) {
+    .pd-split-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .pd-accordion-side {
+        position: static;
+    }
+
+    .pd-phone-side {
+        width: 100%;
+        max-width: 400px;
+        position: static;
+        margin: 0 auto;
+    }
+
     .pd-phone-frame { border-radius: 32px; border-width: 6px; }
     .pd-messages-area { height: 400px; }
 }
