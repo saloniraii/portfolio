@@ -494,6 +494,83 @@
             line-height: 1.5;
         }
 
+        /* ─── STATUS SECTION ─── */
+        .status-section {
+            padding: 60px 40px;
+            border-top: 1px solid #e5e5e5;
+        }
+        .status-section .section-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            align-items: baseline;
+            gap: 40px;
+        }
+        .status-section .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(178, 34, 34, 0.08);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+        .status-section .status-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .status-section .status-text {
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ─── BOTTOM NAV ─── */
+        .bottom-nav {
+            padding: 60px 40px;
+            border-top: 1px solid #e5e5e5;
+        }
+        .bottom-nav .nav-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bottom-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--foreground);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .bottom-nav a:hover {
+            color: var(--accent);
+        }
+        .bottom-nav .nav-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            display: block;
+            margin-bottom: 4px;
+        }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 1200px) {
             .background-section .content-row { flex-direction: column; }
@@ -718,7 +795,7 @@
 <section class="section edge-section">
     <div class="section-inner">
         <h2 class="section-headline">but it's not always the happy path, is it?</h2>
-        <p class="section-body">We picked out the user journeys that had the most friction currently and prioritized those. This allowed us to manage our resources well and move fast.</p>
+        <p class="section-body">A GUI has guardrails built into its structure &mdash; disabled buttons, required fields, validation tooltips. In conversation, there are no guardrails. The user can say anything, in any order, at any time. Designing for the happy path is the easy part; the real work is deciding what happens when people go off-script.</p>
         <div style="margin-top: 48px;">
             <div id="chatPatterns"></div>
         </div>
@@ -769,6 +846,34 @@
         </div>
     </div>
 </section>
+
+<!-- ═══════════ STATUS ═══════════ -->
+<section class="status-section">
+    <div class="section-inner">
+        <span class="status-badge">Shipped pilot</span>
+        <p class="status-text">The agent is live with pilot customers. We're gathering usage insights before GA &mdash; watching where partners succeed in conversation and where they still fall back to the portal.</p>
+    </div>
+</section>
+
+<!-- ═══════════ BOTTOM NAV ═══════════ -->
+<nav class="bottom-nav">
+    <div class="nav-inner">
+        <a href="salesforce.html">
+            <span>&larr;</span>
+            <div>
+                <span class="nav-label">Back to</span>
+                All Salesforce work
+            </div>
+        </a>
+        <a href="activity-timeline.html">
+            <div style="text-align: right;">
+                <span class="nav-label">Next case study</span>
+                Activity Timeline
+            </div>
+            <span>&rarr;</span>
+        </a>
+    </div>
+</nav>
 
 <script src="../shared/partner-demo.js"></script>
 <script src="../shared/chat-patterns.js"></script>
