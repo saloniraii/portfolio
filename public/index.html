@@ -220,8 +220,8 @@
 
     .float-asset img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
+      height: auto;
+      display: block;
       transition: transform 0.3s ease;
     }
 
@@ -229,8 +229,8 @@
       transform: scale(1.08);
     }
 
-    /* Disco hover tooltip — rendered outside the opacity:0 parent via JS */
-    #discoTooltip {
+    /* Asset hover tooltip — rendered outside the opacity:0 parent via JS */
+    #assetTooltip {
       position: fixed;
       background: var(--foreground);
       color: #fff;
@@ -246,7 +246,7 @@
       z-index: 9000;
     }
 
-    #discoTooltip.visible {
+    #assetTooltip.visible {
       opacity: 1;
     }
 
@@ -301,7 +301,6 @@
       left: 20.7%;
       top: 7.03%;
       width: 29.43%;
-      height: 32.0%;
       --start-x: -350;
       --start-y: -350;
       --end-rotate: 4.82;
@@ -578,25 +577,8 @@
     }
 
     .experience-card-reveal-inner {
-      display: flex;
-      gap: 16px;
       padding-top: 24px;
       border-top: 1px solid #e5e5e5;
-    }
-
-    .reveal-thumbnail {
-      width: 120px;
-      height: 80px;
-      border-radius: 8px;
-      background: #f0f0f0;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .reveal-thumbnail img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
 
     .reveal-text {
@@ -621,6 +603,20 @@
       font-weight: 500;
     }
 
+    .reveal-cta {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      transition: gap 0.2s ease;
+    }
+
+    .reveal-cta:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 768px) {
       .experience-section {
         padding: 80px 5vw 60px;
@@ -628,11 +624,6 @@
 
       .experience-card-reveal-inner {
         flex-direction: column;
-      }
-
-      .reveal-thumbnail {
-        width: 100%;
-        height: 120px;
       }
     }
 
@@ -719,6 +710,105 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-top: auto;
+    }
+
+    /* Substack article card */
+    .lately-card-substack {
+      background: #fffdf7;
+      border-color: #f0ebe0;
+    }
+
+    .substack-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #a3a3a3;
+    }
+
+    .lately-card-substack .lately-card-title {
+      font-size: 1.15rem;
+      line-height: 1.25;
+    }
+
+    .lately-card-substack .lately-card-desc {
+      font-style: italic;
+      font-size: 0.78rem;
+    }
+
+    .lately-card-substack:hover {
+      border-color: var(--accent);
+    }
+
+    /* ThinkingWords card */
+    .lately-card-thinking {
+      background: #fff;
+      border-color: #e5e5e5;
+      justify-content: flex-start;
+    }
+
+    .thinking-heading {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--foreground);
+      line-height: 1.3;
+    }
+
+    .thinking-animation {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      margin: 4px 0 8px;
+    }
+
+    .thinking-asterisk {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .thinking-word {
+      color: var(--accent);
+      font-weight: 500;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .thinking-word.fade-out {
+      opacity: 0;
+      transform: translateX(4px);
+    }
+
+    .thinking-word.fade-in {
+      opacity: 0;
+      transform: translateX(-4px);
+    }
+
+    .thinking-dots {
+      color: var(--accent);
+      animation: dotPulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .thinking-logos {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .thinking-logos img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      border-radius: 4px;
     }
 
     /* Polaroid photo card */
@@ -941,6 +1031,42 @@
       }
     }
 
+    /* ===== Hero Intro Elements ===== */
+    .hero-scroll-hint {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--body-font);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--foreground);
+      opacity: 0.7;
+      transition: opacity 0.4s ease;
+    }
+
+    .hero-scroll-hint.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .hero-scroll-hint svg {
+      width: 18px;
+      height: 18px;
+      animation: bounceDown 1.5s ease-in-out infinite;
+    }
+
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+
     /* ===== Footer ===== */
     .site-footer {
       padding: 100px 5vw 60px;
@@ -1060,6 +1186,15 @@
     <div class="cursor-ring"></div>
   </div>
 
+  <!-- Hero scroll hint -->
+  <div class="hero-scroll-hint" id="heroScrollHint">
+    Scroll down
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"></line>
+      <polyline points="19 12 12 19 5 12"></polyline>
+    </svg>
+  </div>
+
   <div class="scroll-spacer">
     <section class="hero">
       <div class="collage">
@@ -1069,22 +1204,22 @@
         </div>
 
         <!-- Surrounding assets — fly in on scroll -->
-        <div class="float-asset asset-disco">
+        <div class="float-asset asset-disco" data-tooltip="click me">
           <img src="collage/disco.gif" alt="" />
         </div>
-        <div class="float-asset asset-pin">
+        <div class="float-asset asset-pin" data-tooltip="finding opportunities to spend time near trees and water bodies">
           <img src="collage/pin.png" alt="" />
         </div>
-        <div class="float-asset asset-dinner">
+        <div class="float-asset asset-dinner" data-tooltip="will host you at the drop of a hat">
           <img src="collage/dinner.png" alt="" />
         </div>
-        <div class="float-asset asset-coffee">
+        <div class="float-asset asset-coffee" data-tooltip="fuelled by iced lattes">
           <img src="collage/coffee.png" alt="" />
         </div>
-        <div class="float-asset asset-vinyl">
+        <div class="float-asset asset-vinyl" data-tooltip="if it makes me feel something, it's on the playlist">
           <img src="collage/vinyl.png" alt="" />
         </div>
-        <div class="float-asset asset-character">
+        <div class="float-asset asset-character" data-tooltip="creating as much as I can">
           <img src="collage/character.png" alt="" />
         </div>
       </div>
@@ -1119,8 +1254,8 @@
     <h2>Experience</h2>
     <div class="experience-list">
 
-      <!-- Card 1 -->
-      <div class="experience-card">
+      <!-- Card 1 — Salesforce -->
+      <div class="experience-card" onclick="window.open('work/salesforce.html','_blank')">
         <div class="experience-card-header">
           <div class="experience-card-info">
             <h3>Salesforce</h3>
@@ -1131,70 +1266,37 @@
         </div>
         <div class="experience-card-reveal">
           <div class="experience-card-reveal-inner">
-            <div class="reveal-thumbnail">
-              <img src="https://placehold.co/240x160/B22222/fff?text=Salesforce" alt="" />
-            </div>
             <div>
-              <p class="reveal-text">Designing enterprise tools that scale. Working on core platform experiences used by millions of users daily.</p>
+              <p class="reveal-text">Designing for AI-first enterprise experiences. Led the vision for Salesforce's Unified Agentic Activity Timeline (patent filed) and designed the first conversation-native channel management tool — the Headless Partner Agent — that pivoted an entire product strategy.</p>
               <div class="reveal-tags">
+                <span class="reveal-tag">AI Agents</span>
                 <span class="reveal-tag">Enterprise</span>
-                <span class="reveal-tag">Design Systems</span>
-                <span class="reveal-tag">Figma</span>
               </div>
+              <a href="work/salesforce.html" target="_blank" rel="noopener noreferrer" class="reveal-cta">View Projects →</a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="experience-card">
+      <!-- Card 2 — Springworks / Albus -->
+      <div class="experience-card" onclick="window.open('work/albus.html','_blank')">
         <div class="experience-card-header">
           <div class="experience-card-info">
-            <h3>Company Two</h3>
-            <p class="role">UX Designer</p>
-            <p class="period">2021 — 2023</p>
+            <h3>Springworks</h3>
+            <p class="role">Product Designer</p>
+            <p class="period">2022 — 2024</p>
           </div>
           <span class="experience-card-arrow">→</span>
         </div>
         <div class="experience-card-reveal">
           <div class="experience-card-reveal-inner">
-            <div class="reveal-thumbnail">
-              <img src="https://placehold.co/240x160/1a1a1a/fff?text=Co+Two" alt="" />
-            </div>
             <div>
-              <p class="reveal-text">Led product design for consumer-facing features. Shipped 3 major product launches impacting 2M+ users.</p>
+              <p class="reveal-text">Designed and led Albus — an AI knowledge bot — from zero to 3,000+ organizations, 18,000+ users, and acquisition. Built the product before Slack, Microsoft, or anyone else had AI in workplace chat. Wore every hat: product design, growth, content, and strategy.</p>
               <div class="reveal-tags">
-                <span class="reveal-tag">Consumer</span>
-                <span class="reveal-tag">Mobile</span>
-                <span class="reveal-tag">Research</span>
+                <span class="reveal-tag">0 → 1</span>
+                <span class="reveal-tag">AI Product</span>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="experience-card">
-        <div class="experience-card-header">
-          <div class="experience-card-info">
-            <h3>College</h3>
-            <p class="role">Student / Creative</p>
-            <p class="period">2017 — 2021</p>
-          </div>
-          <span class="experience-card-arrow">→</span>
-        </div>
-        <div class="experience-card-reveal">
-          <div class="experience-card-reveal-inner">
-            <div class="reveal-thumbnail">
-              <img src="https://placehold.co/240x160/737373/fff?text=College" alt="" />
-            </div>
-            <div>
-              <p class="reveal-text">Explored the intersection of design and technology. Founded the design club. Freelanced for local brands.</p>
-              <div class="reveal-tags">
-                <span class="reveal-tag">Branding</span>
-                <span class="reveal-tag">Illustration</span>
-                <span class="reveal-tag">Freelance</span>
-              </div>
+              <a href="work/albus.html" target="_blank" rel="noopener noreferrer" class="reveal-cta">View Case Study →</a>
             </div>
           </div>
         </div>
@@ -1208,104 +1310,156 @@
     <h2>What I've been up to lately</h2>
     <div class="lately-track-wrapper">
       <div class="lately-track">
-        <!-- Cards — duplicated for infinite scroll illusion -->
-        <a href="#" class="lately-card">
-          <span class="lately-card-title">Redesigning Salesforce's onboarding flow</span>
-          <span class="lately-card-desc">Rethinking how new users experience the platform for the first time.</span>
-          <span class="lately-card-link">Read more →</span>
-        </a>
-
+        <!-- Card 1 — Salesforce Offices -->
         <div class="lately-card lately-card-polaroid">
-          <img src="https://placehold.co/400x300/e5e5e5/737373?text=Coffee+%26+Sketch" alt="" />
-          <span class="lately-card-caption">Morning sketching ritual</span>
+          <img src="gallery/sf-office.jpg" alt="Saloni at SF office" />
+          <span class="lately-card-caption">Seeing Salesforce in 3 cities — Tokyo, Seattle, San Francisco</span>
         </div>
 
-        <a href="#" class="lately-card">
-          <span class="lately-card-title">Speaking at Config 2025</span>
-          <span class="lately-card-desc">Talked about building design systems that actually get adopted by engineering teams.</span>
-          <span class="lately-card-link">Watch talk →</span>
+        <!-- Card 2 — Substack -->
+        <a href="https://saloni529819.substack.com/p/the-death-of-the-interesting-homepage" target="_blank" class="lately-card lately-card-substack">
+          <span class="substack-label">Writing</span>
+          <span class="lately-card-title">the death of the interesting homepage</span>
+          <span class="lately-card-desc">"It's like there's a single Figma file being passed around the entire internet and everyone's just changing the copy and 3 colors!"</span>
+          <span class="lately-card-link">Read on Substack →</span>
         </a>
 
+        <!-- Card 3 — Cooking class -->
         <div class="lately-card lately-card-polaroid">
-          <img src="https://placehold.co/400x300/d4d4d4/525252?text=Vinyl+Finds" alt="" />
-          <span class="lately-card-caption">Weekend vinyl hunting</span>
+          <img src="gallery/cooking-class.jpg" alt="Saloni in cooking class" />
+          <span class="lately-card-caption">Taking cooking classes in places I travel to</span>
         </div>
 
-        <a href="#" class="lately-card">
-          <span class="lately-card-title">Open-sourced my Figma token plugin</span>
-          <span class="lately-card-desc">A plugin that syncs design tokens to code in real-time. 2k+ installs.</span>
-          <span class="lately-card-link">View on GitHub →</span>
+        <!-- Card 4 — Creating more -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/artworks.jpg" alt="Saloni's artworks" />
+          <span class="lately-card-caption">Creating more than I am consuming</span>
+        </div>
+
+        <!-- Card 5 — ThinkingWords -->
+        <div class="lately-card lately-card-thinking">
+          <span class="substack-label">Exploring</span>
+          <div class="thinking-animation">
+            <span class="thinking-asterisk">✱</span>
+            <span class="thinking-word" id="thinkingWord">Cogitating</span>
+            <span class="thinking-dots">...</span>
+          </div>
+          <span class="lately-card-desc">Prototyping with AI, shipping side projects, and making things that feel alive.</span>
+          <div class="thinking-logos">
+            <img src="logos/logo-1.png" alt="" />
+            <img src="logos/logo-2.png" alt="" />
+            <img src="logos/logo-3.png" alt="" />
+            <img src="logos/logo-4.png" alt="" />
+          </div>
+        </div>
+
+        <!-- Card 6 — Mentoring -->
+        <a href="https://topmate.io/salonirai" target="_blank" class="lately-card">
+          <span class="substack-label">Mentoring</span>
+          <span class="lately-card-title">Mentoring young designers</span>
+          <span class="lately-card-desc">Helping early-career designers navigate their first roles, build portfolios, and find their voice in the industry.</span>
+          <span class="lately-card-link">Book a session on Topmate →</span>
         </a>
 
+        <!-- Card 7 — Reading -->
         <div class="lately-card lately-card-polaroid">
-          <img src="https://placehold.co/400x300/f5f5f5/a3a3a3?text=Workshop" alt="" />
-          <span class="lately-card-caption">Design systems workshop @ Bangalore</span>
+          <img src="gallery/mine-your-language.jpg" alt="Mine Your Language book" />
+          <span class="lately-card-caption">Reading 'Mine Your Language' by Abhishek Borah</span>
         </div>
 
-        <a href="#" class="lately-card">
-          <span class="lately-card-title">Experimenting with generative UI</span>
-          <span class="lately-card-desc">Prototyping interfaces that adapt based on user behavior patterns.</span>
-          <span class="lately-card-link">See prototype →</span>
+        <!-- Card 8 — Art gallery -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/art-gallery.jpg" alt="Saloni at art gallery" />
+          <span class="lately-card-caption">Frolicking in art galleries</span>
+        </div>
+
+        <!-- Card 9 — Substack -->
+        <a href="https://saloni529819.substack.com/p/how-the-algorithm-gave-everyone-the" target="_blank" class="lately-card lately-card-substack">
+          <span class="substack-label">Writing</span>
+          <span class="lately-card-title">how the algorithm gave everyone the same taste</span>
+          <span class="lately-card-desc">"Without friction, you get preference. Not taste. Preference is what you click on. Taste is what you'd build your life around."</span>
+          <span class="lately-card-link">Read on Substack →</span>
         </a>
-
-        <div class="lately-card lately-card-polaroid">
-          <img src="https://placehold.co/400x300/e5e5e5/525252?text=Espresso" alt="" />
-          <span class="lately-card-caption">Finally nailed the perfect pull</span>
-        </div>
 
         <!-- Duplicate set for seamless loop -->
-        <a href="#" class="lately-card">
-          <span class="lately-card-title">Redesigning Salesforce's onboarding flow</span>
-          <span class="lately-card-desc">Rethinking how new users experience the platform for the first time.</span>
-          <span class="lately-card-link">Read more →</span>
-        </a>
-
+        <!-- Card 1 dup -->
         <div class="lately-card lately-card-polaroid">
-          <img src="https://placehold.co/400x300/e5e5e5/737373?text=Coffee+%26+Sketch" alt="" />
-          <span class="lately-card-caption">Morning sketching ritual</span>
+          <img src="gallery/sf-office.jpg" alt="Saloni at SF office" />
+          <span class="lately-card-caption">Seeing Salesforce in 3 cities — Tokyo, Seattle, San Francisco</span>
         </div>
 
-        <a href="#" class="lately-card">
-          <span class="lately-card-title">Speaking at Config 2025</span>
-          <span class="lately-card-desc">Talked about building design systems that actually get adopted by engineering teams.</span>
-          <span class="lately-card-link">Watch talk →</span>
+        <!-- Card 2 dup — Substack -->
+        <a href="https://saloni529819.substack.com/p/the-death-of-the-interesting-homepage" target="_blank" class="lately-card lately-card-substack">
+          <span class="lately-card-title">the death of the interesting homepage</span>
+          <span class="lately-card-desc">"It's like there's a single Figma file being passed around the entire internet and everyone's just changing the copy and 3 colors!"</span>
+          <span class="lately-card-link">Read on Substack →</span>
         </a>
 
+        <!-- Card 3 dup -->
         <div class="lately-card lately-card-polaroid">
-          <img src="https://placehold.co/400x300/d4d4d4/525252?text=Vinyl+Finds" alt="" />
-          <span class="lately-card-caption">Weekend vinyl hunting</span>
+          <img src="gallery/cooking-class.jpg" alt="Saloni in cooking class" />
+          <span class="lately-card-caption">Taking cooking classes in places I travel to</span>
         </div>
 
-        <a href="#" class="lately-card">
-          <span class="lately-card-title">Open-sourced my Figma token plugin</span>
-          <span class="lately-card-desc">A plugin that syncs design tokens to code in real-time. 2k+ installs.</span>
-          <span class="lately-card-link">View on GitHub →</span>
+        <!-- Card 4 dup -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/artworks.jpg" alt="Saloni's artworks" />
+          <span class="lately-card-caption">Creating more than I am consuming</span>
+        </div>
+
+        <!-- Card 5 duplicate — ThinkingWords -->
+        <div class="lately-card lately-card-thinking">
+          <span class="substack-label">Exploring</span>
+          <div class="thinking-animation">
+            <span class="thinking-asterisk">✱</span>
+            <span class="thinking-word thinking-word-dup">Cogitating</span>
+            <span class="thinking-dots">...</span>
+          </div>
+          <span class="lately-card-desc">Prototyping with AI, shipping side projects, and making things that feel alive.</span>
+          <div class="thinking-logos">
+            <img src="logos/logo-1.png" alt="" />
+            <img src="logos/logo-2.png" alt="" />
+            <img src="logos/logo-3.png" alt="" />
+            <img src="logos/logo-4.png" alt="" />
+          </div>
+        </div>
+
+        <!-- Card 6 dup -->
+        <a href="https://topmate.io/salonirai" target="_blank" class="lately-card">
+          <span class="substack-label">Mentoring</span>
+          <span class="lately-card-title">Mentoring young designers</span>
+          <span class="lately-card-desc">Helping early-career designers navigate their first roles, build portfolios, and find their voice in the industry.</span>
+          <span class="lately-card-link">Book a session on Topmate →</span>
         </a>
 
+        <!-- Card 7 dup -->
         <div class="lately-card lately-card-polaroid">
-          <img src="https://placehold.co/400x300/f5f5f5/a3a3a3?text=Workshop" alt="" />
-          <span class="lately-card-caption">Design systems workshop @ Bangalore</span>
+          <img src="gallery/mine-your-language.jpg" alt="Mine Your Language book" />
+          <span class="lately-card-caption">Reading 'Mine Your Language' by Abhishek Borah</span>
         </div>
 
-        <a href="#" class="lately-card">
-          <span class="lately-card-title">Experimenting with generative UI</span>
-          <span class="lately-card-desc">Prototyping interfaces that adapt based on user behavior patterns.</span>
-          <span class="lately-card-link">See prototype →</span>
+        <!-- Card 8 dup — Art gallery -->
+        <div class="lately-card lately-card-polaroid">
+          <img src="gallery/art-gallery.jpg" alt="Saloni at art gallery" />
+          <span class="lately-card-caption">Frolicking in art galleries</span>
+        </div>
+
+        <!-- Card 9 dup — Substack -->
+        <a href="https://saloni529819.substack.com/p/how-the-algorithm-gave-everyone-the" target="_blank" class="lately-card lately-card-substack">
+          <span class="substack-label">Writing</span>
+          <span class="lately-card-title">how the algorithm gave everyone the same taste</span>
+          <span class="lately-card-desc">"Without friction, you get preference. Not taste. Preference is what you click on. Taste is what you'd build your life around."</span>
+          <span class="lately-card-link">Read on Substack →</span>
         </a>
-
-        <div class="lately-card lately-card-polaroid">
-          <img src="https://placehold.co/400x300/e5e5e5/525252?text=Espresso" alt="" />
-          <span class="lately-card-caption">Finally nailed the perfect pull</span>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Testimonials Section ===== -->
-  <section class="testimonials-section">
+  <!-- ===== Testimonials Section (hidden for now) ===== -->
+  <section class="testimonials-section" style="display: none;">
     <div class="testimonials-header">
-      <p class="header-top">The best thing about design</p>
-      <h2>is, it's all about the <span class="header-emphasis">people</span></h2>
+      <p class="header-top">The best thing about design is,</p>
+      <h2>it's all about the <span class="header-emphasis">people</span></h2>
     </div>
 
     <div class="testimonials-grid">
@@ -1463,15 +1617,15 @@
       <h2 class="footer-heading">Thank you for visiting!</h2>
       <div class="footer-socials">
         <!-- LinkedIn -->
-        <a href="#" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/salonirai373" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         </a>
         <!-- Instagram -->
-        <a href="#" aria-label="Instagram">
+        <a href="https://www.instagram.com/salonely__/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
         </a>
         <!-- Substack -->
-        <a href="#" aria-label="Substack">
+        <a href="https://substack.com/@saloni529819" target="_blank" rel="noopener noreferrer" aria-label="Substack">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24l9.6-5.4 9.6 5.4V10.812H1.46zm21.08-8.042H1.46V0h21.08v2.77z"/></svg>
         </a>
         <!-- Email -->
@@ -1498,8 +1652,8 @@
     </div>
   </footer>
 
-  <!-- Disco tooltip (body-level to avoid opacity inheritance) -->
-  <div id="discoTooltip">click me</div>
+  <!-- Asset tooltip (body-level to avoid opacity inheritance) -->
+  <div id="assetTooltip"></div>
 
   <!-- Disco mode overlay -->
   <div class="disco-overlay" id="discoOverlay">
@@ -1810,6 +1964,14 @@
         const scrollY = window.scrollY;
         const vh = window.innerHeight;
 
+        // Fade out scroll hint
+        const heroScrollHint = document.getElementById('heroScrollHint');
+        if (scrollY > 80) {
+          heroScrollHint && heroScrollHint.classList.add('hidden');
+        } else {
+          heroScrollHint && heroScrollHint.classList.remove('hidden');
+        }
+
         // Experience cards get a subtle parallax float
         if (experienceSection) {
           const rect = experienceSection.getBoundingClientRect();
@@ -1891,27 +2053,32 @@
       if (discoRAF) clearTimeout(discoRAF);
     }
 
-    // Tooltip positioning
-    const discoTooltip = document.getElementById('discoTooltip');
+    // Tooltip positioning for all float assets
+    const assetTooltip = document.getElementById('assetTooltip');
+    const allAssets = document.querySelectorAll('.float-asset[data-tooltip]');
 
+    allAssets.forEach(asset => {
+      asset.addEventListener('mouseenter', () => {
+        assetTooltip.textContent = asset.getAttribute('data-tooltip');
+        assetTooltip.classList.add('visible');
+      });
+
+      asset.addEventListener('mousemove', (e) => {
+        assetTooltip.style.left = (e.clientX + 16) + 'px';
+        assetTooltip.style.top = (e.clientY - 10) + 'px';
+      });
+
+      asset.addEventListener('mouseleave', () => {
+        assetTooltip.classList.remove('visible');
+        if (asset === discoBall) stopDisco();
+      });
+    });
+
+    // Disco-specific interactions
     if (discoBall) {
-      discoBall.addEventListener('mouseenter', () => {
-        discoTooltip.classList.add('visible');
-      });
-
-      discoBall.addEventListener('mousemove', (e) => {
-        discoTooltip.style.left = (e.clientX + 16) + 'px';
-        discoTooltip.style.top = (e.clientY - 10) + 'px';
-      });
-
-      discoBall.addEventListener('mouseleave', () => {
-        discoTooltip.classList.remove('visible');
-        stopDisco();
-      });
-
       discoBall.addEventListener('mousedown', (e) => {
         e.preventDefault();
-        discoTooltip.classList.remove('visible');
+        assetTooltip.classList.remove('visible');
         startDisco();
       });
       discoBall.addEventListener('mouseup', stopDisco);
@@ -1956,6 +2123,50 @@
     }
 
     animateAssets();
+  </script>
+
+  <!-- ThinkingWords animation -->
+  <script>
+    (function() {
+      const WORDS = [
+        'Cogitating', 'Percolating', 'Marinating', 'Synthesizing',
+        'Orchestrating', 'Crystallizing', 'Bamboozling', 'Discombobulating'
+      ];
+
+      const wordEls = document.querySelectorAll('.thinking-word');
+      let currentIndex = 0;
+
+      function getNextIndex() {
+        let next;
+        do {
+          next = Math.floor(Math.random() * WORDS.length);
+        } while (next === currentIndex && WORDS.length > 1);
+        return next;
+      }
+
+      function cycleWord() {
+        // Fade out
+        wordEls.forEach(el => el.classList.add('fade-out'));
+
+        setTimeout(() => {
+          currentIndex = getNextIndex();
+          wordEls.forEach(el => {
+            el.textContent = WORDS[currentIndex];
+            el.classList.remove('fade-out');
+            el.classList.add('fade-in');
+          });
+
+          // Trigger reflow then fade in
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              wordEls.forEach(el => el.classList.remove('fade-in'));
+            });
+          });
+        }, 200);
+      }
+
+      setInterval(cycleWord, 2500);
+    })();
   </script>
 </body>
 </html>
